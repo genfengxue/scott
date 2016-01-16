@@ -1,0 +1,61 @@
+@import './_variables.less';
+@import './topBanner.less';
+@import './avatar.less';
+
+.home {
+  .avatar-field {
+
+  }
+  .email-hint {
+    margin-left: 4px;
+  }
+  .form-group {
+    position: relative;
+  }
+  .static-field {
+    height: 46px;
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    behavior: url(/img/PIE.htc);
+    background-color: #eee;
+    line-height: 24px;
+  }
+  .input-lg {
+    font-size: 14px;
+  }
+  .icon-btn {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background-color: rgb(200, 200, 200);
+    color: #fff;
+    border-radius: 50%;
+    behavior: url(/img/PIE.htc);
+    transition: color ease-in-out .13s;
+    &:hover {
+      color: @brand-danger;
+    }
+  }
+  .confirm-nickname-icon {
+    position: absolute;
+    right: 38px;
+    top: 36px;
+    &:hover {
+      color: @brand-success;
+    }
+  }
+  .edit-icon {
+    position: absolute;
+    right: 10px;
+    top: 36px;
+  }
+  .nickname-input {
+    padding-right: 70px;
+  }
+  .bottom-nav {
+    margin-left: -30px;
+  }
+}

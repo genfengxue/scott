@@ -1,0 +1,38 @@
+<div class="form-group clearfix">
+  <i class="icon-mobile mobile-icon pull-left"></i>
+  <div class="register-title pull-left">手机注册</div>
+  <a class="pull-right switch" href="/register/?type=email">
+    邮箱注册
+  </a>
+</div>
+<div class="form-group">
+  <input type="text" name="mobile" class="form-control input-lg" placeholder="请填写手机号码" id="mobile-input">
+  <div id="mobile-input-error" class="error-tip" style="display: none;">
+    <i class="icon-cuowutishi"></i>
+  </div>
+</div>
+<div class="form-group">
+  <input type="password" name="password" class="form-control input-lg" placeholder="密码" id="password-input">
+  <div id="password-input-error" class="error-tip" style="display: none;">
+  </div>
+</div>
+<div class="form-group">
+  <input type="text" name="captcha" class="form-control input-lg captcha-input" id="captcha-input" placeholder="验证码">
+  <a class="btn btn-default btn-o get-captcha-btn btn-lg pull-right" id="get-captcha-btn">
+    <img src="/captcha.jpg/?r=<%= Date.now() %>" class="captcha" id="captcha">
+  </a>
+  <div id="captcha-input-error" class="error-tip" style="display: none;">
+  </div>
+</div>
+<div class="form-group">
+  <input type="text" name="code" class="form-control input-lg code-input" id="code-input" placeholder="短信动态码">
+  <a class="btn btn-primary btn-o get-code-btn btn-lg pull-right" id="get-code-btn">获取动态码</a>
+  <div id="code-input-error" class="error-tip" style="display: none;">
+  </div>
+</div>
+<input type="hidden" name="type" value="mobile">
+<div class="form-group">
+  <button type="submit" class="btn btn-danger btn-lg register-btn" id="mobile-register-btn">
+    注册
+  </button>
+</div>

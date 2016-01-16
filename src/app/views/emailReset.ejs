@@ -1,0 +1,51 @@
+<% stylesheet('/css/forgot.css') -%>
+<% title = '密码找回 | 顺顺留学' %>
+
+<div class="forgot">
+  <% include partials/topBanner %>
+  <div class="content">
+    <form class="forgot-form" id="forgot-form" action="/reset/" method="post">
+      <div class="form-group clearfix">
+        <div class="forgot-title pull-left">
+          为<%= vm.email %>设置新密码
+        </div>
+      </div>
+      <input type="hidden" name="key" value="<%= vm.key %>">
+      <input type="hidden" name="email" value="<%= vm.email %>">
+      <div class="text-danger">
+        <%= errors.server || '' %>
+      </div>
+      <div class="form-group">
+        <input type="password"
+          name="password"
+          class="form-control input-lg password-input"
+          id="password-input" placeholder="密码"
+          value="<%= vm.password %>">
+        <div id="password-input-error" class="error-tip" style="<%= errors['password'] ? '' : 'display: none;' %>">
+          <%= errors['password'] %>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password"
+          name="confirmPassword"
+          class="form-control input-lg confirm-password-input"
+          id="confirm-password-input"
+          placeholder="请再次输入密码"
+          value="<%= vm.confirmPassword %>">
+        <div id="confirm-password-input-error" class="error-tip" style="<%= errors['confirmPassword'] ? '' : 'display: none;' %>">
+          <%= errors['confirmPassword'] %>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-danger btn-lg confirm-btn"
+          id="confirm-btn"
+          style="width: 100%; margin-top: 10px"
+          type="submit">
+          确定
+        </button>
+        </div>
+    </form>
+  </div>
+  <div class="loading" style="display: none;">
+  </div>
+</div>

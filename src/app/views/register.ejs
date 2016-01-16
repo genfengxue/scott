@@ -1,0 +1,18 @@
+<% script('/js/register.js') -%>
+<% stylesheet('/css/register.css') -%>
+<% title = '注册 | 顺顺留学' %>
+
+<div class="register">
+  <% include partials/topBanner %>
+  <div class="content">
+    <form class="register-form" id="register-form">
+      <% if (registerType === 'email') { %>
+        <% include partials/registerWithEmail %>
+      <% } else { %>
+        <% include partials/registerWithMobile %>
+      <% } %>
+    </form>
+  </div>
+  <div class="loading" style="display: none;">
+  </div>
+</div>

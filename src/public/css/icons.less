@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "shicon";
+  src: url('../fonts/shicon.eot');
+  src: url('../fonts/shicon.eot?#iefix') format('eot'),
+  url('../fonts/shicon.woff') format('woff'),
+  url('../fonts/shicon.ttf') format('truetype'),
+  url('../fonts/shicon.svg#shicon') format('svg');
+}
+
+.icon-base-pseudo {
+  font-family: "shicon";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+  text-decoration: none;
+  text-transform: none;
+}
+
+.icon-char(@filename) {
+  @cuowutishi: "\E001";
+   @edit: "\E002";
+   @mobile: "\E003";
+   @tick: "\E004";
+   @times: "\E005";
+   
+  content: @@filename;
+}
+
+.icon(@filename, @insert: before) {
+  display: inline-block;
+  @pseudo-selector: ~":@{insert}";
+
+  &@{pseudo-selector} {
+    &:extend(.icon-base-pseudo);
+    .icon-char(@filename);
+  }
+}
+
+.icon-cuowutishi {
+  .icon(cuowutishi);
+}
+.icon-edit {
+  .icon(edit);
+}
+.icon-mobile {
+  .icon(mobile);
+}
+.icon-tick {
+  .icon(tick);
+}
+.icon-times {
+  .icon(times);
+}

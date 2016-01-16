@@ -1,0 +1,23 @@
+<% script('/js/login.js') -%>
+<% stylesheet('/css/login.css') -%>
+<% title = '登录 | 顺顺留学' %>
+
+<div class="login">
+  <% include partials/topBanner %>
+  <div class="content">
+    <form class="login-form" id="login-form">
+      <% if (loginType === 'email') { %>
+        <% include partials/loginWithEmail %>
+      <% } else { %>
+        <% include partials/loginWithMobile %>
+      <% } %>
+    </form>
+    <div class="bottom-nav">
+      <a href="/register/">没有帐号</a>
+      <span class="spliter"></span>
+      <a href="/forgot/">忘记密码</a>
+    </div>
+  </div>
+  <div class="loading" style="display: none;">
+  </div>
+</div>

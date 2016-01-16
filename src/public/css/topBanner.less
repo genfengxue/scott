@@ -1,0 +1,36 @@
+@import "./_variables";
+@import '../libs/bootstrap/less/mixins.less';
+
+@ratio: 0.6;
+.top-banner {
+  height: 280px;
+  background-image: url('/img/login_top_banner.png');
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  @media screen and (max-width: @screen-tablet) {
+    height: @ratio*280px;
+    background-size: cover;
+  }
+}
+.shun-logo {
+  text-align: center;
+  margin-top: 118px;
+  height: 131px;
+  background-image: url('/img/login_shunshun_logo@1x.png');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: 202px;
+  .img-retina('/img/login_shunshun_logo@1x.png', '/img/login_shunshun_logo@2x.png', 202px, 131px);
+  @media screen and (max-width: @screen-tablet) {
+    margin-top: @ratio*118px;
+    height: @ratio*131px;
+    background-size: @ratio*202px;
+    .img-retina('/img/login_shunshun_logo@1x.png', '/img/login_shunshun_logo@2x.png', @ratio*202px, @ratio*131px);
+  }
+}
+.shun-logo-alt {
+  color: #FFF;
+  text-indent: -9999px;
+  margin-top: 0;
+}

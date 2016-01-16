@@ -1,0 +1,28 @@
+<div class="form-group clearfix">
+  <div class="register-title pull-left">邮箱注册</div>
+  <a class="pull-right switch" href="/register/?type=mobile">
+    <i class="icon-mobile mobile-icon pull-left"></i>
+    手机注册
+  </a>
+</div>
+<div class="form-group">
+  <input type="text" name="email" class="form-control input-lg" placeholder="邮箱" id="email-input">
+  <div id="email-input-error" class="error-tip" style="display: none;"></div>
+</div>
+<div class="form-group">
+  <input type="password" name="password" class="form-control input-lg password-input" id="password-input" placeholder="密码">
+  <div id="password-input-error" class="error-tip" style="display: none;"></div>
+</div>
+<div class="form-group">
+  <input type="password" name="confirmPassword" class="form-control input-lg confirm-password-input" id="confirm-password-input" placeholder="请再次输入密码">
+  <div id="confirm-password-input-error" class="error-tip" style="display: none;">aaa</div>
+  <div class="policy-check">
+    <input type="checkbox" name="agreePolicy"><span class="text-muted policy-link">我已阅读并同意<a href="" target="_blank" class="text-muted" rel="nofollow">《顺顺留学服务条款》</a></span>
+  </div>
+</div>
+<input type="hidden" name="type" value="email">
+<div class="form-group">
+  <button type="submit" class="btn btn-danger btn-lg register-btn" id="register-btn">
+    立即注册
+  </button>
+</div>

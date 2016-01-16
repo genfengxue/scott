@@ -1,0 +1,114 @@
+@import "./_variables";
+@import '../libs/bootstrap/less/mixins.less';
+@import '../libs/bootstrap/less/utilities.less';
+@import '../libs/bootstrap/less/normalize.less';
+@import "../libs/bootstrap/less/scaffolding.less";
+@import "../libs/bootstrap/less/type.less";
+@import "../libs/bootstrap/less/forms.less";
+@import "../libs/bootstrap/less/buttons.less";
+@import "../libs/bootstrap/less/badges.less";
+@import "./themes/_buttons.less";
+
+@import './icons';
+
+.my-placeholder {
+  color: #aaa;
+}
+
+.btn-lg {
+  line-height: 22px;
+  font-size: 16px;
+  padding: 11px 16px;
+  border-radius: 6px;
+  behavior: url(/img/PIE.htc);
+}
+
+.content {
+  margin: 70px auto 0;
+  width: 300px;
+  @media screen and (max-width: @screen-tablet) {
+    margin: 30px auto 0;
+  }
+}
+.sub-title {
+  font-size: 16px;
+  margin-left: 4px;
+}
+.captcha-input {
+  width: 200px;
+  display: inline-block;
+}
+.get-captcha-btn {
+  width: 92px;
+  height: 46px;
+  font-size: 14px;
+  padding: 11px 0;
+  line-height: 22px;
+  padding: 0;
+  overflow: hidden;
+}
+.captcha {
+  width: 90px;
+  height: 45px;
+}
+.code-input {
+  width: 200px;
+  display: inline-block;
+}
+.get-code-btn {
+  width: 92px;
+  font-size: 14px;
+  padding: 11px 0;
+  line-height: 22px;
+}
+.confirm-btn {
+  line-height: 22px;
+  width: 100%;
+  font-size: 16px;
+  padding: 11px 16px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.error-tip {
+  position: absolute;
+  color: @brand-danger;
+  .icon-cuowutishi {
+    vertical-align: middle;
+  }
+}
+.form-control {
+  font-size: 14px;
+}
+.input-lg {
+  border-radius: 6px;
+  behavior: url(/img/PIE.htc);
+}
+.badge {
+  border-radius: 10px;
+  behavior: url(/img/PIE.htc);
+}
+.badge-success {
+  background-color: @brand-success;
+}
+
+.badge-danger {
+  background-color: @brand-danger;
+}
+.bottom-nav {
+  text-align: center;
+  font-size: 13px;
+  .spliter {
+    margin: 0 4px;
+    width: 1px;
+    height: 10px;
+    display: inline-block;
+    background-color: @gray-light;
+  }
+}
+.browsehappy {
+  background-color: lighten(@brand-warning, 0);
+  color: #FFF;
+  padding: 5px;
+  font-size: 13px;
+}

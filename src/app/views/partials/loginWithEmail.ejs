@@ -1,0 +1,20 @@
+<div class="form-group clearfix">
+  <div class="login-title pull-left">账号登录</div>
+  <a class="pull-right switch" href="/login/?type=mobile">
+    手机登录
+  </a>
+</div>
+<div class="form-group">
+  <input type="text" name="account" class="form-control input-lg" placeholder="邮箱，手机号" id="account-input">
+  <div id="account-input-error" class="error-tip" style="display: none;"></div>
+</div>
+<div class="form-group">
+  <input type="password" name="password" class="form-control input-lg password-input" id="password-input" placeholder="密码">
+  <div id="password-input-error" class="error-tip" style="display: none;"></div>
+</div>
+<input type="hidden" name="type" value="account">
+<div class="form-group">
+  <button type="submit" class="btn btn-danger btn-lg login-btn" id="login-btn">
+    登录
+  </button>
+</div>
