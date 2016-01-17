@@ -15,7 +15,9 @@ class HomeView extends Component {
     fetchMoreLessonsAsync: PropTypes.func.isRequired,
   };
 
-  componentDidMount() {
+  constructor(props) {
+    super();
+    props.fetchLessonsAsync();
   }
 
   render() {

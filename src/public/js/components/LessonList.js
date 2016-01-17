@@ -20,7 +20,7 @@ class LessonList extends Component {
         <InfiniteScroll
           pageStart={0}
           loadMore={this.props.loadMore}
-          hasMore={this.props.hasMore}
+          hasMore={hasMore}
           loader={<div className="loader">Loading...</div>}>
           {results.map((lesson) => {
             return (

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ajax from '../common/ajax';
 import {actions} from '../redux/lessons';
+import {Link} from 'react-router';
 
 class Lesson extends Component {
   static propTypes = {
@@ -15,8 +16,8 @@ class Lesson extends Component {
           {lesson.name}
         </div>
         <div className="actions">
-          <button className="btn btn-o btn-primary action-btn">听力</button>
-          <button className="btn btn-o btn-primary action-btn">翻译</button>
+          <Link className="btn btn-o btn-primary action-btn" to={`/home/listen/${lesson.id}`}>听力</Link>
+          <Link className="btn btn-o btn-primary action-btn" to={`/translate/${lesson.id}`}>翻译</Link>
         </div>
       </div>
     );

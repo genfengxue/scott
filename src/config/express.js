@@ -65,17 +65,13 @@ export default (app, config) => {
   app.use(methodOverride());
 
 
-  // 页面路由定义
-  app.use('/', require('../app/controllers/home'));
 
   // api 路由定义
   app.use('/api/auth/', require('../app/apis/auth'));
+  app.use('/api/lessons/', require('../app/apis/lesson'));
 
-  app.use('/dtp/', (req, res, next) => {
-    proxy.web(req, res, {
-      target: config.apiRoot,
-    });
-  });
+  // 页面路由定义
+  app.use('/', require('../app/controllers/home'));
 
   app.use((req, res, next) => {
     const err = new Error('Not Found');

@@ -21,6 +21,14 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/home/*', async (req, res) => {
+  try {
+    res.render('index', {});
+  } catch (err) {
+    res.redirect('/login/');
+  }
+});
+
 // router.get('/login/', async (req, res, next) => {
 //   try {
 //     if (req.query.type === 'email' || req.query.type === 'mobile') {

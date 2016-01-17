@@ -16,7 +16,7 @@ export const receivedMoreLessons = createAction(RECEIVED_MORE_LESSONS, (payload)
 export const fetchLessonsAsync = () => {
   return async (dispatch) => {
     const response = await ajax.get('/api/lessons/', {page: 0});
-    dispatch(receivedLessons(response.results));
+    dispatch(receivedLessons(response));
   };
 };
 
