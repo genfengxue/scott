@@ -1,6 +1,16 @@
 ## 环境配置
 - node
-- redis  
+- redis
+`brew install redis`  
+or  
+```
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+```
+千万记住要配置redis本地访问  
+
 ```
 npm install -g gulp babel@^5.8.23 bower
 npm install

@@ -5,6 +5,7 @@ import { createHistory, useBasename } from 'history';
 import Root from './containers/Root';
 import routes from './routes/home';
 import homeReducer from './redux/homeReducer';
+import DevTools from './containers/DevTools';
 
 import {
   applyMiddleware,
@@ -20,7 +21,7 @@ if (__DEV__) {
     middleware,
     window.devToolsExtension
       ? window.devToolsExtension()
-      : require('./containers/DevTools').default.instrument()
+      : DevTools.default.instrument()
   );
 } else {
   createStoreWithMiddleware = compose(middleware);
