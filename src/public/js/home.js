@@ -5,7 +5,6 @@ import { createHistory, useBasename } from 'history';
 import Root from './containers/Root';
 import routes from './routes/home';
 import homeReducer from './redux/homeReducer';
-import DevTools from './containers/DevTools';
 
 import {
   applyMiddleware,
@@ -16,16 +15,7 @@ import thunk from 'redux-thunk';
 
 let createStoreWithMiddleware;
 const middleware = applyMiddleware(thunk);
-if (__DEV__) {
-  createStoreWithMiddleware = compose(
-    middleware,
-    window.devToolsExtension
-      ? window.devToolsExtension()
-      : DevTools.default.instrument()
-  );
-} else {
-  createStoreWithMiddleware = compose(middleware);
-}
+createStoreWithMiddleware = compose(middleware);
 const store = createStoreWithMiddleware(createStore)(
   homeReducer, {}
 );

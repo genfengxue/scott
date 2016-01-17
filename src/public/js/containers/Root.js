@@ -17,22 +17,11 @@ export default class Root extends React.Component {
     );
   }
 
-  get devTools () {
-    if (__DEV__) {
-      if (!window.devToolsExtension) {
-        require('../redux/createDevToolsWindow').default(this.props.store);
-      } else {
-        window.devToolsExtension.open();
-      }
-    }
-  }
-
   render () {
     return (
       <Provider store={this.props.store}>
         <div style={{ height: '100%' }}>
           {this.content}
-          {this.devTools}
         </div>
       </Provider>
     );
