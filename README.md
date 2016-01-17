@@ -49,6 +49,7 @@ gulp build --production # 发布环境编译
 ```
 
 ## 贡献代码
+`npm install -g commitizen`  
 git message必须符合规范, 使用ghook限制，初次提交代码前，执行`chmod +x validate-commit-msg.js`  
 使用`git commit`的地方用`git cz`代替。
 
