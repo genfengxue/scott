@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import {actions} from '../redux/listen';
 import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
+import AudioPlayer from '../components/AudioPlayer';
 
 const mapStateToProps = ({listen}) => ({
   listen
@@ -21,6 +22,13 @@ class ListenView extends Component {
     props.fetchLessonAsync(props.params.lessonId);
   }
 
+  componentWillUpdate(nextProps) {
+    console.log(nextProps);
+    if (nextProps.params.lessonId != this.props.params.lessonId) {
+      this.props.fetchLessonAsync(nextProps.params.lessonId);
+    }
+  }
+
   render() {
     const {listen} = this.props;
     const {lesson, errors, viewAnswer} = listen;
@@ -36,7 +44,15 @@ class ListenView extends Component {
             点击这里查看答案
           </button>
         }
-
+        {
+          lesson.audios ?
+          <AudioPlayer audios={lesson.audios} autoplay={true} />
+          : ''
+        }
+        <div className="bottom-nav">
+          {lesson.prevId ? <Link to={`/home/listen/${lesson.prevId}`} className="pull-left">prev</Link> : ''}
+          {lesson.nextId ? <Link to={`/home/listen/${lesson.nextId}`} className="pull-right">next</Link> : ''}
+        </div>
         <ErrorTip error={errors.server} />
       </div>
     );

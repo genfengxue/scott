@@ -27,6 +27,7 @@
     "file-stream-rotator": "0.0.6",
     "glob": "5.0.15",
     "history": "^1.17.0",
+    "howler": "^1.1.28",
     "http-proxy": "^1.12.0",
     "ioredis": "1.12.2",
     "jquery": "1.11.3",

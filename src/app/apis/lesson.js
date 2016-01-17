@@ -8,13 +8,25 @@ import find from 'lodash/find';
 
 const router = new Router();
 
-const mockData = Array.from(new Array(200), (x, index) => {
-  return {
+const num = 200;
+const mockData = Array.from(new Array(num), (x, index) => {
+  const lesson = {
     id: index + 1,
     name: `lesson ${index + 1}`,
     ch: `内容 ${index + 1}`,
     en: `content ${index + 1}`,
+    audios: ['http://7jprra.com1.z0.glb.clouddn.com/audios/sounds.ogg',
+    'http://7jprra.com1.z0.glb.clouddn.com/audios/sounds.mp3'],
+    prevId: index,
+    nextId: index + 2,
   };
+  if (index > 0) {
+    lesson.prevId = index;
+  }
+  if (index < num - 1) {
+    lesson.nextId = index + 2;
+  }
+  return lesson;
 });
 
 router.get('/', (req, res, next) => {
