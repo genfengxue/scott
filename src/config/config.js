@@ -5,6 +5,10 @@ const env = process.env.NODE_ENV || 'development';
 const config = {
   development: {
     root: rootPath,
+    pagination: {
+      defaultSize: 20,
+      maxSize: 100,
+    },
     app: {
       name: 'crp2',
     },
@@ -41,6 +45,10 @@ const config = {
 
   test: {
     root: rootPath,
+    pagination: {
+      defaultSize: 20,
+      maxSize: 100,
+    },
     app: {
       name: 'crp2',
     },
@@ -77,6 +85,10 @@ const config = {
 
   production: {
     root: rootPath,
+    pagination: {
+      defaultSize: 20,
+      maxSize: 100,
+    },
     app: {
       name: 'crp2',
     },

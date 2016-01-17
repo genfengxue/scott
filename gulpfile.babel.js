@@ -63,10 +63,6 @@ gulp.task('es6', () => {
   gulp.src(['./src/public/**/*.js'])
   .pipe(gulpWebpack({
     entry: {
-      login: './src/public/js/login.js',
-      register: './src/public/js/register.js',
-      forgot: './src/public/js/forgot.js',
-      continue: './src/public/js/continue.js',
       home: './src/public/js/home.js',
     },
     devtool: DEBUG ? 'source-map' : false,
@@ -89,6 +85,12 @@ gulp.task('es6', () => {
       ]),
     ],
   }, null, (err, stats) => {
+    if (err) {
+      console.error(err);
+    }
+    if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') == -1) {
+      console.log(stats.compilation.errors);
+    }
     if (!DEBUG) {
       fs.writeFile('stats.json', JSON.stringify(stats.toJson()), 'utf8', (error) => {
         if (error) {

@@ -1,9 +1,6 @@
-import homeViewState from './homeViewState';
-import user from './user';
-import updateMobileState from './updateMobileState';
-import updateEmailState from './updateEmailState';
+import lessons from './lessons';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-  homeViewState, user, updateMobileState, updateEmailState,
+  lessons
 });
