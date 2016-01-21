@@ -13,7 +13,7 @@ class Lesson extends Component {
     return (
       <div className="lesson clearfix">
         <div className="lesson-name">
-          {lesson.name}
+          Lesson {lesson.lessonNo}. {lesson.englishTitle}
         </div>
         <div className="actions">
           <Link className="btn btn-o btn-primary action-btn" to={`/home/listen/${lesson.id}`}>听力</Link>
