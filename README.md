@@ -64,4 +64,18 @@ git message必须符合规范, 使用ghook限制，初次提交代码前，执�
 
 ## [Changelog](./Changelog.md)
 
-## [用户文档](https://github.com/shunshunedu/crp-api-md/blob/master/%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95.md)
+
+## CMS
+该文档用于wind-cms  
+https://coding.net/u/cagegong/p/wind-cms/git  
+### 环境
+- node // 我们使用nvm来管理node版本
+- mongo // 绑定到本地端口访问，提高安全性
+- 
+```
+npm install gulp bower -g
+npm install
+```
+- 创建.env文件
+### 运行
+npm start
