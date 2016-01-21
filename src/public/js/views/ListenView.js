@@ -19,13 +19,13 @@ class ListenView extends Component {
 
   constructor(props) {
     super();
-    props.fetchLessonAsync(props.params.lessonId);
+    props.fetchLessonAsync(props.params.lessonNo);
   }
 
   componentWillUpdate(nextProps) {
     console.log(nextProps);
-    if (nextProps.params.lessonId != this.props.params.lessonId) {
-      this.props.fetchLessonAsync(nextProps.params.lessonId);
+    if (nextProps.params.lessonNo != this.props.params.lessonNo) {
+      this.props.fetchLessonAsync(nextProps.params.lessonNo);
     }
   }
 

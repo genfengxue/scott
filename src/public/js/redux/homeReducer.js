@@ -1,8 +1,9 @@
 import lessons from './lessons';
+import courses from './courses';
 import listen from './listen';
 import translate from './translate';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-  lessons, listen, translate,
+  courses, lessons, listen, translate,
 });

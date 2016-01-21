@@ -13,17 +13,17 @@ const pageSize = 20;
 export const receivedLessons = createAction(RECEIVED_LESSONS, (payload) => payload);
 export const receivedMoreLessons = createAction(RECEIVED_MORE_LESSONS, (payload) => payload);
 
-export const fetchLessonsAsync = () => {
+export const fetchLessonsAsync = (courseNo) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/lessons/', {page: 0});
+    const response = await ajax.get('/api/lessons/', {page: 1, courseNo});
     dispatch(receivedLessons(response));
   };
 };
 
-export const fetchMoreLessonsAsync = (index) => {
+export const fetchMoreLessonsAsync = (page, courseNo) => {
   return async (dispatch, getState) => {
     try {
-      const response = await ajax.get('/api/lessons/', {page: index});
+      const response = await ajax.get('/api/lessons/', {page, courseNo});
       dispatch(receivedMoreLessons(response));
     } catch(err) {
       console.log(err);
@@ -47,17 +47,9 @@ export default handleActions({
     return payload;
   },
   [RECEIVED_MORE_LESSONS]: (state, {payload}) => {
-    const {results, count} = payload;
-    state.count = count;
-    state.results = unionBy(state.results, results, 'id');
+    const {docs, total} = payload;
+    state.total = total;
+    state.docs = unionBy(state.docs, docs, '_id');
     return Object.assign({}, state);
   },
-}, {
-  results: [
-    {id: 1, name: 'abc'}, {id: 2, name: 'hello world'},
-    {id: 3, name: 'abc'}, {id: 4, name: 'hello world'},
-    {id: 5, name: 'abc'}, {id: 6, name: 'hello world'},
-    {id: 7, name: 'abc'}, {id: 8, name: 'hello world'}
-  ],
-  count: 8,
-});
+}, {docs: []});

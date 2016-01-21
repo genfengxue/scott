@@ -13,6 +13,7 @@ const config = {
       name: 'crp2',
     },
     port: 8000,
+    mongo: 'mongodb://localhost/wind-cms',
     sessionSecret: 'crp2-dev',
     redis: {
       host: '127.0.0.1',
@@ -53,6 +54,7 @@ const config = {
       name: 'crp2',
     },
     port: 8001,
+    mongo: 'mongodb://localhost/wind-cms',
     sessionSecret: 'crp2-dev',
     redis: {
       host: '127.0.0.1',
@@ -93,6 +95,7 @@ const config = {
       name: 'crp2',
     },
     port: 8002,
+    mongo: 'mongodb://localhost/wind-cms',
     sessionSecret: 'crp2-prod',
     redis: {
       host: '127.0.0.1',

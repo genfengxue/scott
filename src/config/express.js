@@ -13,9 +13,18 @@ import fs from 'fs';
 import FileStreamRotator from 'file-stream-rotator';
 import captcha from '../utils/captcha';
 import httpProxy from 'http-proxy';
+import mongoose from 'mongoose';
 
 const RedisStore = connectRedis(session);
 export default (app, config) => {
+
+  mongoose.connect(config.mongo) // connect to our database
+  .connection.on('error', (err) => {
+    logger.info('connection error:' + JSON.stringify(err));
+  }).once('open', () => {
+    logger.info('open mongodb success');
+  });
+
   const proxy = httpProxy.createProxyServer({});
   const env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
@@ -64,10 +73,9 @@ export default (app, config) => {
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
 
-
-
   // api 路由定义
   app.use('/api/auth/', require('../app/apis/auth'));
+  app.use('/api/courses/', require('../app/apis/course'));
   app.use('/api/lessons/', require('../app/apis/lesson'));
 
   // 页面路由定义
@@ -95,4 +103,5 @@ export default (app, config) => {
     }
     logger.error(err);
   });
+
 };

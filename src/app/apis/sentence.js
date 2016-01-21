@@ -5,7 +5,7 @@ import {verifySession} from '../middlewares/authChecker';
 import RedisCache from '../../redis/RedisCache';
 import logger from '../../utils/logger';
 import find from 'lodash/find';
-import Lesson from '../models/Lesson';
+import Sentence from '../models/Sentence';
 
 const router = new Router();
 
@@ -13,20 +13,20 @@ router.get('/', async (req, res, next) => {
   try {
     const page = req.query.page || 1;
     const limit = req.query.limit || config.pagination.defaultSize;
-    const {courseNo} = req.query;
-    const result = await Lesson.paginate({courseNo}, {page, limit});
+    const {courseNo, lessonNo} = req.query;
+    const result = await Sentence.paginate({courseNo, lessonNo}, {page, limit});
     res.send(result);
   } catch (err) {
     next(err);
   }
 });
 
-router.get('/:lessonNo', async (req, res, next) => {
+router.get('/:sentenceNo', async (req, res, next) => {
   try {
-    if (req.params.lessonNo) {
-      const result = await Lesson.findOne({lessonNo: req.params.lessonNo});
-      if (result) {
-        return res.send(result);
+    if (req.params.sentenceNo) {
+      const sentence = await Sentence.findOne({sentenceNo: req.params.sentenceNo});
+      if (sentence) {
+        return res.send(sentence);
       }
       return next({
         status: 404,

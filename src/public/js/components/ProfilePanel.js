@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {actions} from '../redux/user';
-import {actions as viewActions, HomeViewSections} from '../redux/homeViewState';
+import {actions as viewActions, LessonsViewSections} from '../redux/homeViewState';
 import Avatar from './Avatar2';
 
 class ProfilePanel extends Component {
@@ -49,7 +49,7 @@ class ProfilePanel extends Component {
           </div>
           <i className="icon-edit edit-icon icon-btn"
             title="修改"
-            onClick={() => dispatch(viewActions.changeView(HomeViewSections.UPDATE_EMAIL))}></i>
+            onClick={() => dispatch(viewActions.changeView(LessonsViewSections.UPDATE_EMAIL))}></i>
         </div>
         <div className="form-group" key="14">
           <label>手机</label>
@@ -58,7 +58,7 @@ class ProfilePanel extends Component {
           </div>
           <i className="icon-edit edit-icon icon-btn"
             title="修改"
-            onClick={() => dispatch(viewActions.changeView(HomeViewSections.UPDATE_MOBILE))}></i>
+            onClick={() => dispatch(viewActions.changeView(LessonsViewSections.UPDATE_MOBILE))}></i>
         </div>
         <div className="form-group" key="15">
           <label>昵称</label>

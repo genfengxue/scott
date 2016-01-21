@@ -1,31 +1,31 @@
 import React, {Component, PropTypes} from 'react';
 import ajax from '../common/ajax';
-import {actions} from '../redux/lessons';
+import {actions} from '../redux/courses';
 import reactInfiniteScroll from 'react-infinite-scroll';
-import Lesson from './Lesson';
+import Course from './Course';
 
 const InfiniteScroll = reactInfiniteScroll(React);
 
-class LessonList extends Component {
+class CourseList extends Component {
   static propTypes = {
-    lessons: PropTypes.object,
+    courses: PropTypes.object,
     loadMore: PropTypes.func,
   };
 
   render() {
-    const {docs, total} = this.props.lessons;
+    const {docs, total} = this.props.courses;
     const hasMore = docs.length < total;
     return (
-      <div className="lesson-list">
+      <div className="course-list">
         <InfiniteScroll
           pageStart={1}
           loadMore={this.props.loadMore}
           hasMore={hasMore}
           loader={<div className="loader">Loading...</div>}>
-          {docs.map((lesson) => {
+          {docs.map((course) => {
             return (
-              <Lesson key={lesson._id} lesson={lesson}>
-              </Lesson>
+              <Course key={course._id} course={course}>
+              </Course>
             );
           })}
         </InfiniteScroll>
@@ -35,4 +35,4 @@ class LessonList extends Component {
 
 }
 
-export default LessonList;
+export default CourseList;

@@ -8,7 +8,7 @@ const mapStateToProps = ({lessons}) => ({
   lessons
 });
 
-class HomeView extends Component {
+class LessonsView extends Component {
   static propTypes = {
     lessons: PropTypes.object.isRequired,
     fetchLessonsAsync: PropTypes.func.isRequired,
@@ -17,16 +17,24 @@ class HomeView extends Component {
 
   constructor(props) {
     super();
-    props.fetchLessonsAsync();
+    props.fetchLessonsAsync(props.params.courseNo);
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.params.courseNo != this.props.params.courseNo) {
+      console.log(nextProps);
+      this.props.fetchLessonsAsync(nextProps.params.courseNo);
+    }
   }
 
   render() {
+    const courseNo = this.props.params.courseNo;
     return (
       <div>
-        <LessonList lessons={this.props.lessons} loadMore={this.props.fetchMoreLessonsAsync} />
+        <LessonList lessons={this.props.lessons} loadMore={(page) => this.props.fetchMoreLessonsAsync(page, courseNo)} />
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, actions)(HomeView);
+export default connect(mapStateToProps, actions)(LessonsView);
