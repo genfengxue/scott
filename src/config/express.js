@@ -77,6 +77,7 @@ export default (app, config) => {
   app.use('/api/auth/', require('../app/apis/auth'));
   app.use('/api/courses/', require('../app/apis/course'));
   app.use('/api/lessons/', require('../app/apis/lesson'));
+  app.use('/api/sentences/', require('../app/apis/sentence'));
 
   // 页面路由定义
   app.use('/', require('../app/controllers/home'));

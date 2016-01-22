@@ -14,14 +14,12 @@ class AudioPlayer extends Component {
     this.state = {
       playing: props.autoplay,
     };
-    console.log(props.audios);
     this.audio = new Howl({
       urls: props.audios,
       autoplay: props.autoplay,
       onend: () => {
         this.state.playing = false;
         this.setState(this.state);
-        console.log('Finished!');
       }
     });
   }
@@ -40,16 +38,48 @@ class AudioPlayer extends Component {
     this.setState(this.state);
   }
 
+  renderDefaultPause() {
+    return (
+      <div className="audio-btn">
+        <i className="icon-pause" />
+      </div>
+    );
+  }
+
+  renderDefaultPlay() {
+    return (
+      <div className="audio-btn">
+        <i className="icon-play" />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
         {
           this.state.playing ?
-          <button className="btn btn-danger btn-o"
-            onClick={this::this.togglePlay}>playing</button>
+          <a onClick={this::this.togglePlay}>
+            {
+              this.props.children && this.props.children[0] ?
+              this.props.children[0]
+              :
+              <div className="audio-btn">
+                <i className="icon-pause" />
+              </div>
+            }
+          </a>
           :
-          <button className="btn btn-danger btn-o"
-            onClick={this::this.togglePlay}>stopped</button>
+          <a onClick={this::this.togglePlay}>
+            {
+              this.props.children && this.props.children[1] ?
+              this.props.children[1]
+              :
+              <div className="audio-btn">
+                <i className="icon-play" />
+              </div>
+            }
+          </a>
         }
       </div>
     );

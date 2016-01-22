@@ -1,57 +1,102 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDom from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import {actions} from '../redux/listen';
+import {actions as listenActions} from '../redux/listen';
+import {actions as sentencesActions} from '../redux/sentences';
 import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import AudioPlayer from '../components/AudioPlayer';
 
-const mapStateToProps = ({listen}) => ({
-  listen
+const mapStateToProps = ({listen, sentences}) => ({
+  listen, sentences
 });
 
 class ListenView extends Component {
   static propTypes = {
     params: PropTypes.object,
-    fetchLessonAsync: PropTypes.func,
+    fetchSentencesAsync: PropTypes.func,
     showListenAnswer: PropTypes.func,
   };
 
   constructor(props) {
     super();
-    props.fetchLessonAsync(props.params.lessonNo);
+    props.fetchSentencesAsync(props.params.courseNo, props.params.lessonNo);
   }
 
   componentWillUpdate(nextProps) {
-    console.log(nextProps);
-    if (nextProps.params.lessonNo != this.props.params.lessonNo) {
-      this.props.fetchLessonAsync(nextProps.params.lessonNo);
+    if (nextProps.params.lessonNo !== this.props.params.lessonNo || nextProps.params.courseNo !== this.props.params.courseNo) {
+      this.props.fetchSentencesAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
+      this.props.listenInit();
+    }
+    if (nextProps.params.sentenceNo !== this.props.params.sentenceNo) {
+      this.props.listenInit();
     }
   }
 
   render() {
-    const {listen} = this.props;
-    const {lesson, errors, viewAnswer} = listen;
+    const {listen, sentences} = this.props;
+    const {errors, viewAnswer} = listen;
+    const {courseNo, lessonNo, sentenceNo} = this.props.params;
+    const sentence =  sentences.docs.filter((sentence) => {
+      return +sentence.sentenceNo === +this.props.params.sentenceNo;
+    })[0];
+    if (!sentence) {
+      return <div>Loading...</div>;
+    }
+
+    // get prev next pointer
+    const prevSentence = sentences.docs.filter((x) => {
+      return x.sentenceNo < +sentenceNo && x.audios && x.audios.length;
+    }).reverse()[0];
+    const nextSentence = sentences.docs.filter((x) => {
+      return x.sentenceNo > +sentenceNo && x.audios && x.audios.length;
+    })[0];
+    const prevId = prevSentence ? prevSentence.sentenceNo : 0;
+    const nextId = nextSentence ? nextSentence.sentenceNo : 0;
     return (
       <div className="listen text-center">
-        {
-          viewAnswer ?
+        <div className="text-left top-nav">
+          <Link className="nav-btn" to={`/home/courses/${courseNo}`}>
+            <i className="icon-left" />
+          </Link>
+        </div>
+        <div className="answer-block">
+          {viewAnswer ?
           <div className="listen-answer">
-            {lesson.en}
+            {sentence.english}
           </div>
           :
-          <button className="btn btn-primary btn-o" onClick={this.props.showListenAnswer}>
-            点击这里查看答案
-          </button>
-        }
+          <div>
+            <div className="listen-answer fade-out">
+              {sentence.english}
+            </div>
+            <button className="btn btn-primary btn-o review-answer-btn" onClick={this.props.showListenAnswer}>
+              点击这里查看答案
+            </button>
+          </div>}
+        </div>
         {
-          lesson.audios ?
-          <AudioPlayer audios={lesson.audios} autoplay={true} />
+          sentence.audios ?
+          <AudioPlayer key={sentence._id} audios={sentence.audios} autoplay={true} />
           : ''
         }
         <div className="bottom-nav">
-          {lesson.prevId ? <Link to={`/home/listen/${lesson.prevId}`} className="pull-left">prev</Link> : ''}
-          {lesson.nextId ? <Link to={`/home/listen/${lesson.nextId}`} className="pull-right">next</Link> : ''}
+          {
+            prevId ?
+            <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}
+              className="pull-left nav-btn">
+              <i className="icon-left" />
+            </Link> :
+            ''
+          }
+          {
+            nextId ?
+            <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}
+              className="pull-right nav-btn">
+              <i className="icon-right" />
+            </Link> :
+            ''
+          }
         </div>
         <ErrorTip error={errors.server} />
       </div>
@@ -59,4 +104,4 @@ class ListenView extends Component {
   }
 }
 
-export default connect(mapStateToProps, actions)(ListenView);
+export default connect(mapStateToProps, Object.assign(listenActions, sentencesActions))(ListenView);

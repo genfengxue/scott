@@ -16,8 +16,8 @@ class Lesson extends Component {
           Lesson {lesson.lessonNo}. {lesson.englishTitle}
         </div>
         <div className="actions">
-          <Link className="btn btn-o btn-primary action-btn" to={`/home/listen/${lesson.id}`}>听力</Link>
-          <Link className="btn btn-o btn-primary action-btn" to={`/home/translate/${lesson.id}`}>翻译</Link>
+          {lesson.hasListen ? <Link className="btn btn-o btn-primary action-btn" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/listen/1`}>听力</Link> : ''}
+          {lesson.hasTranslate ? <Link className="btn btn-o btn-primary action-btn" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/translate/1`}>翻译</Link> : ''}
         </div>
       </div>
     );

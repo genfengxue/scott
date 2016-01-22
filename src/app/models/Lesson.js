@@ -6,6 +6,8 @@ const schema = BaseSchema.extend({
   lessonNo: { type: Number},
   englishTitle: { type: String},
   chineseTitle: { type: String},
+  hasListen: { type: Boolean},
+  hasTranslate: { type: Boolean},
 });
 
 export default mongoose.model('Lesson', schema);

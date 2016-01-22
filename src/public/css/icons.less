@@ -22,9 +22,14 @@
 .icon-char(@filename) {
   @cuowutishi: "\E001";
    @edit: "\E002";
-   @mobile: "\E003";
-   @tick: "\E004";
-   @times: "\E005";
+   @left: "\E003";
+   @mobile: "\E004";
+   @pause: "\E005";
+   @play: "\E006";
+   @right: "\E007";
+   @tick: "\E008";
+   @times: "\E009";
+   @voice: "\E00A";
    
   content: @@filename;
 }
@@ -45,12 +50,27 @@
 .icon-edit {
   .icon(edit);
 }
+.icon-left {
+  .icon(left);
+}
 .icon-mobile {
   .icon(mobile);
+}
+.icon-pause {
+  .icon(pause);
+}
+.icon-play {
+  .icon(play);
+}
+.icon-right {
+  .icon(right);
 }
 .icon-tick {
   .icon(tick);
 }
 .icon-times {
   .icon(times);
+}
+.icon-voice {
+  .icon(voice);
 }

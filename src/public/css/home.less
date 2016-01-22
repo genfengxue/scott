@@ -4,9 +4,6 @@
 @import './course.less';
 
 .home {
-  .avatar-field {
-
-  }
   .email-hint {
     margin-left: 4px;
   }
@@ -21,24 +18,6 @@
     behavior: url(/img/PIE.htc);
     background-color: #eee;
     line-height: 24px;
-  }
-  .input-lg {
-    font-size: 14px;
-  }
-  .icon-btn {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    background-color: rgb(200, 200, 200);
-    color: #fff;
-    border-radius: 50%;
-    behavior: url(/img/PIE.htc);
-    transition: color ease-in-out .13s;
-    &:hover {
-      color: @brand-danger;
-    }
   }
   .confirm-nickname-icon {
     position: absolute;
@@ -55,5 +34,60 @@
   }
   .nickname-input {
     padding-right: 70px;
+  }
+  .back-btn {
+    padding: 14px 16px;
+    font-size: 18px;
+    color: @gray;
+    display: inline-block;
+    text-align: center;
+  }
+  .nav-btn {
+    padding: 14px 20px;
+    font-size: 18px;
+    color: @gray;
+    display: inline-block;
+    text-align: center;
+  }
+  .top-nav {
+  }
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+  }
+  .audio-btn {
+    font-size: 42px;
+    color: @brand-primary;
+    display: inline-block;
+    text-align: center;
+  }
+  .listen-answer {
+    &.fade-out {
+      opacity: 0;
+    }
+  }
+  .answer-block {
+    position: relative;
+    min-height: 250px;
+    padding: 40px 15px;
+    font-size: 18px;
+  }
+  .review-answer-btn {
+    position: absolute;
+    left: 50%;
+    margin-left: -70px;
+    width: 140px;
+    top: 80px;
+  }
+  .answer-block {
+    font-size: 18px;
+    padding: 40px 15px;
+    min-height: 230px;
+  }
+  .translate-answer {
+    font-size: 18px;
+    padding: 0px 15px;
   }
 }

@@ -12,8 +12,8 @@ export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={CoursesView} />
     <Route path='/home/courses/:courseNo' component={LessonsView} />
-    <Route path='/home/listen/:lessonNo' component={ListenView} />
-    <Route path='/home/translate/:lessonNo' component={TranslateView} />
+    <Route path='/home/courses/:courseNo/lessons/:lessonNo/listen/:sentenceNo' component={ListenView} />
+    <Route path='/home/courses/:courseNo/lessons/:lessonNo/translate/:sentenceNo' component={TranslateView} />
     <Redirect from='*' to='/404' />
   </Route>
 );

@@ -11,8 +11,8 @@ const router = new Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const page = req.query.page || 1;
-    const limit = req.query.limit || config.pagination.defaultSize;
+    const page = 1;
+    const limit = 1000;
     const {courseNo, lessonNo} = req.query;
     const result = await Sentence.paginate({courseNo, lessonNo}, {page, limit});
     res.send(result);

@@ -164,7 +164,7 @@ gulp.task('iconfont', () => {
   .pipe(iconfont({
     fontName: fontName,
   }))
-  .pipe(gulp.dest('build/public/fonts/'));
+  .pipe(gulp.dest('src/public/fonts/')).pipe(gulp.dest('build/public/fonts/'));
 });
 
 gulp.task('develop', async () => {
