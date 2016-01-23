@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     const page = req.query.page || 1;
     const limit = req.query.limit || config.pagination.defaultSize;
     const {courseNo} = req.query;
-    const result = await Lesson.paginate({courseNo}, {page, limit});
+    const result = await Lesson.paginate({courseNo}, {page, limit, sort: {lessonNo: 1}});
     const course = await Course.findOne({courseNo});
     result.course = course;
     res.send(result);

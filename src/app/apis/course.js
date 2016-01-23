@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
   try {
     const page = req.query.page || 1;
     let limit = req.query.limit || config.pagination.defaultSize;
-    const result = await Course.paginate({}, {page, limit});
+    const result = await Course.paginate({}, {page, limit, sort: {courseNo: 1}});
     res.send(result);
   } catch (err) {
     next(err);
