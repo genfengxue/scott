@@ -34,6 +34,11 @@ class TranslateView extends Component {
   }
 
   render() {
+    const course = this.props.sentences.course;
+    const lesson = this.props.sentences.lesson;
+    if (course && lesson) {
+      document.title = `翻译-Lesson${lesson.lessonNo}-${course.chineseTitle}`;
+    }
     const {translate, sentences} = this.props;
     const {errors, viewAnswer} = translate;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;

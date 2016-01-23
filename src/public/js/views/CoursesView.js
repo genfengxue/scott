@@ -21,6 +21,7 @@ class CoursesView extends Component {
   }
 
   render() {
+    document.title = 'Wind 教口语';
     return (
       <div>
         <CourseList courses={this.props.courses} loadMore={this.props.fetchMoreCoursesAsync} />

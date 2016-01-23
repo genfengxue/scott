@@ -34,6 +34,11 @@ class ListenView extends Component {
   }
 
   render() {
+    const course = this.props.sentences.course;
+    const lesson = this.props.sentences.lesson;
+    if (course && lesson) {
+      document.title = `听力-Lesson${lesson.lessonNo}-${course.chineseTitle}`;
+    }
     const {listen, sentences} = this.props;
     const {errors, viewAnswer} = listen;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;

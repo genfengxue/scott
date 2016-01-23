@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import LessonList from '../components/LessonList';
 import {actions} from '../redux/lessons';
+import {Link} from 'react-router';
 
 const mapStateToProps = ({lessons}) => ({
   lessons
@@ -28,9 +29,18 @@ class LessonsView extends Component {
   }
 
   render() {
+    const course = this.props.lessons.course;
+    if (course) {
+      document.title = course.chineseTitle;
+    }
     const courseNo = this.props.params.courseNo;
     return (
       <div>
+        <div className="text-left top-nav">
+          <Link className="nav-btn" to={`/`}>
+            <i className="icon-left" />
+          </Link>
+        </div>
         <LessonList lessons={this.props.lessons} loadMore={(page) => this.props.fetchMoreLessonsAsync(page, courseNo)} />
       </div>
     );

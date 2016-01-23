@@ -6,6 +6,7 @@ import RedisCache from '../../redis/RedisCache';
 import logger from '../../utils/logger';
 import find from 'lodash/find';
 import Lesson from '../models/Lesson';
+import Course from '../models/Course';
 
 const router = new Router();
 
@@ -15,6 +16,8 @@ router.get('/', async (req, res, next) => {
     const limit = req.query.limit || config.pagination.defaultSize;
     const {courseNo} = req.query;
     const result = await Lesson.paginate({courseNo}, {page, limit});
+    const course = await Course.findOne({courseNo});
+    result.course = course;
     res.send(result);
   } catch (err) {
     next(err);
