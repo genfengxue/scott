@@ -122,7 +122,7 @@ router.get('/home/*', async (req, res) => {
 
 // router.get('/activate/:key', async (req, res, next) => {
 //   try {
-//     // http://account.shunshunliuxue.com/activate/f4dab9c2d4d85749a74459b7fa511283
+//     // http://account.genfengxue.com/activate/f4dab9c2d4d85749a74459b7fa511283
 //     // call api: /dtp/userlogin/pollcode/callback/?key=f4dab9c2d4d85749a74459b7fa511283
 //     // {"code":10,"result":"恭喜你验证成功"}
 //     const result = await request.get('userlogin/pollcode/callback/', {key: req.params.key});
@@ -136,7 +136,7 @@ router.get('/home/*', async (req, res) => {
 
 // router.get('/reset/:key', async (req, res, next) => {
 //   try {
-//     // http://account.shunshunliuxue.com/reset/f4dab9c2d4d85749a74459b7fa511283_cage@gmail.com
+//     // http://account.genfengxue.com/reset/f4dab9c2d4d85749a74459b7fa511283_cage@gmail.com
 //     if (!req.params.key) {
 //       return res.status(400).send('参数错误');
 //     }
@@ -157,7 +157,7 @@ router.get('/home/*', async (req, res) => {
 
 // router.post('/reset/', async (req, res, next) => {
 //   try {
-//     // http://account.shunshunliuxue.com/reset/f4dab9c2d4d85749a74459b7fa511283_cage@gmail.com
+//     // http://account.genfengxue.com/reset/f4dab9c2d4d85749a74459b7fa511283_cage@gmail.com
 //     if (!req.body.key || !req.body.email) {
 //       return res.status(400).send('参数错误');
 //     }

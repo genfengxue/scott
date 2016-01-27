@@ -71,7 +71,7 @@ https://coding.net/u/cagegong/p/wind-cms/git
 ### 环境
 - node // 我们使用nvm来管理node版本
 - mongo // 绑定到本地端口访问，提高安全性
-- 
+- ffmpeg // https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 ```
 npm install gulp bower -g
 npm install
@@ -79,3 +79,4 @@ npm install
 - 创建.env文件
 ### 运行
 npm start
+

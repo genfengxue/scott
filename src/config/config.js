@@ -23,8 +23,8 @@ const config = {
     accessLog: false,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     redirects: {
-      crp: 'http://crptest1.shunshunliuxue.com',
-      www: 'http://testsoho.shunshunliuxue.com',
+      crp: 'http://crptest1.genfengxue.com',
+      www: 'http://testsoho.genfengxue.com',
       bi: 'http://101.200.202.48:8766',
     },
     cookieSecret: 'dsfljkasdjfklsdajfkl',
@@ -34,7 +34,7 @@ const config = {
       charset: 'utf8',
     },
     cookieExpire: 7 * 24 * 3600 * 1000, // 7天
-    cookieDomain: '.shunshunliuxue.com',
+    cookieDomain: '.genfengxue.com',
     qiniu: {
       ACCESS_KEY: 'qgdHNv_xV0rZgs3ZTTVFc4AQEQxsLoGcSDi2ov7X',
       SECRET_KEY: 'd_spzzJzPcGJPWfD8UDTzW-A8DtCe2VPzB9t_pZ7',
@@ -64,8 +64,8 @@ const config = {
     accessLog: true,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     redirects: {
-      crp: 'http://crptest1.shunshunliuxue.com',
-      www: 'http://testsoho.shunshunliuxue.com',
+      crp: 'http://crptest1.genfengxue.com',
+      www: 'http://testsoho.genfengxue.com',
       bi: 'http://101.200.202.48:8766',
     },
     cookieSecret: 'dsfljkasdjfklsdajfkl',
@@ -75,7 +75,7 @@ const config = {
       charset: 'utf8',
     },
     cookieExpire: 7 * 24 * 3600 * 1000, // 7天
-    cookieDomain: '.shunshunliuxue.com',
+    cookieDomain: '.genfengxue.com',
     qiniu: {
       ACCESS_KEY: 'qgdHNv_xV0rZgs3ZTTVFc4AQEQxsLoGcSDi2ov7X',
       SECRET_KEY: 'd_spzzJzPcGJPWfD8UDTzW-A8DtCe2VPzB9t_pZ7',
@@ -105,9 +105,9 @@ const config = {
     accessLog: true,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     redirects: {
-      crp: 'http://crp.shunshunliuxue.com',
-      www: 'http://www.shunshunliuxue.com',
-      bi: 'http://bi.shunshunliuxue.com',
+      crp: 'http://crp.genfengxue.com',
+      www: 'http://www.genfengxue.com',
+      bi: 'http://bi.genfengxue.com',
     },
     cookieSecret: 'dsfljkasdjfklsdajfkl',
     rsa: {
@@ -116,7 +116,7 @@ const config = {
       charset: 'utf8',
     },
     cookieExpire: 7 * 24 * 3600 * 1000, // 7天
-    cookieDomain: '.shunshunliuxue.com',
+    cookieDomain: '.genfengxue.com',
     qiniu: {
       ACCESS_KEY: 'qgdHNv_xV0rZgs3ZTTVFc4AQEQxsLoGcSDi2ov7X',
       SECRET_KEY: 'd_spzzJzPcGJPWfD8UDTzW-A8DtCe2VPzB9t_pZ7',
