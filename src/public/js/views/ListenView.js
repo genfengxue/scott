@@ -51,10 +51,10 @@ class ListenView extends Component {
 
     // get prev next pointer
     const prevSentence = sentences.docs.filter((x) => {
-      return x.sentenceNo < +sentenceNo && x.audios && x.audios.length;
+      return x.sentenceNo < +sentenceNo && x.audio && x.audio.length;
     }).reverse()[0];
     const nextSentence = sentences.docs.filter((x) => {
-      return x.sentenceNo > +sentenceNo && x.audios && x.audios.length;
+      return x.sentenceNo > +sentenceNo && x.audio && x.audio.length;
     })[0];
     const prevId = prevSentence ? prevSentence.sentenceNo : 0;
     const nextId = nextSentence ? nextSentence.sentenceNo : 0;
@@ -81,8 +81,8 @@ class ListenView extends Component {
           </div>}
         </div>
         {
-          sentence.audios ?
-          <AudioPlayer key={sentence._id} audios={sentence.audios} autoplay={true} />
+          sentence.audio ?
+          <AudioPlayer key={sentence._id} audios={[sentence.audio]} autoplay={true} />
           : ''
         }
         <div className="bottom-nav">

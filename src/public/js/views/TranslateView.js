@@ -74,8 +74,8 @@ class TranslateView extends Component {
           viewAnswer ?
           <div className="translate-answer">
             {
-              sentence.audios ?
-              <AudioPlayer audios={sentence.audios}>
+              sentence.audio ?
+              <AudioPlayer audios={[sentence.audio]}>
                 <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
                 <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
               </AudioPlayer>
