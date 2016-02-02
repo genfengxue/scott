@@ -17,7 +17,7 @@ class Course extends Component {
       <div className="course clearfix">
         <Link to={`/home/courses/${course.courseNo}`}>
           <div className="course-image" style={courseStyle}/>
-          <h4 className="course-name text-center">
+          <h4 className="course-name text-xs-center">
             {course.chineseTitle}
           </h4>
         </Link>

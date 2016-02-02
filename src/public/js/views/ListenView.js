@@ -6,6 +6,7 @@ import {actions as sentencesActions} from '../redux/sentences';
 import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import AudioPlayer from '../components/AudioPlayer';
+import Instruction from '../components/Instruction';
 
 const mapStateToProps = ({listen, sentences}) => ({
   listen, sentences
@@ -59,51 +60,84 @@ class ListenView extends Component {
     const prevId = prevSentence ? prevSentence.sentenceNo : 0;
     const nextId = nextSentence ? nextSentence.sentenceNo : 0;
     return (
-      <div className="listen text-center">
-        <div className="text-left top-nav">
-          <Link className="nav-btn" to={`/home/courses/${courseNo}`}>
-            <i className="icon-left" />
-          </Link>
-        </div>
-        <div className="answer-block">
-          {viewAnswer ?
-          <div className="listen-answer">
-            {sentence.english}
-          </div>
-          :
-          <div>
-            <div className="listen-answer fade-out">
+      <div className="listen">
+        <nav className="navbar">
+          <ul className="nav navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to={`/home/courses/${courseNo}`}>
+                <i className="icon-left" />
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <div className="container">
+          <Instruction text="请跟读" />
+          <div className="answer-block text-xs-center">
+            {viewAnswer ?
+            <div className="listen-answer">
               {sentence.english}
             </div>
-            <button className="btn btn-primary btn-o review-answer-btn" onClick={this.props.showListenAnswer}>
-              点击这里查看答案
-            </button>
-          </div>}
-        </div>
-        {
-          sentence.audio ?
-          <AudioPlayer key={sentence._id} audios={[sentence.audio]} autoplay={true} />
-          : ''
-        }
-        <div className="bottom-nav">
+            :
+            <div>
+              <div className="listen-answer fade-out">
+                {sentence.english}
+              </div>
+              <button className="btn btn-primary btn-o review-answer-btn" onClick={this.props.showListenAnswer}>
+                点击这里查看答案
+              </button>
+            </div>}
+          </div>
           {
-            prevId ?
-            <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}
-              className="pull-left nav-btn">
-              <i className="icon-left" />
-            </Link> :
-            ''
+            sentence.audio ?
+            <AudioPlayer key={sentence._id} audios={[sentence.audio]} autoplay={true} />
+            : ''
           }
-          {
-            nextId ?
-            <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}
-              className="pull-right nav-btn">
-              <i className="icon-right" />
-            </Link> :
-            ''
-          }
+          <div>
+            {
+              prevId ?
+              <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}
+                className="pull-left nav-btn">
+                <i className="icon-left" />
+              </Link> :
+              ''
+            }
+            {
+              nextId ?
+              <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}
+                className="pull-right nav-btn">
+                <i className="icon-right" />
+              </Link> :
+              ''
+            }
+          </div>
+          <ErrorTip error={errors.server} />
         </div>
-        <ErrorTip error={errors.server} />
+        <nav className="navbar navbar-fixed-bottom bottom-nav">
+          <ul className="nav navbar-nav">
+            <li className="col-xs-2">
+              {
+                prevId ?
+                <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}>
+                  <i className="icon-left" />
+                </Link>
+                :
+                ''
+              }
+            </li>
+            <li className="col-xs-8 text-xs-center">
+            {
+              viewAnswer ?
+              <Link className="btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}>
+                下一句
+              </Link>
+              :
+              <button className="btn btn-primary-outline col-xs-12" onClick={this.props.showListenAnswer}>
+                查看答案
+              </button>
+            }
+            </li>
+          </ul>
+        </nav>
       </div>
     );
   }

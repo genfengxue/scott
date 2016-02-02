@@ -27,7 +27,7 @@
 - ejs 
 - log4js 
 - redis session 
-- bootstrap less 
+- bootstrap scss 
 - mobile responsive design 
 - ie 8 support
   - border-radius 

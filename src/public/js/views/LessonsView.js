@@ -36,11 +36,15 @@ class LessonsView extends Component {
     const courseNo = this.props.params.courseNo;
     return (
       <div>
-        <div className="text-left top-nav">
-          <Link className="nav-btn" to={`/`}>
-            <i className="icon-left" />
-          </Link>
-        </div>
+        <nav className="navbar">
+          <ul className="nav navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to={`/`}>
+                <i className="icon-left" />
+              </Link>
+            </li>
+          </ul>
+        </nav>
         <LessonList lessons={this.props.lessons} loadMore={(page) => this.props.fetchMoreLessonsAsync(page, courseNo)} />
       </div>
     );

@@ -1,14 +1,15 @@
+@import "./_variables";
 .lesson {
-  font-size: 20px;
-  padding: 10px 15px;
+  font-size: $font-size-lg;
+  padding: 1.5rem 2rem;
   display: table;
   width: 100%;
   .action-btn {
-    margin: 0 5px;
+    margin: 0 0.25rem;
   }
   .actions {
     display: table-cell;
-    width: 130px;
+    width: 8rem;
   }
   .lesson-name {
     display: table-cell;

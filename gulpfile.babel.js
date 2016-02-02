@@ -8,15 +8,13 @@ import gulp from 'gulp';
 import nodemon from 'gulp-nodemon';
 import plumber from 'gulp-plumber';
 import livereload from 'gulp-livereload';
-import less from 'gulp-less';
+import sass from 'gulp-sass';
 import babel from 'gulp-babel';
 import iconfont from 'gulp-iconfont';
 import iconfontCss from 'gulp-iconfont-css';
 import wait from 'gulp-wait';
 import imagemin from 'gulp-imagemin';
 import pngquant from 'imagemin-pngquant';
-import LessPluginCleanCSS from 'less-plugin-clean-css';
-import LessPluginAutoPrefix from 'less-plugin-autoprefix';
 import rev from 'gulp-rev';
 import revReplace from 'gulp-rev-replace';
 import cdnify from 'gulp-cdnify';
@@ -39,16 +37,11 @@ const GLOBALS = {
   __DEV__: DEBUG,
 };
 
-const cleancss = new LessPluginCleanCSS({ advanced: true });
-const autoprefix = new LessPluginAutoPrefix({ browsers: ['last 2 versions'] });
-
 // 需要return gulp
-gulp.task('less', () => {
-  return gulp.src(['./src/public/css/*.less', '!./src/public/css/_*.less'])
+gulp.task('sass', () => {
+  return gulp.src(['./src/public/css/*.scss', '!./src/public/css/_*.scss'])
   .pipe(plumber().on('error', handleError))
-  .pipe(less({
-    plugins: DEBUG ? [] : [autoprefix, cleancss],
-  }).on('error', handleError))
+  .pipe(sass({outputStyle: 'compressed'}).on('error', handleError))
   .pipe(gulp.dest('./build/public/css'))
   .pipe(livereload());
 });
@@ -104,7 +97,7 @@ gulp.task('es6', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./src/public/css/**/*.less', ['less']);
+  gulp.watch('./src/public/css/**/*.scss', ['sass']);
   // gulp.watch('./src/public/**/*.js', ['es6']);
   gulp.watch(['./src/**/*.js', '!./src/public/**/*.js'], (file) => {
     try {
@@ -157,8 +150,8 @@ gulp.task('iconfont', () => {
   return gulp.src('src/public/img/svgs/*.svg')
   .pipe(iconfontCss({
     fontName: fontName,
-    path: 'src/public/css/_icons.less',
-    targetPath: '../css/icons.less',
+    path: 'src/public/css/_iconsTpl.scss',
+    targetPath: '../css/icons.scss',
     fontPath: '../fonts/',
   }))
   .pipe(iconfont({
@@ -250,7 +243,7 @@ gulp.task('default', () => {
     'es6',
     'es6:server',
     'iconfont',
-    'less',
+    'sass',
     'copy',
     'imagemin',
     'develop',
@@ -264,7 +257,7 @@ gulp.task('build', () => {
     'es6',
     'es6:server',
     'iconfont',
-    'less',
+    'sass',
     'copy',
     'imagemin',
     'rev',

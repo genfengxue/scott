@@ -1,0 +1,33 @@
+.btn-o{
+  background: transparent;
+  color: inherit;
+  transition: all .2s;
+  &:hover, &:focus{
+    color: #FFF;
+  }
+
+  &.btn-primary{
+    color: $brand-primary;
+    border-color: $brand-primary;
+    &:hover, &:focus{
+      color: #FFF;
+      background-color: $brand-primary;
+    }
+    &.btn-reverse{
+      color: #FFF;
+      border-color: #FFF;
+      &:hover, &:focus{
+        color: $brand-primary;
+        background-color: #FFF;
+      }
+    }
+    &[disabled] {
+      border-color: $gray-light;
+      color: $gray-light;
+      &:hover, &:focus{
+        color: $gray-light;
+        background-color: #FFF;
+      }
+    }
+  }
+}

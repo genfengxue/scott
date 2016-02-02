@@ -1,14 +1,15 @@
-@import './_variables.less';
+@import "./_variables";
 
 .course {
-  margin: 20px 15px;
+  margin: 1.5rem 2rem;
   .course-image {
-    width: 240px;
-    height: 180px;
-    background-color: @gray-lighter;
+    width: 16rem;
+    height: 9rem;
+    background-color: $gray-lighter;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin: auto;
+    margin-bottom: 0.5rem;
   }
 }

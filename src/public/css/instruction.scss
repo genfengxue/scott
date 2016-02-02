@@ -1,0 +1,12 @@
+@import "./_variables";
+.instruction {
+  .media-object {
+    border-radius: 50%;
+    width: 4rem;
+    border: .125rem solid $gray-lighter;
+  }
+  .media-body {
+    vertical-align: middle;
+    font-size: 1.125rem;
+  }
+}
