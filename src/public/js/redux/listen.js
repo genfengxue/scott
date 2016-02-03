@@ -1,6 +1,4 @@
 import {createAction, handleActions} from 'redux-actions';
-import ajax from '../common/ajax';
-import unionBy from 'lodash/unionBy';
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -33,7 +31,7 @@ export default handleActions({
     state.viewAnswer = true;
     return Object.assign({}, state);
   },
-  [LISTEN_INIT]: (state) => {
+  [LISTEN_INIT]: () => {
     return {errors: {}};
-  }
+  },
 }, {errors: {}});

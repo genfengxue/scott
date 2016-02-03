@@ -33,7 +33,7 @@ export default handleActions({
     state.viewAnswer = true;
     return Object.assign({}, state);
   },
-  [TRANSLATE_INIT]: (state) => {
+  [TRANSLATE_INIT]: () => {
     return {errors: {}};
-  }
+  },
 }, {errors: {}});

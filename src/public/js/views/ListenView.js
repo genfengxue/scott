@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDom from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import {actions as listenActions} from '../redux/listen';
 import {actions as sentencesActions} from '../redux/sentences';
 import {Link} from 'react-router';
@@ -9,7 +8,7 @@ import AudioPlayer from '../components/AudioPlayer';
 import Instruction from '../components/Instruction';
 
 const mapStateToProps = ({listen, sentences}) => ({
-  listen, sentences
+  listen, sentences,
 });
 
 class ListenView extends Component {
@@ -17,6 +16,9 @@ class ListenView extends Component {
     params: PropTypes.object,
     fetchSentencesAsync: PropTypes.func,
     showListenAnswer: PropTypes.func,
+    listenInit: PropTypes.func,
+    sentences: PropTypes.object,
+    listen: PropTypes.object,
   };
 
   constructor(props) {
@@ -43,8 +45,8 @@ class ListenView extends Component {
     const {listen, sentences} = this.props;
     const {errors, viewAnswer} = listen;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
-    const sentence =  sentences.docs.filter((sentence) => {
-      return +sentence.sentenceNo === +this.props.params.sentenceNo;
+    const sentence = sentences.docs.filter((x) => {
+      return +x.sentenceNo === +this.props.params.sentenceNo;
     })[0];
     if (!sentence) {
       return <div>Loading...</div>;
@@ -74,28 +76,30 @@ class ListenView extends Component {
           <Instruction text="请跟读" />
           <div className="answer-block text-xs-center">
             {
-              viewAnswer ?
-              (
-                sentence.audio ?
-                <AudioPlayer audios={[sentence.audio]} autoplay={true}>
-                  <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
-                  <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
-                </AudioPlayer>
-                : ''
-              )
-              :
-              (
-                sentence.audio ?
-                <AudioPlayer audios={[sentence.audio]} autoplay={true}>
-                  <div className="audio-btn">
-                    <i className="icon-pause" />
-                  </div>
-                  <div className="audio-btn">
-                    <i className="icon-play" />
-                  </div>
-                </AudioPlayer>
-                : ''
-              )
+              () => {
+                switch (true) {
+                case viewAnswer && sentence.audio:
+                  return (
+                    <AudioPlayer audios={[sentence.audio]} autoplay>
+                      <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
+                      <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
+                    </AudioPlayer>
+                  );
+                case !viewAnswer && sentence.audio:
+                  return (
+                    <AudioPlayer audios={[sentence.audio]} autoplay>
+                      <div className="audio-btn">
+                        <i className="icon-pause" />
+                      </div>
+                      <div className="audio-btn">
+                        <i className="icon-play" />
+                      </div>
+                    </AudioPlayer>
+                  );
+                default:
+                  return '';
+                }
+              }()
             }
           </div>
           <div>
@@ -121,14 +125,14 @@ class ListenView extends Component {
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
             <li className="col-xs-2">
-              {
-                prevId ?
-                <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}>
-                  <i className="icon-left" />
-                </Link>
-                :
-                ''
-              }
+            {
+              prevId ?
+              <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}>
+                <i className="icon-left" />
+              </Link>
+              :
+              ''
+            }
             </li>
             <li className="col-xs-8 text-xs-center">
             {

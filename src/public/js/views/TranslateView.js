@@ -87,29 +87,39 @@ class TranslateView extends Component {
             }
           </div>
           :
-          <button className="btn btn-primary-outline" onClick={this.props.showTranslateAnswer}>
-            点击这里查看答案
-          </button>
+          ''
         }
         <ErrorTip error={errors.server} />
-        <div className="bottom-nav">
-          {
-            prevId ?
-            <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${prevId}`}
-              className="pull-left nav-btn">
-              <i className="icon-left" />
-            </Link> :
-            ''
-          }
-          {
-            nextId ?
-            <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${nextId}`}
-              className="pull-right nav-btn">
-              <i className="icon-right" />
-            </Link> :
-            ''
-          }
-        </div>
+        <nav className="navbar navbar-fixed-bottom bottom-nav">
+          <ul className="nav navbar-nav">
+            <li className="col-xs-2">
+              {
+                prevId ?
+                <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${prevId}`}>
+                  <i className="icon-left" />
+                </Link>
+                :
+                ''
+              }
+            </li>
+            <li className="col-xs-8 text-xs-center">
+            {
+              viewAnswer ?
+              (
+                nextId ?
+                <Link className="btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${nextId}`} >
+                  下一句
+                </Link>
+                : '没了'
+              )
+              :
+              <button className="btn btn-primary-outline col-xs-12" onClick={this.props.showTranslateAnswer}>
+                查看答案
+              </button>
+            }
+            </li>
+          </ul>
+        </nav>
       </div>
     );
   }

@@ -6,7 +6,6 @@ import unionBy from 'lodash/unionBy';
 // ------------------------------------
 export const RECEIVED_LESSONS = 'RECEIVED_LESSONS';
 export const RECEIVED_MORE_LESSONS = 'RECEIVED_MORE_LESSONS';
-const pageSize = 20;
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -21,11 +20,11 @@ export const fetchLessonsAsync = (courseNo) => {
 };
 
 export const fetchMoreLessonsAsync = (page, courseNo) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
       const response = await ajax.get('/api/lessons/', {page, courseNo});
       dispatch(receivedMoreLessons(response));
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       // dispatch(receivedMoreLessons([]));
     }
