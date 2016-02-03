@@ -37,7 +37,7 @@ class MobilePanel extends Component {
             ref="captcha"
             className="form-control input-lg captcha-input"
             placeholder="验证码" />
-          <a className="btn btn-default btn-o get-captcha-btn btn-lg pull-right">
+          <a className="btn btn-default-outline get-captcha-btn btn-lg pull-right">
             <img src={captchaUrl} className="captcha" onClick={() => dispatch(actions.changeCaptcha())} />
           </a>
           <ErrorTip error={errors.captcha} />
@@ -49,13 +49,13 @@ class MobilePanel extends Component {
             placeholder="短信动态码" />
           {
             canResent ?
-            <a className="btn btn-primary btn-o get-code-btn btn-lg pull-right"
+            <a className="btn btn-primary-outline get-code-btn btn-lg pull-right"
               id="get-code-btn"
               onClick={() => dispatch(actions.getCode({
                 mobile: this.refs.mobile.value,
                 captcha: this.refs.captcha.value,
               }))}>获取动态码</a> :
-            <a className="btn btn-primary btn-o get-code-btn btn-lg pull-right" disabled="disabled">{countdown}</a>
+            <a className="btn btn-primary-outline get-code-btn btn-lg pull-right" disabled="disabled">{countdown}</a>
           }
           <ErrorTip error={errors.code} />
         </div>

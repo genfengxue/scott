@@ -1,7 +1,6 @@
 @import '../libs/bootstrap/scss/bootstrap';
 @import "./_variables";
 @import './icons.scss';
-@import "./themes/_buttons";
 
 .browsehappy {
   background-color: lighten($brand-warning, 0);

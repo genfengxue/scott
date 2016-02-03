@@ -87,7 +87,7 @@ class TranslateView extends Component {
             }
           </div>
           :
-          <button className="btn btn-primary btn-o" onClick={this.props.showTranslateAnswer}>
+          <button className="btn btn-primary-outline" onClick={this.props.showTranslateAnswer}>
             点击这里查看答案
           </button>
         }

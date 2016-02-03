@@ -73,25 +73,31 @@ class ListenView extends Component {
         <div className="container">
           <Instruction text="请跟读" />
           <div className="answer-block text-xs-center">
-            {viewAnswer ?
-            <div className="listen-answer">
-              {sentence.english}
-            </div>
-            :
-            <div>
-              <div className="listen-answer fade-out">
-                {sentence.english}
-              </div>
-              <button className="btn btn-primary btn-o review-answer-btn" onClick={this.props.showListenAnswer}>
-                点击这里查看答案
-              </button>
-            </div>}
+            {
+              viewAnswer ?
+              (
+                sentence.audio ?
+                <AudioPlayer audios={[sentence.audio]} autoplay={true}>
+                  <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
+                  <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
+                </AudioPlayer>
+                : ''
+              )
+              :
+              (
+                sentence.audio ?
+                <AudioPlayer audios={[sentence.audio]} autoplay={true}>
+                  <div className="audio-btn">
+                    <i className="icon-pause" />
+                  </div>
+                  <div className="audio-btn">
+                    <i className="icon-play" />
+                  </div>
+                </AudioPlayer>
+                : ''
+              )
+            }
           </div>
-          {
-            sentence.audio ?
-            <AudioPlayer key={sentence._id} audios={[sentence.audio]} autoplay={true} />
-            : ''
-          }
           <div>
             {
               prevId ?
@@ -127,9 +133,13 @@ class ListenView extends Component {
             <li className="col-xs-8 text-xs-center">
             {
               viewAnswer ?
-              <Link className="btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}>
-                下一句
-              </Link>
+              (
+                nextId ?
+                <Link className="btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}>
+                  下一句
+                </Link>
+                : '没了'
+              )
               :
               <button className="btn btn-primary-outline col-xs-12" onClick={this.props.showListenAnswer}>
                 查看答案
