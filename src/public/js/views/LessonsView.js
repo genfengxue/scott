@@ -1,12 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDom from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import LessonList from '../components/LessonList';
 import {actions} from '../redux/lessons';
 import {Link} from 'react-router';
+import setTitle from '../common/setTitle';
 
 const mapStateToProps = ({lessons}) => ({
-  lessons
+  lessons,
 });
 
 class LessonsView extends Component {
@@ -14,6 +14,7 @@ class LessonsView extends Component {
     lessons: PropTypes.object.isRequired,
     fetchLessonsAsync: PropTypes.func.isRequired,
     fetchMoreLessonsAsync: PropTypes.func.isRequired,
+    params: PropTypes.object,
   };
 
   constructor(props) {
@@ -22,7 +23,7 @@ class LessonsView extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.params.courseNo != this.props.params.courseNo) {
+    if (+nextProps.params.courseNo !== +this.props.params.courseNo) {
       console.log(nextProps);
       this.props.fetchLessonsAsync(nextProps.params.courseNo);
     }
@@ -31,7 +32,7 @@ class LessonsView extends Component {
   render() {
     const course = this.props.lessons.course;
     if (course) {
-      document.title = course.chineseTitle;
+      setTitle(course.chineseTitle);
     }
     const courseNo = this.props.params.courseNo;
     return (

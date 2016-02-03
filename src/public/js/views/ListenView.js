@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import AudioPlayer from '../components/AudioPlayer';
 import Instruction from '../components/Instruction';
+import setTitle from '../common/setTitle';
 
 const mapStateToProps = ({listen, sentences}) => ({
   listen, sentences,
@@ -39,9 +40,6 @@ class ListenView extends Component {
   render() {
     const course = this.props.sentences.course;
     const lesson = this.props.sentences.lesson;
-    if (course && lesson) {
-      document.title = `听力-Lesson${lesson.lessonNo}-${course.chineseTitle}`;
-    }
     const {listen, sentences} = this.props;
     const {errors, viewAnswer} = listen;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
@@ -50,6 +48,9 @@ class ListenView extends Component {
     })[0];
     if (!sentence) {
       return <div>Loading...</div>;
+    }
+    if (course && lesson && sentence) {
+      setTitle(`共${sentences.docs.length}句-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
     }
 
     // get prev next pointer
@@ -74,51 +75,47 @@ class ListenView extends Component {
         </nav>
         <div className="container">
           <Instruction text="请跟读" />
-          <div className="answer-block text-xs-center">
+          <div className="col-xs-12 answer-block">
+            <div className="center-block">
             {
               () => {
                 switch (true) {
-                case viewAnswer && sentence.audio:
+                case viewAnswer && !!sentence.audio:
                   return (
-                    <AudioPlayer audios={[sentence.audio]} autoplay>
-                      <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
-                      <div>{sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
-                    </AudioPlayer>
+                    <div className="col-xs-12">
+                      <AudioPlayer audios={[sentence.audio]} autoplay key={sentence._id}>
+                        <div className="sentence-text">
+                          {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
+                          <br />
+                          <small>{sentence.chinese}</small>
+                        </div>
+                        <div className="sentence-text">
+                          {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
+                          <br />
+                          <small>{sentence.chinese}</small>
+                        </div>
+                      </AudioPlayer>
+                    </div>
                   );
-                case !viewAnswer && sentence.audio:
+                case !viewAnswer && !!sentence.audio:
                   return (
-                    <AudioPlayer audios={[sentence.audio]} autoplay>
-                      <div className="audio-btn">
-                        <i className="icon-pause" />
-                      </div>
-                      <div className="audio-btn">
-                        <i className="icon-play" />
-                      </div>
-                    </AudioPlayer>
+                    <div className="col-xs-12 text-xs-center">
+                      <AudioPlayer audios={[sentence.audio]} autoplay key={sentence._id}>
+                        <div className="audio-btn">
+                          <i className="icon-pause" />
+                        </div>
+                        <div className="audio-btn">
+                          <i className="icon-play" />
+                        </div>
+                      </AudioPlayer>
+                    </div>
                   );
                 default:
                   return '';
                 }
               }()
             }
-          </div>
-          <div>
-            {
-              prevId ?
-              <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}
-                className="pull-left nav-btn">
-                <i className="icon-left" />
-              </Link> :
-              ''
-            }
-            {
-              nextId ?
-              <Link to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}
-                className="pull-right nav-btn">
-                <i className="icon-right" />
-              </Link> :
-              ''
-            }
+            </div>
           </div>
           <ErrorTip error={errors.server} />
         </div>
@@ -139,13 +136,16 @@ class ListenView extends Component {
               viewAnswer ?
               (
                 nextId ?
-                <Link className="btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}>
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${nextId}`}>
                   下一句
                 </Link>
-                : '没了'
+                :
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/1`}>
+                  再来一遍
+                </Link>
               )
               :
-              <button className="btn btn-primary-outline col-xs-12" onClick={this.props.showListenAnswer}>
+              <button className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={this.props.showListenAnswer}>
                 查看答案
               </button>
             }

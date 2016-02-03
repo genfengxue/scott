@@ -7,6 +7,7 @@ class AudioPlayer extends Component {
   static propTypes = {
     audios: PropTypes.array.isRequired,
     autoplay: PropTypes.bool,
+    children: PropTypes.array,
   };
 
   constructor(props) {
@@ -20,7 +21,7 @@ class AudioPlayer extends Component {
       onend: () => {
         this.state.playing = false;
         this.setState(this.state);
-      }
+      },
     });
   }
 
@@ -59,7 +60,7 @@ class AudioPlayer extends Component {
       <div>
         {
           this.state.playing ?
-          <a onClick={this::this.togglePlay}>
+          <span onClick={this::this.togglePlay}>
             {
               this.props.children && this.props.children[0] ?
               this.props.children[0]
@@ -68,9 +69,9 @@ class AudioPlayer extends Component {
                 <i className="icon-pause" />
               </div>
             }
-          </a>
+          </span>
           :
-          <a onClick={this::this.togglePlay}>
+          <span onClick={this::this.togglePlay}>
             {
               this.props.children && this.props.children[1] ?
               this.props.children[1]
@@ -79,7 +80,7 @@ class AudioPlayer extends Component {
                 <i className="icon-play" />
               </div>
             }
-          </a>
+          </span>
         }
       </div>
     );

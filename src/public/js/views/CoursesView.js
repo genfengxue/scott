@@ -1,11 +1,11 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDom from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import CourseList from '../components/CourseList';
 import {actions} from '../redux/courses';
+import setTitle from '../common/setTitle';
 
 const mapStateToProps = ({courses}) => ({
-  courses
+  courses,
 });
 
 class CoursesView extends Component {
@@ -21,7 +21,7 @@ class CoursesView extends Component {
   }
 
   render() {
-    document.title = 'Wind 教口语';
+    setTitle('Wind 教口语');
     return (
       <div>
         <CourseList courses={this.props.courses} loadMore={this.props.fetchMoreCoursesAsync} />
