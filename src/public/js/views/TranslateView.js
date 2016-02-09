@@ -101,17 +101,17 @@ class TranslateView extends Component {
         </div>
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
-            <li className="col-xs-2">
+            <li>
               {
                 prevId ?
-                <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${prevId}`}>
+                <Link className="col-xs-1 no-padding-col" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${prevId}`}>
                   <i className="icon-left" />
                 </Link>
                 :
                 ''
               }
             </li>
-            <li className="col-xs-8 text-xs-center">
+            <li className="col-xs-10 text-xs-center no-padding-col">
             {
               viewAnswer ?
               (

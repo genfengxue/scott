@@ -121,7 +121,7 @@ class ListenView extends Component {
         </div>
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
-            <li className="col-xs-2">
+            <li className="col-xs-1 no-padding-col">
             {
               prevId ?
               <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/${prevId}`}>
@@ -131,7 +131,7 @@ class ListenView extends Component {
               ''
             }
             </li>
-            <li className="col-xs-8 text-xs-center">
+            <li className="col-xs-10 no-padding-col text-xs-center">
             {
               viewAnswer ?
               (
