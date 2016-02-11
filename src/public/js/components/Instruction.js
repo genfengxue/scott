@@ -10,7 +10,8 @@ class Instruction extends Component {
       <div className="col-xs-12 instruction">
         <div className="media">
           <div className="media-left">
-            <img className="media-object" src="/img/wind.jpg" alt="wind" />
+            <div className="media-object">
+            </div>
           </div>
           <div className="media-body">
             {this.props.text}

@@ -3,7 +3,11 @@
   .media-object {
     border-radius: 50%;
     width: 4rem;
+    height: 4rem;
     border: .125rem solid $gray-lighter;
+    background-image: url('/img/wind.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .media-body {
     vertical-align: middle;

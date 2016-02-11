@@ -35,26 +35,29 @@
   @if $filename == left {
     $char: "\E003";
   }
-  @if $filename == mobile {
+  @if $filename == loading {
     $char: "\E004";
   }
-  @if $filename == pause {
+  @if $filename == mobile {
     $char: "\E005";
   }
-  @if $filename == play {
+  @if $filename == pause {
     $char: "\E006";
   }
-  @if $filename == right {
+  @if $filename == play {
     $char: "\E007";
   }
-  @if $filename == tick {
+  @if $filename == right {
     $char: "\E008";
   }
-  @if $filename == times {
+  @if $filename == tick {
     $char: "\E009";
   }
-  @if $filename == voice {
+  @if $filename == times {
     $char: "\E00A";
+  }
+  @if $filename == voice {
+    $char: "\E00B";
   }
 
   @return $char;
@@ -79,6 +82,9 @@
 }
 .icon-left {
   @include icon(left);
+}
+.icon-loading {
+  @include icon(loading);
 }
 .icon-mobile {
   @include icon(mobile);

@@ -1,7 +1,7 @@
 import babelPolyfill from 'babel-polyfill'; // eslint-disable-line no-unused-vars
-import React, {Component} from 'react';
+import React from 'react';
+import { browserHistory } from 'react-router';
 import ReactDom from 'react-dom';
-import { createHistory, useBasename } from 'history';
 import Root from './containers/Root';
 import routes from './routes/home';
 import homeReducer from './redux/homeReducer';
@@ -19,8 +19,7 @@ createStoreWithMiddleware = compose(middleware);
 const store = createStoreWithMiddleware(createStore)(
   homeReducer, {}
 );
-window.dispatch = store.dispatch;
-const history = useBasename(createHistory)({
-});
 
-ReactDom.render(<Root history={history} routes={routes} store={store} />, document.getElementById('app'));
+window.dispatch = store.dispatch;
+
+ReactDom.render(<Root history={browserHistory} routes={routes} store={store} />, document.getElementById('app'));

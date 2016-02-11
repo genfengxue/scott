@@ -24,6 +24,7 @@ class ListenView extends Component {
 
   constructor(props) {
     super();
+    props.listenInit();
     props.fetchSentencesAsync(props.params.courseNo, props.params.lessonNo);
   }
 
@@ -63,7 +64,7 @@ class ListenView extends Component {
     const prevId = prevSentence ? prevSentence.sentenceNo : 0;
     const nextId = nextSentence ? nextSentence.sentenceNo : 0;
     return (
-      <div className="listen">
+      <div className="listen noselect">
         <nav className="navbar">
           <ul className="nav navbar-nav">
             <li className="nav-item">
@@ -82,24 +83,24 @@ class ListenView extends Component {
                 switch (true) {
                 case viewAnswer && !!sentence.audio:
                   return (
-                    <div className="col-xs-12">
+                    <div>
                       <AudioPlayer audios={[sentence.audio]} autoplay key={sentence._id}>
                         <div className="sentence-text">
                           {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
                           <br />
-                          <small>{sentence.chinese}</small>
+                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
                         </div>
                         <div className="sentence-text">
                           {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
                           <br />
-                          <small>{sentence.chinese}</small>
+                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
                         </div>
                       </AudioPlayer>
                     </div>
                   );
                 case !viewAnswer && !!sentence.audio:
                   return (
-                    <div className="col-xs-12 text-xs-center">
+                    <div className="text-xs-center">
                       <AudioPlayer audios={[sentence.audio]} autoplay key={sentence._id}>
                         <div className="audio-btn">
                           <i className="icon-pause" />
@@ -131,7 +132,7 @@ class ListenView extends Component {
               ''
             }
             </li>
-            <li className="col-xs-10 no-padding-col text-xs-center">
+            <li className="col-xs-10 text-xs-center">
             {
               viewAnswer ?
               (

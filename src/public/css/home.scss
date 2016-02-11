@@ -15,6 +15,7 @@
   margin-top: 2rem;
   height: 14rem;
   display: table;
+  font-size: $main-text-zize;
   .center-block {
     display: table-cell;
     vertical-align: middle;
@@ -26,5 +27,13 @@
     width: 100%;
     height: 7rem;
     padding: 1rem 0;
+  }
+}
+
+.btn-primary-outline {
+  &:hover, &:focus {
+    color: $brand-primary;
+    background-color: transparent;
+    border-color: $brand-primary;
   }
 }

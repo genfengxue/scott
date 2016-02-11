@@ -13,13 +13,29 @@ class AudioPlayer extends Component {
   constructor(props) {
     super();
     this.state = {
-      playing: props.autoplay,
+      loading: true,
     };
     this.audio = new Howl({
       urls: props.audios,
       autoplay: props.autoplay,
+      onload: () => {
+        this.state.loading = false;
+        this.setState(this.state);
+      },
       onend: () => {
         this.state.playing = false;
+        this.setState(this.state);
+      },
+      onplay: () => {
+        this.state.playing = true;
+        this.setState(this.state);
+      },
+      onpause: () => {
+        this.state.playing = false;
+        this.setState(this.state);
+      },
+      onloaderror: (e) => {
+        this.state.error = e;
         this.setState(this.state);
       },
     });
@@ -30,35 +46,43 @@ class AudioPlayer extends Component {
   }
 
   togglePlay() {
-    this.state.playing = !this.state.playing;
-    if (this.state.playing) {
+    const playing = !this.state.playing;
+    console.log(this.audio);
+    if (playing) {
       this.audio.play();
     } else {
       this.audio.pause();
     }
-    this.setState(this.state);
-  }
-
-  renderDefaultPause() {
-    return (
-      <div className="audio-btn">
-        <i className="icon-pause" />
-      </div>
-    );
-  }
-
-  renderDefaultPlay() {
-    return (
-      <div className="audio-btn">
-        <i className="icon-play" />
-      </div>
-    );
   }
 
   render() {
     return (
       <div>
         {
+          this.state.error ?
+          <span>
+            {
+              this.props.children && this.props.children[3] ?
+              this.props.children[3]
+              :
+              <div className="audio-btn">
+                <i className="icon-cuowutishi" />
+              </div>
+            }
+          </span>
+          :
+          this.state.loading ?
+          <span>
+            {
+              this.props.children && this.props.children[2] ?
+              this.props.children[2]
+              :
+              <div className="audio-btn">
+                <i className="icon-loading spin" />
+              </div>
+            }
+          </span>
+          :
           this.state.playing ?
           <span onClick={this::this.togglePlay}>
             {

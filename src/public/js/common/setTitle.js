@@ -1,3 +1,13 @@
+/**
+ * author      : cagegong cagegong@gmail.com
+ * date        : 02/03/2016
+ * description : 微信页面动态设置title
+ */
+
+/**
+ * Set page title in wechat webview.
+ * @param {String} title the new title for the current page
+ */
 export default (title) => {
   const body = document.body;
   document.title = title; // hack在微信等webview中无法修改document.title的情况
