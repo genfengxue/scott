@@ -8,15 +8,6 @@
 }
 
 @mixin <%= cssClass%>-styles {
-  font-family: "<%= fontName %>";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
-  text-decoration: none;
-  text-transform: none;
 }
 
 %<%= cssClass%> {
@@ -34,6 +25,17 @@
 }
 
 @mixin <%= cssClass%>($filename, $insert: before, $extend: true) {
+  font-family: "<%= fontName %>";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: middle;
+  display: inline-block;
   &:#{$insert} {
     @if $extend {
       @extend %<%= cssClass%>;

@@ -10,32 +10,40 @@ class AudioPlayer extends Component {
     children: PropTypes.array,
   };
 
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       loading: true,
     };
+  }
+
+  componentDidMount() {
     this.audio = new Howl({
-      urls: props.audios,
-      autoplay: props.autoplay,
+      urls: this.props.audios,
+      autoplay: this.props.autoplay,
       onload: () => {
         this.state.loading = false;
+        console.log('loaded');
         this.setState(this.state);
       },
       onend: () => {
         this.state.playing = false;
+        console.log('onend');
         this.setState(this.state);
       },
       onplay: () => {
         this.state.playing = true;
+        console.log('onplay');
         this.setState(this.state);
       },
       onpause: () => {
         this.state.playing = false;
+        console.log('onpause');
         this.setState(this.state);
       },
       onloaderror: (e) => {
         this.state.error = e;
+        console.log('onloaderror');
         this.setState(this.state);
       },
     });
@@ -45,9 +53,9 @@ class AudioPlayer extends Component {
     this.audio.unload();
   }
 
+
   togglePlay() {
     const playing = !this.state.playing;
-    console.log(this.audio);
     if (playing) {
       this.audio.play();
     } else {

@@ -91,7 +91,17 @@ class ListenView extends Component {
                           <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
                         </div>
                         <div className="sentence-text">
-                          {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
+                          {sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" />
+                          <br />
+                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
+                        </div>
+                        <div className="sentence-text">
+                          {sentence.sentenceNo} {sentence.english} <i className="icon-loading spin" />
+                          <br />
+                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
+                        </div>
+                        <div className="sentence-text">
+                          {sentence.sentenceNo} {sentence.english}
                           <br />
                           <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
                         </div>

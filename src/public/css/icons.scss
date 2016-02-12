@@ -8,15 +8,6 @@
 }
 
 @mixin icon-styles {
-  font-family: "shicon";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
-  text-decoration: none;
-  text-transform: none;
 }
 
 %icon {
@@ -56,14 +47,28 @@
   @if $filename == times {
     $char: "\E00A";
   }
-  @if $filename == voice {
+  @if $filename == voice-mute {
     $char: "\E00B";
+  }
+  @if $filename == voice {
+    $char: "\E00C";
   }
 
   @return $char;
 }
 
 @mixin icon($filename, $insert: before, $extend: true) {
+  font-family: "shicon";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: middle;
+  display: inline-block;
   &:#{$insert} {
     @if $extend {
       @extend %icon;
@@ -103,6 +108,9 @@
 }
 .icon-times {
   @include icon(times);
+}
+.icon-voice-mute {
+  @include icon(voice-mute);
 }
 .icon-voice {
   @include icon(voice);

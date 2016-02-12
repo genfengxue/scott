@@ -29,8 +29,8 @@ class TranslateView extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.params.lessonNo !== this.props.params.lessonNo || nextProps.params.courseNo !== this.props.params.courseNo) {
-      this.props.fetchSentencesAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
       this.props.translateInit();
+      this.props.fetchSentencesAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
     }
     if (nextProps.params.sentenceNo !== this.props.params.sentenceNo) {
       this.props.translateInit();
@@ -86,9 +86,11 @@ class TranslateView extends Component {
               <div className="col-xs-12 translate-answer">
                 {
                   sentence.audio ?
-                  <AudioPlayer audios={[sentence.audio]} key={sentence._id}>
-                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
-                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice" style={{'verticalAlign': 'middle'}}/></div>
+                  <AudioPlayer audios={[sentence.audio]} key={sentence._id} autoplay>
+                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice" /></div>
+                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" /></div>
+                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-loading spin" /></div>
+                    <div>{sentence.sentenceNo} {sentence.english} </div>
                   </AudioPlayer>
                   : sentence.english
                 }
@@ -116,7 +118,7 @@ class TranslateView extends Component {
               viewAnswer ?
               (
                 nextId ?
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${nextId}`} >
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.translateInit()} to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${nextId}`} >
                   下一句
                 </Link>
                 :
