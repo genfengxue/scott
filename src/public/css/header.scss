@@ -1,0 +1,46 @@
+@import "./_variables";
+
+.header {
+  position: relative;
+}
+
+.header-side-memu {
+  padding: 0.5rem;
+  z-index: 1032;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: transform .2s ease-out;
+  overflow-y: auto;
+  width: 12rem;
+  transform: translateX(110%);
+  background: #FFF;
+  box-shadow: rgba(0, 0, 0, 0.14902) -2px 2px 4px;
+  &.open {
+    transform: translateX(0%);
+  }
+  .nav-link {
+    color: $gray-dark;
+    &.selected {
+      color: $brand-primary;
+    }
+  }
+}
+
+.header-overlay {
+  z-index: 1031;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease-out;
+  background-color: rgba(0,0,0,.3);
+  &.open {
+    visibility: visible;
+    opacity: 1;
+  }
+}

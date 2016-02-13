@@ -23,35 +23,38 @@
   @if $filename == edit {
     $char: "\E002";
   }
-  @if $filename == left {
+  @if $filename == hamburger {
     $char: "\E003";
   }
-  @if $filename == loading {
+  @if $filename == left {
     $char: "\E004";
   }
-  @if $filename == mobile {
+  @if $filename == loading {
     $char: "\E005";
   }
-  @if $filename == pause {
+  @if $filename == mobile {
     $char: "\E006";
   }
-  @if $filename == play {
+  @if $filename == pause {
     $char: "\E007";
   }
-  @if $filename == right {
+  @if $filename == play {
     $char: "\E008";
   }
-  @if $filename == tick {
+  @if $filename == right {
     $char: "\E009";
   }
-  @if $filename == times {
+  @if $filename == tick {
     $char: "\E00A";
   }
-  @if $filename == voice-mute {
+  @if $filename == times {
     $char: "\E00B";
   }
-  @if $filename == voice {
+  @if $filename == voice-mute {
     $char: "\E00C";
+  }
+  @if $filename == voice {
+    $char: "\E00D";
   }
 
   @return $char;
@@ -84,6 +87,9 @@
 }
 .icon-edit {
   @include icon(edit);
+}
+.icon-hamburger {
+  @include icon(hamburger);
 }
 .icon-left {
   @include icon(left);

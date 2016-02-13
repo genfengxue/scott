@@ -5,6 +5,7 @@ import {createAction, handleActions} from 'redux-actions';
 export const LISTEN_ERRORS = 'LISTEN_ERRORS';
 export const SHOW_LISTEN_ANSWER = 'SHOW_LISTEN_ANSWER';
 export const LISTEN_INIT = 'LISTEN_INIT';
+export const TOGGLE_COLLECTION_MODAL = 'TOGGLE_COLLECTION_MODAL';
 
 // ------------------------------------
 // Actions
@@ -12,11 +13,13 @@ export const LISTEN_INIT = 'LISTEN_INIT';
 export const displayErrors = createAction(LISTEN_ERRORS, (payload) => payload);
 export const showListenAnswer = createAction(SHOW_LISTEN_ANSWER);
 export const listenInit = createAction(LISTEN_INIT);
+export const toggleCollectionModal = createAction(TOGGLE_COLLECTION_MODAL, (payload) => payload);
 
 export const actions = {
   displayErrors,
   showListenAnswer,
   listenInit,
+  toggleCollectionModal,
 };
 
 // ------------------------------------
@@ -33,5 +36,9 @@ export default handleActions({
   },
   [LISTEN_INIT]: () => {
     return {errors: {}};
+  },
+  [TOGGLE_COLLECTION_MODAL]: (state, {payload}) => {
+    state.showCollectionModal = payload;
+    return Object.assign({}, state);
   },
 }, {errors: {}});

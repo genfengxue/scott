@@ -4,11 +4,17 @@
  * description : 微信页面动态设置title
  */
 
+let lastTitle = '';
+
 /**
  * Set page title in wechat webview.
  * @param {String} title the new title for the current page
  */
 export default (title) => {
+  if (title === lastTitle) {
+    return;
+  }
+  lastTitle = title;
   const body = document.body;
   document.title = title; // hack在微信等webview中无法修改document.title的情况
   const $iframe = document.createElement('iframe');

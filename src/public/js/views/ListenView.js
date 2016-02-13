@@ -2,14 +2,18 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {actions as listenActions} from '../redux/listen';
 import {actions as sentencesActions} from '../redux/sentences';
+import {actions as shiftingActions} from '../redux/shifting';
 import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import AudioPlayer from '../components/AudioPlayer';
 import Instruction from '../components/Instruction';
+import Header from '../components/Header';
 import setTitle from '../common/setTitle';
+import CollectionModal from '../components/CollectionModal';
+import {RATES} from '../redux/shifting';
 
-const mapStateToProps = ({listen, sentences}) => ({
-  listen, sentences,
+const mapStateToProps = ({listen, sentences, shifting}) => ({
+  listen, sentences, shifting,
 });
 
 class ListenView extends Component {
@@ -17,9 +21,13 @@ class ListenView extends Component {
     params: PropTypes.object,
     fetchSentencesAsync: PropTypes.func,
     showListenAnswer: PropTypes.func,
+    toggleCollectionModal: PropTypes.func,
+    toggleSpeeds: PropTypes.func,
+    shiftSpeed: PropTypes.func,
     listenInit: PropTypes.func,
     sentences: PropTypes.object,
     listen: PropTypes.object,
+    shifting: PropTypes.object,
   };
 
   constructor(props) {
@@ -41,8 +49,8 @@ class ListenView extends Component {
   render() {
     const course = this.props.sentences.course;
     const lesson = this.props.sentences.lesson;
-    const {listen, sentences} = this.props;
-    const {errors, viewAnswer} = listen;
+    const {listen, sentences, shifting} = this.props;
+    const {errors, viewAnswer, showCollectionModal} = listen;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
     const sentence = sentences.docs.filter((x) => {
       return +x.sentenceNo === +this.props.params.sentenceNo;
@@ -52,6 +60,26 @@ class ListenView extends Component {
     }
     if (course && lesson && sentence) {
       setTitle(`共${sentences.docs.length}句-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
+    }
+
+    // audios
+    let audios;
+    /**
+     * Get the rated audio source according to original src and rate.
+     * @param {String} src: original src
+     * @param {String} rate: the rate, '0.8', '1.0'
+     */
+    const getRatedAudioSrc = (src, rate) => {
+      const suffix = '.mp3';
+      const rateSrc = rate.toString().replace('.', '_');
+      let result = src;
+      if (rate !== '1.0') {
+        result = result.substr(0, result.length - suffix.length) + '@' + rateSrc + suffix;
+      }
+      return [result];
+    };
+    if (sentence && sentence.audio) {
+      audios = getRatedAudioSrc(sentence.audio, shifting.speed);
     }
 
     // get prev next pointer
@@ -65,15 +93,40 @@ class ListenView extends Component {
     const nextId = nextSentence ? nextSentence.sentenceNo : 0;
     return (
       <div className="listen noselect">
-        <nav className="navbar">
-          <ul className="nav navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to={`/home/courses/${courseNo}`}>
-                <i className="icon-left" />
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <Header back={`/home/courses/${courseNo}`}>
+          <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >收藏</a>
+          <a className="nav-link" onClick={e => {
+            e.stopPropagation();
+            this.props.toggleSpeeds();
+          }}>变速</a>
+          {
+            shifting.showSpeeds ?
+            <div>
+              {
+                RATES.map((rate) => {
+                  return (
+                    <a className={'nav-link col-xs-12' + (shifting.speed === rate ? ' selected' : '')} key={rate} onClick={() => {
+                      this.props.shiftSpeed(rate);
+                    }}>
+                      {rate}
+                      {
+                        shifting.speed === rate ?
+                        <i className="icon-tick pull-xs-right" />
+                        :
+                        ''
+                      }
+                    </a>
+                  );
+                })
+              }
+            </div>
+            :
+            ''
+          }
+        </Header>
+        <CollectionModal
+          isOpen={showCollectionModal}
+          onRequestClose={() => this.props.toggleCollectionModal(false)} />
         <div className="container">
           <Instruction text="请跟读" />
           <div className="col-xs-12 answer-block">
@@ -81,10 +134,10 @@ class ListenView extends Component {
             {
               () => {
                 switch (true) {
-                case viewAnswer && !!sentence.audio:
+                case viewAnswer && !!audios:
                   return (
                     <div>
-                      <AudioPlayer audios={[sentence.audio]} autoplay key={sentence._id}>
+                      <AudioPlayer audios={audios} autoplay key={sentence._id}>
                         <div className="sentence-text">
                           {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
                           <br />
@@ -108,10 +161,10 @@ class ListenView extends Component {
                       </AudioPlayer>
                     </div>
                   );
-                case !viewAnswer && !!sentence.audio:
+                case !viewAnswer && !!audios:
                   return (
                     <div className="text-xs-center">
-                      <AudioPlayer audios={[sentence.audio]} autoplay key={sentence._id}>
+                      <AudioPlayer audios={audios} autoplay key={sentence._id}>
                         <div className="audio-btn">
                           <i className="icon-pause" />
                         </div>
@@ -168,4 +221,4 @@ class ListenView extends Component {
   }
 }
 
-export default connect(mapStateToProps, Object.assign(listenActions, sentencesActions))(ListenView);
+export default connect(mapStateToProps, Object.assign(listenActions, sentencesActions, shiftingActions))(ListenView);
