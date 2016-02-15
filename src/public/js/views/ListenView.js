@@ -137,7 +137,7 @@ class ListenView extends Component {
                 case viewAnswer && !!audios:
                   return (
                     <div>
-                      <AudioPlayer audios={audios} autoplay key={sentence._id}>
+                      <AudioPlayer audios={audios} autoplay key={audios[0]}>
                         <div className="sentence-text">
                           {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
                           <br />
@@ -145,11 +145,6 @@ class ListenView extends Component {
                         </div>
                         <div className="sentence-text">
                           {sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" />
-                          <br />
-                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
-                        </div>
-                        <div className="sentence-text">
-                          {sentence.sentenceNo} {sentence.english} <i className="icon-loading spin" />
                           <br />
                           <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
                         </div>
@@ -164,7 +159,7 @@ class ListenView extends Component {
                 case !viewAnswer && !!audios:
                   return (
                     <div className="text-xs-center">
-                      <AudioPlayer audios={audios} autoplay key={sentence._id}>
+                      <AudioPlayer audios={audios} autoplay key={audios[0]}>
                         <div className="audio-btn">
                           <i className="icon-pause" />
                         </div>

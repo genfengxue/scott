@@ -89,7 +89,6 @@ class TranslateView extends Component {
                   <AudioPlayer audios={[sentence.audio]} key={sentence._id} autoplay>
                     <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice" /></div>
                     <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" /></div>
-                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-loading spin" /></div>
                     <div>{sentence.sentenceNo} {sentence.english} </div>
                   </AudioPlayer>
                   : sentence.english

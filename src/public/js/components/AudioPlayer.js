@@ -70,8 +70,8 @@ class AudioPlayer extends Component {
           this.state.error ?
           <span>
             {
-              this.props.children && this.props.children[3] ?
-              this.props.children[3]
+              this.props.children && this.props.children[2] ?
+              this.props.children[2]
               :
               <div className="audio-btn">
                 <i className="icon-cuowutishi" />
@@ -79,20 +79,8 @@ class AudioPlayer extends Component {
             }
           </span>
           :
-          this.state.loading ?
-          <span>
-            {
-              this.props.children && this.props.children[2] ?
-              this.props.children[2]
-              :
-              <div className="audio-btn">
-                <i className="icon-loading spin" />
-              </div>
-            }
-          </span>
-          :
           this.state.playing ?
-          <span onClick={this::this.togglePlay}>
+          <span onTouchStart={this::this.togglePlay}>
             {
               this.props.children && this.props.children[0] ?
               this.props.children[0]
@@ -103,7 +91,7 @@ class AudioPlayer extends Component {
             }
           </span>
           :
-          <span onClick={this::this.togglePlay}>
+          <span onTouchStart={this::this.togglePlay}>
             {
               this.props.children && this.props.children[1] ?
               this.props.children[1]

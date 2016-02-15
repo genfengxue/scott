@@ -34,7 +34,7 @@ class Header extends Component {
               </Link>
             </li>
             <li className="nav-item pull-xs-right">
-              <a className="nav-link" onClick={() => this.openSidebar()} >
+              <a className="nav-link" onClick={() => this.openSidebar()}>
                 <i className="icon-hamburger" />
               </a>
             </li>
@@ -42,6 +42,11 @@ class Header extends Component {
         </nav>
         <div className={'header-side-memu' + (open ? ' open' : '')}>
           <ul className="nav">
+            <li className="nav-item clearfix">
+              <a className="nav-link pull-xs-right" onClick={() => this.closeSidebar()}>
+                <i className="icon-times" />
+              </a>
+            </li>
             {
               this.props.children.map((child, index) => {
                 return (

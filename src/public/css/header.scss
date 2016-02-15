@@ -5,7 +5,7 @@
 }
 
 .header-side-memu {
-  padding: 0.5rem;
+  padding: 1rem;
   z-index: 1032;
   position: fixed;
   top: 0;
@@ -13,7 +13,7 @@
   right: 0;
   transition: transform .3s;
   overflow-y: auto;
-  width: 12rem;
+  width: 10rem;
   transform: translate(100%, 0);
   backface-visibility: hidden;
   background: #FFF;
@@ -21,7 +21,10 @@
     transform: translate(0%, 0);
   }
   .nav-link {
-    color: $gray-dark;
+    padding-bottom: 0.8rem;
+    display: block;
+    color: $gray;
+    font-size: 1.125rem;
     &.selected {
       color: $brand-primary;
     }
