@@ -11,14 +11,14 @@
   top: 0;
   bottom: 0;
   right: 0;
-  transition: transform .2s ease-out;
+  transition: transform .3s;
   overflow-y: auto;
   width: 12rem;
-  transform: translateX(110%);
+  transform: translate(100%, 0);
+  backface-visibility: hidden;
   background: #FFF;
-  box-shadow: rgba(0, 0, 0, 0.14902) -2px 2px 4px;
   &.open {
-    transform: translateX(0%);
+    transform: translate(0%, 0);
   }
   .nav-link {
     color: $gray-dark;
@@ -35,12 +35,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .2s ease-out;
-  background-color: rgba(0,0,0,.3);
+  transition: background .3s;
+  display: none;
+  background: rgba(0, 0, 0, 0);
   &.open {
-    visibility: visible;
-    opacity: 1;
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
   }
 }

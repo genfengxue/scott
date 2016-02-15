@@ -9,6 +9,7 @@ import nodemon from 'gulp-nodemon';
 import plumber from 'gulp-plumber';
 import livereload from 'gulp-livereload';
 import sass from 'gulp-sass';
+import autoprefixer from 'gulp-autoprefixer';
 import babel from 'gulp-babel';
 import iconfont from 'gulp-iconfont';
 import iconfontCss from 'gulp-iconfont-css';
@@ -42,6 +43,10 @@ gulp.task('sass', () => {
   return gulp.src(['./src/public/css/*.scss', '!./src/public/css/_*.scss'])
   .pipe(plumber().on('error', handleError))
   .pipe(sass({outputStyle: 'compressed'}).on('error', handleError))
+  .pipe(autoprefixer({
+    browsers: ['last 2 versions'],
+    cascade: false,
+  }))
   .pipe(gulp.dest('./build/public/css'))
   .pipe(livereload());
 });
