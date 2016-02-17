@@ -18,7 +18,7 @@ import values from 'lodash/values';
       } else {
         xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
       }
-      xmlhttp.open('POST', 'http://airlog.genfengxue.com/log/scott', true);
+      xmlhttp.open('POST', 'http://airlog.learnwithwind.com/log/scott', true);
       xmlhttp.setRequestHeader('Accept', '*');
       xmlhttp.setRequestHeader('Content-Type', 'application/json');
       try {

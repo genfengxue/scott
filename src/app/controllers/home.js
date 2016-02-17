@@ -1,16 +1,16 @@
 import {Router} from 'express';
-import config from '../../config/config';
+// import config from '../../config/config';
 // import security from '../../utils/security';
-import request from '../../utils/request';
-import logger from '../../utils/logger';
-import {EMAIL_REG} from '../../common/regex';
-import multer from 'multer';
-import qiniu from 'qiniu';
-import easyimg from 'easyimage';
+// import request from '../../utils/request';
+// import logger from '../../utils/logger';
+// import {EMAIL_REG} from '../../common/regex';
+// import multer from 'multer';
+// import qiniu from 'qiniu';
+// import easyimg from 'easyimage';
 
-qiniu.conf.ACCESS_KEY = config.qiniu.ACCESS_KEY;
-qiniu.conf.SECRET_KEY = config.qiniu.SECRET_KEY;
-const upload = multer({ dest: `${config.root}/uploads/` });
+// qiniu.conf.ACCESS_KEY = config.qiniu.ACCESS_KEY;
+// qiniu.conf.SECRET_KEY = config.qiniu.SECRET_KEY;
+// const upload = multer({ dest: `${config.root}/uploads/` });
 const router = new Router();
 
 router.get('/', async (req, res) => {
