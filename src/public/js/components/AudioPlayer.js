@@ -43,7 +43,7 @@ class AudioPlayer extends Component {
       },
       onloaderror: (e) => {
         this.state.error = e;
-        console.log('onloaderror');
+        console.log(e);
         this.setState(this.state);
       },
     });

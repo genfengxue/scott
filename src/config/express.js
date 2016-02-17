@@ -74,7 +74,7 @@ export default (app, config) => {
   app.use(methodOverride());
 
   // api 路由定义
-  app.use('/api/auth/', require('../app/apis/auth'));
+  // app.use('/api/auth/', require('../app/apis/auth'));
   app.use('/api/courses/', require('../app/apis/course'));
   app.use('/api/lessons/', require('../app/apis/lesson'));
   app.use('/api/sentences/', require('../app/apis/sentence'));

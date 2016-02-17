@@ -2,7 +2,7 @@ import {Router} from 'express';
 import request from '../../utils/request';
 import config from '../../config/config';
 import {MOBILE_REG} from '../../common/regex';
-import security from '../../utils/security';
+// import security from '../../utils/security';
 import {verifySession} from '../middlewares/authChecker';
 import RedisCache from '../../redis/RedisCache';
 import logger from '../../utils/logger';

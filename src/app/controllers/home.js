@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import config from '../../config/config';
-import security from '../../utils/security';
+// import security from '../../utils/security';
 import request from '../../utils/request';
 import logger from '../../utils/logger';
 import {EMAIL_REG} from '../../common/regex';

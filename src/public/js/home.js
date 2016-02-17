@@ -5,6 +5,7 @@ import ReactDom from 'react-dom';
 import Root from './containers/Root';
 import routes from './routes/home';
 import homeReducer from './redux/homeReducer';
+import './common/airlog';
 
 import {
   applyMiddleware,

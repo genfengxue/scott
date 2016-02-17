@@ -76,7 +76,10 @@ class ListenView extends Component {
       if (rate !== '1.0') {
         result = result.substr(0, result.length - suffix.length) + '@' + rateSrc + suffix;
       }
-      return [result];
+      const suffixes = ['.mp3', '.ogg', '.wav'];
+      return suffixes.map((x) => {
+        return result.substr(0, result.length - suffix.length) + x;
+      });
     };
     if (sentence && sentence.audio) {
       audios = getRatedAudioSrc(sentence.audio, shifting.speed);
