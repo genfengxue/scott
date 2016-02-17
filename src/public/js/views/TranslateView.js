@@ -2,35 +2,44 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {actions as translateActions} from '../redux/translate';
 import {actions as sentencesActions} from '../redux/sentences';
+import {actions as shiftingActions} from '../redux/shifting';
 import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import AudioPlayer from '../components/AudioPlayer';
 import Instruction from '../components/Instruction';
+import Header from '../components/Header';
 import setTitle from '../common/setTitle';
+import CollectionModal from '../components/CollectionModal';
+import {RATES} from '../redux/shifting';
 
-const mapStateToProps = ({translate, sentences}) => ({
-  translate, sentences,
+const mapStateToProps = ({translate, sentences, shifting}) => ({
+  translate, sentences, shifting,
 });
 
 class TranslateView extends Component {
   static propTypes = {
     params: PropTypes.object,
     fetchSentencesAsync: PropTypes.func,
+    toggleCollectionModal: PropTypes.func,
+    toggleSpeeds: PropTypes.func,
+    shiftSpeed: PropTypes.func,
     showTranslateAnswer: PropTypes.func,
     translateInit: PropTypes.func,
     sentences: PropTypes.object,
     translate: PropTypes.object,
+    shifting: PropTypes.object,
   };
 
   constructor(props) {
     super();
+    props.translateInit();
     props.fetchSentencesAsync(props.params.courseNo, props.params.lessonNo);
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.params.lessonNo !== this.props.params.lessonNo || nextProps.params.courseNo !== this.props.params.courseNo) {
-      this.props.translateInit();
       this.props.fetchSentencesAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
+      this.props.translateInit();
     }
     if (nextProps.params.sentenceNo !== this.props.params.sentenceNo) {
       this.props.translateInit();
@@ -40,8 +49,8 @@ class TranslateView extends Component {
   render() {
     const course = this.props.sentences.course;
     const lesson = this.props.sentences.lesson;
-    const {translate, sentences} = this.props;
-    const {errors, viewAnswer} = translate;
+    const {translate, sentences, shifting} = this.props;
+    const {errors, viewAnswer, showCollectionModal} = translate;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
 
     const sentence = sentences.docs.filter((x) => {
@@ -52,6 +61,27 @@ class TranslateView extends Component {
     }
     if (course && lesson && sentence) {
       setTitle(`共${sentences.docs.length}句-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
+    }
+
+    // audios
+    let audios;
+    /**
+     * Get the rated audio source according to original src and rate.
+     * @param {String} src: original src
+     * @param {String} rate: the rate, '0.8', '1.0'
+     */
+    const getRatedAudioSrc = (src, rate) => {
+      const suffix = '.mp3';
+      const rateSrc = rate.toString().replace('.', '_');
+      let result = src;
+      result = result.substr(0, result.length - suffix.length) + '@' + rateSrc + suffix;
+      const suffixes = ['.mp3', '.ogg', '.wav'];
+      return suffixes.map((x) => {
+        return result.substr(0, result.length - suffix.length) + x;
+      });
+    };
+    if (sentence && sentence.audio) {
+      audios = getRatedAudioSrc(sentence.audio, shifting.speed);
     }
 
     // get prev next pointer
@@ -66,15 +96,40 @@ class TranslateView extends Component {
 
     return (
       <div className="translate">
-        <nav className="navbar">
-          <ul className="nav navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to={`/home/courses/${courseNo}`}>
-                <i className="icon-left" />
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <Header back={`/home/courses/${courseNo}`}>
+          <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >收藏</a>
+          <a className="nav-link" onClick={e => {
+            e.stopPropagation();
+            this.props.toggleSpeeds();
+          }}>变速</a>
+          {
+            shifting.showSpeeds ?
+            <div>
+              {
+                RATES.map((rate) => {
+                  return (
+                    <a className={'nav-link col-xs-12' + (shifting.speed === rate ? ' selected' : '')} key={rate} onClick={() => {
+                      this.props.shiftSpeed(rate);
+                    }}>
+                      {rate}
+                      {
+                        shifting.speed === rate ?
+                        <i className="icon-tick pull-xs-right" />
+                        :
+                        ''
+                      }
+                    </a>
+                  );
+                })
+              }
+            </div>
+            :
+            ''
+          }
+        </Header>
+        <CollectionModal
+          isOpen={showCollectionModal}
+          onRequestClose={() => this.props.toggleCollectionModal(false)} />
         <div className="container">
           <Instruction text="请翻译" />
           <div className="col-xs-12 answer-block">
@@ -85,8 +140,8 @@ class TranslateView extends Component {
               viewAnswer ?
               <div className="col-xs-12 translate-answer">
                 {
-                  sentence.audio ?
-                  <AudioPlayer audios={[sentence.audio]} key={sentence._id} autoplay>
+                  !!audios ?
+                  <AudioPlayer audios={audios} key={audios[0]} autoplay>
                     <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice" /></div>
                     <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" /></div>
                     <div>{sentence.sentenceNo} {sentence.english} </div>
@@ -138,4 +193,4 @@ class TranslateView extends Component {
   }
 }
 
-export default connect(mapStateToProps, Object.assign(translateActions, sentencesActions))(TranslateView);
+export default connect(mapStateToProps, Object.assign(translateActions, sentencesActions, shiftingActions))(TranslateView);
