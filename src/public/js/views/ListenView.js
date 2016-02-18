@@ -59,7 +59,7 @@ class ListenView extends Component {
       return <div>Loading...</div>;
     }
     if (course && lesson && sentence) {
-      setTitle(`共${sentences.docs.length}句-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
+      setTitle(`${sentence.sentenceNo}/${sentences.docs.length}-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
     }
 
     // audios
@@ -99,7 +99,7 @@ class ListenView extends Component {
           <a className="nav-link" onClick={e => {
             e.stopPropagation();
             this.props.toggleSpeeds();
-          }}>变速</a>
+          }}>难度</a>
           {
             shifting.showSpeeds ?
             <div>
@@ -140,19 +140,19 @@ class ListenView extends Component {
                     <div>
                       <AudioPlayer audios={audios} autoplay key={audios[0]}>
                         <div className="sentence-text">
-                          {sentence.sentenceNo} {sentence.english} <i className="icon-voice" />
+                          {sentence.english} <i className="icon-voice" />
                           <br />
-                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
+                          <small>{sentence.chinese}</small>
                         </div>
                         <div className="sentence-text">
-                          {sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" />
+                          {sentence.english} <i className="icon-voice-mute" />
                           <br />
-                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
+                          <small>{sentence.chinese}</small>
                         </div>
                         <div className="sentence-text">
-                          {sentence.sentenceNo} {sentence.english}
+                          {sentence.english}
                           <br />
-                          <span className="hidden">{sentence.sentenceNo} </span><small>{sentence.chinese}</small>
+                          <small>{sentence.chinese}</small>
                         </div>
                       </AudioPlayer>
                     </div>
@@ -200,8 +200,8 @@ class ListenView extends Component {
                   下一句
                 </Link>
                 :
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/listen/1`}>
-                  再来一遍
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/`}>
+                  返回
                 </Link>
               )
               :

@@ -60,7 +60,7 @@ class TranslateView extends Component {
       return <div>Loading...</div>;
     }
     if (course && lesson && sentence) {
-      setTitle(`共${sentences.docs.length}句-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
+      setTitle(`${sentence.sentenceNo}/${sentences.docs.length}-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
     }
 
     // audios
@@ -101,7 +101,7 @@ class TranslateView extends Component {
           <a className="nav-link" onClick={e => {
             e.stopPropagation();
             this.props.toggleSpeeds();
-          }}>变速</a>
+          }}>难度</a>
           {
             shifting.showSpeeds ?
             <div>
@@ -141,10 +141,10 @@ class TranslateView extends Component {
               <div className="col-xs-12 translate-answer">
                 {
                   !!audios ?
-                  <AudioPlayer audios={audios} key={audios[0]} autoplay>
-                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice" /></div>
-                    <div>{sentence.sentenceNo} {sentence.english} <i className="icon-voice-mute" /></div>
-                    <div>{sentence.sentenceNo} {sentence.english} </div>
+                  <AudioPlayer audios={audios} key={audios[0]}>
+                    <div>{sentence.english} <i className="icon-voice" /></div>
+                    <div>{sentence.english} <i className="icon-voice-mute" /></div>
+                    <div>{sentence.english} </div>
                   </AudioPlayer>
                   : sentence.english
                 }
@@ -176,8 +176,8 @@ class TranslateView extends Component {
                   下一句
                 </Link>
                 :
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/1`} >
-                  再来一遍
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/`} >
+                  返回
                 </Link>
               )
               :
