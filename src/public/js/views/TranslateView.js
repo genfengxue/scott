@@ -176,7 +176,7 @@ class TranslateView extends Component {
                   下一句
                 </Link>
                 :
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/`} >
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}?type=translate`} >
                   返回
                 </Link>
               )

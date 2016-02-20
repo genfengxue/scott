@@ -200,7 +200,7 @@ class ListenView extends Component {
                   下一句
                 </Link>
                 :
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/`}>
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}?type=listen`}>
                   返回
                 </Link>
               )

@@ -39,3 +39,9 @@
     border-color: $brand-primary;
   }
 }
+
+a, button {
+  &:active {
+    opacity: 0.5;
+  }
+}
