@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import ajax from '../common/ajax';
-import {actions} from '../redux/lessons';
 import reactInfiniteScroll from 'react-infinite-scroll';
 import Lesson from './Lesson';
 
@@ -10,6 +8,7 @@ class LessonList extends Component {
   static propTypes = {
     lessons: PropTypes.object,
     loadMore: PropTypes.func,
+    type: PropTypes.string,
   };
 
   render() {
@@ -24,8 +23,7 @@ class LessonList extends Component {
           loader={<div className="loader">Loading...</div>}>
           {docs.map((lesson) => {
             return (
-              <Lesson key={lesson._id} lesson={lesson}>
-              </Lesson>
+              <Lesson key={lesson._id} lesson={lesson} type={this.props.type} />
             );
           })}
         </InfiniteScroll>

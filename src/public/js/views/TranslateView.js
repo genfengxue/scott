@@ -54,7 +54,7 @@ class TranslateView extends Component {
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
 
     const sentence = sentences.docs.filter((x) => {
-      return +x.sentenceNo === +this.props.params.sentenceNo;
+      return +x.sentenceNo === +sentenceNo && +x.lessonNo === +lessonNo && +x.courseNo === +courseNo;
     })[0];
     if (!sentence) {
       return <div>Loading...</div>;
@@ -96,7 +96,7 @@ class TranslateView extends Component {
 
     return (
       <div className="translate">
-        <Header back={`/home/courses/${courseNo}`}>
+        <Header back={`/home/courses/${courseNo}?type=translate`}>
           <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >收藏</a>
           <a className="nav-link" onClick={e => {
             e.stopPropagation();

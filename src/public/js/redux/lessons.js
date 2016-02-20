@@ -12,17 +12,17 @@ export const RECEIVED_MORE_LESSONS = 'RECEIVED_MORE_LESSONS';
 export const receivedLessons = createAction(RECEIVED_LESSONS, (payload) => payload);
 export const receivedMoreLessons = createAction(RECEIVED_MORE_LESSONS, (payload) => payload);
 
-export const fetchLessonsAsync = (courseNo) => {
+export const fetchLessonsAsync = (courseNo, query) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/lessons/', {page: 1, courseNo});
+    const response = await ajax.get('/api/lessons/', Object.assign({page: 1, courseNo}, query));
     dispatch(receivedLessons(response));
   };
 };
 
-export const fetchMoreLessonsAsync = (page, courseNo) => {
+export const fetchMoreLessonsAsync = (page, courseNo, query) => {
   return async (dispatch) => {
     try {
-      const response = await ajax.get('/api/lessons/', {page, courseNo});
+      const response = await ajax.get('/api/lessons/', Object.assign({page, courseNo}, query));
       dispatch(receivedMoreLessons(response));
     } catch (err) {
       console.log(err);

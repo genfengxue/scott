@@ -15,38 +15,45 @@ class LessonsView extends Component {
     fetchLessonsAsync: PropTypes.func.isRequired,
     fetchMoreLessonsAsync: PropTypes.func.isRequired,
     params: PropTypes.object,
+    location: PropTypes.object,
   };
 
   constructor(props) {
     super();
-    props.fetchLessonsAsync(props.params.courseNo);
+    const {query} = props.location;
+    const otherQuery = query.type === 'listen' ? {hasListen: true} : {hasTranslate: true};
+    props.fetchLessonsAsync(props.params.courseNo, otherQuery);
   }
 
   componentWillUpdate(nextProps) {
     if (+nextProps.params.courseNo !== +this.props.params.courseNo) {
-      console.log(nextProps);
-      this.props.fetchLessonsAsync(nextProps.params.courseNo);
+      const {query} = nextProps.location;
+      const otherQuery = query.type === 'listen' ? {hasListen: true} : {hasTranslate: true};
+      this.props.fetchLessonsAsync(nextProps.params.courseNo, otherQuery);
     }
   }
 
   render() {
     const course = this.props.lessons.course;
+    const {query} = this.props.location;
+    const type = query.type;
     if (course) {
       setTitle(course.chineseTitle);
     }
+    const otherQuery = query.type === 'listen' ? {hasListen: true} : {hasTranslate: true};
     const courseNo = this.props.params.courseNo;
     return (
       <div>
         <nav className="navbar">
           <ul className="nav navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to={`/`}>
+              <Link className="nav-link" to={`/home/courses/?type=${type}`}>
                 <i className="icon-left" />
               </Link>
             </li>
           </ul>
         </nav>
-        <LessonList lessons={this.props.lessons} loadMore={(page) => this.props.fetchMoreLessonsAsync(page, courseNo)} />
+        <LessonList lessons={this.props.lessons} type={type} loadMore={(page) => this.props.fetchMoreLessonsAsync(page, courseNo, otherQuery)} />
       </div>
     );
   }

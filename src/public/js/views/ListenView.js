@@ -53,7 +53,7 @@ class ListenView extends Component {
     const {errors, viewAnswer, showCollectionModal} = listen;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
     const sentence = sentences.docs.filter((x) => {
-      return +x.sentenceNo === +this.props.params.sentenceNo;
+      return +x.sentenceNo === +sentenceNo && +x.lessonNo === +lessonNo && +x.courseNo === +courseNo;
     })[0];
     if (!sentence) {
       return <div>Loading...</div>;
@@ -94,7 +94,7 @@ class ListenView extends Component {
     const nextId = nextSentence ? nextSentence.sentenceNo : 0;
     return (
       <div className="listen noselect">
-        <Header back={`/home/courses/${courseNo}`}>
+        <Header back={`/home/courses/${courseNo}?type=listen`}>
           <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >收藏</a>
           <a className="nav-link" onClick={e => {
             e.stopPropagation();

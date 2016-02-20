@@ -1,0 +1,15 @@
+@import "./_variables";
+.skill-list {
+  .skill-link {
+    height: 6rem;
+    height: 18vh;
+    font-size: 1.5rem;
+    line-height: 6rem;
+    line-height: 18vh;
+    margin-top: 3rem;
+    margin-top: 10vh;
+    display: block;
+    text-decoration: none;
+    color: $gray;
+  }
+}

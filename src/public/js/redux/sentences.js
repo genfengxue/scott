@@ -1,11 +1,11 @@
 import {createAction, handleActions} from 'redux-actions';
 import ajax from '../common/ajax';
-import unionBy from 'lodash/unionBy';
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const RECEIVED_SENTENCES = 'RECEIVED_SENTENCES';
-const pageSize = 20;
+
 // ------------------------------------
 // Actions
 // ------------------------------------

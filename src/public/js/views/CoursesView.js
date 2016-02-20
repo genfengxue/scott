@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CourseList from '../components/CourseList';
 import {actions} from '../redux/courses';
 import setTitle from '../common/setTitle';
+import {Link} from 'react-router';
 
 const mapStateToProps = ({courses}) => ({
   courses,
@@ -13,6 +14,7 @@ class CoursesView extends Component {
     courses: PropTypes.object.isRequired,
     fetchCoursesAsync: PropTypes.func.isRequired,
     fetchMoreCoursesAsync: PropTypes.func.isRequired,
+    location: PropTypes.object,
   };
 
   constructor(props) {
@@ -22,9 +24,20 @@ class CoursesView extends Component {
 
   render() {
     setTitle('Wind 教口语');
+    const {query} = this.props.location;
+    const type = query.type || 'listen';
     return (
       <div>
-        <CourseList courses={this.props.courses} loadMore={this.props.fetchMoreCoursesAsync} />
+        <nav className="navbar">
+          <ul className="nav navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to={`/`}>
+                <i className="icon-left" />
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <CourseList courses={this.props.courses} loadMore={this.props.fetchMoreCoursesAsync} type={type} />
       </div>
     );
   }

@@ -4,19 +4,16 @@ import {Link} from 'react-router';
 class Lesson extends Component {
   static propTypes = {
     lesson: PropTypes.object,
+    type: PropTypes.string,
   };
 
   render() {
-    const {lesson} = this.props;
+    const {lesson, type} = this.props;
     return (
       <div className="clearfix col-xs-12 lesson">
-        <div className="lesson-name">
+        <Link className="lesson-name" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`}>
           Lesson {lesson.lessonNo}
-        </div>
-        <div className="actions">
-          {lesson.hasListen ? <Link className="btn btn-primary-outline action-btn btn-sm" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/listen/1`}>跟读</Link> : ''}
-          {lesson.hasTranslate ? <Link className="btn btn-primary-outline action-btn btn-sm" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/translate/1`}>翻译</Link> : ''}
-        </div>
+        </Link>
       </div>
     );
   }
