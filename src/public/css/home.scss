@@ -40,6 +40,24 @@
   }
 }
 
+.touch-dot {
+  position: fixed;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background-color: $brand-info;
+  z-index: 11000;
+  opacity: 0;
+  transition: opacity .13s;
+  visibility: hidden;
+  margin-left: -0.9rem;
+  margin-top: -0.9rem;
+  &.active {
+    visibility: visible;
+    opacity: 0.5;
+  }
+}
+
 a, button {
   &:active {
     opacity: 0.5;

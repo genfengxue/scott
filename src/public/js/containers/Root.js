@@ -9,6 +9,11 @@ export default class Root extends React.Component {
     store: React.PropTypes.object.isRequired,
   };
 
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   get content() {
     return (
       <Router history={this.props.history}>
@@ -17,11 +22,20 @@ export default class Root extends React.Component {
     );
   }
 
+  drawCircle(e) {
+    const event = e.nativeEvent;
+    this.setState(Object.assign(this.state, {dotTop: event.clientY, dotLeft: event.clientX, showDot: true}));
+    setTimeout(() => {
+      this.setState(Object.assign(this.state, {dotTop: event.clientY, dotLeft: event.clientX, showDot: false}));
+    }, 200);
+  }
+
   render() {
     return (
       <Provider store={this.props.store}>
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%' }} onClick={e => this.drawCircle(e)}>
           {this.content}
+          <div className={`touch-dot${this.state.showDot ? ' active' : ''}`} style={{top: this.state.dotTop, left: this.state.dotLeft}}></div>
         </div>
       </Provider>
     );
