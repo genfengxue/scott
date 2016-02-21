@@ -32,14 +32,17 @@ class TempPronunciationView extends Component {
               Hi there~
             </p>
             <p className="card-text">
-              发音语调部分暂时还没整合进来
+              发音语调训练目前通过另外一款App进行
             </p>
             <p className="card-text">
-              请添加Wind老师个人微信 819432228, 免费获取训练内容
+              你可以添加我的个人微信819432228来获得另外那款App
             </p>
             <p className="card-text">
-              Wind <br />
-              2016.2.18于华山
+              我打算先开发其他功能，之后再把发音语调内容整合进来
+            </p>
+            <p className="card-text">
+              cheers, <br />
+              Wind
             </p>
           </div>
         </div>
