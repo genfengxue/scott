@@ -32,14 +32,10 @@ class AudioPlayer extends Component {
         this.setState(this.state);
       },
       onplay: () => {
-        this.state.playing = true;
         console.log('onplay');
-        this.setState(this.state);
       },
       onpause: () => {
-        this.state.playing = false;
         console.log('onpause');
-        this.setState(this.state);
       },
       onloaderror: (e) => {
         this.state.error = e;
@@ -58,8 +54,12 @@ class AudioPlayer extends Component {
     const playing = !this.state.playing;
     if (playing) {
       this.audio.play();
+      this.state.playing = true;
+      this.setState(this.state);
     } else {
       this.audio.pause();
+      this.state.playing = false;
+      this.setState(this.state);
     }
   }
 
