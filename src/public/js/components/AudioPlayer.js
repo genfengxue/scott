@@ -10,10 +10,11 @@ class AudioPlayer extends Component {
     children: PropTypes.array,
   };
 
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       loading: true,
+      playing: props.autoplay,
     };
   }
 
