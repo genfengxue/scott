@@ -31,9 +31,10 @@ export default class Root extends React.Component {
   }
 
   render() {
+    // onClick={e => this.drawCircle(e)}
     return (
       <Provider store={this.props.store}>
-        <div style={{ height: '100%' }} onClick={e => this.drawCircle(e)}>
+        <div style={{ height: '100%' }}>
           {this.content}
           <div className={`touch-dot${this.state.showDot ? ' active' : ''}`} style={{top: this.state.dotTop, left: this.state.dotLeft}}></div>
         </div>
