@@ -167,7 +167,7 @@ class TranslateView extends Component {
                 ''
               }
             </li>
-            <li className="col-xs-10 no-padding-col text-xs-center">
+            <li className="col-xs-10 text-xs-center">
             {
               viewAnswer ?
               (

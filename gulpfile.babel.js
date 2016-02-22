@@ -235,7 +235,7 @@ gulp.task('cdnify', () => {
   .pipe(cdnify({
     base: cdn,
   }))
-  .pipe(gulp.dest('build/public/img/'));
+  .pipe(gulp.dest('build/'));
 });
 
 gulp.task('clean', () => {
