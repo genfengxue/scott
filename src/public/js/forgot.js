@@ -291,7 +291,4 @@ const validateForm = (data) => {
     }
   }
   return valid;
-}
-
-
-
+};
