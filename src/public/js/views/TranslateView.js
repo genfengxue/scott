@@ -10,6 +10,9 @@ import Instruction from '../components/Instruction';
 import Header from '../components/Header';
 import setTitle from '../common/setTitle';
 import CollectionModal from '../components/CollectionModal';
+import MethodModal from '../components/MethodModal';
+import FeedbackModal from '../components/FeedbackModal';
+import ReviewModal from '../components/ReviewModal';
 import {RATES} from '../redux/shifting';
 
 const mapStateToProps = ({translate, sentences, shifting}) => ({
@@ -22,6 +25,9 @@ class TranslateView extends Component {
     fetchSentencesAsync: PropTypes.func,
     toggleCollectionModal: PropTypes.func,
     toggleSpeeds: PropTypes.func,
+    toggleMethodModal: PropTypes.func,
+    toggleFeedbackModal: PropTypes.func,
+    toggleReviewModal: PropTypes.func,
     shiftSpeed: PropTypes.func,
     showTranslateAnswer: PropTypes.func,
     translateInit: PropTypes.func,
@@ -50,7 +56,7 @@ class TranslateView extends Component {
     const course = this.props.sentences.course;
     const lesson = this.props.sentences.lesson;
     const {translate, sentences, shifting} = this.props;
-    const {errors, viewAnswer, showCollectionModal} = translate;
+    const {errors, viewAnswer, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal} = translate;
     const {courseNo, lessonNo, sentenceNo} = this.props.params;
 
     const sentence = sentences.docs.filter((x) => {
@@ -97,7 +103,7 @@ class TranslateView extends Component {
     return (
       <div className="translate">
         <Header back={`/home/courses/${courseNo}?type=translate`}>
-          <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >收藏</a>
+          <a className="nav-link" onClick={() => this.props.toggleMethodModal(true)} >方法</a>
           <a className="nav-link" onClick={e => {
             e.stopPropagation();
             this.props.toggleSpeeds();
@@ -126,10 +132,22 @@ class TranslateView extends Component {
             :
             ''
           }
+          <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >存档</a>
+          <a className="nav-link" onClick={() => this.props.toggleReviewModal(true)} >复习</a>
+          <a className="nav-link" onClick={() => this.props.toggleFeedbackModal(true)} >纠错</a>
         </Header>
         <CollectionModal
           isOpen={showCollectionModal}
           onRequestClose={() => this.props.toggleCollectionModal(false)} />
+        <MethodModal
+          isOpen={showMethodModal}
+          onRequestClose={() => this.props.toggleMethodModal(false)} />
+        <ReviewModal
+          isOpen={showReviewModal}
+          onRequestClose={() => this.props.toggleReviewModal(false)} />
+        <FeedbackModal
+          isOpen={showFeedbackModal}
+          onRequestClose={() => this.props.toggleFeedbackModal(false)} />
         <div className="container">
           <Instruction text="请翻译" />
           <div className="col-xs-12 answer-block">

@@ -14,7 +14,8 @@ const customStyles = {
     padding: '0',
   },
 };
-class CollectionModal extends Component {
+
+class FeedbackModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool,
     onRequestClose: PropTypes.func,
@@ -31,9 +32,14 @@ class CollectionModal extends Component {
           </a>
           <p>Hi there~</p>
           <br />
-          <p>这个功能还没弄好╮(╯▽╰)╭</p>
-          <p>如果某课你学到一半想下次再学, 你可以点击页面右上角的按钮, 选择"发送给朋友", 发送给你自己~</p>
-          <p>存档这个功能日后会有滴!</p>
+          <p>如果你练习时发现某个句子文本或音频有错, 比如:</p>
+          <p>
+            1 音频开头或结尾多了或少了个词 <br/>
+            2 文本中有个错别字或者标点错误 <br/>
+            3 或者任何别的错误
+          </p>
+          <p>请联系Wind老师个人微信819432228进行纠错</p>
+          <p>纠错有奖励哦~</p>
           <br/>
           cheers,
           <br />
@@ -45,4 +51,4 @@ class CollectionModal extends Component {
 
 }
 
-export default CollectionModal;
+export default FeedbackModal;

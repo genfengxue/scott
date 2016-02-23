@@ -14,7 +14,7 @@ const customStyles = {
     padding: '0',
   },
 };
-class CollectionModal extends Component {
+class MethodModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool,
     onRequestClose: PropTypes.func,
@@ -29,15 +29,14 @@ class CollectionModal extends Component {
           <a className="close" onClick={() => this.props.onRequestClose()}>
             <i className="icon-times" />
           </a>
-          <p>Hi there~</p>
-          <br />
-          <p>这个功能还没弄好╮(╯▽╰)╭</p>
-          <p>如果某课你学到一半想下次再学, 你可以点击页面右上角的按钮, 选择"发送给朋友", 发送给你自己~</p>
-          <p>存档这个功能日后会有滴!</p>
-          <br/>
-          cheers,
-          <br />
-          Wind
+          <h5>练听力方法:</h5>
+          <p>每个句子听1-2遍并且跟读->看答案->听错的句子听1-5遍尽量听清<br/></p>
+          <p>跟读可以让你节省做听写的时间, 还能让你练习发音语调<br/></p>
+
+          <h5>练口语方法:</h5>
+          <p>看中文说英文->对照答案->跟答案不一样的地方向答案学习<br/></p>
+          <p>翻译可以让你练习遣词造句, 还能让你注意到许多不起眼的小错误<br/></p>
+
         </div>
       </Modal>
     );
@@ -45,4 +44,4 @@ class CollectionModal extends Component {
 
 }
 
-export default CollectionModal;
+export default MethodModal;

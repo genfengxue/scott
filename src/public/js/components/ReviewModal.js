@@ -14,7 +14,7 @@ const customStyles = {
     padding: '0',
   },
 };
-class CollectionModal extends Component {
+class ReviewModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool,
     onRequestClose: PropTypes.func,
@@ -32,9 +32,9 @@ class CollectionModal extends Component {
           <p>Hi there~</p>
           <br />
           <p>这个功能还没弄好╮(╯▽╰)╭</p>
-          <p>如果某课你学到一半想下次再学, 你可以点击页面右上角的按钮, 选择"发送给朋友", 发送给你自己~</p>
-          <p>存档这个功能日后会有滴!</p>
-          <br/>
+          <p>如果跟读某个句子时没听懂, 翻译某个句子时说错了, 你可以把句子序号记录下来, 下次复习</p>
+          <p>复习这个功能日后会有滴!</p>
+          <br />
           cheers,
           <br />
           Wind
@@ -45,4 +45,4 @@ class CollectionModal extends Component {
 
 }
 
-export default CollectionModal;
+export default ReviewModal;
