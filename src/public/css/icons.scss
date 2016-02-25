@@ -41,20 +41,23 @@
   @if $filename == play {
     $char: "\E008";
   }
-  @if $filename == right {
+  @if $filename == portrait {
     $char: "\E009";
   }
-  @if $filename == tick {
+  @if $filename == right {
     $char: "\E00A";
   }
-  @if $filename == times {
+  @if $filename == tick {
     $char: "\E00B";
   }
-  @if $filename == voice-mute {
+  @if $filename == times {
     $char: "\E00C";
   }
-  @if $filename == voice {
+  @if $filename == voice-mute {
     $char: "\E00D";
+  }
+  @if $filename == voice {
+    $char: "\E00E";
   }
 
   @return $char;
@@ -105,6 +108,9 @@
 }
 .icon-play {
   @include icon(play);
+}
+.icon-portrait {
+  @include icon(portrait);
 }
 .icon-right {
   @include icon(right);

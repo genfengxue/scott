@@ -14,6 +14,26 @@
   padding-left: 0;
 }
 
+.portrait-phone {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 3000;
+  background: #FFF;
+  padding-top: 4rem;
+  .icon-portrait {
+    font-size: 3rem;
+  }
+}
+@media screen and (orientation: landscape) {
+  .portrait-phone {
+    display: block;
+  }
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -62,36 +82,36 @@
 }
 
 html {
-    font-size : 15px;
+  font-size : 15px;
 }
 @media only screen and (min-width: 359px){
-    html {
-        font-size: 16px !important;
-    }
+  html {
+    font-size: 16px !important;
+  }
 }
 // 414
 @media only screen and (min-width: 401px){
-    html {
-        font-size: 18px !important;
-    }
+  html {
+    font-size: 18px !important;
+  }
 }
 @media only screen and (min-width: 428px){
-    html {
-        font-size: 20px !important;
-    }
+  html {
+    font-size: 20px !important;
+  }
 }
 @media only screen and (min-width: 481px){
-    html {
-        font-size: 22px !important;
-    }
+  html {
+    font-size: 22px !important;
+  }
 }
 @media only screen and (min-width: 569px){
-    html {
-        font-size: 24px !important;
-    }
+  html {
+    font-size: 24px !important;
+  }
 }
 @media only screen and (min-width: 641px){
-    html {
-        font-size: 26px !important;
-    }
+  html {
+    font-size: 26px !important;
+  }
 }
