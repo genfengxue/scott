@@ -70,7 +70,7 @@ export default (app, config) => {
     saveUninitialized: true,
   }));
   app.use(captcha({ url: '/captcha.jpg', color: '#0064cd', background: '#FFF' })); // captcha params
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static(config.root + '/public', {maxAge: 86400000 * 7}));
   app.use(methodOverride());
 
   // api 路由定义
