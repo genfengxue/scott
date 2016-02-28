@@ -24,19 +24,15 @@ class AudioPlayer extends Component {
       autoplay: this.props.autoplay,
       onload: () => {
         this.state.loading = false;
-        console.log('loaded');
         this.setState(this.state);
       },
       onend: () => {
         this.state.playing = false;
-        console.log('onend');
         this.setState(this.state);
       },
       onplay: () => {
-        console.log('onplay');
       },
       onpause: () => {
-        console.log('onpause');
       },
       onloaderror: (e) => {
         this.state.error = e;

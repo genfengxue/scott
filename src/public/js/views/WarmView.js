@@ -31,6 +31,7 @@ class WarmView extends Component {
     warmInit: PropTypes.func,
     warm: PropTypes.object,
     shifting: PropTypes.object,
+    location: PropTypes.object,
   };
 
   constructor(props) {
@@ -49,8 +50,9 @@ class WarmView extends Component {
   render() {
     const {warm, shifting} = this.props;
     const {lesson, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal} = warm;
-    const {courseNo, lessonNo, type} = this.props.params;
-
+    const {courseNo, lessonNo} = this.props.params;
+    const {query} = this.props.location;
+    const type = query.type || 'listen';
     if (!lesson) {
       return <div>Loading...</div>;
     }

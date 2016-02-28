@@ -24,8 +24,6 @@ class VideoPlayer extends Component {
   }
 
   _onPlay(e) {
-    console.log(e.nativeEvent);
-    e.preventDefault();
   }
 
   _onPause(e) {
