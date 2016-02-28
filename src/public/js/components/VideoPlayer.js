@@ -12,6 +12,12 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
+    // console.dir(this.refs.video);
+    // const videoEl = this.refs.video;
+    // videoEl.oncanplay = () => {
+    //   console.log('oncanplay');
+    //   videoEl.play();
+    // };
   }
 
   componentWillUnmount() {
@@ -19,24 +25,32 @@ class VideoPlayer extends Component {
 
   _onPlay(e) {
     console.log(e.nativeEvent);
+    e.preventDefault();
   }
 
   _onPause(e) {
   }
 
+  _onCanplay(e) {
+    console.dir(e.nativeEvent, this.refs.video);
+    this.refs.video.play();
+  }
+  _onLoaded(e) {
+    console.dir(e.nativeEvent, this.refs.video);
+    this.refs.video.play();
+  }
   render() {
     const videos = this.props.videos;
     return (
       <div className="video-player">
         { videos && videos.length ?
           <video controls
+            ref="video"
             className="video-player-core"
             onPlay={e=>this._onPlay(e)}
-            onPause={e => this._onPlay(e)}
-            onLoaded={e => this._onPlay(e)}
-            onError={e => this._onPlay(e)}
-            onEnded={e => this._onPlay(e)}
-            onCanplay={e => this._onPlay(e)}
+            onPause={e => this._onPause(e)}
+            onLoaded={e => this._onLoaded(e)}
+            onCanplay={e => this._onCanplay(e)}
             >
             {
               videos.map((video) => {

@@ -21,6 +21,12 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/iframe', async (req, res) => {
+  res.set('Content-Type', 'text/html');
+  res.set('Cache-Control', 'public, max-age=604800');
+  res.status(200).send('', {maxAge: 604800000});
+});
+
 router.get('/home/*', async (req, res) => {
   try {
     res.render('index', {});
