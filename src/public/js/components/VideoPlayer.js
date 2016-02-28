@@ -65,7 +65,7 @@ class VideoPlayer extends Component {
           :
           '无视频源'
         }
-
+        3/4G用户请注意视频流量，土豪忽略
       </div>
     );
   }
