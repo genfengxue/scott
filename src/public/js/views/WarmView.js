@@ -1,11 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {actions as translateActions} from '../redux/translate';
-import {actions as sentencesActions} from '../redux/sentences';
+import {actions as warmActions} from '../redux/warm';
 import {actions as shiftingActions} from '../redux/shifting';
 import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
-import AudioPlayer from '../components/AudioPlayer';
 import Instruction from '../components/Instruction';
 import Header from '../components/Header';
 import setTitle from '../common/setTitle';
@@ -13,92 +11,73 @@ import CollectionModal from '../components/CollectionModal';
 import MethodModal from '../components/MethodModal';
 import FeedbackModal from '../components/FeedbackModal';
 import ReviewModal from '../components/ReviewModal';
+import VideoPlayer from '../components/VideoPlayer';
 import {RATES} from '../redux/shifting';
 
-const mapStateToProps = ({translate, sentences, shifting}) => ({
-  translate, sentences, shifting,
+const mapStateToProps = ({warm, shifting}) => ({
+  warm, shifting,
 });
 
 class WarmView extends Component {
   static propTypes = {
     params: PropTypes.object,
-    fetchSentencesAsync: PropTypes.func,
+    fetchSingleLessonAsync: PropTypes.func,
     toggleCollectionModal: PropTypes.func,
     toggleSpeeds: PropTypes.func,
     toggleMethodModal: PropTypes.func,
     toggleFeedbackModal: PropTypes.func,
     toggleReviewModal: PropTypes.func,
     shiftSpeed: PropTypes.func,
-    showTranslateAnswer: PropTypes.func,
-    translateInit: PropTypes.func,
-    sentences: PropTypes.object,
-    translate: PropTypes.object,
+    warmInit: PropTypes.func,
+    warm: PropTypes.object,
     shifting: PropTypes.object,
   };
 
   constructor(props) {
     super();
-    props.translateInit();
-    props.fetchSentencesAsync(props.params.courseNo, props.params.lessonNo);
+    props.warmInit();
+    props.fetchSingleLessonAsync(props.params.courseNo, props.params.lessonNo);
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.params.lessonNo !== this.props.params.lessonNo || nextProps.params.courseNo !== this.props.params.courseNo) {
-      this.props.fetchSentencesAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
-      this.props.translateInit();
-    }
-    if (nextProps.params.sentenceNo !== this.props.params.sentenceNo) {
-      this.props.translateInit();
+      this.props.fetchSingleLessonAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
+      this.props.warmInit();
     }
   }
 
   render() {
-    const course = this.props.sentences.course;
-    const lesson = this.props.sentences.lesson;
-    const {translate, sentences, shifting} = this.props;
-    const {errors, viewAnswer, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal} = translate;
-    const {courseNo, lessonNo, sentenceNo} = this.props.params;
+    const {warm, shifting} = this.props;
+    const {lesson, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal} = warm;
+    const {courseNo, lessonNo, type} = this.props.params;
 
-    const sentence = sentences.docs.filter((x) => {
-      return +x.sentenceNo === +sentenceNo && +x.lessonNo === +lessonNo && +x.courseNo === +courseNo;
-    })[0];
-    if (!sentence) {
+    if (!lesson) {
       return <div>Loading...</div>;
     }
-    if (course && lesson && sentence) {
-      setTitle(`${sentence.sentenceNo}/${sentences.docs.length}-Lesson${lesson.lessonNo}-${course.chineseTitle}`);
+    if (lesson) {
+      setTitle(`${courseNo}-${lessonNo}-热身`);
     }
 
-    // audios
-    let audios;
+    // videos
+    let videos;
     /**
      * Get the rated audio source according to original src and rate.
      * @param {String} src: original src
      * @param {String} rate: the rate, '0.8', '1.0'
      */
-    const getRatedAudioSrc = (src, rate) => {
-      const suffix = '.mp3';
+    const getRatedVideoSrc = (src, rate) => {
+      const suffix = '.mp4';
       const rateSrc = rate.toString().replace('.', '_');
       let result = src;
-      result = result.substr(0, result.length - suffix.length) + '@' + rateSrc + suffix;
-      const suffixes = ['.mp3', '.ogg', '.wav'];
+      result = result + '@' + rateSrc + suffix;
+      const suffixes = ['.mp4'];
       return suffixes.map((x) => {
         return result.substr(0, result.length - suffix.length) + x;
       });
     };
-    if (sentence && sentence.audio) {
-      audios = getRatedAudioSrc(sentence.audio, shifting.speed);
+    if (lesson && lesson.videoPath) {
+      videos = getRatedVideoSrc(lesson.videoPath, shifting.speed);
     }
-
-    // get prev next pointer
-    const prevSentence = sentences.docs.filter((x) => {
-      return x.sentenceNo < +sentenceNo && x.chinese;
-    }).reverse()[0];
-    const nextSentence = sentences.docs.filter((x) => {
-      return x.sentenceNo > +sentenceNo && x.chinese;
-    })[0];
-    const prevId = prevSentence ? prevSentence.sentenceNo : 0;
-    const nextId = nextSentence ? nextSentence.sentenceNo : 0;
 
     return (
       <div className="translate">
@@ -149,60 +128,18 @@ class WarmView extends Component {
           isOpen={showFeedbackModal}
           onRequestClose={() => this.props.toggleFeedbackModal(false)} />
         <div className="container">
-          <Instruction text="请翻译" />
-          <div className="col-xs-12 answer-block">
-            <div className="col-xs-12 sentence-chinese">
-              {sentence.chinese}
-            </div>
-            {
-              viewAnswer ?
-              <div className="col-xs-12 translate-answer">
-                {
-                  !!audios ?
-                  <AudioPlayer audios={audios} key={audios[0]}>
-                    <div>{sentence.english} <i className="icon-voice" /></div>
-                    <div>{sentence.english} <i className="icon-voice-mute" /></div>
-                    <div>{sentence.english} </div>
-                  </AudioPlayer>
-                  : sentence.english
-                }
-              </div>
-              :
-              ''
-            }
+          <Instruction text="请看视频" />
+          <div className="col-xs-12 video-block">
+            <VideoPlayer videos={videos} key={videos[0]} />
           </div>
           <ErrorTip error={errors.server} />
         </div>
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
-            <li className="col-xs-1 no-padding-col">
-              {
-                prevId ?
-                <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${prevId}`}>
-                  <i className="icon-left" />
+            <li className="col-xs-10 col-xs-offset-1 text-xs-center">
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`} >
+                  开始练习
                 </Link>
-                :
-                ''
-              }
-            </li>
-            <li className="col-xs-10 text-xs-center">
-            {
-              viewAnswer ?
-              (
-                nextId ?
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.translateInit()} to={`/home/courses/${courseNo}/lessons/${lessonNo}/translate/${nextId}`} >
-                  下一句
-                </Link>
-                :
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}?type=translate`} >
-                  返回
-                </Link>
-              )
-              :
-              <button className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={this.props.showTranslateAnswer}>
-                查看答案
-              </button>
-            }
             </li>
           </ul>
         </nav>
@@ -211,4 +148,4 @@ class WarmView extends Component {
   }
 }
 
-export default connect(mapStateToProps, Object.assign(translateActions, sentencesActions, shiftingActions))(WarmView);
+export default connect(mapStateToProps, Object.assign(warmActions, shiftingActions))(WarmView);

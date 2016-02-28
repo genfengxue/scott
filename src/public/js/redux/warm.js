@@ -16,11 +16,11 @@ export const TOGGLE_COLLECTION_MODAL = 'TOGGLE_COLLECTION_MODAL';
 // Actions
 // ------------------------------------
 export const displayErrors = createAction(WARM_ERRORS, (payload) => payload);
-export const listenInit = createAction(WARM_INIT);
+export const warmInit = createAction(WARM_INIT);
 export const receivedSingleLesson = createAction(RECEIVED_SINGLE_LESSON, (payload) => payload);
-export const fetchSingleLessonAsync = (lessonNo) => {
+export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/lessons/' + lessonNo);
+    const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
     dispatch(receivedSingleLesson(response));
   };
 };
@@ -31,7 +31,7 @@ export const toggleFeedbackModal = createAction(TOGGLE_FEEDBACK_MODAL, (payload)
 
 export const actions = {
   displayErrors,
-  listenInit,
+  warmInit,
   fetchSingleLessonAsync,
   receivedSingleLesson,
   toggleCollectionModal,

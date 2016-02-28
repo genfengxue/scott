@@ -7,6 +7,8 @@ import SkillsView from '../views/SkillsView';
 import ListenView from '../views/ListenView';
 import TranslateView from '../views/TranslateView';
 import TempPronunciationView from '../views/TempPronunciationView';
+import WarmView from '../views/WarmView';
+
 // import NotFoundView from '../views/NotFoundView/NotFoundView';
 //     <Route path='/404' component={NotFoundView} />
 
@@ -16,6 +18,7 @@ export default (
     <Route path="/home/courses/" component={CoursesView} />
     <Route path="/home/pronunciations/" component={TempPronunciationView} />
     <Route path="/home/courses/:courseNo" component={LessonsView} />
+    <Route path="/home/courses/:courseNo/lessons/:lessonNo/warm/" component={WarmView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/listen/:sentenceNo" component={ListenView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/translate/:sentenceNo" component={TranslateView} />
     <Redirect from="*" to="/" />

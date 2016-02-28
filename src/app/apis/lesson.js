@@ -30,10 +30,10 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:lessonNo', async (req, res, next) => {
+router.get('/:courseNo/:lessonNo', async (req, res, next) => {
   try {
     if (req.params.lessonNo) {
-      const result = await Lesson.findOne({lessonNo: req.params.lessonNo});
+      const result = await Lesson.findOne({lessonNo: req.params.lessonNo, courseNo: req.params.courseNo});
       if (result) {
         return res.send(result);
       }

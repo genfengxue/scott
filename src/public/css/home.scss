@@ -4,6 +4,7 @@
 @import "./skills";
 @import "./instruction";
 @import "./audioPlayer";
+@import "./videoPlayer";
 @import "./header";
 
 .navbar.bottom-nav {
@@ -30,6 +31,10 @@
     height: 7rem;
     padding: 1rem 0;
   }
+}
+
+.video-block {
+  margin-top: 2rem;
 }
 
 .btn-primary-outline {
