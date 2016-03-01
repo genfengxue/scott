@@ -80,7 +80,7 @@ class ListenView extends Component {
       const rateSrc = rate.toString().replace('.', '_');
       let result = src;
       result = result.substr(0, result.length - suffix.length) + '@' + rateSrc + suffix;
-      const suffixes = ['.mp3', '.ogg', '.wav'];
+      const suffixes = ['.mp3'];
       return suffixes.map((x) => {
         return result.substr(0, result.length - suffix.length) + x;
       });
