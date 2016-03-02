@@ -26,7 +26,7 @@ class RedisCache {
    * set key-value or add expire
    * @param key
    * @param value
-   * @param expire cache expire
+   * @param expire cache expire in seconds
    * @returns {*} ok | ''
    */
   static async set(key, value, expire) {

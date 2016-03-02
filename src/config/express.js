@@ -12,12 +12,10 @@ import connectRedis from 'connect-redis';
 import fs from 'fs';
 import FileStreamRotator from 'file-stream-rotator';
 import captcha from '../utils/captcha';
-import httpProxy from 'http-proxy';
 import mongoose from 'mongoose';
 
 const RedisStore = connectRedis(session);
 export default (app, config) => {
-
   mongoose.connect(config.mongo) // connect to our database
   .connection.on('error', (err) => {
     logger.info('connection error:' + JSON.stringify(err));
@@ -25,7 +23,6 @@ export default (app, config) => {
     logger.info('open mongodb success');
   });
 
-  const proxy = httpProxy.createProxyServer({});
   const env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env === 'development';
@@ -70,7 +67,11 @@ export default (app, config) => {
     saveUninitialized: true,
   }));
   app.use(captcha({ url: '/captcha.jpg', color: '#0064cd', background: '#FFF' })); // captcha params
-  app.use(express.static(config.root + '/public', {maxAge: 86400000 * 7}));
+  if (env === 'production') {
+    app.use(express.static(config.root + '/public', {maxAge: 86400000 * 7}));
+  } else {
+    app.use(express.static(config.root + '/public'));
+  }
   app.use(methodOverride());
 
   // api 路由定义
@@ -78,6 +79,7 @@ export default (app, config) => {
   app.use('/api/courses/', require('../app/apis/course'));
   app.use('/api/lessons/', require('../app/apis/lesson'));
   app.use('/api/sentences/', require('../app/apis/sentence'));
+  app.use('/api/wechat/', require('../app/apis/wechat'));
 
   // 页面路由定义
   app.use('/', require('../app/controllers/home'));
@@ -104,5 +106,4 @@ export default (app, config) => {
     }
     logger.error(err);
   });
-
 };

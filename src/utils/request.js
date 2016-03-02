@@ -1,17 +1,16 @@
 import request from 'superagent';
-import config from '../config/config';
 import logger from './logger';
 
 const generateError = (err) => {
   return Object.assign(err.response ? err.response.body : {code: err.code}, err.response ? err.response.error : {status: 501, message: 'timeout'}, {raw: err});
 };
 
-const timeout = 120 * 1000;
+const timeout = 3 * 1000;
 
 export default {
   get: (path, query) => new Promise((resolve, reject) => {
     const req = request
-      .get(config.apiRoot + path)
+      .get(path)
       .timeout(timeout)
       .accept('application/json');
 
@@ -30,7 +29,7 @@ export default {
   }),
 
   put: (path, data, query) => new Promise((resolve, reject) => {
-    const req = request.put(config.apiRoot + path)
+    const req = request.put(path)
       .timeout(timeout)
       .accept('application/json')
       .send(data);
@@ -50,7 +49,7 @@ export default {
   }),
 
   post: (path, data, query) => new Promise((resolve, reject) => {
-    const req = request.post(config.apiRoot + path)
+    const req = request.post(path)
       .timeout(timeout)
       .accept('application/json')
       .send(data);
@@ -70,7 +69,7 @@ export default {
   }),
 
   del: (path, query) => new Promise((resolve, reject) => {
-    const req = request.del(config.apiRoot + path)
+    const req = request.del(path)
       .timeout(timeout)
       .accept('application/json');
 

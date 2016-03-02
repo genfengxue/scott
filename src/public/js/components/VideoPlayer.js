@@ -5,6 +5,7 @@ class VideoPlayer extends Component {
     videos: PropTypes.array.isRequired,
     autoplay: PropTypes.bool,
     onPlay: PropTypes.func,
+    playing: PropTypes.bool,
   };
 
   constructor() {
@@ -18,6 +19,19 @@ class VideoPlayer extends Component {
     //   console.log('oncanplay');
     //   videoEl.play();
     // };
+
+    this.refs.video.getDOMNode().setAttribute('webkit-playsinline', 'true');
+    if (this.props.playing) {
+      this.refs.video.play();
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.playing) {
+      this.refs.video.play();
+    } else {
+      this.refs.video.pause();
+    }
   }
 
   componentWillUnmount() {
@@ -45,6 +59,7 @@ class VideoPlayer extends Component {
           <video controls
             ref="video"
             className="video-player-core"
+            preload="metadata"
             onPlay={e=>this._onPlay(e)}
             onPause={e => this._onPause(e)}
             onLoaded={e => this._onLoaded(e)}

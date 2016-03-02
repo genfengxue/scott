@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {actions as warmActions} from '../redux/warm';
+import {actions as translateQuizActions} from '../redux/translateQuiz';
 import {actions as shiftingActions} from '../redux/shifting';
 import {actions as wxsdkActions} from '../redux/wxsdk';
 import {Link} from 'react-router';
@@ -15,11 +15,11 @@ import ReviewModal from '../components/ReviewModal';
 import VideoPlayer from '../components/VideoPlayer';
 import {RATES} from '../redux/shifting';
 
-const mapStateToProps = ({warm, shifting, wxsdk}) => ({
-  warm, shifting, wxsdk,
+const mapStateToProps = ({translateQuiz, shifting, wxsdk}) => ({
+  translateQuiz, shifting, wxsdk,
 });
 
-class WarmView extends Component {
+class TranslateQuizView extends Component {
   static propTypes = {
     params: PropTypes.object,
     fetchSingleLessonAsync: PropTypes.func,
@@ -29,28 +29,51 @@ class WarmView extends Component {
     toggleFeedbackModal: PropTypes.func,
     toggleReviewModal: PropTypes.func,
     shiftSpeed: PropTypes.func,
-    warmInit: PropTypes.func,
-    warm: PropTypes.object,
+    translateQuizInit: PropTypes.func,
+    translateQuiz: PropTypes.object,
     shifting: PropTypes.object,
     location: PropTypes.object,
+    beginTranslateQuiz: PropTypes.func,
+    endTranslateQuiz: PropTypes.func,
+    fetchSignatureAsync: PropTypes.func,
+    wxsdk: PropTypes.object,
   };
 
   constructor(props) {
     super();
-    props.warmInit();
+    props.translateQuizInit();
     props.fetchSingleLessonAsync(props.params.courseNo, props.params.lessonNo);
+    props.fetchSignatureAsync();
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.params.lessonNo !== this.props.params.lessonNo || nextProps.params.courseNo !== this.props.params.courseNo) {
       this.props.fetchSingleLessonAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
-      this.props.warmInit();
+      this.props.translateQuizInit();
     }
   }
 
+  beginTranslateQuiz() {
+    this.props.beginTranslateQuiz();
+    console.log(this.props.wxsdk);
+    wx.startRecord();
+  }
+
+  endTranslateQuiz() {
+    this.props.endTranslateQuiz();
+    wx.stopRecord({
+      success: (res) => {
+        localId = res.localId;
+        // wx.playVoice({
+        //   localId, // 需要播放的音频的本地ID，由stopRecord接口获得
+        // });
+      },
+    });
+  }
+
   render() {
-    const {warm, shifting} = this.props;
-    const {lesson, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal} = warm;
+    const {translateQuiz, shifting, wxsdk} = this.props;
+    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal} = translateQuiz;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;
     const type = query.type || 'listen';
@@ -79,7 +102,7 @@ class WarmView extends Component {
       });
     };
     if (lesson && lesson.videoPath) {
-      videos = getRatedVideoSrc(lesson.videoPath, shifting.speed);
+      videos = getRatedVideoSrc(lesson.videoPath + '_muted', shifting.speed);
     }
 
     return (
@@ -133,16 +156,23 @@ class WarmView extends Component {
         <div className="container">
           <Instruction text="请看视频" />
           <div className="col-xs-12 video-block">
-            <VideoPlayer videos={videos} key={videos[0]} />
+            <VideoPlayer playing={quizOn} videos={videos} key={videos[0]} />
           </div>
           <ErrorTip error={errors.server} />
         </div>
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
             <li className="col-xs-10 col-xs-offset-1 text-xs-center">
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`} >
-                  开始练习
-                </Link>
+              {
+                quizOn ?
+                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.endTranslateQuiz()}>
+                  完成
+                </a>
+                :
+                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.beginTranslateQuiz()}>
+                  立即开始
+                </a>
+              }
             </li>
           </ul>
         </nav>
@@ -151,4 +181,4 @@ class WarmView extends Component {
   }
 }
 
-export default connect(mapStateToProps, Object.assign(warmActions, shiftingActions, wxsdkActions))(WarmView);
+export default connect(mapStateToProps, Object.assign(translateQuizActions, shiftingActions, wxsdkActions))(TranslateQuizView);

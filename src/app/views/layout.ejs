@@ -18,13 +18,13 @@
     <!-- styles -->
     <link href="/css/style.css" rel="stylesheet">
     <%- stylesheets %>
-
     <% if (ENV_DEVELOPMENT) { %>
       <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
     <% } %>
   </head>
   <body>
     <%- body %>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <%- scripts %>
     <script type="text/javascript" src="http://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500013411" ></script>
   </body>
