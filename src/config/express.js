@@ -79,6 +79,7 @@ export default (app, config) => {
   app.use('/api/courses/', require('../app/apis/course'));
   app.use('/api/lessons/', require('../app/apis/lesson'));
   app.use('/api/sentences/', require('../app/apis/sentence'));
+  app.use('/api/homeworks/', require('../app/apis/homework'));
   app.use('/api/wechat/', require('../app/apis/wechat'));
 
   // 页面路由定义

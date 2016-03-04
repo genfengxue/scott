@@ -13,13 +13,6 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
-    // console.dir(this.refs.video);
-    // const videoEl = this.refs.video;
-    // videoEl.oncanplay = () => {
-    //   console.log('oncanplay');
-    //   videoEl.play();
-    // };
-
     this.refs.video.getDOMNode().setAttribute('webkit-playsinline', 'true');
     if (this.props.playing) {
       this.refs.video.play();

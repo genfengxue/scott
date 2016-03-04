@@ -10,7 +10,7 @@ router.get('/signature/', async (req, res, next) => {
     const timestamp = parseInt((new Date()).valueOf() / 1000, 10);
     const noncestr = 'helloworld';
     const url = req.header('Referer');
-    console.log(noncestr, timestamp, url);
+    logger.info('--signature--', noncestr, timestamp, url);
     const signature = await wechat.getSignature(noncestr, timestamp, url);
     res.status(200).json({appId: config.weixin.appid, signature, timestamp, nonceStr: noncestr});
   } catch (err) {

@@ -40,24 +40,29 @@ class Header extends Component {
             </li>
           </ul>
         </nav>
-        <div className={'header-side-memu' + (open ? ' open' : '')}>
-          <ul className="nav">
-            <li className="nav-item clearfix">
-              <a className="nav-link pull-xs-right" onClick={() => this.closeSidebar()}>
-                <i className="icon-times" />
-              </a>
-            </li>
-            {
-              this.props.children.map((child, index) => {
-                return (
-                  <li key={index} className="nav-item" onClick={() => this.closeSidebar()}>
-                    {child}
-                  </li>
-                );
-              })
-            }
-          </ul>
-        </div>
+        {
+          this.props.children ?
+          <div className={'header-side-memu' + (open ? ' open' : '')}>
+            <ul className="nav">
+              <li className="nav-item clearfix">
+                <a className="nav-link pull-xs-right" onClick={() => this.closeSidebar()}>
+                  <i className="icon-times" />
+                </a>
+              </li>
+              {
+                this.props.children.map((child, index) => {
+                  return (
+                    <li key={index} className="nav-item" onClick={() => this.closeSidebar()}>
+                      {child}
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </div>
+          :
+          ''
+        }
         <div className={'header-overlay' + (open ? ' open' : '')} onClick={() => this.closeSidebar()}>
         </div>
       </div>

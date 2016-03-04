@@ -43,6 +43,7 @@
     "multer": "1.1.0",
     "qiniu": "6.1.9",
     "qs": "6.0.1",
+    "randomstring": "^1.1.4",
     "react": "0.14.3",
     "react-dom": "0.14.3",
     "react-infinite-scroll": "^0.1.5",

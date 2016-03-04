@@ -1,5 +1,6 @@
 import {createAction, handleActions} from 'redux-actions';
 import ajax from '../common/ajax';
+import history from '../common/history';
 
 // ------------------------------------
 // Constants
@@ -13,6 +14,9 @@ export const TOGGLE_FEEDBACK_MODAL = 'TOGGLE_FEEDBACK_MODAL';
 export const TOGGLE_COLLECTION_MODAL = 'TOGGLE_COLLECTION_MODAL';
 export const BEGIN_TRANSLATE_QUIZ = 'BEGIN_TRANSLATE_QUIZ';
 export const END_TRANSLATE_QUIZ = 'END_TRANSLATE_QUIZ';
+export const CANCEL_SUBMIT = 'CANCEL_SUBMIT';
+export const SUBMIT_RECORD = 'SUBMIT_RECORD';
+export const UPLOADING_RECORD = 'UPLOADING_RECORD';
 
 // ------------------------------------
 // Actions
@@ -31,7 +35,36 @@ export const toggleReviewModal = createAction(TOGGLE_REVIEW_MODAL, (payload) => 
 export const toggleMethodModal = createAction(TOGGLE_METHOD_MODAL, (payload) => payload);
 export const toggleFeedbackModal = createAction(TOGGLE_FEEDBACK_MODAL, (payload) => payload);
 export const beginTranslateQuiz = createAction(BEGIN_TRANSLATE_QUIZ);
-export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ);
+export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ, (payload) => payload);
+export const cancelSubmit = createAction(CANCEL_SUBMIT);
+export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => payload);
+export const submitRecordAsync = (payload, wxsdk) => {
+  return (dispatch) => {
+    if (!payload.localId) {
+      return dispatch(displayErrors({server: '录音不存在'}));
+    }
+    if (!payload.nickname) {
+      return dispatch(displayErrors({nickname: '需要输入昵称后才可以提交'}));
+    }
+    if (!payload.time) {
+      return dispatch(displayErrors({time: '请输入练习时间'}));
+    }
+    dispatch(uploadingRecord(true));
+    wx.uploadVoice({
+      localId: payload.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+      isShowProgressTips: 1, // 默认为1，显示进度提示
+      success: async (res) => {
+        const serverId = res.serverId; // 返回音频的服务器端ID
+        payload.serverId = serverId;
+        const response = await ajax.post('/api/homeworks/', payload);
+        console.log(response);
+        // go to homework view
+        history.pushState(null, `/home/homeworks/${response._id}`);
+        dispatch(uploadingRecord(false));
+      },
+    });
+  };
+};
 
 export const actions = {
   displayErrors,
@@ -44,6 +77,8 @@ export const actions = {
   toggleFeedbackModal,
   beginTranslateQuiz,
   endTranslateQuiz,
+  cancelSubmit,
+  submitRecordAsync,
 };
 
 // ------------------------------------
@@ -81,8 +116,17 @@ export default handleActions({
     state.quizOn = true;
     return Object.assign({}, state);
   },
-  [END_TRANSLATE_QUIZ]: (state) => {
+  [END_TRANSLATE_QUIZ]: (state, {payload}) => {
     state.quizOn = false;
+    state.localId = payload;
+    return Object.assign({}, state);
+  },
+  [CANCEL_SUBMIT]: (state) => {
+    state.localId = '';
+    return Object.assign({}, state);
+  },
+  [UPLOADING_RECORD]: (state, {payload}) => {
+    state.uploadingRecord = payload;
     return Object.assign({}, state);
   },
 }, {errors: {}});

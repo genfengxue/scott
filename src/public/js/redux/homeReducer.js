@@ -7,8 +7,9 @@ import shifting from './shifting';
 import warm from './warm';
 import translateQuiz from './translateQuiz';
 import wxsdk from './wxsdk';
+import homework from './homework';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-  courses, lessons, sentences, listen, translate, shifting, warm, translateQuiz, wxsdk,
+  courses, lessons, sentences, listen, translate, shifting, warm, translateQuiz, wxsdk, homework,
 });

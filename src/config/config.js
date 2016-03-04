@@ -5,6 +5,12 @@ const env = process.env.NODE_ENV || 'development';
 const config = {
   development: {
     root: rootPath,
+    qiniu: {
+      ACCESS_KEY: '07cMjNhILyyOUOy4mes6SWwuwRnytDqrb6Zdlq0U',
+      SECRET_KEY: 'NvlDby_4PcpNdWRfyzb5pli2y9mjquzC6Rv2GDnx',
+      bucket: 'scott',
+      prefix: 'https://o3f47rda5.qnssl.com/',
+    },
     pagination: {
       defaultSize: 20,
       maxSize: 100,
@@ -38,6 +44,12 @@ const config = {
 
   test: {
     root: rootPath,
+    qiniu: {
+      ACCESS_KEY: '07cMjNhILyyOUOy4mes6SWwuwRnytDqrb6Zdlq0U',
+      SECRET_KEY: 'NvlDby_4PcpNdWRfyzb5pli2y9mjquzC6Rv2GDnx',
+      bucket: 'scott',
+      prefix: 'https://o3f47rda5.qnssl.com/',
+    },
     pagination: {
       defaultSize: 20,
       maxSize: 100,
@@ -71,6 +83,12 @@ const config = {
 
   production: {
     root: rootPath,
+    qiniu: {
+      ACCESS_KEY: '07cMjNhILyyOUOy4mes6SWwuwRnytDqrb6Zdlq0U',
+      SECRET_KEY: 'NvlDby_4PcpNdWRfyzb5pli2y9mjquzC6Rv2GDnx',
+      bucket: 'scott',
+      prefix: 'https://o3f47rda5.qnssl.com/',
+    },
     pagination: {
       defaultSize: 20,
       maxSize: 100,

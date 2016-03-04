@@ -1,6 +1,6 @@
 import babelPolyfill from 'babel-polyfill'; // eslint-disable-line no-unused-vars
 import React from 'react';
-import { browserHistory } from 'react-router';
+import history from './common/history';
 import ReactDom from 'react-dom';
 import Root from './containers/Root';
 import routes from './routes/home';
@@ -23,4 +23,4 @@ const store = createStoreWithMiddleware(createStore)(
 
 window.dispatch = store.dispatch;
 
-ReactDom.render(<Root history={browserHistory} routes={routes} store={store} />, document.getElementById('app'));
+ReactDom.render(<Root history={history} routes={routes} store={store} />, document.getElementById('app'));
