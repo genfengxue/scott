@@ -19,7 +19,7 @@ export default (
     <IndexRoute component={SkillsView} />
     <Route path="/home/courses/" component={CoursesView} />
     <Route path="/home/pronunciations/" component={TempPronunciationView} />
-    <Route path="/home/courses/:courseNo/lessons/:lessonNo/quiz/translate/" component={TranslateQuizView} />
+    <Route path="/home/courses/:courseNo/lessons/:lessonNo/quiz/" component={TranslateQuizView} />
     <Route path="/home/courses/:courseNo" component={LessonsView} />
     <Route path="/home/homeworks/:homeworkId" component={HomeworkView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/warm/" component={WarmView} />

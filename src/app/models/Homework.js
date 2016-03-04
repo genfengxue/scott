@@ -8,6 +8,7 @@ const schema = BaseSchema.extend({
   audio: { type: String },
   nickname: { type: String },
   serverId: { type: String },
+  type: {type: String},
 });
 
 export default mongoose.model('Homework', schema);

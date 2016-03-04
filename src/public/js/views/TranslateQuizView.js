@@ -112,12 +112,12 @@ class TranslateQuizView extends Component {
       });
     };
     if (lesson && lesson.videoPath) {
-      videos = getRatedVideoSrc(lesson.videoPath + '_muted', shifting.speed);
+      videos = getRatedVideoSrc(lesson.videoPath + (type === 'translate' ? '_muted' : ''), shifting.speed);
     }
 
     return (
       <div className="translate">
-        <Header back={`/home/courses/${courseNo}?type=translate`}>
+        <Header back={`/home/courses/${courseNo}?type=${type}`}>
           <a className="nav-link" onClick={() => this.props.toggleMethodModal(true)} >方法</a>
           <a className="nav-link" onClick={e => {
             e.stopPropagation();
@@ -168,7 +168,7 @@ class TranslateQuizView extends Component {
             localId ?
             <Instruction text="请提交录音" />
             :
-            <Instruction text="请翻译整段视频" />
+            <Instruction text={`请${type === 'translate' ? '翻译' : '跟读'}整段视频`} />
           }
 
           <div className="col-xs-12 video-block">
@@ -215,7 +215,7 @@ class TranslateQuizView extends Component {
             {
               localId ?
               <li className="col-xs-10 text-xs-center">
-                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.submit({courseNo, lessonNo, localId})}>
+                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.submit({courseNo, lessonNo, localId, type})}>
                   提交录音
                 </a>
               </li>

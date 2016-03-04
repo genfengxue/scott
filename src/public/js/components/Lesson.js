@@ -12,7 +12,7 @@ class Lesson extends Component {
     return (
       <div className="clearfix col-xs-12 lesson">
         <Link className="lesson-name" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/warm/?type=${type || 'listen'}`}>
-          Lesson {lesson.lessonNo}
+          {lesson.englishTitle}
         </Link>
       </div>
     );

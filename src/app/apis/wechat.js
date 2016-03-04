@@ -14,6 +14,7 @@ router.get('/signature/', async (req, res, next) => {
     const signature = await wechat.getSignature(noncestr, timestamp, url);
     res.status(200).json({appId: config.weixin.appid, signature, timestamp, nonceStr: noncestr});
   } catch (err) {
+    await wechat.reset();
     next(err);
   }
 });

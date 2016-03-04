@@ -57,7 +57,6 @@ export const submitRecordAsync = (payload, wxsdk) => {
         const serverId = res.serverId; // 返回音频的服务器端ID
         payload.serverId = serverId;
         const response = await ajax.post('/api/homeworks/', payload);
-        console.log(response);
         // go to homework view
         history.pushState(null, `/home/homeworks/${response._id}`);
         dispatch(uploadingRecord(false));

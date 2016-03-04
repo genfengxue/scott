@@ -43,8 +43,14 @@ const getSignature = async (noncestr, timestamp, url) => {
   return sha1(input);
 };
 
+const reset = async () => {
+  await RedisCache.set(accessTokenKey, '');
+  await RedisCache.set(jsapiTicketKey, '');
+}
+
 export default {
   getAccessToken,
   getJsapiTicket,
   getSignature,
+  reset,
 };

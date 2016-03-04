@@ -59,7 +59,7 @@ class HomeworkView extends Component {
 
   render() {
     const {homework, wxsdk} = this.props;
-    const {serverId, errors, lessonNo, courseNo, nickname, playing} = homework;
+    const {serverId, errors, lessonNo, courseNo, nickname, playing, type} = homework;
     if (!serverId) {
       return <div>Loading...</div>;
     }
@@ -69,10 +69,10 @@ class HomeworkView extends Component {
 
     return (
       <div className="homework">
-        <Header back={`/home/courses/${courseNo}?type=translate`} />
+        <Header back={`/home/courses/${courseNo}?type=${type}`} />
         <div className="container">
           <div className="col-xs-12 video-block">
-            <h4>{`${nickname}的翻译作品`}</h4>
+            <h4>{`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品`}</h4>
             <div className="text-xs-center">
               {
                 playing ?
