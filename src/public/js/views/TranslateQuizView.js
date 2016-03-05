@@ -39,6 +39,7 @@ class TranslateQuizView extends Component {
     wxsdk: PropTypes.object,
     cancelSubmit: PropTypes.func,
     submitRecordAsync: PropTypes.func,
+    endTranslateQuizAsync: PropTypes.func,
   };
 
   constructor(props) {
@@ -66,14 +67,6 @@ class TranslateQuizView extends Component {
     });
   }
 
-  endTranslateQuiz() {
-    wx.stopRecord({
-      success: (res) => {
-        this.props.endTranslateQuiz(res.localId);
-      },
-    });
-  }
-
   submit(data) {
     const nickname = this.refs.nickname.value;
     const time = parseInt(this.refs.time.value, 10);
@@ -83,7 +76,7 @@ class TranslateQuizView extends Component {
 
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
-    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId} = translateQuiz;
+    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time} = translateQuiz;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;
     const type = query.type || 'listen';
@@ -184,7 +177,7 @@ class TranslateQuizView extends Component {
                 <div className="form-group row">
                   <label htmlFor="time" className="col-xs-2 form-control-label">时间</label>
                   <div className="col-xs-8">
-                    <input ref="time" type="number" className="form-control" id="time" placeholder="时间" />
+                    <input ref="time" defaultValue={parseInt(time / 1000 / 60, 10)} type="number" className="form-control" id="time" placeholder="时间" />
                   </div>
                   <label className="col-xs-2 form-control-label">分钟</label>
                 </div>
@@ -223,13 +216,16 @@ class TranslateQuizView extends Component {
               <li className="col-xs-10 text-xs-center">
                 {
                   quizOn ?
-                  <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.endTranslateQuiz()}>
+                  <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={this.props.endTranslateQuizAsync}>
                     完成
                   </a>
                   :
+                  wxsdk.signature ?
                   <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.beginTranslateQuiz()}>
                     立即开始
                   </a>
+                  :
+                  '请在微信下做作业'
                 }
               </li>
             }

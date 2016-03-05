@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
     result.course = course;
     const lesson = await Lesson.findOne({lessonNo});
     result.lesson = lesson;
+    req.session.startTime = new Date();
     res.send(result);
   } catch (err) {
     next(err);

@@ -81,6 +81,7 @@ export default (app, config) => {
   app.use('/api/sentences/', require('../app/apis/sentence'));
   app.use('/api/homeworks/', require('../app/apis/homework'));
   app.use('/api/wechat/', require('../app/apis/wechat'));
+  app.use('/api/stats/', require('../app/apis/stats'));
 
   // 页面路由定义
   app.use('/', require('../app/controllers/home'));

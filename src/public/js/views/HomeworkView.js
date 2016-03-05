@@ -64,7 +64,7 @@ class HomeworkView extends Component {
       return <div>Loading...</div>;
     }
     if (serverId) {
-      setTitle(` Lesson${lessonNo}-${homework.course.chineseTitle}-作业`);
+      setTitle(`${lesson.chineseTitle}-${homework.course.chineseTitle}-作业`);
     }
 
     return (

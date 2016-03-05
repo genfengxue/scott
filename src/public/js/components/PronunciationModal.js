@@ -5,6 +5,7 @@ const customStyles = {
   overlay: {
     zIndex: '1031',
     background: 'rgba(0, 0, 0, 0.6)',
+    overflow: 'auto',
   },
   content: {
     // top: '50%',
@@ -14,7 +15,7 @@ const customStyles = {
     // marginRight: '-50%',
     // WebkitTransform: 'translate(-50%, -50%)',
     // transform: 'translate(-50%, -50%)',
-    top: '25%',
+    top: '0.5rem',
     left: '2rem',
     right: '2rem',
     bottom: 'auto',
@@ -40,14 +41,13 @@ class PronunciationModal extends Component {
             Hi there~
           </p>
           <p>
-            发音语调训练目前通过另外一款App进行
+            发音语调训练内容请到应用商店下载"流利学院"
           </p>
           <p>
-            你可以添加我的个人微信819432228来获得另外那款App
+            在"课程库"里边, "英语"类别最下边可以看到课程
           </p>
-          <p>
-            我打算先开发其他功能，之后再把发音语调内容整合进来
-          </p>
+
+          <img src="/img/vocal.jpg" style={{width: '100%'}} />
           <p>
             cheers, <br />
             Wind

@@ -10,6 +10,11 @@ class VideoPlayer extends Component {
 
   constructor() {
     super();
+    wx.getNetworkType({
+      success: (res) => {
+        this.networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+      },
+    });
   }
 
   componentDidMount() {
@@ -71,7 +76,12 @@ class VideoPlayer extends Component {
           :
           '无视频源'
         }
-        3/4G用户请注意视频流量，土豪忽略
+        {
+          this.networkType === 'wifi' ?
+          ''
+          :
+          '3/4G用户请注意视频流量，土豪忽略'
+        }
       </div>
     );
   }

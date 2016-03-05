@@ -1,12 +1,12 @@
 import {Router} from 'express';
 import config from '../../config/config';
-import find from 'lodash/find';
 import Homework from '../models/Homework';
 import wechat from '../../utils/wechat';
 import request from '../../utils/request';
 import qiniu from 'qiniu';
 import randomstring from 'randomstring';
 import Course from '../models/Course';
+import Lesson from '../models/Lesson';
 
 qiniu.conf.ACCESS_KEY = config.qiniu.ACCESS_KEY;
 qiniu.conf.SECRET_KEY = config.qiniu.SECRET_KEY;
@@ -18,8 +18,10 @@ router.get('/:homeworkId', async (req, res, next) => {
     const homeworkId = req.params.homeworkId;
     const result = await Homework.findOne({_id: homeworkId});
     const course = await Course.findOne({courseNo: result.courseNo});
+    const lesson = await Lesson.findOne({courseNo: result.courseNo, lessonNo: result.lessonNo});
     const homework = result.toObject();
     homework.course = course;
+    homework.lesson = lesson;
     res.send(homework);
   } catch (err) {
     next(err);
