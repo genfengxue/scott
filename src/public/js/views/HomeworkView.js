@@ -59,7 +59,7 @@ class HomeworkView extends Component {
 
   render() {
     const {homework, wxsdk} = this.props;
-    const {serverId, errors, lessonNo, courseNo, nickname, playing, type} = homework;
+    const {serverId, errors, lesson, courseNo, nickname, playing, type} = homework;
     if (!serverId) {
       return <div>Loading...</div>;
     }
