@@ -38,14 +38,18 @@ export const beginTranslateQuiz = createAction(BEGIN_TRANSLATE_QUIZ);
 export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ, (payload) => payload);
 export const cancelSubmit = createAction(CANCEL_SUBMIT);
 export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => payload);
-export const endTranslateQuizAsync = () => {
+export const endTranslateQuizAsync = (localId) => {
   return async (dispatch) => {
     const {time} = await ajax.get('/api/stats/');
-    wx.stopRecord({
-      success: (res) => {
-        dispatch(endTranslateQuiz({localId: res.localId, time}));
-      },
-    });
+    if (localId) {
+      dispatch(endTranslateQuiz({localId, time}));
+    } else {
+      wx.stopRecord({
+        success: (res) => {
+          dispatch(endTranslateQuiz({localId: res.localId, time}));
+        },
+      });
+    }
   };
 };
 export const submitRecordAsync = (payload, wxsdk) => {

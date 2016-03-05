@@ -34,7 +34,6 @@ class TranslateQuizView extends Component {
     shifting: PropTypes.object,
     location: PropTypes.object,
     beginTranslateQuiz: PropTypes.func,
-    endTranslateQuiz: PropTypes.func,
     fetchSignatureAsync: PropTypes.func,
     wxsdk: PropTypes.object,
     cancelSubmit: PropTypes.func,
@@ -62,7 +61,7 @@ class TranslateQuizView extends Component {
     wx.onVoiceRecordEnd({
     // 录音时间超过一分钟没有停止的时候会执行 complete 回调
       complete: (res) => {
-        this.props.endTranslateQuiz(res.localId);
+        this.props.endTranslateQuizAsync(res.localId);
       },
     });
   }

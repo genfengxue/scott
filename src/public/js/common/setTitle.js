@@ -24,7 +24,7 @@ export default (title) => {
     setTimeout(() => {
       $iframe.onload = null;
       body.removeChild($iframe);
-    }, 50);
+    }, 0);
   };
   body.appendChild($iframe);
 };
