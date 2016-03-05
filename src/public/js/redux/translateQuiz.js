@@ -92,6 +92,7 @@ export const actions = {
   endTranslateQuiz,
   cancelSubmit,
   submitRecordAsync,
+  endTranslateQuizAsync，
 };
 
 // ------------------------------------
