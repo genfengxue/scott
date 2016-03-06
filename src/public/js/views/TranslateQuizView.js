@@ -202,6 +202,12 @@ class TranslateQuizView extends Component {
                   :
                   <p className="small">如果视频没自动播放, 请手动播放视频;<br />如果字幕被播放器挡住, 请点击一下空白区域即可</p>
                 }
+                {
+                  tempId ?
+                  <p className="text-danger text-xs-center" style={{'marginTop': '5rem'}}>点击下边完成，提交录音</p>
+                  :
+                  ''
+                }
               </div>
             }
           </div>
