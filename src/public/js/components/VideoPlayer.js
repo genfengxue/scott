@@ -80,7 +80,7 @@ class VideoPlayer extends Component {
           this.networkType === 'wifi' ?
           ''
           :
-          '3/4G用户请注意视频流量，土豪忽略'
+          '1分钟视频需要约2M流量'
         }
       </div>
     );

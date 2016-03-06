@@ -83,7 +83,7 @@ class TranslateQuizView extends Component {
       return <div>Loading...</div>;
     }
     if (lesson) {
-      setTitle(`${courseNo}-${lessonNo}-热身`);
+      setTitle(`打Boss`);
     }
 
     // videos
@@ -168,20 +168,20 @@ class TranslateQuizView extends Component {
               localId ?
               <div>
                 <div className="form-group row">
-                  <label htmlFor="nickname" className="col-xs-2 form-control-label">昵称</label>
-                  <div className="col-xs-8">
-                    <input type="text" ref="nickname" className="form-control" id="nickname" placeholder="昵称" />
+                  <label htmlFor="nickname" className="col-xs-3 form-control-label">昵称</label>
+                  <div className="col-xs-6">
+                    <input type="text" ref="nickname" className="form-control" id="nickname" placeholder="请输入英文名" />
                   </div>
                 </div>
                 <div className="form-group row">
-                  <label htmlFor="time" className="col-xs-2 form-control-label">时间</label>
-                  <div className="col-xs-8">
+                  <label htmlFor="time" className="col-xs-3 form-control-label">时间</label>
+                  <div className="col-xs-6">
                     <input ref="time" defaultValue={parseInt(time / 1000 / 60, 10)} type="number" className="form-control" id="time" placeholder="时间" />
                   </div>
-                  <label className="col-xs-2 form-control-label">分钟</label>
+                  <label className="col-xs-3 form-control-label">分钟</label>
                 </div>
                 <div className="form-group row">
-                  <div className="col-xs-8 col-xs-offset-2">
+                  <div className="col-xs-6 col-xs-offset-3 small">
                     这是系统记录你本课的学习时间，可以手动修改
                   </div>
                 </div>
