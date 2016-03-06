@@ -39,6 +39,7 @@ class TranslateQuizView extends Component {
     cancelSubmit: PropTypes.func,
     submitRecordAsync: PropTypes.func,
     endTranslateQuizAsync: PropTypes.func,
+    endQuiz: PropTypes.func,
   };
 
   constructor(props) {
@@ -61,7 +62,7 @@ class TranslateQuizView extends Component {
     wx.onVoiceRecordEnd({
     // 录音时间超过一分钟没有停止的时候会执行 complete 回调
       complete: (res) => {
-        this.props.endTranslateQuizAsync(res.localId);
+        this.props.endQuiz(res.localId);
       },
     });
   }
@@ -75,7 +76,7 @@ class TranslateQuizView extends Component {
 
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
-    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time} = translateQuiz;
+    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time, tempId} = translateQuiz;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;
     const type = query.type || 'listen';
@@ -187,7 +188,21 @@ class TranslateQuizView extends Component {
                 </div>
               </div>
               :
-              <VideoPlayer playing={quizOn} videos={videos} key={videos[0]} />
+              <div>
+                <VideoPlayer playing={quizOn} videos={videos} key={videos[0]} />
+                {
+                  quizOn ?
+                  <p className="text-danger text-xs-center">正在录音中...</p>
+                  :
+                  <p> </p>
+                }
+                {
+                  tempId ?
+                  ''
+                  :
+                  <p className="small">如果视频没自动播放, 请手动播放视频;<br />如果字幕被播放器挡住, 请点击一下空白区域即可</p>
+                }
+              </div>
             }
           </div>
           <ErrorTip error={errors.server} />
@@ -214,10 +229,13 @@ class TranslateQuizView extends Component {
               :
               <li className="col-xs-10 text-xs-center">
                 {
-                  quizOn ?
-                  <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={this.props.endTranslateQuizAsync}>
+                  tempId ?
+                  <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempId)}>
                     完成
                   </a>
+                  :
+                  quizOn ?
+                  <div className="small">如果视频已经结束了, 请等待录音结束</div>
                   :
                   wxsdk.signature ?
                   <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.beginTranslateQuiz()}>

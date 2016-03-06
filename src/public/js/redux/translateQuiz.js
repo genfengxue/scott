@@ -17,6 +17,7 @@ export const END_TRANSLATE_QUIZ = 'END_TRANSLATE_QUIZ';
 export const CANCEL_SUBMIT = 'CANCEL_SUBMIT';
 export const SUBMIT_RECORD = 'SUBMIT_RECORD';
 export const UPLOADING_RECORD = 'UPLOADING_RECORD';
+export const END_QUIZ = 'END_QUIZ';
 
 // ------------------------------------
 // Actions
@@ -30,14 +31,15 @@ export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
     dispatch(receivedSingleLesson(response));
   };
 };
+export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ, (payload) => payload);
 export const toggleCollectionModal = createAction(TOGGLE_COLLECTION_MODAL, (payload) => payload);
 export const toggleReviewModal = createAction(TOGGLE_REVIEW_MODAL, (payload) => payload);
 export const toggleMethodModal = createAction(TOGGLE_METHOD_MODAL, (payload) => payload);
 export const toggleFeedbackModal = createAction(TOGGLE_FEEDBACK_MODAL, (payload) => payload);
 export const beginTranslateQuiz = createAction(BEGIN_TRANSLATE_QUIZ);
-export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ, (payload) => payload);
 export const cancelSubmit = createAction(CANCEL_SUBMIT);
 export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => payload);
+export const endQuiz = createAction(END_QUIZ, (payload) => payload);
 export const endTranslateQuizAsync = (localId) => {
   return async (dispatch) => {
     const {time} = await ajax.get('/api/stats/');
@@ -142,6 +144,11 @@ export default handleActions({
   },
   [UPLOADING_RECORD]: (state, {payload}) => {
     state.uploadingRecord = payload;
+    return Object.assign({}, state);
+  },
+  [END_QUIZ]: (state, {payload}) => {
+    state.tempId = payload;
+    state.quizOn = false;
     return Object.assign({}, state);
   },
 }, {errors: {}});
