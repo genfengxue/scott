@@ -23,9 +23,9 @@ class CoursesView extends Component {
   }
 
   render() {
-    setTitle('Wind 教口语');
     const {query} = this.props.location;
     const type = query.type || 'listen';
+    setTitle( (type === 'listen' ? '听力训练' : '口语训练') + '-Wind教口语');
     return (
       <div>
         <nav className="navbar">

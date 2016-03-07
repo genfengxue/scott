@@ -56,7 +56,6 @@ router.post('/', async (req, res, next) => {
     // const homework = new Homework({lessonNo, courseNo, nickname, time, audio: `${config.qiniu.prefix}${key}`});
     const homework = new Homework({lessonNo, courseNo, nickname, time, serverId});
     await homework.save();
-    console.log(homework);
     res.send(homework);
   } catch (err) {
     next(err);

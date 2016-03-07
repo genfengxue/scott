@@ -9,12 +9,9 @@ class RedisCache {
    * @returns {*} value | null
    */
   static async get(key) {
-    const time = new Date();
     let data;
     try {
       data = await redis.get(key);
-      const duration = (new Date() - time);
-      logger.debug('redis cache get *' + key + '*' + duration + 'ms');
       return JSON.parse(data);
     } catch (error) {
       logger.fatal(error);
@@ -30,7 +27,6 @@ class RedisCache {
    * @returns {*} ok | ''
    */
   static async set(key, value, expire) {
-    const time = new Date();
     const strValue = JSON.stringify(value);
     let bkSet;
     try {
@@ -39,8 +35,6 @@ class RedisCache {
       } else {
         bkSet = await redis.setex(key, expire, strValue);
       }
-      const duration = (new Date() - time);
-      logger.debug('redis cache set *' + key + '*' + duration + 'ms');
       return bkSet;
     } catch (error) {
       logger.fatal(error);
