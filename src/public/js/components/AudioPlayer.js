@@ -1,7 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import howler from 'howler';
-
-const Howl = howler.Howl;
 
 class AudioPlayer extends Component {
   static propTypes = {
@@ -10,57 +7,69 @@ class AudioPlayer extends Component {
     children: PropTypes.array,
   };
 
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       loading: true,
-      playing: props.autoplay,
     };
   }
 
   componentDidMount() {
-    this.audio = new Howl({
-      urls: this.props.audios,
-      autoplay: this.props.autoplay,
-      onload: () => {
-        this.state.loading = false;
+    const children = this.refs.audio.children;
+    const length = children.length;
+    let errCount = 0;
+    const handler = (err) => {
+      errCount++;
+      if (errCount === length) {
+        console.log(err, errCount, length);
+        this.state.error = err;
         this.setState(this.state);
-      },
-      onend: () => {
-        this.state.playing = false;
-        this.setState(this.state);
-      },
-      onplay: () => {
-      },
-      onpause: () => {
-      },
-      onloaderror: (e) => {
-        this.state.error = e;
-        console.log(e);
-        this.setState(this.state);
-      },
-    });
+      }
+    };
+    for (let i = 0; i < length; i++) {
+      const child = children[i];
+      child.addEventListener('error', handler);
+      child.addEventListener('invalid', handler);
+    }
   }
 
-  componentWillUnmount() {
-    this.audio.unload();
+  _onLoaded() {
+    this.state.loading = false;
+    this.setState(this.state);
   }
 
+  _onEnded() {
+    this.state.playing = false;
+    this.setState(this.state);
+  }
+
+  _onPause() {
+    this.state.playing = false;
+    this.setState(this.state);
+  }
+
+  _onPlay() {
+    this.state.playing = true;
+    this.setState(this.state);
+  }
+
+  _onError(e) {
+    this.state.error = e;
+    console.log(e);
+    this.setState(this.state);
+  }
 
   togglePlay() {
     const playing = !this.state.playing;
     if (playing) {
-      this.audio.play();
-      this.state.playing = true;
-      this.setState(this.state);
+      this.refs.audio.play();
     } else {
-      this.audio.pause();
-      this.state.playing = false;
-      this.setState(this.state);
+      this.refs.audio.pause();
     }
   }
 
   render() {
+    const {audios, autoplay} = this.props;
     return (
       <div>
         {
@@ -99,6 +108,32 @@ class AudioPlayer extends Component {
             }
           </span>
         }
+        <audio controls
+          ref="audio"
+          autoPlay={autoplay}
+          style={{position: 'fixed', top: '-1000%', left: '-1000%'}}
+          className="audio-player-core"
+          onPlay={e=>this._onPlay(e)}
+          onPause={e => this._onPause(e)}
+          onLoaded={e => this._onLoaded(e)}
+          onCanplay={e => this._onCanplay(e)}
+          onEnded={e=>this._onEnded(e)}
+          onError={e=>this._onError(e)}
+          >
+          {
+            audios.map((audio) => {
+              const suffix = audio.split('.').reverse()[0];
+              return (
+                <source
+                  src={audio}
+                  type={`audio/${suffix === 'mp3' ? 'mpeg' : suffix}`}
+                  key={audio}
+                  onError={e=>this._onError(e)}
+                  />
+              );
+            })
+          }
+        </audio>
       </div>
     );
   }

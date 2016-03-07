@@ -37,10 +37,10 @@ class LessonsView extends Component {
     const course = this.props.lessons.course;
     const {query} = this.props.location;
     const type = query.type;
+    const otherQuery = type === 'listen' ? {hasListen: true} : {hasTranslate: true};
     if (course) {
-      setTitle(course.chineseTitle);
+      setTitle(course.chineseTitle + ' ' + (type === 'listen' ? '听力训练' : '口语训练'));
     }
-    const otherQuery = query.type === 'listen' ? {hasListen: true} : {hasTranslate: true};
     const courseNo = this.props.params.courseNo;
     return (
       <div>

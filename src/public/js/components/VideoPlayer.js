@@ -18,7 +18,7 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
-    this.refs.video.getDOMNode().setAttribute('webkit-playsinline', 'true');
+    this.refs.video.setAttribute('webkit-playsinline', 'true');
     if (this.props.playing) {
       this.refs.video.play();
     }
@@ -80,7 +80,7 @@ class VideoPlayer extends Component {
           this.networkType === 'wifi' ?
           ''
           :
-          '1分钟视频需要约2M流量'
+          <div className="text-xs-center">1分钟视频需要约2M流量</div>
         }
       </div>
     );

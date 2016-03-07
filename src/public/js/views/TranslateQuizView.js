@@ -174,12 +174,14 @@ class TranslateQuizView extends Component {
                     <input type="text" ref="nickname" className="form-control" id="nickname" placeholder="请输入英文名" />
                   </div>
                 </div>
+                <ErrorTip error={errors.nickname} />
                 <div className="form-group row">
                   <label htmlFor="time" className="col-xs-3 form-control-label">时间</label>
                   <div className="col-xs-6">
                     <input ref="time" defaultValue={parseInt(time / 1000 / 60, 10)} type="number" className="form-control" id="time" placeholder="时间" />
                   </div>
                   <label className="col-xs-3 form-control-label">分钟</label>
+                  <ErrorTip error={errors.time} />
                 </div>
                 <div className="form-group row">
                   <div className="col-xs-6 col-xs-offset-3 small">
@@ -248,7 +250,7 @@ class TranslateQuizView extends Component {
                     立即开始
                   </a>
                   :
-                  '请在微信下做作业'
+                  '"打Boss"功能不支持在浏览器下使用'
                 }
               </li>
             }
