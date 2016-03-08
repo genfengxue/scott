@@ -199,7 +199,7 @@ class TranslateQuizView extends Component {
               </div>
               :
               <div>
-                <VideoPlayer onEnded={this.onEnded} playing={quizOn} videos={videos} key={videos[0]} />
+                <VideoPlayer onEnded={() => this.onEnded()} playing={quizOn} videos={videos} key={videos[0]} />
                 {
                   quizOn ?
                   <p className="text-danger text-xs-center">正在录音中...</p>
