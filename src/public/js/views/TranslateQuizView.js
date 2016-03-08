@@ -74,6 +74,14 @@ class TranslateQuizView extends Component {
     this.props.submitRecordAsync(payload, this.props.wxsdk);
   }
 
+  onEnded() {
+    wx.stopRecord({
+      success: (res) => {
+        this.props.endQuiz(res.localId);
+      },
+    });
+  }
+
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
     const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time, tempId} = translateQuiz;
@@ -191,7 +199,7 @@ class TranslateQuizView extends Component {
               </div>
               :
               <div>
-                <VideoPlayer playing={quizOn} videos={videos} key={videos[0]} />
+                <VideoPlayer onEnded={this.onEnded} playing={quizOn} videos={videos} key={videos[0]} />
                 {
                   quizOn ?
                   <p className="text-danger text-xs-center">正在录音中...</p>

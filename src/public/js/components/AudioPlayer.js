@@ -116,7 +116,6 @@ class AudioPlayer extends Component {
           onPlay={e=>this._onPlay(e)}
           onPause={e => this._onPause(e)}
           onLoaded={e => this._onLoaded(e)}
-          onCanplay={e => this._onCanplay(e)}
           onEnded={e=>this._onEnded(e)}
           onError={e=>this._onError(e)}
           >

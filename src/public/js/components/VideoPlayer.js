@@ -6,6 +6,7 @@ class VideoPlayer extends Component {
     autoplay: PropTypes.bool,
     onPlay: PropTypes.func,
     playing: PropTypes.bool,
+    onEnded: PropTypes.func,
   };
 
   constructor() {
@@ -42,13 +43,12 @@ class VideoPlayer extends Component {
   }
 
   _onCanplay(e) {
-    console.dir(e.nativeEvent, this.refs.video);
-    this.refs.video.play();
+    console.log(e.nativeEvent, this.refs.video);
   }
   _onLoaded(e) {
-    console.dir(e.nativeEvent, this.refs.video);
-    this.refs.video.play();
+    console.log(e.nativeEvent, this.refs.video);
   }
+
   render() {
     const videos = this.props.videos;
     return (
@@ -57,11 +57,12 @@ class VideoPlayer extends Component {
           <video controls
             ref="video"
             className="video-player-core"
-            preload="metadata"
+            preload="auto"
             onPlay={e=>this._onPlay(e)}
             onPause={e => this._onPause(e)}
             onLoaded={e => this._onLoaded(e)}
             onCanplay={e => this._onCanplay(e)}
+            onEnded={this.props.onEnded}
             >
             {
               videos.map((video) => {
