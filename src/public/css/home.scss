@@ -13,7 +13,11 @@
     margin: 0.05rem 0;
   }
 }
-
+@media screen and (max-height: 400px) {
+  .navbar.bottom-nav {
+    position: static;
+  }
+}
 .answer-block {
   margin-top: 2rem;
   height: 14rem;
