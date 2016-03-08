@@ -9,4 +9,5 @@ logs
 stats.json
 src/public/**/*.css
 src/public/libs/
+src/public/fonts/
 *.rdb
