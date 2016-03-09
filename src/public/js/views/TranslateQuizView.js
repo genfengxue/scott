@@ -260,7 +260,7 @@ class TranslateQuizView extends Component {
                   </a>
                   :
                   quizOn ?
-                  <div className="small">如果视频已经结束了, 请等待录音结束</div>
+                  ''
                   :
                   wxsdk.signature ?
                   <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.beginTranslateQuiz()}>
