@@ -13,7 +13,7 @@ class SkillsView extends Component {
   }
 
   render() {
-    setTitle('Wind 教口语');
+    setTitle('Wind教口语');
     return (
       <div className="container skill-list">
         <a className="text-xs-center skill-link" onClick={()=>this.setState({showPronunciationModal: true})}>发音语调训练</a>

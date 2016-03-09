@@ -11,7 +11,7 @@ class TempPronunciationView extends Component {
   }
 
   render() {
-    setTitle('Wind 教口语');
+    setTitle('Wind教口语');
     return (
       <div className="container">
         <nav className="navbar">

@@ -56,6 +56,12 @@ class TranslateQuizView extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.endTimeout) {
+      this.clearTimeout(this.endTimeout);
+    }
+  }
+
   beginTranslateQuiz() {
     this.props.beginTranslateQuiz();
     wx.startRecord();
@@ -75,11 +81,14 @@ class TranslateQuizView extends Component {
   }
 
   onEnded() {
-    wx.stopRecord({
-      success: (res) => {
-        this.props.endQuiz(res.localId);
-      },
-    });
+    // 视频结尾自己语速会比视频慢一点, 所以建议是视频停止3s之后再结束录音
+    this.endTimeout = setTimeout(() => {
+      wx.stopRecord({
+        success: (res) => {
+          this.props.endQuiz(res.localId);
+        },
+      });
+    }, 3000);
   }
 
   render() {
