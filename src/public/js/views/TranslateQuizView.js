@@ -58,7 +58,7 @@ class TranslateQuizView extends Component {
 
   componentWillUnmount() {
     if (this.endTimeout) {
-      this.clearTimeout(this.endTimeout);
+      clearTimeout(this.endTimeout);
     }
   }
 
