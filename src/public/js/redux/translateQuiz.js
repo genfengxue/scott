@@ -75,7 +75,6 @@ export const submitRecordAsync = (payload, wxsdk) => {
         const response = await ajax.post('/api/homeworks/', payload);
         // go to homework view
         history.pushState(null, `/home/homeworks/${response._id}`);
-        dispatch(uploadingRecord(false));
       },
     });
   };

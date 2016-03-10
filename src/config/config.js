@@ -104,7 +104,7 @@ const config = {
       port: 6379,
       db: 1,
     },
-    accessLog: true,
+    accessLog: false,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     cookieSecret: 'dsfljkasdjfklsdajfkl',
     rsa: {
