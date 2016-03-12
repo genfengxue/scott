@@ -14,8 +14,12 @@ export const receivedMoreLessons = createAction(RECEIVED_MORE_LESSONS, (payload)
 
 export const fetchLessonsAsync = (courseNo, query) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/lessons/', Object.assign({page: 1, courseNo}, query));
-    dispatch(receivedLessons(response));
+    try {
+      const response = await ajax.get('/api/lessons/', Object.assign({page: 1, courseNo}, query));
+      dispatch(receivedLessons(response));
+    } catch(err) {
+      console.log(err);
+    }
   };
 };
 

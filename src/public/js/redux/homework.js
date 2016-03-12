@@ -18,8 +18,12 @@ export const receivedSingleHomework = createAction(RECEIVED_SINGLE_HOMEWORK, (pa
 export const togglePlay = createAction(TOGGLE_PLAY, (payload) => payload);
 export const fetchSingleHomeworkAsync = (homeworkId) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/homeworks/' + homeworkId);
-    dispatch(receivedSingleHomework(response));
+    try {
+      const response = await ajax.get('/api/homeworks/' + homeworkId);
+      dispatch(receivedSingleHomework(response));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 

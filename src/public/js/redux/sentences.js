@@ -13,8 +13,12 @@ export const receivedSentences = createAction(RECEIVED_SENTENCES, (payload) => p
 
 export const fetchSentencesAsync = (courseNo, lessonNo) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/sentences/', {page: 1, courseNo, lessonNo});
-    dispatch(receivedSentences(response));
+    try {
+      const response = await ajax.get('/api/sentences/', {page: 1, courseNo, lessonNo});
+      dispatch(receivedSentences(response));
+    } catch(err) {
+      console.log(err);
+    }
   };
 };
 

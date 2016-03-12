@@ -38,17 +38,7 @@ export default (app, config) => {
     fs.mkdirSync(logDirectory);
   }
 
-  if (config.accessLog) {
-    // create a rotating write stream
-    const accessLogStream = FileStreamRotator.getStream({
-      filename: logDirectory + '/access-%DATE%.log',
-      frequency: 'daily',
-      verbose: false,
-    });
-    app.use(morgan('combined', {stream: accessLogStream}));
-  } else {
-    app.use(morgan('dev'));
-  }
+  app.use(morgan('dev'));
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({

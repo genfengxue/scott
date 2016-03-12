@@ -7,7 +7,7 @@ import log4js from 'log4js';
 import colors from 'colors';
 import fs from 'fs';
 
-const logDirectory = config.root + '/log';
+const logDirectory = (config.logPath || config.root) + '/log';
   // ensure log directory exists
 if (!fs.existsSync(logDirectory)) {
   fs.mkdirSync(logDirectory);
@@ -32,7 +32,7 @@ log4js.configure({
   'appenders': [
     {
       'type': 'dateFile',
-      'filename': config.root + '/log/logs',
+      'filename': logDirectory + '/scott',
       'pattern': '-yyyy-MM-dd.log',
       'alwaysIncludePattern': true,
     },

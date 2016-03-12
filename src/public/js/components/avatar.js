@@ -30,9 +30,13 @@ class Avatar extends Component {
           return;
         }
         // save
-        const user = await ajax.put('/api/auth/me/', {avatar_file: data.text});
-        event.emit('user', user);
-        this.setState({image: data.text});
+        try {
+          const user = await ajax.put('/api/auth/me/', {avatar_file: data.text});
+          event.emit('user', user);
+          this.setState({image: data.text});
+        } catch(error) {
+          console.log(error);
+        }
       });
       e.target.value = null;
     }

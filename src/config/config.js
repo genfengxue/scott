@@ -26,7 +26,6 @@ const config = {
       port: 6379,
       db: 0,
     },
-    accessLog: false,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     cookieSecret: 'dsfljkasdjfklsdajfkl',
     rsa: {
@@ -65,7 +64,6 @@ const config = {
       port: 6379,
       db: 0,
     },
-    accessLog: false,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     cookieSecret: 'dsfljkasdjfklsdajfkl',
     rsa: {
@@ -96,6 +94,7 @@ const config = {
     app: {
       name: 'wind',
     },
+    logPath: '/data/',
     port: 8002,
     mongo: 'mongodb://localhost/wind-cms',
     sessionSecret: 'wind-prod',
@@ -104,7 +103,6 @@ const config = {
       port: 6379,
       db: 1,
     },
-    accessLog: false,
     apiRoot: 'http://123.57.72.210:9002/dtp/',
     cookieSecret: 'dsfljkasdjfklsdajfkl',
     rsa: {

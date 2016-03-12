@@ -198,7 +198,7 @@ class TranslateQuizView extends Component {
                     <input ref="time" defaultValue={parseInt(time / 1000 / 60, 10)} type="number" className="form-control" id="time" placeholder="时间" pattern="[0-9]*"/>
                   </div>
                   <label className="col-xs-3 form-control-label">分钟</label>
-                  <ErrorTip error={errors.time} />
+                  <ErrorTip className="col-xs-6 col-xs-offset-3" error={errors.time} />
                 </div>
                 <div className="form-group row">
                   <div className="col-xs-6 col-xs-offset-3 small">

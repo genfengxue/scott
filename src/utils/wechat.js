@@ -13,7 +13,7 @@ const getAccessToken = async () => {
       'secret': config.weixin.secret,
     });
     accessToken = result.access_token;
-    await RedisCache.set(accessTokenKey, accessToken, result.expires_in);
+    await RedisCache.set(accessTokenKey, accessToken, parseInt(result.expires_in * 9 / 10, 10));
   }
   return accessToken;
 };
@@ -25,7 +25,7 @@ const getJsapiTicket = async () => {
   if (!jsapiTicket) {
     const result = await request.get(`https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=${accessToken}&type=jsapi`);
     jsapiTicket = result.ticket;
-    await RedisCache.set(jsapiTicketKey, jsapiTicket, result.expires_in);
+    await RedisCache.set(jsapiTicketKey, jsapiTicket, parseInt(result.expires_in * 9 / 10, 10));
   }
   return jsapiTicket;
 };

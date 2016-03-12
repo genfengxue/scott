@@ -20,8 +20,12 @@ export const warmInit = createAction(WARM_INIT);
 export const receivedSingleLesson = createAction(RECEIVED_SINGLE_LESSON, (payload) => payload);
 export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
-    dispatch(receivedSingleLesson(response));
+    try {
+      const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
+      dispatch(receivedSingleLesson(response));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 export const toggleCollectionModal = createAction(TOGGLE_COLLECTION_MODAL, (payload) => payload);

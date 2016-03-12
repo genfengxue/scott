@@ -15,8 +15,12 @@ export const receivedMoreCourses = createAction(RECEIVED_MORE_COURSES, (payload)
 
 export const fetchCoursesAsync = () => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/courses/', {page: 1});
-    dispatch(receivedCourses(response));
+    try {
+      const response = await ajax.get('/api/courses/', {page: 1});
+      dispatch(receivedCourses(response));
+    } catch(err) {
+      console.log(err);
+    }
   };
 };
 

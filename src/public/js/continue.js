@@ -15,9 +15,13 @@ class Home extends Component {
   }
 
   async fetchUser() {
-    const user = await ajax.get('/api/auth/me/');
-    this.setState({user});
-    this.oldUser = clone(user, true);
+    try {
+      const user = await ajax.get('/api/auth/me/');
+      this.setState({user});
+      this.oldUser = clone(user, true);
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   render() {

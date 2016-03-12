@@ -27,8 +27,12 @@ export const translateQuizInit = createAction(TRANSLATE_QUIZ_INIT);
 export const receivedSingleLesson = createAction(RECEIVED_SINGLE_LESSON, (payload) => payload);
 export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
   return async (dispatch) => {
-    const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
-    dispatch(receivedSingleLesson(response));
+    try {
+      const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
+      dispatch(receivedSingleLesson(response));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ, (payload) => payload);
@@ -42,15 +46,19 @@ export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => paylo
 export const endQuiz = createAction(END_QUIZ, (payload) => payload);
 export const endTranslateQuizAsync = (localId) => {
   return async (dispatch) => {
-    const {time} = await ajax.get('/api/stats/');
-    if (localId) {
-      dispatch(endTranslateQuiz({localId, time}));
-    } else {
-      wx.stopRecord({
-        success: (res) => {
-          dispatch(endTranslateQuiz({localId: res.localId, time}));
-        },
-      });
+    try {
+      const {time} = await ajax.get('/api/stats/');
+      if (localId) {
+        dispatch(endTranslateQuiz({localId, time}));
+      } else {
+        wx.stopRecord({
+          success: (res) => {
+            dispatch(endTranslateQuiz({localId: res.localId, time}));
+          },
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 };
@@ -70,11 +78,15 @@ export const submitRecordAsync = (payload, wxsdk) => {
       localId: payload.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
       isShowProgressTips: 1, // 默认为1，显示进度提示
       success: async (res) => {
-        const serverId = res.serverId; // 返回音频的服务器端ID
-        payload.serverId = serverId;
-        const response = await ajax.post('/api/homeworks/', payload);
-        // go to homework view
-        history.pushState(null, `/home/homeworks/${response._id}`);
+        try {
+          const serverId = res.serverId; // 返回音频的服务器端ID
+          payload.serverId = serverId;
+          const response = await ajax.post('/api/homeworks/', payload);
+          // go to homework view
+          history.pushState(null, `/home/homeworks/${response._id}`);
+        } catch (err) {
+          dispatch(displayErrors({server: '提交失败，请重试'}));
+        }
       },
     });
   };
