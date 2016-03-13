@@ -108,7 +108,7 @@ class TranslateQuizView extends Component {
 
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
-    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time, tempIds} = translateQuiz;
+    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localIds, time, tempIds} = translateQuiz;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;
     const type = query.type || 'listen';
@@ -190,7 +190,7 @@ class TranslateQuizView extends Component {
           onRequestClose={() => this.props.toggleFeedbackModal(false)} />
         <div className="container">
           {
-            localId ?
+            localIds ?
             <Instruction text="请提交录音" />
             :
             <Instruction text={`请${type === 'translate' ? '翻译' : '跟读'}整段视频`} />
@@ -198,7 +198,7 @@ class TranslateQuizView extends Component {
 
           <div className="col-xs-12 video-block">
             {
-              localId ?
+              localIds ?
               <div>
                 <div className="form-group row">
                   <label htmlFor="nickname" className="col-xs-3 form-control-label">昵称</label>
@@ -259,7 +259,7 @@ class TranslateQuizView extends Component {
           <ul className="nav navbar-nav">
             <li className="col-xs-1 no-padding-col">
             {
-              localId ?
+              localIds ?
               <a className="nav-link" onClick={this.props.cancelSubmit}>
                 <i className="icon-left" />
               </a>
@@ -268,9 +268,9 @@ class TranslateQuizView extends Component {
             }
             </li>
             {
-              localId ?
+              localIds ?
               <li className="col-xs-10 text-xs-center">
-                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.submit({courseNo, lessonNo, localId, type})}>
+                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.submit({courseNo, lessonNo, localIds, type})}>
                   提交录音
                 </a>
               </li>

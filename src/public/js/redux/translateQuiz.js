@@ -46,6 +46,7 @@ export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => paylo
 export const endQuiz = createAction(END_QUIZ, (payload) => payload);
 export const endTranslateQuizAsync = (localIds) => {
   return async (dispatch) => {
+    console.log(localIds);
     try {
       const {time} = await ajax.get('/api/stats/');
       dispatch(endTranslateQuiz({localIds, time}));
