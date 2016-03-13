@@ -44,6 +44,7 @@ export const fetchSignatureAsync = () => {
         dispatch(fetchSignatureAsync());
       });
     } else {
+      dispatch(receivedSignature());
       console.log('signature error');
     }
   };
