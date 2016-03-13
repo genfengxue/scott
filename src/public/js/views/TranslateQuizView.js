@@ -241,7 +241,7 @@ class TranslateQuizView extends Component {
                 }
                 {
                   tempId ?
-                  <p className="text-danger text-xs-center" style={{'marginTop': '5rem'}}>点击下边完成，提交录音</p>
+                  <p className="text-danger text-xs-center" style={{'marginTop': '2rem'}}>点击下边完成，提交录音</p>
                   :
                   ''
                 }
@@ -277,7 +277,7 @@ class TranslateQuizView extends Component {
                     <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempId)}>
                       完成录音
                     </a>
-                    <a className="bottom-nav-btn btn btn-link col-xs-12" style={{'margin-top': '0.5rem'}} onClick={() => this.rework()}>
+                    <a className="bottom-nav-btn btn btn-link col-xs-12" style={{'marginTop': '0.5rem'}} onClick={() => this.rework()}>
                       重新打Boss
                     </a>
                   </div>
