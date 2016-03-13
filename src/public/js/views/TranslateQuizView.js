@@ -47,6 +47,7 @@ class TranslateQuizView extends Component {
     props.translateQuizInit();
     props.fetchSingleLessonAsync(props.params.courseNo, props.params.lessonNo);
     props.fetchSignatureAsync();
+    this.localIds = [];
   }
 
   componentWillUpdate(nextProps) {
@@ -68,7 +69,10 @@ class TranslateQuizView extends Component {
     wx.onVoiceRecordEnd({
     // 录音时间超过一分钟没有停止的时候会执行 complete 回调
       complete: (res) => {
-        this.props.endQuiz(res.localId);
+        this.localIds.push(res.localId);
+        // this.props.endQuiz(res.localId);
+        // todo: start another record
+        wx.startRecord();
       },
       fail: (err) => {
         console.log(err);
@@ -88,6 +92,8 @@ class TranslateQuizView extends Component {
     this.endTimeout = setTimeout(() => {
       wx.stopRecord({
         success: (res) => {
+          this.localIds.push(res.localId);
+          // todo: end quiz
           this.props.endQuiz(res.localId);
         },
         fail: (err) => {
