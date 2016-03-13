@@ -141,7 +141,13 @@ class WarmView extends Component {
           <ul className="nav navbar-nav">
             <li className="col-xs-10 col-xs-offset-1 text-xs-center">
                 <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`} >
-                  开始练习
+                  开始训练
+                </Link>
+                <br />
+                <Link className="bottom-nav-btn btn btn-danger-outline col-xs-12"
+                  to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/quiz/?type=${type || 'listen'}/`}
+                  style={{'margin-top': '0.5rem'}}>
+                  直接打Boss
                 </Link>
             </li>
           </ul>

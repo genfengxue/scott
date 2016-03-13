@@ -91,6 +91,10 @@ class TranslateQuizView extends Component {
     }, 3000);
   }
 
+  rework() {
+    location.reload();
+  }
+
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
     const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time, tempId} = translateQuiz;
@@ -191,14 +195,22 @@ class TranslateQuizView extends Component {
                     <input type="text" ref="nickname" className="form-control" id="nickname" placeholder="请输入英文名" />
                   </div>
                 </div>
-                <ErrorTip error={errors.nickname} />
+                <div className="row">
+                  <div className="col-xs-6 col-xs-offset-3">
+                    <ErrorTip error={errors.nickname} />
+                  </div>
+                </div>
                 <div className="form-group row">
                   <label htmlFor="time" className="col-xs-3 form-control-label">时间</label>
                   <div className="col-xs-6">
                     <input ref="time" defaultValue={parseInt(time / 1000 / 60, 10)} type="number" className="form-control" id="time" placeholder="时间" pattern="[0-9]*"/>
                   </div>
                   <label className="col-xs-3 form-control-label">分钟</label>
-                  <ErrorTip className="col-xs-6 col-xs-offset-3" error={errors.time} />
+                </div>
+                <div className="row">
+                  <div className="col-xs-6 col-xs-offset-3">
+                    <ErrorTip error={errors.time} />
+                  </div>
                 </div>
                 <div className="form-group row">
                   <div className="col-xs-6 col-xs-offset-3 small">
@@ -238,6 +250,11 @@ class TranslateQuizView extends Component {
             {
               localId ?
               <a className="nav-link" onClick={this.props.cancelSubmit}>
+                <i className="icon-left" />
+              </a>
+              :
+              tempId ?
+              <a className="nav-link" onClick={() => this.rework()}>
                 <i className="icon-left" />
               </a>
               :
