@@ -17,10 +17,14 @@ export const fetchSignatureAsync = () => {
   return async (dispatch) => {
     dispatch(clearSignature());
     let response;
-    try {
-      response = await ajax.get('/api/wechat/signature/');
-    } catch (err) {
-      console.log(err);
+    let retryTimes = 3;
+    while (retryTimes > 0 && !response) {
+      try {
+        response = await ajax.get('/api/wechat/signature/');
+        retryTimes--;
+      } catch (err) {
+        console.log(err);
+      }
     }
     if (response && response.signature) {
       wx.config({
@@ -40,7 +44,6 @@ export const fetchSignatureAsync = () => {
       });
     } else {
       console.log('signature error');
-      console.log(response);
     }
   };
 };

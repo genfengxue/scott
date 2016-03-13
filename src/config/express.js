@@ -85,17 +85,10 @@ export default (app, config) => {
   app.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
     res.status(err.status || 500);
     const locals = Object.assign({message: err.message}, {
-      error: app.get('env') === 'development' ? err : {},
+      error: err,
       title: 'error',
     });
-    if (err.status === 500 && err.text) {
-      return res.send(err.text);
-    }
-    if (/application\/json/.test(req.get('accept'))) {
-      res.json(locals);
-    } else {
-      res.render('error', locals);
-    }
+    res.json(locals);
     logger.error(err);
   });
 };

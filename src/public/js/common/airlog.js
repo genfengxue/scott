@@ -1,5 +1,3 @@
-import values from 'lodash/values';
-
 // remote log system
 (function(console) {
   let methods;
@@ -22,7 +20,7 @@ import values from 'lodash/values';
       xmlhttp.setRequestHeader('Accept', '*');
       xmlhttp.setRequestHeader('Content-Type', 'application/json');
       try {
-        xmlhttp.send(JSON.stringify(values(arguments)));
+        xmlhttp.send(JSON.stringify(Array.prototype.slice.call(arguments)));
       } catch (e) {
         xmlhttp = null;
       }
