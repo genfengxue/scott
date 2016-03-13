@@ -44,30 +44,36 @@ export const beginTranslateQuiz = createAction(BEGIN_TRANSLATE_QUIZ);
 export const cancelSubmit = createAction(CANCEL_SUBMIT);
 export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => payload);
 export const endQuiz = createAction(END_QUIZ, (payload) => payload);
-export const endTranslateQuizAsync = (localId) => {
+export const endTranslateQuizAsync = (localIds) => {
   return async (dispatch) => {
     try {
       const {time} = await ajax.get('/api/stats/');
-      if (localId) {
-        dispatch(endTranslateQuiz({localId, time}));
-      } else {
-        wx.stopRecord({
-          success: (res) => {
-            dispatch(endTranslateQuiz({localId: res.localId, time}));
-          },
-          fail: (err) => {
-            console.log(err);
-          },
-        });
-      }
+      dispatch(endTranslateQuiz({localIds, time}));
     } catch (err) {
       console.log(err);
     }
   };
 };
+
+const uploadSingle = async (localId) => {
+  return new Promise((resolve, reject) => {
+    wx.uploadVoice({
+      localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+      isShowProgressTips: 1, // 默认为1，显示进度提示
+      success: async (res) => {
+        resolve(res.serverId);
+      },
+      fail: (err) => {
+        console.log(err);
+        reject(err);
+      }
+    });
+  });
+};
+
 export const submitRecordAsync = (payload, wxsdk) => {
-  return (dispatch) => {
-    if (!payload.localId) {
+  return async (dispatch) => {
+    if (!payload.localIds) {
       return dispatch(displayErrors({server: '录音不存在'}));
     }
     if (!payload.nickname) {
@@ -77,25 +83,29 @@ export const submitRecordAsync = (payload, wxsdk) => {
       return dispatch(displayErrors({time: '请输入练习时间'}));
     }
     dispatch(uploadingRecord(true));
-    wx.uploadVoice({
-      localId: payload.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-      isShowProgressTips: 1, // 默认为1，显示进度提示
-      success: async (res) => {
-        try {
-          const serverId = res.serverId; // 返回音频的服务器端ID
-          payload.serverId = serverId;
-          const response = await ajax.post('/api/homeworks/', payload);
-          // go to homework view
-          history.pushState(null, `/home/homeworks/${response._id}`);
-        } catch (err) {
-          dispatch(displayErrors({server: '提交失败，请重试'}));
-        }
-      },
-      fail: (err) => {
-        console.log(err);
-        dispatch(displayErrors({server: '提交失败，请重试'}));
+
+    const localIds = payload.localIds.slice();
+
+    const serverIds = [];
+    while (localIds.length > 0) {
+      const localId = localIds.pop();
+      try {
+        const serverId = await uploadSingle(localId);
+        serverIds.shift(serverId);
+      } catch (err) {
+        dispatch(displayErrors({server: '上传失败，请重试'}));
+        throw err;
       }
-    });
+    }
+    payload.serverIds = serverIds;
+
+    try {
+      const response = await ajax.post('/api/homeworks/', payload);
+      // go to homework view
+      history.pushState(null, `/home/homeworks/${response._id}`);
+    } catch (err) {
+      dispatch(displayErrors({server: '提交失败，请重试'}));
+    }
   };
 };
 
@@ -153,12 +163,12 @@ export default handleActions({
   },
   [END_TRANSLATE_QUIZ]: (state, {payload}) => {
     state.quizOn = false;
-    state.localId = payload.localId;
+    state.localIds = payload.localIds;
     state.time = payload.time;
     return Object.assign({}, state);
   },
   [CANCEL_SUBMIT]: (state) => {
-    state.localId = '';
+    state.localIds = null;
     return Object.assign({}, state);
   },
   [UPLOADING_RECORD]: (state, {payload}) => {
@@ -166,7 +176,7 @@ export default handleActions({
     return Object.assign({}, state);
   },
   [END_QUIZ]: (state, {payload}) => {
-    state.tempId = payload;
+    state.tempIds = payload;
     state.quizOn = false;
     return Object.assign({}, state);
   },

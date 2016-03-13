@@ -44,13 +44,14 @@ export default handleActions({
     return Object.assign({}, state);
   },
   [HOMEWORK_INIT]: () => {
-    return {errors: {}};
+    return {errors: {}, playing: {}};
   },
   [RECEIVED_SINGLE_HOMEWORK]: (state, {payload}) => {
     return Object.assign(state, payload);
   },
   [TOGGLE_PLAY]: (state, {payload}) => {
-    state.playing = payload;
+    console.log('homeworks toggleplay');
+    state.playing = Object.assign(state.playing, payload);;
     return Object.assign({}, state);
   },
-}, {errors: {}});
+}, {errors: {}, playing: {}});

@@ -25,6 +25,7 @@ class HomeworkView extends Component {
 
   constructor(props) {
     super();
+    this.localIdMap = {};
   }
 
   componentDidMount() {
@@ -38,14 +39,14 @@ class HomeworkView extends Component {
       serverId: serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
       isShowProgressTips: 1, // 默认为1，显示进度提示
       success: (res) => {
-        this.localId = res.localId; // 返回音频的本地ID
         wx.playVoice({
-          localId: this.localId, // 需要播放的音频的本地ID，由stopRecord接口获得
+          localId: res.localId, // 需要播放的音频的本地ID，由stopRecord接口获得
         });
-        this.props.togglePlay(true);
+        this.localIdMap[serverId] = res.localId;
+        this.props.togglePlay({[serverId]: true});
         wx.onVoicePlayEnd({
           success: (res) => {
-            this.props.togglePlay(false);
+            this.props.togglePlay({[serverId]: false});
           },
           fail: (err) => {
             console.log(err);
@@ -58,20 +59,21 @@ class HomeworkView extends Component {
     });
   }
 
-  pause() {
+  pause(serverId) {
+    const localId = this.localIdMap[serverId];
     wx.pauseVoice({
-      localId: this.localId, // 需要播放的音频的本地ID，由stopRecord接口获得
+      localId: localId, // 需要播放的音频的本地ID，由stopRecord接口获得
     });
-    this.props.togglePlay(false);
+    this.props.togglePlay({[serverId]: false});
   }
 
   render() {
     const {homework, wxsdk} = this.props;
-    const {serverId, errors, lesson, courseNo, nickname, playing, type} = homework;
-    if (!serverId) {
+    const {serverIds, errors, lesson, courseNo, nickname, playing, type} = homework;
+    if (!serverIds) {
       return <div>Loading...</div>;
     }
-    if (serverId) {
+    if (serverIds) {
       setTitle(`${lesson.chineseTitle}-${homework.course.chineseTitle}-作业`);
     }
 
@@ -81,14 +83,18 @@ class HomeworkView extends Component {
         <div className="container">
           <div className="col-xs-12 video-block">
             <h4>{`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品`}</h4>
-            <div className="text-xs-center">
-              {
-                playing ?
-                <i className="icon-pause audio-btn" onClick={() => this.pause()} />
-                :
-                <i className="icon-play audio-btn" onClick={() => this.play(serverId)} />
-              }
-            </div>
+            {
+              serverIds.map((serverId, index) => {
+                return (<div className="text-xs-center" key={serverId}>
+                  {
+                    playing[serverId] ?
+                    <i className="icon-pause audio-btn-sm" onClick={() => this.pause(serverId)} />
+                    :
+                    <i className="icon-play audio-btn-sm" onClick={() => this.play(serverId)} />
+                  }
+                </div>);
+              })
+            }
             <h4>
               本课我一共学习了约{homework.time}分钟
             </h4>

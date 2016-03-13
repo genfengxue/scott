@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {actions as translateQuizActions} from '../redux/translateQuiz';
 import {actions as shiftingActions} from '../redux/shifting';
 import {actions as wxsdkActions} from '../redux/wxsdk';
-import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import Instruction from '../components/Instruction';
 import Header from '../components/Header';
@@ -63,6 +62,29 @@ class TranslateQuizView extends Component {
     }
   }
 
+  onEnded() {
+    // 视频结尾自己语速会比视频慢一点, 所以建议是视频停止3s之后再结束录音
+    this.endTimeout = setTimeout(() => {
+      wx.stopRecord({
+        success: (res) => {
+          this.localIds.push(res.localId);
+          // todo: end quiz
+          this.props.endQuiz(this.localIds);
+        },
+        fail: (err) => {
+          console.log(err);
+        },
+      });
+    }, 3000);
+  }
+
+  submit(data) {
+    const nickname = this.refs.nickname.value;
+    const time = parseInt(this.refs.time.value, 10);
+    const payload = Object.assign(data, {nickname, time});
+    this.props.submitRecordAsync(payload, this.props.wxsdk);
+  }
+
   beginTranslateQuiz() {
     this.props.beginTranslateQuiz();
     wx.startRecord();
@@ -80,36 +102,13 @@ class TranslateQuizView extends Component {
     });
   }
 
-  submit(data) {
-    const nickname = this.refs.nickname.value;
-    const time = parseInt(this.refs.time.value, 10);
-    const payload = Object.assign(data, {nickname, time});
-    this.props.submitRecordAsync(payload, this.props.wxsdk);
-  }
-
-  onEnded() {
-    // 视频结尾自己语速会比视频慢一点, 所以建议是视频停止3s之后再结束录音
-    this.endTimeout = setTimeout(() => {
-      wx.stopRecord({
-        success: (res) => {
-          this.localIds.push(res.localId);
-          // todo: end quiz
-          this.props.endQuiz(res.localId);
-        },
-        fail: (err) => {
-          console.log(err);
-        },
-      });
-    }, 3000);
-  }
-
   rework() {
     location.reload();
   }
 
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
-    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time, tempId} = translateQuiz;
+    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localId, time, tempIds} = translateQuiz;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;
     const type = query.type || 'listen';
@@ -246,8 +245,8 @@ class TranslateQuizView extends Component {
                   ''
                 }
                 {
-                  tempId ?
-                  <p className="text-danger text-xs-center" style={{'marginTop': '5rem'}}>点击下边完成，提交录音</p>
+                  tempIds ?
+                  <p className="text-danger text-xs-center" style={{'marginTop': '2rem'}}>点击下边完成，提交录音</p>
                   :
                   ''
                 }
@@ -278,12 +277,12 @@ class TranslateQuizView extends Component {
               :
               <li className="col-xs-10 text-xs-center">
                 {
-                  tempId ?
+                  tempIds ?
                   <div>
-                    <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempId)}>
+                    <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempIds)}>
                       完成录音
                     </a>
-                    <a className="bottom-nav-btn btn btn-link col-xs-12" style={{'margin-top': '0.5rem'}} onClick={() => this.rework()}>
+                    <a className="bottom-nav-btn btn btn-link col-xs-12" style={{'marginTop': '0.5rem'}} onClick={() => this.rework()}>
                       重新打Boss
                     </a>
                   </div>

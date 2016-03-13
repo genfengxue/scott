@@ -14,7 +14,7 @@ router.get('/signature/', async (req, res, next) => {
     logger.info('--signature--' + ' ' + noncestr + ' ' + timestamp + ' ' + url);
     let signature;
     let retryTimes = 3;
-    while(retryTimes > 0 && !signature) {
+    while (retryTimes > 0 && !signature) {
       try {
         signature = await wechat.getSignature(noncestr, timestamp, url);
         retryTimes--;
