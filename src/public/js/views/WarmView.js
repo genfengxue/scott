@@ -144,7 +144,7 @@ class WarmView extends Component {
                   开始训练
                 </Link>
                 <br />
-                <Link className="bottom-nav-btn btn btn-danger-outline col-xs-12"
+                <Link className="bottom-nav-btn btn btn-link col-xs-12"
                   to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/quiz/?type=${type || 'listen'}/`}
                   style={{'margin-top': '0.5rem'}}>
                   直接打Boss
