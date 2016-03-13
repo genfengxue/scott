@@ -182,7 +182,9 @@ class TranslateView extends Component {
                   <i className="icon-left" />
                 </Link>
                 :
-                ''
+                <Link className="nav-link" to={`/home/courses/${courseNo}/lessons/${lessonNo}/warm/?type=translate`}>
+                  <i className="icon-left" />
+                </Link>
               }
             </li>
             <li className="col-xs-10 text-xs-center">
