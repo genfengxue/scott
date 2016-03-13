@@ -50,8 +50,7 @@ export default handleActions({
     return Object.assign(state, payload);
   },
   [TOGGLE_PLAY]: (state, {payload}) => {
-    console.log('homeworks toggleplay');
-    state.playing = Object.assign(state.playing, payload);;
+    state.playing = payload;
     return Object.assign({}, state);
   },
 }, {errors: {}, playing: {}});

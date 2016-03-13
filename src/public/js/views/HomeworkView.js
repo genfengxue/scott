@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {actions as homeworkActions} from '../redux/homework';
 import {actions as wxsdkActions} from '../redux/wxsdk';
-import {Link} from 'react-router';
 import ErrorTip from '../components/ErrorTip';
 import Header from '../components/Header';
 import setTitle from '../common/setTitle';
