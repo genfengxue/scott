@@ -67,7 +67,7 @@ const uploadSingle = async (localId) => {
       fail: (err) => {
         console.log(err);
         reject(err);
-      }
+      },
     });
   });
 };
@@ -92,7 +92,7 @@ export const submitRecordAsync = (payload, wxsdk) => {
       const localId = localIds.pop();
       try {
         const serverId = await uploadSingle(localId);
-        serverIds.shift(serverId);
+        serverIds.splice(0, 0, serverId);
       } catch (err) {
         dispatch(displayErrors({server: '上传失败，请重试'}));
         throw err;
@@ -164,7 +164,7 @@ export default handleActions({
   },
   [END_TRANSLATE_QUIZ]: (state, {payload}) => {
     state.quizOn = false;
-    state.localIds = payload.localIds;
+    state.localIds = payload.localIds.slice();
     state.time = payload.time;
     return Object.assign({}, state);
   },
@@ -177,7 +177,7 @@ export default handleActions({
     return Object.assign({}, state);
   },
   [END_QUIZ]: (state, {payload}) => {
-    state.tempIds = payload;
+    state.tempIds = payload.slice();
     state.quizOn = false;
     return Object.assign({}, state);
   },
