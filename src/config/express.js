@@ -32,12 +32,6 @@ export default (app, config) => {
   app.locals._layoutFile = 'layout.ejs';
   app.use(favicon(config.root + '/public/img/favicon.ico'));
 
-  const logDirectory = config.root + '/log';
-  // ensure log directory exists
-  if (!fs.existsSync(logDirectory)) {
-    fs.mkdirSync(logDirectory);
-  }
-
   app.use(morgan('dev'));
 
   app.use(bodyParser.json());
