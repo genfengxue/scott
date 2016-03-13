@@ -41,6 +41,7 @@ export const fetchSignatureAsync = () => {
       wx.error((res) => {
         console.log('signature error');
         console.log(res);
+        dispatch(fetchSignatureAsync());
       });
     } else {
       console.log('signature error');

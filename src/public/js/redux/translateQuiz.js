@@ -55,6 +55,9 @@ export const endTranslateQuizAsync = (localId) => {
           success: (res) => {
             dispatch(endTranslateQuiz({localId: res.localId, time}));
           },
+          fail: (err) => {
+            console.log(err);
+          },
         });
       }
     } catch (err) {
@@ -88,6 +91,10 @@ export const submitRecordAsync = (payload, wxsdk) => {
           dispatch(displayErrors({server: '提交失败，请重试'}));
         }
       },
+      fail: (err) => {
+        console.log(err);
+        dispatch(displayErrors({server: '提交失败，请重试'}));
+      }
     });
   };
 };

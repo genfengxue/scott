@@ -15,6 +15,9 @@ class VideoPlayer extends Component {
       success: (res) => {
         this.networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
       },
+      fail: (err) => {
+        console.log(err);
+      }
     });
   }
 

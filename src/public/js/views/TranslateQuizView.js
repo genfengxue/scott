@@ -70,6 +70,9 @@ class TranslateQuizView extends Component {
       complete: (res) => {
         this.props.endQuiz(res.localId);
       },
+      fail: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -86,6 +89,9 @@ class TranslateQuizView extends Component {
       wx.stopRecord({
         success: (res) => {
           this.props.endQuiz(res.localId);
+        },
+        fail: (err) => {
+          console.log(err);
         },
       });
     }, 3000);

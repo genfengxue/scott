@@ -35,7 +35,6 @@ class HomeworkView extends Component {
       serverId: serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
       isShowProgressTips: 1, // 默认为1，显示进度提示
       success: (res) => {
-        console.log(res);
         this.localId = res.localId; // 返回音频的本地ID
         wx.playVoice({
           localId: this.localId, // 需要播放的音频的本地ID，由stopRecord接口获得
@@ -45,7 +44,13 @@ class HomeworkView extends Component {
           success: (res) => {
             this.props.togglePlay(false);
           },
+          fail: (err) => {
+            console.log(err);
+          },
         });
+      },
+      fail: (err) => {
+        console.log(err);
       },
     });
   }
