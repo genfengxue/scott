@@ -259,11 +259,6 @@ class TranslateQuizView extends Component {
                 <i className="icon-left" />
               </a>
               :
-              tempId ?
-              <a className="nav-link" onClick={() => this.rework()}>
-                <i className="icon-left" />
-              </a>
-              :
               ''
             }
             </li>
@@ -278,9 +273,14 @@ class TranslateQuizView extends Component {
               <li className="col-xs-10 text-xs-center">
                 {
                   tempId ?
-                  <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempId)}>
-                    完成
-                  </a>
+                  <div>
+                    <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempId)}>
+                      完成录音
+                    </a>
+                    <a className="bottom-nav-btn btn btn-link col-xs-12" style={{'margin-top': '0.5rem'}} onClick={() => this.rework()}>
+                      重新打Boss
+                    </a>
+                  </div>
                   :
                   quizOn ?
                   ''
