@@ -25,9 +25,12 @@ class HomeworkView extends Component {
 
   constructor(props) {
     super();
-    props.homeworkInit();
-    props.fetchSingleHomeworkAsync(props.params.homeworkId);
-    props.fetchSignatureAsync();
+  }
+
+  componentDidMount() {
+    this.props.homeworkInit();
+    this.props.fetchSingleHomeworkAsync(this.props.params.homeworkId);
+    this.props.fetchSignatureAsync();
   }
 
   play(serverId) {
