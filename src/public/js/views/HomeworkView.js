@@ -48,12 +48,12 @@ class HomeworkView extends Component {
             this.props.togglePlay({[serverId]: false});
           },
           fail: (err) => {
-            console.log(err);
+            console.log('views/HomeworkView 51', err);
           },
         });
       },
       fail: (err) => {
-        console.log(err);
+        console.log('views/HomeworkView 56', err);
       },
     });
   }

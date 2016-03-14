@@ -1,6 +1,7 @@
 import request from 'superagent';
 
 const generateError = (err) => {
+  console.log('ajax 4', err);
   return Object.assign(err.response ? err.response.body : {code: err.code}, err.response ? err.response.error : {status: 501, message: 'timeout'}, {raw: err});
 };
 

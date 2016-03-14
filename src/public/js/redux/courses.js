@@ -18,8 +18,8 @@ export const fetchCoursesAsync = () => {
     try {
       const response = await ajax.get('/api/courses/', {page: 1});
       dispatch(receivedCourses(response));
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      console.log('redux/courses 22', err);
     }
   };
 };
@@ -30,7 +30,7 @@ export const fetchMoreCoursesAsync = (page) => {
       const response = await ajax.get('/api/courses/', {page});
       dispatch(receivedMoreCourses(response));
     } catch (err) {
-      console.log(err);
+      console.log('redux/courses 33', err);
     }
   };
 };

@@ -21,7 +21,7 @@ class AudioPlayer extends Component {
     const handler = (err) => {
       errCount++;
       if (errCount === length) {
-        console.log(err, errCount, length);
+        console.log('AudioPlayer 24', err);
         this.state.error = err;
         this.setState(this.state);
       }
@@ -55,7 +55,7 @@ class AudioPlayer extends Component {
 
   _onError(e) {
     this.state.error = e;
-    console.log(e);
+    console.log('AudioPlayer 58', e);
     this.setState(this.state);
   }
 

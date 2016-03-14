@@ -17,8 +17,8 @@ export const fetchLessonsAsync = (courseNo, query) => {
     try {
       const response = await ajax.get('/api/lessons/', Object.assign({page: 1, courseNo}, query));
       dispatch(receivedLessons(response));
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      console.log('redux/lessons 21', err);
     }
   };
 };

@@ -72,7 +72,7 @@ class TranslateQuizView extends Component {
           this.props.endQuiz(this.localIds);
         },
         fail: (err) => {
-          console.log(err);
+          console.log('views/TranslateQuizView 75', err);
         },
       });
     }, 3000);
@@ -97,7 +97,7 @@ class TranslateQuizView extends Component {
         wx.startRecord();
       },
       fail: (err) => {
-        console.log(err);
+        console.log('views/TranslateQuizView 100', err);
       },
     });
   }

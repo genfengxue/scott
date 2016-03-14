@@ -16,8 +16,8 @@ export const fetchSentencesAsync = (courseNo, lessonNo) => {
     try {
       const response = await ajax.get('/api/sentences/', {page: 1, courseNo, lessonNo});
       dispatch(receivedSentences(response));
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      console.log('redux/sentences 20', err);
     }
   };
 };

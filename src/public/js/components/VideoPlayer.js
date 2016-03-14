@@ -16,8 +16,8 @@ class VideoPlayer extends Component {
         this.networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
       },
       fail: (err) => {
-        console.log(err);
-      }
+        console.log('VideoPlayer 19', err);
+      },
     });
   }
 
@@ -46,10 +46,10 @@ class VideoPlayer extends Component {
   }
 
   _onCanplay(e) {
-    console.log(e.nativeEvent, this.refs.video);
+    console.log('VideoPlayer 49', e.nativeEvent, this.refs.video);
   }
   _onLoaded(e) {
-    console.log(e.nativeEvent, this.refs.video);
+    console.log('VideoPlayer 52', e.nativeEvent, this.refs.video);
   }
 
   render() {

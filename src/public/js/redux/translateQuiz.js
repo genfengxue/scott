@@ -31,7 +31,7 @@ export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
       const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
       dispatch(receivedSingleLesson(response));
     } catch (err) {
-      console.log(err);
+      console.log('redux/translateQuiz 34', err);
     }
   };
 };
@@ -51,7 +51,7 @@ export const endTranslateQuizAsync = (localIds) => {
       const {time} = await ajax.get('/api/stats/');
       dispatch(endTranslateQuiz({localIds, time}));
     } catch (err) {
-      console.log(err);
+      console.log('redux/translateQuiz 54', err);
     }
   };
 };
@@ -65,7 +65,7 @@ const uploadSingle = async (localId) => {
         resolve(res.serverId);
       },
       fail: (err) => {
-        console.log(err);
+        console.log('redux/translateQuiz 68', err);
         reject(err);
       },
     });
