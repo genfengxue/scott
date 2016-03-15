@@ -310,8 +310,8 @@ class TranslateQuizView extends Component {
                   </div>
                   :
                   wxsdk.noWechat ?
-                  <div>
-                    请在微信浏览器中打开此页面
+                  <div className="small">
+                    录音功能不支持在浏览器下使用, 请用微信
                   </div>
                   :
                   <div>
