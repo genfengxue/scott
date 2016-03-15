@@ -43,9 +43,23 @@ cd $HOME/.ssh/
 openssl genrsa -out server.pem 2048
 openssl rsa -in server.pem -pubout -out server.pub
 ```
-```
-gulp build --production # 发布环境编译
 
+
+## 发布
+### 测试
+```
+NODE_ENV=test gulp build --release # 测试环境编译
+NODE_ENV=test pm2 start build/app.js --name "scott-test"
+```
+
+### 真实
+```
+NODE_ENV=production gulp build --release # 发布环境编译
+NODE_ENV=production pm2 start build/app.js --name "scott-prod"
+```
+或者
+```
+sh deploy/prod.sh
 ```
 
 ## 贡献代码
