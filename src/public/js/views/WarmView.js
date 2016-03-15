@@ -84,7 +84,7 @@ class WarmView extends Component {
 
     return (
       <div className="translate">
-        <Header back={`/home/courses/${courseNo}?type=translate`}>
+        <Header back={`/home/courses/${courseNo}?type=${type}`}>
           <a className="nav-link" onClick={() => this.props.toggleMethodModal(true)} >方法</a>
           <a className="nav-link" onClick={e => {
             e.stopPropagation();
@@ -145,7 +145,7 @@ class WarmView extends Component {
                 </Link>
                 <br />
                 <Link className="bottom-nav-btn btn btn-link col-xs-12"
-                  to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/quiz/?type=${type || 'listen'}/`}
+                  to={`/home/courses/${courseNo}/lessons/${lessonNo}/quiz/?type=${type || 'listen'}`}
                   style={{'marginTop': '0.5rem'}}>
                   直接打Boss
                 </Link>
