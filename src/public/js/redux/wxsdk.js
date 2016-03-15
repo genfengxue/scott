@@ -14,10 +14,16 @@ export const WXSDK_ERROR = 'WXSDK_ERROR';
 export const receivedSignature = createAction(RECEIVED_SIGNATURE, (payload) => payload);
 export const clearSignature = createAction(CLEAR_SIGNATURE);
 export const displayWxsdkError = createAction(WXSDK_ERROR, (payload) => payload);
-
+const isWeixinBrowser = () => {
+  return (/MicroMessenger/i).test(window.navigator.userAgent);
+};
 export const fetchSignatureAsync = () => {
   return async (dispatch) => {
     dispatch(clearSignature());
+    if (!isWeixinBrowser()) {
+      dispatch(displayWxsdkError({noWechat: true}));
+      return;
+    }
     let response;
     let retryTimes = 3;
     while (retryTimes > 0 && !response) {

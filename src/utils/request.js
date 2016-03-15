@@ -23,7 +23,6 @@ export default {
         logger.error('get ' + path + ' ' + JSON.stringify(query) + ' http error - ' + JSON.stringify(err));
         reject(generateError(err));
       } else {
-        console.log(res);
         resolve(res.body || res);
       }
     });

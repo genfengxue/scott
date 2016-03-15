@@ -48,15 +48,15 @@
 
 .icon-loading.spin {
   &:before {
-    -webkit-animation: spin 2s infinite linear;
-    animation: spin 2s infinite linear;
+    -webkit-animation: spin 1.3s infinite linear;
+    animation: spin 1.3s infinite linear;
     display: block;
   }
 }
 
 .spin {
-  -webkit-animation: spin 2s infinite linear;
-  animation: spin 2s infinite linear;
+  -webkit-animation: spin 1.3s infinite linear;
+  animation: spin 1.3s infinite linear;
 }
 
 @-webkit-keyframes spin {

@@ -86,15 +86,15 @@ class TranslateQuizView extends Component {
   }
 
   beginTranslateQuiz() {
-    this.props.beginTranslateQuiz();
+    setTimeout(() => this.props.beginTranslateQuiz(), 500);
     wx.startRecord();
     wx.onVoiceRecordEnd({
     // 录音时间超过一分钟没有停止的时候会执行 complete 回调
       complete: (res) => {
         this.localIds.push(res.localId);
-        // this.props.endQuiz(res.localId);
         // todo: start another record
         wx.startRecord();
+        setTimeout(() => this.props.beginTranslateQuiz(), 500);
       },
       fail: (err) => {
         console.log('views/TranslateQuizView 100', err);
@@ -299,7 +299,27 @@ class TranslateQuizView extends Component {
                     立即开始
                   </a>
                   :
-                  '"打Boss"功能不支持在浏览器下使用'
+                  wxsdk.errMsg ?
+                  <div>
+                    <p>
+                      Boss没准备好，请重来一遍
+                    </p>
+                    <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={this.props.fetchSignatureAsync}>
+                      Boss快粗来
+                    </a>
+                  </div>
+                  :
+                  wxsdk.noWechat ?
+                  <div>
+                    请在微信浏览器中打开此页面
+                  </div>
+                  :
+                  <div>
+                    <h3>
+                      <i className="icon-loadingdots spin"/>
+                    </h3>
+                    Boss正在准备中，请稍后
+                  </div>
                 }
               </li>
             }
