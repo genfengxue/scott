@@ -29,11 +29,12 @@ class HomeworkView extends Component {
 
   componentDidMount() {
     this.props.homeworkInit();
-    this.props.fetchSingleHomeworkAsync(this.props.params.homeworkId);
+    setTimeout(() => this.props.fetchSingleHomeworkAsync(this.props.params.homeworkId), 400);
     this.props.fetchSignatureAsync();
   }
 
   play(serverId) {
+    console.log('views/HomeworkView 37', serverId);
     wx.downloadVoice({
       serverId: serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
       isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -91,9 +92,9 @@ class HomeworkView extends Component {
                 return (<div className="text-xs-center" key={serverId}>
                   {
                     playing[serverId] ?
-                    <i className="icon-pause audio-btn-sm" onClick={() => this.pause(serverId)} />
+                    <i className="icon-pause audio-btn-sm" onTouchStart={() => this.pause(serverId)} />
                     :
-                    <i className="icon-play audio-btn-sm" onClick={() => this.play(serverId)} />
+                    <i className="icon-play audio-btn-sm" onTouchStart={() => this.play(serverId)} />
                   }
                 </div>);
               })

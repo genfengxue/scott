@@ -30,7 +30,6 @@ class VideoPlayer extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.playing) {
-      console.log('play video');
       this.refs.video.play();
     } else {
       this.refs.video.pause();
