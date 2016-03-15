@@ -108,6 +108,10 @@ class TranslateQuizView extends Component {
 
   render() {
     const {translateQuiz, shifting, wxsdk} = this.props;
+    // const {errMsg} = wxsdk;
+    // if (errMsg) {
+    //   console.log('签名失败');
+    // }
     const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localIds, time, tempIds} = translateQuiz;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;

@@ -6,12 +6,14 @@ import ajax from '../common/ajax';
 // ------------------------------------
 export const RECEIVED_SIGNATURE = 'RECEIVED_SIGNATURE';
 export const CLEAR_SIGNATURE = 'CLEAR_SIGNATURE';
+export const WXSDK_ERROR = 'WXSDK_ERROR';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 export const receivedSignature = createAction(RECEIVED_SIGNATURE, (payload) => payload);
 export const clearSignature = createAction(CLEAR_SIGNATURE);
+export const displayWxsdkError = createAction(WXSDK_ERROR, (payload) => payload);
 
 export const fetchSignatureAsync = () => {
   return async (dispatch) => {
@@ -40,7 +42,7 @@ export const fetchSignatureAsync = () => {
       });
       wx.error((res) => {
         console.log('redux/wxsdk 43', res);
-        dispatch(fetchSignatureAsync());
+        dispatch(displayWxsdkError(res));
       });
     } else {
       dispatch(receivedSignature());
@@ -62,5 +64,8 @@ export default handleActions({
   },
   [CLEAR_SIGNATURE]: () => {
     return {};
+  },
+  [WXSDK_ERROR]: (state, {payload}) => {
+    return payload;
   },
 }, {});

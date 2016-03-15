@@ -68,6 +68,10 @@ class HomeworkView extends Component {
 
   render() {
     const {homework, wxsdk} = this.props;
+    // const {errMsg} = wxsdk;
+    // if (errMsg) {
+    //   console.log('签名失败');
+    // }
     const {serverIds, errors, lesson, courseNo, nickname, playing, type} = homework;
     if (!serverIds) {
       return <div>Loading...</div>;
