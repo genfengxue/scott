@@ -21,17 +21,21 @@ import revReplace from 'gulp-rev-replace';
 import cdnify from 'gulp-cdnify';
 import del from 'del';
 import fs from 'fs';
+import replace from 'gulp-replace';
 
 const handleError = notify.onError({
   title: 'Gulp Error: <%= error.plugin %>',
   message: '<%= error.name %>: <%= error.toString() %>',
 });
 
-const cdn = 'https://o04a112cv.qnssl.com';
 
 const args = process.argv.slice(2);
 const DEBUG = !(args.indexOf('--release') > -1);
 const VERBOSE = args.indexOf('--verbose') > -1;
+
+const cdn = process.env.NODE_ENV === 'production' ?
+  'https://o43236zpa.qnssl.com' :
+  'http://7xrwtt.com1.z0.glb.clouddn.com';
 
 const GLOBALS = {
   'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
@@ -234,7 +238,20 @@ gulp.task('cdnify', () => {
   )
   .pipe(cdnify({
     base: cdn,
+    rewriter: (url, process) => {
+      let result;
+      if (/^..\/fonts/.test(url)) {
+        return url;
+      }
+      if (/^\/img\/PIE/.test(url)) {
+        return url;
+      }
+      result = process(url);
+      return result;
+    },
   }))
+  .pipe(replace(/stylesheet\('/, `stylesheet('${cdn}`))
+  .pipe(replace(/script\('/, `script('${cdn}`))
   .pipe(gulp.dest('build/'));
 });
 
@@ -266,6 +283,7 @@ gulp.task('build', () => {
     'copy',
     'imagemin',
     'rev',
-    'revReplace'
+    'revReplace',
+    'cdnify'
   );
 });
