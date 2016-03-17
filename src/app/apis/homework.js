@@ -30,7 +30,7 @@ router.get('/:homeworkId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {serverIds, lessonNo, courseNo, nickname, time} = req.body;
+    const {serverIds, lessonNo, courseNo, nickname, time, type} = req.body;
     // const accessToken = await wechat.getAccessToken();
     // console.log(`http://file.api.weixin.qq.com/cgi-bin/media/get`, {access_token: accessToken, media_id: serverId});
     // const file = await request.get(`http://file.api.weixin.qq.com/cgi-bin/media/get`, {access_token: accessToken, media_id: serverId});
@@ -54,7 +54,7 @@ router.post('/', async (req, res, next) => {
     //   );
     // });
     // const homework = new Homework({lessonNo, courseNo, nickname, time, audio: `${config.qiniu.prefix}${key}`});
-    const homework = new Homework({lessonNo, courseNo, nickname, time, serverIds});
+    const homework = new Homework({lessonNo, courseNo, nickname, time, serverIds, type});
     await homework.save();
     res.send(homework);
   } catch (err) {
