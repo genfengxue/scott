@@ -5,15 +5,15 @@ import history from '../common/history';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const TRANSLATE_QUIZ_ERRORS = 'TRANSLATE_QUIZ_ERRORS';
-export const TRANSLATE_QUIZ_INIT = 'TRANSLATE_QUIZ_INIT';
+export const DOING_HOMEWORK_ERRORS = 'DOING_HOMEWORK_ERRORS';
+export const DOING_HOMEWORK_INIT = 'DOING_HOMEWORK_INIT';
 export const RECEIVED_SINGLE_LESSON = 'RECEIVED_SINGLE_LESSON';
 export const TOGGLE_REVIEW_MODAL = 'TOGGLE_REVIEW_MODAL';
 export const TOGGLE_METHOD_MODAL = 'TOGGLE_METHOD_MODAL';
 export const TOGGLE_FEEDBACK_MODAL = 'TOGGLE_FEEDBACK_MODAL';
 export const TOGGLE_COLLECTION_MODAL = 'TOGGLE_COLLECTION_MODAL';
-export const BEGIN_TRANSLATE_QUIZ = 'BEGIN_TRANSLATE_QUIZ';
-export const END_TRANSLATE_QUIZ = 'END_TRANSLATE_QUIZ';
+export const BEGIN_DOING_HOMEWORK = 'BEGIN_DOING_HOMEWORK';
+export const END_DOING_HOMEWORK = 'END_DOING_HOMEWORK';
 export const CANCEL_SUBMIT = 'CANCEL_SUBMIT';
 export const SUBMIT_RECORD = 'SUBMIT_RECORD';
 export const UPLOADING_RECORD = 'UPLOADING_RECORD';
@@ -22,8 +22,8 @@ export const END_QUIZ = 'END_QUIZ';
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const displayErrors = createAction(TRANSLATE_QUIZ_ERRORS, (payload) => payload);
-export const translateQuizInit = createAction(TRANSLATE_QUIZ_INIT);
+export const displayErrors = createAction(DOING_HOMEWORK_ERRORS, (payload) => payload);
+export const doingHomeworkInit = createAction(DOING_HOMEWORK_INIT);
 export const receivedSingleLesson = createAction(RECEIVED_SINGLE_LESSON, (payload) => payload);
 export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
   return async (dispatch) => {
@@ -31,27 +31,26 @@ export const fetchSingleLessonAsync = (courseNo, lessonNo) => {
       const response = await ajax.get('/api/lessons/' + courseNo + '/' + lessonNo);
       dispatch(receivedSingleLesson(response));
     } catch (err) {
-      console.log('redux/translateQuiz 34', err);
+      console.log('redux/doingHomework 34', err);
     }
   };
 };
-export const endTranslateQuiz = createAction(END_TRANSLATE_QUIZ, (payload) => payload);
+export const endTranslateQuiz = createAction(END_DOING_HOMEWORK, (payload) => payload);
 export const toggleCollectionModal = createAction(TOGGLE_COLLECTION_MODAL, (payload) => payload);
 export const toggleReviewModal = createAction(TOGGLE_REVIEW_MODAL, (payload) => payload);
 export const toggleMethodModal = createAction(TOGGLE_METHOD_MODAL, (payload) => payload);
 export const toggleFeedbackModal = createAction(TOGGLE_FEEDBACK_MODAL, (payload) => payload);
-export const beginTranslateQuiz = createAction(BEGIN_TRANSLATE_QUIZ);
+export const beginTranslateQuiz = createAction(BEGIN_DOING_HOMEWORK);
 export const cancelSubmit = createAction(CANCEL_SUBMIT);
 export const uploadingRecord = createAction(UPLOADING_RECORD, (payload) => payload);
 export const endQuiz = createAction(END_QUIZ, (payload) => payload);
 export const endTranslateQuizAsync = (localIds) => {
   return async (dispatch) => {
-    console.log(localIds);
     try {
       const {time} = await ajax.get('/api/stats/');
       dispatch(endTranslateQuiz({localIds, time}));
     } catch (err) {
-      console.log('redux/translateQuiz 54', err);
+      console.log('redux/doingHomework 54', err);
     }
   };
 };
@@ -65,7 +64,7 @@ const uploadSingle = async (localId) => {
         resolve(res.serverId);
       },
       fail: (err) => {
-        console.log('redux/translateQuiz 68', err);
+        console.log('redux/doingHomework 68', err);
         reject(err);
       },
     });
@@ -112,7 +111,7 @@ export const submitRecordAsync = (payload, wxsdk) => {
 
 export const actions = {
   displayErrors,
-  translateQuizInit,
+  doingHomeworkInit,
   fetchSingleLessonAsync,
   receivedSingleLesson,
   toggleCollectionModal,
@@ -131,11 +130,11 @@ export const actions = {
 // Reducer
 // ------------------------------------
 export default handleActions({
-  [TRANSLATE_QUIZ_ERRORS]: (state, {payload}) => {
+  [DOING_HOMEWORK_ERRORS]: (state, {payload}) => {
     state.errors = payload;
     return Object.assign({}, state);
   },
-  [TRANSLATE_QUIZ_INIT]: () => {
+  [DOING_HOMEWORK_INIT]: () => {
     return {errors: {}};
   },
   [RECEIVED_SINGLE_LESSON]: (state, {payload}) => {
@@ -158,11 +157,11 @@ export default handleActions({
     state.showFeedbackModal = payload;
     return Object.assign({}, state);
   },
-  [BEGIN_TRANSLATE_QUIZ]: (state) => {
+  [BEGIN_DOING_HOMEWORK]: (state) => {
     state.quizOn = true;
     return Object.assign({}, state);
   },
-  [END_TRANSLATE_QUIZ]: (state, {payload}) => {
+  [END_DOING_HOMEWORK]: (state, {payload}) => {
     state.quizOn = false;
     state.localIds = payload.localIds.slice();
     state.time = payload.time;
@@ -177,7 +176,6 @@ export default handleActions({
     return Object.assign({}, state);
   },
   [END_QUIZ]: (state, {payload}) => {
-    state.tempIds = payload.slice();
     state.quizOn = false;
     return Object.assign({}, state);
   },

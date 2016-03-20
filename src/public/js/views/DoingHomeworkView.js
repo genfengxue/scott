@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {actions as translateQuizActions} from '../redux/translateQuiz';
+import {actions as doingHomeworkActions} from '../redux/doingHomework';
 import {actions as shiftingActions} from '../redux/shifting';
 import {actions as wxsdkActions} from '../redux/wxsdk';
 import ErrorTip from '../components/ErrorTip';
@@ -14,11 +14,11 @@ import ReviewModal from '../components/ReviewModal';
 import VideoPlayer from '../components/VideoPlayer';
 import {RATES} from '../redux/shifting';
 
-const mapStateToProps = ({translateQuiz, shifting, wxsdk}) => ({
-  translateQuiz, shifting, wxsdk,
+const mapStateToProps = ({doingHomework, shifting, wxsdk}) => ({
+  doingHomework, shifting, wxsdk,
 });
 
-class TranslateQuizView extends Component {
+class DoingHomeworkView extends Component {
   static propTypes = {
     params: PropTypes.object,
     fetchSingleLessonAsync: PropTypes.func,
@@ -28,8 +28,8 @@ class TranslateQuizView extends Component {
     toggleFeedbackModal: PropTypes.func,
     toggleReviewModal: PropTypes.func,
     shiftSpeed: PropTypes.func,
-    translateQuizInit: PropTypes.func,
-    translateQuiz: PropTypes.object,
+    doingHomeworkInit: PropTypes.func,
+    doingHomework: PropTypes.object,
     shifting: PropTypes.object,
     location: PropTypes.object,
     beginTranslateQuiz: PropTypes.func,
@@ -43,7 +43,7 @@ class TranslateQuizView extends Component {
 
   constructor(props) {
     super();
-    props.translateQuizInit();
+    props.doingHomeworkInit();
     props.fetchSingleLessonAsync(props.params.courseNo, props.params.lessonNo);
     props.fetchSignatureAsync();
     this.localIds = [];
@@ -52,7 +52,7 @@ class TranslateQuizView extends Component {
   componentWillUpdate(nextProps) {
     if (nextProps.params.lessonNo !== this.props.params.lessonNo || nextProps.params.courseNo !== this.props.params.courseNo) {
       this.props.fetchSingleLessonAsync(nextProps.params.courseNo, nextProps.params.lessonNo);
-      this.props.translateQuizInit();
+      this.props.doingHomeworkInit();
     }
   }
 
@@ -62,20 +62,18 @@ class TranslateQuizView extends Component {
     }
   }
 
-  onEnded() {
-    // 视频结尾自己语速会比视频慢一点, 所以建议是视频停止3s之后再结束录音
-    this.endTimeout = setTimeout(() => {
-      wx.stopRecord({
-        success: (res) => {
-          this.localIds.push(res.localId);
-          // todo: end quiz
-          this.props.endQuiz(this.localIds);
-        },
-        fail: (err) => {
-          console.log('views/TranslateQuizView 75', err);
-        },
-      });
-    }, 3000);
+  stopRecord() {
+    wx.stopRecord({
+      success: (res) => {
+        this.localIds.push(res.localId);
+        // todo: end quiz
+        this.props.endQuiz(this.localIds);
+        this.props.endTranslateQuizAsync(this.localIds.slice());
+      },
+      fail: (err) => {
+        console.log('views/DoingHomeworkView 75', err);
+      },
+    });
   }
 
   submit(data) {
@@ -97,7 +95,7 @@ class TranslateQuizView extends Component {
         setTimeout(() => this.props.beginTranslateQuiz(), 500);
       },
       fail: (err) => {
-        console.log('views/TranslateQuizView 100', err);
+        console.log('views/DoingHomeworkView 100', err);
       },
     });
   }
@@ -107,12 +105,12 @@ class TranslateQuizView extends Component {
   }
 
   render() {
-    const {translateQuiz, shifting, wxsdk} = this.props;
+    const {doingHomework, shifting, wxsdk} = this.props;
     // const {errMsg} = wxsdk;
     // if (errMsg) {
     //   console.log('签名失败');
     // }
-    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localIds, time, tempIds} = translateQuiz;
+    const {lesson, quizOn, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, localIds, time} = doingHomework;
     const {courseNo, lessonNo} = this.props.params;
     const {query} = this.props.location;
     const type = query.type || 'listen';
@@ -235,7 +233,7 @@ class TranslateQuizView extends Component {
               </div>
               :
               <div>
-                <VideoPlayer onEnded={() => this.onEnded()} playing={quizOn} videos={videos} key={videos[0]} />
+                <VideoPlayer playing={quizOn} videos={videos} key={videos[0]} />
                 {
                   quizOn ?
                   <p className="text-danger text-xs-center">正在录音中...</p>
@@ -245,12 +243,6 @@ class TranslateQuizView extends Component {
                 {
                   quizOn ?
                   <p className="small">如果视频没自动播放, 请手动播放视频;<br />如果字幕被播放器挡住, 请点击一下空白区域即可</p>
-                  :
-                  ''
-                }
-                {
-                  tempIds ?
-                  <p className="text-danger text-xs-center" style={{'marginTop': '2rem'}}>点击下边完成，提交录音</p>
                   :
                   ''
                 }
@@ -281,18 +273,15 @@ class TranslateQuizView extends Component {
               :
               <li className="col-xs-10 text-xs-center">
                 {
-                  tempIds ?
+                  quizOn ?
                   <div>
-                    <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.endTranslateQuizAsync(tempIds)}>
+                    <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.stopRecord()}>
                       完成录音
                     </a>
                     <a className="bottom-nav-btn btn btn-link col-xs-12" style={{'marginTop': '0.5rem'}} onClick={() => this.rework()}>
                       重新打Boss
                     </a>
                   </div>
-                  :
-                  quizOn ?
-                  ''
                   :
                   wxsdk.signature ?
                   <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.beginTranslateQuiz()}>
@@ -330,4 +319,4 @@ class TranslateQuizView extends Component {
   }
 }
 
-export default connect(mapStateToProps, Object.assign(translateQuizActions, shiftingActions, wxsdkActions))(TranslateQuizView);
+export default connect(mapStateToProps, Object.assign(doingHomeworkActions, shiftingActions, wxsdkActions))(DoingHomeworkView);
