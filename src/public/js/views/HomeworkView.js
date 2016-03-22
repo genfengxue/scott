@@ -74,22 +74,26 @@ class HomeworkView extends Component {
     // if (errMsg) {
     //   console.log('签名失败');
     // }
-    const {serverIds, errors, lesson, courseNo, nickname, playing, type} = homework;
+    const {serverIds, errors, lesson, courseNo, nickname, playing, type, created} = homework;
     if (!serverIds) {
       return <div>Loading...</div>;
     }
     if (serverIds) {
-      setTitle(`${lesson.chineseTitle}-${homework.course.chineseTitle}-作业`);
+      setTitle(`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品 ${lesson.chineseTitle} ${homework.course.chineseTitle}`);
     }
+
+    let expireDate = created.valueOf() + 72 * 3600 * 1000;
+    expireDate = new Date(expireDate);
+    expireDate = (expireDate.getMonth() + 1) + '月' + expireDate.getDate() + '日' + expireDate.getHours() + '点';
 
     return (
       <div className="homework">
         <Header back={`/home/courses/${courseNo}?type=${type}`} />
         <div className="container">
           <div className="col-xs-12 video-block">
-            <h4>{`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品`}</h4>
+            <h4>{`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品 ${lesson.chineseTitle} ${homework.course.chineseTitle}`}</h4>
             {
-              serverIds.map((serverId, index) => {
+              serverIds.map((serverId) => {
                 return (<div className="text-xs-center" key={serverId}>
                   {
                     playing[serverId] ?
@@ -105,6 +109,11 @@ class HomeworkView extends Component {
             </h4>
             <p className="text-muted">
               一定要点击微信右上角菜单的分享，分享到微信群，老师才能看到你的作业
+            </p>
+            <p className="text-danger">
+              本录音将于{expireDate}过期, 过期后将无法播放
+              <br />
+              (目前录音仅存储72小时, 日后会实现永久存储)
             </p>
           </div>
           <ErrorTip error={errors.server} />
