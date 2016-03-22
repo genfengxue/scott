@@ -41,7 +41,7 @@ class Header extends Component {
           </ul>
         </nav>
         {
-          this.props.children ?
+          this.props.children && this.props.children.length ?
           <div className={'header-side-memu' + (open ? ' open' : '')}>
             <ul className="nav">
               <li className="nav-item clearfix">
