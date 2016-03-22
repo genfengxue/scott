@@ -110,7 +110,7 @@ class HomeworkView extends Component {
             <p className="text-muted">
               一定要点击微信右上角菜单的分享，分享到微信群，老师才能看到你的作业
             </p>
-            <p className="text-danger">
+            <p className="text-danger small">
               本录音将于{expireDate}过期, 过期后将无法播放
               <br />
               (目前录音仅存储72小时, 日后会实现永久存储)
