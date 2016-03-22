@@ -82,7 +82,7 @@ class HomeworkView extends Component {
       setTitle(`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品 ${lesson.chineseTitle} ${homework.course.chineseTitle}`);
     }
 
-    let expireDate = created.valueOf() + 72 * 3600 * 1000;
+    let expireDate = new Date(created).valueOf() + 72 * 3600 * 1000;
     expireDate = new Date(expireDate);
     expireDate = (expireDate.getMonth() + 1) + '月' + expireDate.getDate() + '日' + expireDate.getHours() + '点';
 
