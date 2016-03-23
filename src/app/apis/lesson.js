@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
     if (hasTranslate) {
       query.hasTranslate = hasTranslate;
     }
-    const result = await Lesson.paginate(query, {page, limit, sort: {lessonNo: 1}});
+    const result = await Lesson.paginate(query, {page, limit, sort: {lessonNo: -1}});
     const course = await Course.findOne({courseNo});
     result.course = course;
     res.send(result);
