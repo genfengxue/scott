@@ -79,7 +79,7 @@ class HomeworkView extends Component {
       return <div>Loading...</div>;
     }
     if (serverIds) {
-      setTitle(`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品 ${lesson.chineseTitle} ${homework.course.chineseTitle}`);
+      setTitle(`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品`);
     }
 
     let expireDate = new Date(created).valueOf() + 72 * 3600 * 1000;
@@ -88,10 +88,13 @@ class HomeworkView extends Component {
 
     return (
       <div className="homework">
+        <div style={{'margin': '0 auto', 'width': '0px', 'height': '0px', 'overflow': 'hidden'}}>
+          <img src={homework.course.imageUrl} width="700" />
+        </div>
         <Header back={`/home/courses/${courseNo}?type=${type}`} />
         <div className="container">
           <div className="col-xs-12 video-block">
-            <h4>{`${nickname}的${type === 'translate' ? '翻译' : '跟读'}作品 ${lesson.chineseTitle} ${homework.course.chineseTitle}`}</h4>
+            <h4>{`${lesson.chineseTitle} ${homework.course.chineseTitle}`}</h4>
             {
               serverIds.map((serverId) => {
                 return (<div className="text-xs-center" key={serverId}>
@@ -111,6 +114,8 @@ class HomeworkView extends Component {
               一定要点击微信右上角菜单的分享，分享到微信群，老师才能看到你的作业
             </p>
             <p className="text-danger small">
+              本录音无法在浏览器内播放
+              <br />
               本录音将于{expireDate}过期, 过期后将无法播放
               <br />
               (目前录音仅存储72小时, 日后会实现永久存储)
