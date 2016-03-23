@@ -1,12 +1,18 @@
 ## 环境配置
-- node
+
+#### 安装 node
+```
   - 0.12.x
   - 5.4.0
   - 5.9.0
-- redis
-`brew install redis`  
-or  
 ```
+
+#### 安装 redis
+```
+# 通过brew 安装
+$ brew install redis
+
+# 或者
 wget http://download.redis.io/redis-stable.tar.gz
 tar xvzf redis-stable.tar.gz
 cd redis-stable
@@ -14,30 +20,46 @@ make
 ```
 千万记住要配置redis本地访问  
 
+#### 安装包管理工具
 ```
-npm install -g gulp babel@^5.8.23 bower
+npm install -g gulp bower
+```
+
+#### 安装项目依赖
+```
 npm install
 bower install
 ```
-注意：babel 6有bug，所以使用babel 5.8.23  
+注意：
 
+ * babel 6有bug，所以项目默认使用babel 5.8.23  
+ * 执行npm install时，如果node-canvas安装失败，执行
+ 
+```
+xcode-select --install  
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig  
+```
+更多信息：
+###### MAC
+* 请安装 https://github.com/Automattic/node-canvas  
+* EI Capitan 下需要查看这条issue(https://github.com/Automattic/node-canvas/issues/649)
 
-### 安装imagemagic
-sudo apt-get update  
-sudo apt-get install imagemagick --fix-missing
-
-### Ubuntu
+###### Ubuntu
 ```
 $ sudo apt-get update 
 $ sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
 ```
 
-### MAC
-请安装 https://github.com/Automattic/node-canvas  
-EI Capitan 下需要查看这条issue  
-https://github.com/Automattic/node-canvas/issues/649  
-xcode-select --install  
-export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig  
+#### 运行本地端口
+```
+# 默认开启 8000 端口
+$ gulp
+```
+
+### 安装imagemagic
+sudo apt-get update  
+sudo apt-get install imagemagick --fix-missing
+
 
 ## 部署
 ### 创建rsa  
@@ -100,4 +122,3 @@ CLOUDINARY_URL=cloudinary://333779167276662:_8jbSi9FB3sWYrfimcl8VKh34rI@keystone
 ```
 ### 运行
 npm start
-
