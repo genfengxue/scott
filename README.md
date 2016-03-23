@@ -2,6 +2,7 @@
 - node
   - 0.12.x
   - 5.4.0
+  - 5.9.0
 - redis
 `brew install redis`  
 or  
