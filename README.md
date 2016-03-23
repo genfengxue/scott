@@ -1,5 +1,7 @@
 ## 环境配置
 - node
+  - 0.12.x
+  - 5.4.0
 - redis
 `brew install redis`  
 or  
