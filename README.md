@@ -93,6 +93,94 @@ git message必须符合规范, 使用ghook限制，初次提交代码前，执�
 使用`git commit`的地方用`git cz`代替。
 
 
+### 创建一个express页面
+在`app/views/`目录下新增一个[ejs](http://www.embeddedjs.com/)文件  
+app/views/new.ejs  
+```html
+<% layout('layout') -%>
+<% title = 'new | 顺顺留学' %>
+<% stylesheet('/css/new.css') -%>
+<% script('/js/new.js') -%>
+<div class="new">
+  <div class="content">
+    <h4>
+      This is new
+    </h4>
+  </div>
+</div>
+```
+如果需要使用父模版，ejs文件头部加：`<% layout('layout') -%>`  
+如果有js文件，或者css文件，ejs文件头部加：`<% script('/js/new.js') -%>`, `<% stylesheet('/css/new.css') -%>`，同时，在`public/js/`, `public/css/`下创建js文件，和less文件。  
+为什么引用处使用css，而原文件是less？gulpfile中有一个task会把less文件编译为css放入项目运行目录下 `build/public/css/`  
+如果添加js文件，除了在`public/js/`下创建js文件，还需要在gulpfile中定义js入口文件。  
+![](./docs/add_entry_js.gif)
+
+### 创建一个express route
+创建完页面后，需要加上对应的路由才可以访问到页面  
+两种方式：  
+1. 在已有的路由文件中添加子路由，比如在`app/controllers/home.js`中添加一个url为`/home/new/`，http method 为`get`的路由，
+```javascript
+router.get('/new/', async (req, res) => {
+  try {
+    const local = {message: 'new'};
+    res.render('new', local);
+  } catch (err) {
+    next(err);
+  }
+});
+```
+2. 创建一个新的路由文件，然后在`app/config/express.js`中引用
+![](./docs/router.png)
+
+### 创建一个express api
+在`app/api/`目录下创建api文件，然后在`app/config/express.js`中引用
+![](./docs/api_router.png)
+
+### 创建一个redux页面
+- 在`public/js/redux`目录下创建一个reducer
+![](./docs/reducer.gif)
+- 在`homeReducer.js`中引入上一步创建的reducer，
+```
+import homeViewState from './homeViewState';
+import user from './user';
+import updateMobileState from './updateMobileState';
+import updateEmailState from './updateEmailState';
+import {combineReducers} from 'redux';
+import newReducer from './new'; // 这里引入文件
+
+export default combineReducers({
+  homeViewState, user, updateMobileState, updateEmailState,
+  newReducer: newReducer // 这里给reducer分配一个key，这个key之后可以在整个state中访问
+});
+```
+这个时候，已经可以在整个app的state中访问到这个reducer了
+- 在`public/views/`目录下创建一个view
+```
+import React, {Component, PropTypes} from 'react';
+import { connect } from 'react-redux';
+import {actions} from '../redux/newReducer';
+const mapStateToProps = ({newReducer}) => ({
+  newReducer,
+});
+class NewView extends Component {
+  static propTypes = {
+    newEvent: PropTypes.func, // 可以在props中调用newReducer中的action
+    newReducer: PropTypes.object, // 可以在props中取到newReducer
+  };
+  render() {
+    return (
+      <div className="new-view">
+        {this.props.newReducer}
+      </div>
+    );
+  }
+}
+export default connect(
+  mapStateToProps, 
+  actions, 
+)(NewView); // 这一步实现了view和reducer的绑定。
+```
+
 ## [Roadmap](./Roadmap.md)
 
 ## [Changelog](./Changelog.md)
