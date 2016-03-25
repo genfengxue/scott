@@ -41,17 +41,10 @@ class PronunciationModal extends Component {
             Hi there~
           </p>
           <p>
-            发音语调训练内容暂时放在"流利学院"app里
+            我们的发音语调训练正在开发中, 预计4月下旬上线
             <br />
-            这款app已经下架了,
-            <br />
-            如果是安卓用户请点击 <a href="http://pan.baidu.com/share/link?shareid=3786196134&uk=957169300">安卓版下载</a>
-            <br />
-            如果是苹果用户, 请先下载pp助手, 然后搜索 "流利学院"
-            <br />
-            注册登陆之后, 在"课程库"里边, "英语"类别最下边可以看到课程
+            如果你是付费学员, 请联系Wind老师获取临时的App
           </p>
-          <img src="/img/vocal.jpg" style={{width: '100%'}} />
           <p>
             cheers, <br />
             Wind
