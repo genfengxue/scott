@@ -180,6 +180,26 @@ export default connect(
   actions, 
 )(NewView); // 这一步实现了view和reducer的绑定。
 ```
+- 暴露路由，创建好了页面和reducer，还需要设置路由才能访问该页面  
+在`public/js/routes/home.js`中设置路由
+```
+<Route path="/" component={CoreLayout}>
+  ...
+  <Route path="/home/new" component={NewView} />
+  ...
+</Route>
+```
+注意，此处的路由都是在#后面的(.com/#/home/new)，之所以这样是因为安卓微信不支持h5 history api，如果使用h5路由(.com/home/new)的话，需要在服务器端也做相应配置，  
+```
+router.get('/home/*', async (req, res) => {
+  try {
+    res.render('index', {});
+  } catch (err) {
+    res.redirect('/login/');
+  }
+});
+```
+这里，所有home开头的路由都会指向这个react-redux app入口页面。
 
 ## [Roadmap](./Roadmap.md)
 
