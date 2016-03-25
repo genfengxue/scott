@@ -20,7 +20,7 @@
 - deploy
   - auto deploy tool
 - script
-  - pm2
+  - pm2 
   - commit hook  
 
 ## Tech
@@ -37,6 +37,6 @@
 - 使用阿里redis
 - 迁移至babel 6
 - 短链接
-- node 5
+- node 5 
 
 **shift + opt + k = **

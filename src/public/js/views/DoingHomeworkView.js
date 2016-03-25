@@ -60,6 +60,11 @@ class DoingHomeworkView extends Component {
     if (this.endTimeout) {
       clearTimeout(this.endTimeout);
     }
+    wx.stopRecord({
+      fail: (err) => {
+        console.log('views/DoingHomeworkView 66', err);
+      },
+    });
   }
 
   stopRecord() {

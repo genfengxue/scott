@@ -93,12 +93,6 @@ git message必须符合规范, 使用ghook限制，初次提交代码前，执�
 使用`git commit`的地方用`git cz`代替。
 
 
-## 兼容性
-- IE 8 不兼容object defineProperty，因此，在es6中避免使用getter setter
-- IE 8 不支持 background-size，使用2x图片的地方可以用bootstrap的 .img-retina，在ie 8上自动fallback到1倍图
-- IE 8 不支持圆角，1. 忽悠设计接受在ie 8上显示直角，material design， metro style 2. 使用CSS pie
-- IE 8 中使用react 习惯性的给所有元素都加key吧
-
 ## [Roadmap](./Roadmap.md)
 
 ## [Changelog](./Changelog.md)
