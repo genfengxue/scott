@@ -50,6 +50,24 @@ $ sudo apt-get update
 $ sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
 ```
 
+#### 安装 mongodb
+```
+# 1.安装mongodb
+brew install mongodb
+
+# 2. 在根目录下面创建 /data/db
+sudo mkdir -p /data/db
+
+# 3. 把/data/db的权限设为用户账号
+sudo chown -R username:staff /data/db
+
+# 4. 启动mongodb
+mongod
+
+# 5. 导入数据
+mongorestore -dwind-cms /Users/chenbin/Desktop/wind-cms
+```
+
 #### 运行本地端口
 ```
 # 默认开启 8000 端口
