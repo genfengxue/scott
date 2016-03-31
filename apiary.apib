@@ -1,0 +1,489 @@
+FORMAT: 1A
+HOST: http://test.holdqq.com/
+
+# scott
+
+Scott is an English Learning program. Including listening, translating, pronunciation. 
+
+## Principles
+- RESTful
+- List api should implement pagination. Result contains docs(results array), total(docs count), page(current page index), pages(pages count), limit(page size)
+- Detail api 末尾加id，默认是mongoid，如果有特里，需要在api文档说明
+
+
+## Courses Collection [/api/courses/{?page}{?limit}{?sort}]
+
++ Parameters
+
+    + page (number, optional) - page of the Courses, start from 1
+    + limit (number, optional) - length of page
+    + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
+
+### List All Courses [GET]
+
++ Response 200 (application/json)
+
+        {
+          "docs": [
+            {
+              "_id": "56ce9c119513f69008278012",
+              "courseNo": 2,
+              "__v": 0,
+              "chineseTitle": "初级 大家说英语",
+              "description": "",
+              "englishTitle": "Let's Talk in English",
+              "imageUrl": "http://7xqe0p.com1.z0.glb.clouddn.com/course_03_cover_image.PNG",
+              "modified": null,
+              "created": null
+            },
+            {
+              "_id": "56ce9a559513f69008278011",
+              "courseNo": 3,
+              "__v": 0,
+              "chineseTitle": "中级 Rebecca的梦想",
+              "description": "",
+              "englishTitle": "Rebecca's dream",
+              "imageUrl": "http://7xqe0p.com1.z0.glb.clouddn.com/course_02_cover_image.PNG",
+              "modified": null,
+              "created": null
+            }
+          ],
+          "total": 2,
+          "limit": 20,
+          "page": 1,
+          "pages": 1
+        }
+
+## Course Detail [/api/courses/{courseNo}]
+
++ Parameters
+
+    + courseNo (number) - Course No, 1, 2, 3 ... Unique
+
+
+### Get a Course [GET]
+根据courseNo拿取course，courseNo在courses中是唯一的
+
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /api/courses/2
+
+    + Body
+
+            {
+                "_id": "56ce9c119513f69008278012",
+                "courseNo": 2,
+                "__v": 0,
+                "chineseTitle": "初级 大家说英语",
+                "description": "",
+                "englishTitle": "Let's Talk in English",
+                "imageUrl": "http://7xqe0p.com1.z0.glb.clouddn.com/course_03_cover_image.PNG",
+                "modified": null,
+                "created": null
+            }
+
+
+## Lessons Collection [/api/lessons/{?courseNo}{?hasListen}{?hasTranslate}{?page}{?limit}{?sort}]
+获取课程下面所有课时
+
++ Parameters
+
+    + courseNo (number) - Course No of the Lesson
+    + hasListen (boolean, optional) - 如果为true，则筛选出含有跟读课的课时
+    + hasTranslate (boolean, optional) - 如果为true，则筛选出含有翻译课的课时
+    + page (number, optional) - page of the Courses, start from 1
+    + limit (number, optional) - length of page
+    + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
+
+### List Lessons of the course [GET]
+videoPath: 这个字段比较tricky，需要跟上速度后缀叫扩展后缀才能获取到真正的链接。
+如：`http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17`
+需要变为：`http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17@1_0.mp4`
+course: 课时对应的course, 此字段是为了方便前端，不太建议这么做，因为不restful
+
++ Response 200 (application/json)
+
+
+        {
+          "docs": [
+            {
+              "_id": "56f39cce332215535788b53d",
+              "chineseTitle": "Lesson 17",
+              "englishTitle": "Lesson 17",
+              "lessonNo": 17,
+              "courseNo": 2,
+              "hasTranslate": true,
+              "hasListen": true,
+              "__v": 1,
+              "videoPath": "http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17",
+              "modified": null,
+              "created": null
+            }
+          ],
+          "total": 17,
+          "limit": "20",
+          "page": "1",
+          "pages": 1,
+          "course": {
+            "_id": "56ce9c119513f69008278012",
+            "courseNo": 2,
+            "__v": 0,
+            "chineseTitle": "初级 大家说英语",
+            "description": "",
+            "englishTitle": "Let's Talk in English",
+            "imageUrl": "http://7xqe0p.com1.z0.glb.clouddn.com/course_03_cover_image.PNG",
+            "modified": null,
+            "created": null
+          }
+        }
+
+## Lesson Detail [/api/lessons/{courseNo}/{lessonNo}/]
+
++ Parameters
+
+    + courseNo (number) - Course No, 1, 2, 3 ... Unique
+    + lessonNo (number) - Lesson No
+
+### Get a Lesson [GET]
+根据courseNo, lessonNo拿取lesson
+
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /api/lessons/2/1/
+
+    + Body
+
+
+            {
+              "_id": "56f3d1b7332215535788b8ce",
+              "chineseTitle": "Lesson 1",
+              "englishTitle": "Lesson 1",
+              "lessonNo": 1,
+              "courseNo": 2,
+              "hasTranslate": true,
+              "hasListen": true,
+              "__v": 1,
+              "videoPath": "http://7xqe0p.com1.z0.glb.clouddn.com/zPEOGy/data/files/2_1",
+              "modified": null,
+              "created": null
+            }
+
+
+## Sentences Collection [/api/sentences/{?courseNo}{?lessonNo}{?page}{?limit}{?sort}]
+获取该课时下的所有句子
+
++ Parameters
+
+    + courseNo (number) - Course No of the sentences
+    + lessonNo (number) - Lesson No of the sentences
+    + page (number, optional) - page of the Courses, start from 1
+    + limit (number, optional) - length of page
+    + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
+
+### List Sentences of the lesson [GET]
+audio: 句子对应的视频链接，后面可以加变速参数，或者改后缀名
+如：http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1.mp3
+改编为：http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1@0_8.mp3
+
+
++ Response 200 (application/json)
+
+
+
+        {
+          "docs": [
+            {
+              "_id": "56f484143d1d6f5827cf5433",
+              "chinese": "哈啰! 我在找Carol",
+              "english": "Hello! I'm looking for Carol.",
+              "sentenceNo": 1,
+              "lessonNo": 1,
+              "courseNo": 2,
+              "__v": 0,
+              "audio": "http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1.mp3",
+              "modified": null,
+              "created": null
+            },
+            {
+              "_id": "56f484143d1d6f5827cf5434",
+              "chinese": "她在吗?",
+              "english": "Is she here?",
+              "sentenceNo": 2,
+              "lessonNo": 1,
+              "courseNo": 2,
+              "__v": 0,
+              "audio": "http://7xqe0p.com1.z0.glb.clouddn.com/2fwOiF/data/files/2_1_2.mp3",
+              "modified": null,
+              "created": null
+            }
+          ],
+          "total": 30,
+          "limit": 1000,
+          "page": 1,
+          "pages": 1,
+          "course": {
+            "_id": "56ce9c119513f69008278012",
+            "courseNo": 2,
+            "__v": 0,
+            "chineseTitle": "初级 大家说英语",
+            "description": "",
+            "englishTitle": "Let's Talk in English",
+            "imageUrl": "http://7xqe0p.com1.z0.glb.clouddn.com/course_03_cover_image.PNG",
+            "modified": null,
+            "created": null
+          },
+          "lesson": {
+            "_id": "56d4fe708c2dd4fd79a476f7",
+            "chineseTitle": "Lesson 1",
+            "englishTitle": "Lesson 1",
+            "lessonNo": 1,
+            "courseNo": 3,
+            "hasTranslate": true,
+            "hasListen": true,
+            "__v": 1,
+            "videoPath": "http://7xqe0p.com1.z0.glb.clouddn.com/cd7Piv/data/files/3_1",
+            "modified": null,
+            "created": null
+          }
+        }
+
+
+## Homework Collection [/api/homeworks/]
+
+### Create a Homework [POST]
+
++ Request (application/json)
+
+    + Body 
+
+            {
+                "serverIds": ["xxxxxxx", "xxxxxx"], 
+                "lessonNo": 1, 
+                "courseNo": 2, 
+                "nickname": "test", 
+                "time": 12, 
+                "type": "translate"
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+
+
+            {
+                "_id":"56f7a122dc54ad29467f28f3",
+                "__t":"Homework",
+                "lessonNo":19,
+                "courseNo":3,
+                "nickname": "Ashley",
+                "time":30,
+                "type":"listen",
+                "__v":0,
+                "serverIds":["aMBxkMf4cq9dXuPbBgGvf8rqlCAOHo7nJckmapcjhx-Psf_7FfLrU6MgX5hxoTEV","G1pBuSQeEDD0x3v1mqVVrsNsxbEjdfexuh3NK4S2dxc2erEgCQ0ls2AI1El94TcE","kqk8bsrPnO8BxNY-YhepsQfFUsF_VAjs79IgTb7XZWfpffNt73IY5GHzJflVQq7W"],
+                "modified":"2016-03-27T09:00:18.009Z",
+                "created":"2016-03-27T09:00:18.009Z"
+            }
+   
+
+## Homework Detail [/api/homeworks/{id}]
+
++ Parameters
+    
+    + id (string) - Homework id
+    
+
+### Get Homework Detail [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "_id": "56f7a122dc54ad29467f28f3",
+              "__t": "Homework",
+              "lessonNo": 19,
+              "courseNo": 3,
+              "nickname": "Ashley",
+              "time": 30,
+              "type": "listen",
+              "__v": 0,
+              "serverIds": [
+                "aMBxkMf4cq9dXuPbBgGvf8rqlCAOHo7nJckmapcjhx-Psf_7FfLrU6MgX5hxoTEV",
+                "G1pBuSQeEDD0x3v1mqVVrsNsxbEjdfexuh3NK4S2dxc2erEgCQ0ls2AI1El94TcE",
+                "kqk8bsrPnO8BxNY-YhepsQfFUsF_VAjs79IgTb7XZWfpffNt73IY5GHzJflVQq7W"
+              ],
+              "modified": "2016-03-27T09:00:18.009Z",
+              "created": "2016-03-27T09:00:18.009Z",
+              "course": {
+                "_id": "56ce9a559513f69008278011",
+                "courseNo": 3,
+                "__v": 0,
+                "chineseTitle": "中级 Rebecca的梦想",
+                "description": "",
+                "englishTitle": "Rebecca's dream",
+                "imageUrl": "http://7xqe0p.com1.z0.glb.clouddn.com/course_02_cover_image.PNG",
+                "modified": null,
+                "created": null
+              },
+              "lesson": {
+                "_id": "56f39db8332215535788b5f4",
+                "chineseTitle": "Lesson 19",
+                "englishTitle": "Lesson 19",
+                "lessonNo": 19,
+                "courseNo": 3,
+                "hasTranslate": true,
+                "hasListen": true,
+                "__v": 1,
+                "videoPath": "http://7xqe0p.com1.z0.glb.clouddn.com/hmk3Je/data/files/3_19",
+                "modified": null,
+                "created": null
+              }
+            }
+
+
+## Wechat Signature [/api/wechat/signature/]
+
+### Get a signature [GET]
+timestamp: 为微信设置的timestamp，js timestamp / 1000
+
+
++ Response 200 (application/json)
+    
+    + Body
+    
+            {
+                "appId": "config.weixin.appid", 
+                "signature": "xafdaewqrq", 
+                "timestamp": 1459072805, 
+                "nonceStr": "noncestr"
+            }
+
+
+## Courses Collection [/api/pronunciation_courses/{?page}{?limit}{?sort}]
+
+发音语调所有的课程
+
++ Parameters
+
+  + page (number, optional) - page of the Courses, start from 1
+  + limit (number, optional) - length of page 
+  + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
+
+### List All Courses [GET]
+
++ Response 200 (application/json)
+
+        {
+            "docs": [
+                {
+                    "id": 1,
+                    "course_name": "初级",
+                    "image_url": "http://placeholder.png"
+                },
+                {
+                    "id": 2,
+                    "course_name": "中级",
+                    "image_url": "http://placeholder.png"
+                },
+                {
+                    "id": 3,
+                    "course_name": "高级",
+                    "image_url": "http://placeholder.png"
+                }
+            ]
+        }
+
+## Lessions Collection [/api/pronunciation_courses/{id}/lessons/{?page}]
+
+发音语调所有的课程分别对应的课时
+
+### List Lessons of the course [GET]
+
++ Response 200 (application/json)
+
+        {
+            "docs": [
+                {
+                    "id": 1,
+                    "lesson_name": "Lesson 1"
+                },
+                {
+                    "id": 2,
+                    "lesson_name": "Lesson 2"
+                },
+                {
+                    "id": 3,
+                    "lesson_name": "Lesson 3"
+                }
+            ]
+        }
+
+## Lesson Activitiy [/api/pronunciation_courses/{id}/lessons/{id}]
+
+课时所对应的讲解、朗读、打boss
+
+### Get Lesson Details [GET]
+
++ Response 200 (application/json)
+
+        {
+          "meta": {
+            "total": 17,
+          },
+          "docs": [
+            {
+              "id": "1",
+              "index": 1,
+              "type": "explanation",
+              "videoPath": "http://audio.mp3",
+              "description": "some desc...",
+              "isBoss": "false"
+            },
+            {
+              "id": "2",
+              "index": 2,
+              "type": "redaing",
+              "videoPath": "http://video.mp4",
+              "description": "some desc..."
+              "isBoss": "false"
+            },
+            {
+              "id": "3",
+              "index": 2,
+              "type": "explanation",
+              "videoPath": "http://video.mp4",
+              "description": "some desc..."
+              "isBoss": "true" // 最后一个显示打boss按钮
+            },
+          ]
+        }
+
+## Voices [/api/v1/users/{id}/voices]
+
+提交用户的录音
+
+### Create Voices [POST]
+
++ Request (application/json)
+
+    + body
+
+            {
+                "lessionNo": "1",
+                "nickname": "昵称", // 这里是指音频的名称
+                "file": "MIME", // 这里应该是上传一个音频文件
+                "serverIds": [
+                    "aMBxkMf4cq9dXuPbBgGvf8rqlCAOHo7nJckmapcjhx-Psf_7FfLrU6MgX5hxoTEV",
+                    "G1pBuSQeEDD0x3v1mqVVrsNsxbEjdfexuh3NK4S2dxc2erEgCQ0ls2AI1El94TcE",
+                    "kqk8bsrPnO8BxNY-YhepsQfFUsF_VAjs79IgTb7XZWfpffNt73IY5GHzJflVQq7W"
+                  ],
+            }
+
++ Response 200 (application/json)
