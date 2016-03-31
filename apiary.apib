@@ -365,3 +365,126 @@ timestamp: 为微信设置的timestamp，js timestamp / 1000
                 "timestamp": 1459072805, 
                 "nonceStr": "noncestr"
             }
+
+
+## Courses Collection [/api/pronunciation_courses/{?page}{?limit}{?sort}]
+
+发音语调所有的课程
+
++ Parameters
+
+  + page (number, optional) - page of the Courses, start from 1
+  + limit (number, optional) - length of page 
+  + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
+
+### List All Courses [GET]
+
++ Response 200 (application/json)
+
+        {
+            "docs": [
+                {
+                    "id": 1,
+                    "course_name": "初级",
+                    "image_url": "http://placeholder.png"
+                },
+                {
+                    "id": 2,
+                    "course_name": "中级",
+                    "image_url": "http://placeholder.png"
+                },
+                {
+                    "id": 3,
+                    "course_name": "高级",
+                    "image_url": "http://placeholder.png"
+                }
+            ]
+        }
+
+## Lessions Collection [/api/pronunciation_courses/{id}/lessons/{?page}]
+
+发音语调所有的课程分别对应的课时
+
+### List Lessons of the course [GET]
+
++ Response 200 (application/json)
+
+        {
+            "docs": [
+                {
+                    "id": 1,
+                    "lesson_name": "Lesson 1"
+                },
+                {
+                    "id": 2,
+                    "lesson_name": "Lesson 2"
+                },
+                {
+                    "id": 3,
+                    "lesson_name": "Lesson 3"
+                }
+            ]
+        }
+
+## Lesson Activitiy [/api/pronunciation_courses/{id}/lessons/{id}]
+
+课时所对应的讲解、朗读、打boss
+
+### Get Lesson Details [GET]
+
++ Response 200 (application/json)
+
+        {
+          "meta": {
+            "total": 17,
+          },
+          "docs": [
+            {
+              "id": "1",
+              "index": 1,
+              "type": "explanation",
+              "videoPath": "http://audio.mp3",
+              "description": "some desc...",
+              "isBoss": "false"
+            },
+            {
+              "id": "2",
+              "index": 2,
+              "type": "redaing",
+              "videoPath": "http://video.mp4",
+              "description": "some desc..."
+              "isBoss": "false"
+            },
+            {
+              "id": "3",
+              "index": 2,
+              "type": "explanation",
+              "videoPath": "http://video.mp4",
+              "description": "some desc..."
+              "isBoss": "true" // 最后一个显示打boss按钮
+            },
+          ]
+        }
+
+## Voices [/api/v1/users/{id}/voices]
+
+提交用户的录音
+
+### Create Voices [POST]
+
++ Request (application/json)
+
+    + body
+
+            {
+                "lessionNo": "1",
+                "nickname": "昵称", // 这里是指音频的名称
+                "file": "MIME", // 这里应该是上传一个音频文件
+                "serverIds": [
+                    "aMBxkMf4cq9dXuPbBgGvf8rqlCAOHo7nJckmapcjhx-Psf_7FfLrU6MgX5hxoTEV",
+                    "G1pBuSQeEDD0x3v1mqVVrsNsxbEjdfexuh3NK4S2dxc2erEgCQ0ls2AI1El94TcE",
+                    "kqk8bsrPnO8BxNY-YhepsQfFUsF_VAjs79IgTb7XZWfpffNt73IY5GHzJflVQq7W"
+                  ],
+            }
+
++ Response 200 (application/json)
