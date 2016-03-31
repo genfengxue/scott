@@ -59,7 +59,7 @@ Scott is an English Learning program. Including listening, translating, pronunci
 + Parameters
 
     + courseNo (number) - Course No, 1, 2, 3 ... Unique
-    
+
 
 ### Get a Course [GET]
 根据courseNo拿取course，courseNo在courses中是唯一的
@@ -84,14 +84,13 @@ Scott is an English Learning program. Including listening, translating, pronunci
                 "modified": null,
                 "created": null
             }
-            
-            
+
 
 ## Lessons Collection [/api/lessons/{?courseNo}{?hasListen}{?hasTranslate}{?page}{?limit}{?sort}]
 获取课程下面所有课时
 
 + Parameters
-    
+
     + courseNo (number) - Course No of the Lesson
     + hasListen (boolean, optional) - 如果为true，则筛选出含有跟读课的课时
     + hasTranslate (boolean, optional) - 如果为true，则筛选出含有翻译课的课时
@@ -100,14 +99,14 @@ Scott is an English Learning program. Including listening, translating, pronunci
     + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
 
 ### List Lessons of the course [GET]
-videoPath: 这个字段比较tricky，需要跟上速度后缀叫扩展后缀才能获取到真正的链接。  
-如：`http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17`  
-需要变为：`http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17@1_0.mp4`   
+videoPath: 这个字段比较tricky，需要跟上速度后缀叫扩展后缀才能获取到真正的链接。
+如：`http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17`
+需要变为：`http://7xqe0p.com1.z0.glb.clouddn.com/g5BXQz/data/files/2_17@1_0.mp4`
 course: 课时对应的course, 此字段是为了方便前端，不太建议这么做，因为不restful
 
 + Response 200 (application/json)
 
-        
+
         {
           "docs": [
             {
@@ -174,13 +173,13 @@ course: 课时对应的course, 此字段是为了方便前端，不太建议这�
               "modified": null,
               "created": null
             }
-   
+
 
 ## Sentences Collection [/api/sentences/{?courseNo}{?lessonNo}{?page}{?limit}{?sort}]
 获取该课时下的所有句子
 
 + Parameters
-    
+
     + courseNo (number) - Course No of the sentences
     + lessonNo (number) - Lesson No of the sentences
     + page (number, optional) - page of the Courses, start from 1
@@ -188,14 +187,14 @@ course: 课时对应的course, 此字段是为了方便前端，不太建议这�
     + sort (string, optional) - sorting field, sort=courseNo, not implemented yet
 
 ### List Sentences of the lesson [GET]
-audio: 句子对应的视频链接，后面可以加变速参数，或者改后缀名  
-如：http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1.mp3  
-改编为：http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1@0_8.mp3   
+audio: 句子对应的视频链接，后面可以加变速参数，或者改后缀名
+如：http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1.mp3
+改编为：http://7xqe0p.com1.z0.glb.clouddn.com/I7OkMO/data/files/2_1_1@0_8.mp3
 
 
 + Response 200 (application/json)
 
-        
+
 
         {
           "docs": [
