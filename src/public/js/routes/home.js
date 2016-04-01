@@ -3,6 +3,7 @@ import { Route, IndexRoute, Redirect } from 'react-router';
 import CoreLayout from '../views/CoreLayout';
 import LessonsView from '../views/LessonsView';
 import CoursesView from '../views/CoursesView';
+import PronunciationCoursesView from '../views/PronunciationCoursesView';
 import SkillsView from '../views/SkillsView';
 import ListenView from '../views/ListenView';
 import TranslateView from '../views/TranslateView';
@@ -18,6 +19,7 @@ export default (
   <Route path="/" component={CoreLayout}>
     <IndexRoute component={SkillsView} />
     <Route path="/home/courses/" component={CoursesView} />
+    <Route path="/home/pronunciation_courses/" component={PronunciationCoursesView} />
     <Route path="/home/pronunciations/" component={TempPronunciationView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/quiz/" component={DoingHomeworkView} />
     <Route path="/home/courses/:courseNo" component={LessonsView} />

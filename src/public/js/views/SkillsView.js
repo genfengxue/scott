@@ -16,7 +16,7 @@ class SkillsView extends Component {
     setTitle('Wind教口语');
     return (
       <div className="container skill-list">
-        <a className="text-xs-center skill-link" onClick={()=>this.setState({showPronunciationModal: true})}>发音语调训练</a>
+        <Link className="text-xs-center skill-link" to="/home/pronunciation_courses/">发音语调训练</Link>
         <Link className="text-xs-center skill-link" to="/home/courses/?type=listen">听力训练</Link>
         <Link className="text-xs-center skill-link" to="/home/courses/?type=translate">口语训练</Link>
         <PronunciationModal
