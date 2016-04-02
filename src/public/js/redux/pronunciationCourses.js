@@ -12,11 +12,6 @@ export const RECEIVED_PRONUNCIATION_COURSES = 'RECEIVED_PRONUNCIATION_COURSES';
 // ------------------------------------
 export const receivedPronunciationCourses = createAction(RECEIVED_PRONUNCIATION_COURSES, (payload) => payload)
 
-export const actions = {
-  receivedPronunciationCourses,
-  fetchPronunciationCoursesAsync,
-};
-
 export const fetchPronunciationCoursesAsync = () => {
   return async (dispatch) => {
     try {
@@ -28,6 +23,10 @@ export const fetchPronunciationCoursesAsync = () => {
   };
 }
 
+export const actions = {
+  receivedPronunciationCourses,
+  fetchPronunciationCoursesAsync,
+};
 
 // ------------------------------------
 // Reducer
