@@ -66,7 +66,7 @@ export default (app, config) => {
   app.use('/api/homeworks/', require('../app/apis/homework'));
   app.use('/api/wechat/', require('../app/apis/wechat'));
   app.use('/api/stats/', require('../app/apis/stats'));
-  app.use('/api/pronunciationCourses/', require('../app/apis/pronunciationCourse'));
+  app.use('/api/pronunciation_courses/', require('../app/apis/pronunciation_courses'));
 
 
   // 页面路由定义
