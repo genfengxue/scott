@@ -36,8 +36,8 @@ class PronunciationCoursesView extends Component {
         <CourseList
           courses={this.props.pronunciationCourses} />
       </div>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps, actions)(PronunciationCoursesView)
+export default connect(mapStateToProps, actions)(PronunciationCoursesView);

@@ -1,6 +1,5 @@
 import {createAction, handleActions} from 'redux-actions';
 import ajax from '../common/ajax';
-import unionBy from 'lodash/unionBy';
 
 // ------------------------------------
 // Constants
@@ -10,7 +9,7 @@ export const RECEIVED_PRONUNCIATION_COURSES = 'RECEIVED_PRONUNCIATION_COURSES';
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const receivedPronunciationCourses = createAction(RECEIVED_PRONUNCIATION_COURSES, (payload) => payload)
+export const receivedPronunciationCourses = createAction(RECEIVED_PRONUNCIATION_COURSES, (payload) => payload);
 
 export const fetchPronunciationCoursesAsync = () => {
   return async (dispatch) => {
@@ -21,7 +20,7 @@ export const fetchPronunciationCoursesAsync = () => {
       console.log('redux/courses 22', err);
     }
   };
-}
+};
 
 export const actions = {
   receivedPronunciationCourses,
@@ -34,7 +33,5 @@ export const actions = {
 export default handleActions({
   [RECEIVED_PRONUNCIATION_COURSES]: (state, {payload}) => {
     return payload;
-  }
+  },
 }, {docs: []});
-
-
