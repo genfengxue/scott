@@ -98,7 +98,7 @@ git message必须符合规范, 使用ghook限制，初次提交代码前，执�
 app/views/new.ejs  
 ```html
 <% layout('layout') -%>
-<% title = 'new | 顺顺留学' %>
+<% title = 'new' %>
 <% stylesheet('/css/new.css') -%>
 <% script('/js/new.js') -%>
 <div class="new">
