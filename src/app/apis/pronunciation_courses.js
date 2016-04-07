@@ -14,7 +14,8 @@ router.get('/', async (req, res, next) => {
   try {
     const page = req.query.page || 1;
     const limit = req.query.limit || config.pagination.defaultSize;
-    const result = await PronunciationCourse.paginate({}, {page, limit, sort: {courseNo: 1}});
+    // const result = await PronunciationCourse.paginate({}, {page, limit, sort: {courseNo: 1}});
+    const result = {"docs":[{"_id":"56ce9c119513f69008278012","courseNo":2,"__v":0,"chineseTitle":"初级 大家说英语","description":"","englishTitle":"Let's Talk in English","imageUrl":"http://7xqe0p.com1.z0.glb.clouddn.com/course_03_cover_image.PNG","modified":null,"created":null},{"_id":"56ce9a559513f69008278011","courseNo":3,"__v":0,"chineseTitle":"中级 Rebecca的梦想","description":"","englishTitle":"Rebecca's dream","imageUrl":"https://o3f47rda5.qnssl.com/content/images/20160328/course_02_cover_image.PNG","modified":null,"created":null}],"total":2,"limit":20,"page":"1","pages":1};
     res.send(result);
   } catch (err) {
     next(err);
@@ -29,7 +30,8 @@ router.get('/:courseNo/lessons', async (req, res, next) => {
 
     const query = {};
     query.courseNo = req.params.courseNo;
-    const result = await Lesson.paginate(query,{page, limit, sort: {lessonNo: 1}});
+    // const result = await Lesson.paginate(query,{page, limit, sort: {lessonNo: 1}});
+    const result = {"docs":[{"lessonNo":1,"courseNo":1,"chineseTitle":"Lesson 1","englishTitle":"Lesson 1","lessonCount":20},{"lessonNo":2,"courseNo":1,"chineseTitle":"Lesson 1","englishTitle":"Lesson 1","lessonCount":20}],"total":2,"limit":20,"page":"1","pages":1};
     res.send(result);
   } catch (err) {
     next(err);

@@ -6,6 +6,7 @@ const schema = BaseSchema.extend({
   chineseTitle: { type: String},
   courseNo: { type: Number},
   imageUrl: { type: String},
+  lessonCount:{type: Number},
   description: { type: String}
 });
 
