@@ -14,7 +14,7 @@ export const receivedPronunciationCourses = createAction(RECEIVED_PRONUNCIATION_
 export const fetchPronunciationCoursesAsync = () => {
   return async (dispatch) => {
     try {
-      const response = await ajax.get('/api/courses/', {page: 1});
+      const response = await ajax.get('/api/pronunciation_courses/', {page: 1});
       dispatch(receivedPronunciationCourses(response));
     } catch (err) {
       console.log('redux/courses 22', err);

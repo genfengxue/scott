@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import CourseList from '../components/CourseList';
+import PronunciationCourseList from '../components/PronunciationCourseList';
 import {actions} from '../redux/pronunciationCourses';
 import {Link} from 'react-router';
 
@@ -33,7 +33,7 @@ class PronunciationCoursesView extends Component {
             </li>
           </ul>
         </nav>
-        <CourseList
+        <PronunciationCourseList
           courses={this.props.pronunciationCourses} />
       </div>
     );
