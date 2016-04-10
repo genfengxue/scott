@@ -12,7 +12,7 @@ class PronunciationCourse extends Component {
     window.type = this.props;
     return (
       <div className="pronunciation-course clearfix">
-        <Link to={`/home/courses/${course.courseNo}?type=${type}`}>
+        <Link to={`/home/pronunciation_courses/${course.courseNo}`}>
           <h4 className="pronunciation-course-name text-xs-center">
             {course.chineseTitle}
           </h4>
