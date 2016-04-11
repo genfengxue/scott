@@ -43,7 +43,7 @@ class PronunciationLessonsView extends Component {
             {docs.map((lesson) => {
               return (
                 <li className="pronunciation-lesson-name" key={lesson.lessonNo}>
-                  <Link to={`/` }>{lesson.chineseTitle}</Link>
+                  <Link to={`/home/pronunciation_courses/1/lessons/activity/` }>{lesson.chineseTitle}</Link>
                 </li>
               );
             })}
