@@ -2,87 +2,91 @@
 
 .pronunciation-activity-view {
   margin: 0 1.25rem;
-  .reading {
-    .course-info {
-      .mentor-photo {
-        float: left;
-        width: 3.4rem;
-        height: 3.4rem;
-        margin-right: 1.5rem;
-        border-radius: 50%;
-      }
-      .course-label {
-        line-height: 3.4rem;
+  .course-info {
+    .mentor-photo {
+      float: left;
+      width: 3.4rem;
+      height: 3.4rem;
+      margin-right: 1.5rem;
+      border-radius: 50%;
+    }
+    .course-label {
+      line-height: 3.4rem;
+    }
+  }
+
+  .course-content {
+    height: 416px; // TODO:
+    overflow: scroll;
+    .pronunciation-symbol {
+      margin: 1.8rem 0 1.25rem;
+    }
+    ol {
+      padding-left: 1.25rem;
+      li {
+        color: $light-grey;
+        margin-bottom: 1.25rem;
+        font-size: 0.9rem;
       }
     }
 
-    .course-content {
-      .pronunciation-symbol {
-        margin: 1.8rem 0 1.25rem;
-      }
-      ol {
-        padding-left: 1.25rem;
-        li {
-          color: $light-grey;
-          margin-bottom: 1.25rem;
-          font-size: 0.9rem;
-        }
-      }
+    .reading-pronunciation {
+      text-align: center;
     }
+  }
 
-    .course-buttons {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 5.4rem;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      border-top: 1px solid #d1d1e2;
-      &:after {
-        content: '';
-        width: 0;
-        height: 0;
-        border-left: 16px solid transparent;
-        border-right: 16px solid transparent;
-        border-bottom: 16px solid #d1d1e2;
-        position: absolute;
-        left: 50%;
-        margin-left: -16px;
-        top: -16px;
-      }
-      &:before {
-        content: '';
-        width: 0;
-        height: 0;
-        border-left: 16px solid transparent;
-        border-right: 16px solid transparent;
-        border-bottom: 16px solid #fff;
-        position: absolute;
-        left: 50%;
-        margin-left: -16px;
-        top: -15px;
-        z-index: 1;
-      }
-      .boss-button {
-        width: 2.875rem;
-        height: 2.875rem;
-        background: url('/img/icon-boss.png') no-repeat;
-        background-size: cover;
-      }
-      .sound-button {
-        width: 7.5rem;
-        height: 3.625em;
-        background: url('/img/icon-sound.png') no-repeat;
-        background-size: cover;
-      }
-      .next-button {
-        width: 2.875rem;
-        height: 2.875rem;
-        background: url('/img/icon-next-arrow.png') no-repeat;
-        background-size: cover;
-      }
+  .course-buttons {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5.4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #d1d1e2;
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid #d1d1e2;
+      position: absolute;
+      left: 50%;
+      margin-left: -16px;
+      top: -16px;
+    }
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid #fff;
+      position: absolute;
+      left: 50%;
+      margin-left: -16px;
+      top: -15px;
+      z-index: 1;
+    }
+    .boss-button {
+      width: 2.875rem;
+      height: 2.875rem;
+      background: url('/img/icon-boss.png') no-repeat;
+      background-size: cover;
+    }
+    .sound-button {
+      width: 7.5rem;
+      height: 3.625em;
+      background: url('/img/icon-sound.png') no-repeat;
+      background-size: cover;
+    }
+    .next-button {
+      width: 2.875rem;
+      height: 2.875rem;
+      background: url('/img/icon-next-arrow.png') no-repeat;
+      background-size: cover;
     }
   }
 }
