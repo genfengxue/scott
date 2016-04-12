@@ -1,21 +1,29 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import LessonList from '../components/LessonList';
-import {actions} from '../redux/lessons';
+
+import {actions} from '../redux/pronunciationLessonActivity';
 import {Link} from 'react-router';
 import setTitle from '../common/setTitle';
 
-const mapStateToProps = ({lessons}) => ({
-  lessons,
+const mapStateToProps = ({pronunciationLessonActivity}) => ({
+  pronunciationLessonActivity,
 });
 
 class PronunciationLessonActivityView extends Component {
 
+  static propTypes = {
+    pronunciationLessonActivity: PropTypes.object.isRequired,
+    fetchPronunciationLessonsActivityAsync: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super();
+    props.fetchPronunciationLessonsActivityAsync();
   }
 
   render() {
+    const {docs} = this.props.pronunciationLessonActivity;
+    window.pronunciationLessonActivity = this.props.pronunciationLessonActivity;
     return (
       <div className="pronunciation-activity-view">
         <nav className="navbar">
@@ -70,12 +78,12 @@ class PronunciationLessonActivityView extends Component {
         </div>
 
         <div className="course-buttons">
-          <span className="boss-button hidden"></span>
-          <span className="sound-button hidden"></span>
-          <span className="next-button hidden"></span>
+          <span className="boss-button"></span>
+          <span className="sound-button"></span>
+          <span className="next-button"></span>
           <span className="record-button hidden"></span>
-          <span className="submit-button"></span>
-          <span className="upload-button"></span>
+          <span className="submit-button hidden"></span>
+          <span className="upload-button hidden"></span>
         </div>
       </div>
     );

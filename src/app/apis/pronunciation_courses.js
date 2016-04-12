@@ -66,17 +66,31 @@ router.get('/:courseNo/lessons', async (req, res, next) => {
       "docs":
         [
           {
-            "lessonNo":1,
             "courseNo":1,
+            "lessonNo":1,
             "chineseTitle":"Lesson 1",
             "englishTitle":"Lesson 1",
             "lessonCount":20
           },
           {
-            "lessonNo":2,
             "courseNo":1,
-            "chineseTitle":"Lesson 1",
-            "englishTitle":"Lesson 1",
+            "lessonNo":2,
+            "chineseTitle":"Lesson 2",
+            "englishTitle":"Lesson 2",
+            "lessonCount":20
+          },
+          {
+            "courseNo":1,
+            "lessonNo":3,
+            "chineseTitle":"Lesson 3",
+            "englishTitle":"Lesson 3",
+            "lessonCount":20
+          },
+          {
+            "courseNo":1,
+            "lessonNo":4,
+            "chineseTitle":"Lesson 4",
+            "englishTitle":"Lesson 4",
             "lessonCount":20
           }
         ],
@@ -99,7 +113,43 @@ router.get('/:courseNo/lessons/:lessonNo', async (req, res, next) => {
     const query = {};
     query.courseNo = req.params.courseNo;
     query.lessonNo = req.params.lessonNo;
-    const result = await LessonActivity.paginate(query, {page, limit, sort: {index: 1}});
+    // const result = await LessonActivity.paginate(query, {page, limit, sort: {index: 1}});
+    const result = {
+      "docs":
+        [
+          {
+            "courseNo": 1,
+            "lessonNo": 1,
+            "index": 1,
+            "type": "explanation",
+            "description": "some description",
+            "audio": "",
+            "video": ""
+          },
+          {
+            "courseNo": 1,
+            "lessonNo": 1,
+            "index": 2,
+            "type": "redaing",
+            "description": "some description",
+            "audio": "",
+            "video": ""
+          },
+          {
+            "courseNo": 1,
+            "lessonNo": 1,
+            "index": 3,
+            "type": "explanation",
+            "description": "some description",
+            "audio": "",
+            "video": ""
+          }
+        ],
+          "total":3,
+          "limit":20,
+          "page": 1,
+          "pages":1
+        };
     res.send(result);
   } catch (err) {
     next(err);
