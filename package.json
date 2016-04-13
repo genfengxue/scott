@@ -97,6 +97,7 @@
     "imagemin-pngquant": "4.2.0",
     "ncp": "2.0.0",
     "path": "0.12.7",
+    "react-slick": "^0.11.1",
     "run-sequence": "1.1.5"
   },
   "config": {

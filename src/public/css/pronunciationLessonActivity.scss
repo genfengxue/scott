@@ -90,41 +90,59 @@
       top: -15px;
       z-index: 1;
     }
-    .boss-button {
-      width: 2.875rem;
-      height: 2.875rem;
-      background: url('/img/icon-boss.png') no-repeat;
-      background-size: cover;
-    }
-    .sound-button {
-      width: 7.5rem;
-      height: 3.625em;
-      background: url('/img/icon-sound.png') no-repeat;
-      background-size: cover;
-    }
-    .next-button {
-      width: 2.875rem;
-      height: 2.875rem;
-      background: url('/img/icon-next-arrow.png') no-repeat;
-      background-size: cover;
-    }
-    .record-button {
-      width: 2.875rem;
-      height: 2.875rem;
-      background: url('/img/icon-record.png') no-repeat;
-      background-size: cover;
-    }
-    .submit-button {
-      width: 2.875rem;
-      height: 2.875rem;
-      background: url('/img/icon-submit.png') no-repeat;
-      background-size: cover;
-    }
-    .upload-button {
-      width: 2.875rem;
-      height: 2.875rem;
-      background: url('/img/icon-upload.png') no-repeat;
-      background-size: cover;
-    }
   }
+}
+
+.boss-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-boss.png') no-repeat;
+  background-size: cover;
+}
+.sound-button {
+  display: inline-block;
+  width: 7.5rem;
+  height: 3.625em;
+  background: url('/img/icon-sound.png') no-repeat;
+  background-size: cover;
+}
+.next-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-next-arrow.png') no-repeat;
+  background-size: cover;
+}
+.prev-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-prev-arrow.png') no-repeat;
+  background-size: cover;
+}
+.record-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-record.png') no-repeat;
+  background-size: cover;
+}
+.submit-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-submit.png') no-repeat;
+  background-size: cover;
+}
+.upload-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-upload.png') no-repeat;
+  background-size: cover;
+}
+
+.activity-item {
+  width: 100%;
 }
