@@ -6,13 +6,14 @@ import Root from './containers/Root';
 import routes from './routes/home';
 import homeReducer from './redux/homeReducer';
 import './common/airlog';
-
 import {
   applyMiddleware,
   compose,
   createStore,
 } from 'redux';
 import thunk from 'redux-thunk';
+
+window.scott = true;
 
 let createStoreWithMiddleware;
 const middleware = applyMiddleware(thunk);

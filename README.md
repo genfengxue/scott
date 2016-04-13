@@ -98,7 +98,7 @@ git message必须符合规范, 使用ghook限制，初次提交代码前，执�
 app/views/new.ejs  
 ```html
 <% layout('layout') -%>
-<% title = 'new | 顺顺留学' %>
+<% title = 'new' %>
 <% stylesheet('/css/new.css') -%>
 <% script('/js/new.js') -%>
 <div class="new">
@@ -208,7 +208,6 @@ router.get('/home/*', async (req, res) => {
 
 ## CMS
 该文档用于wind-cms  
-https://coding.net/u/cagegong/p/wind-cms/git  
 ### 环境
 - node // 我们使用nvm来管理node版本
 - mongo // 绑定到本地端口访问，提高安全性
