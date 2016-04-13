@@ -208,7 +208,6 @@ router.get('/home/*', async (req, res) => {
 
 ## CMS
 该文档用于wind-cms  
-https://coding.net/u/cagegong/p/wind-cms/git  
 ### 环境
 - node // 我们使用nvm来管理node版本
 - mongo // 绑定到本地端口访问，提高安全性
