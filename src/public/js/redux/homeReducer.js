@@ -2,6 +2,8 @@ import sentences from './sentences';
 import lessons from './lessons';
 import courses from './courses';
 import pronunciationCourses from './pronunciationCourses';
+import pronunciationLessons from './pronunciationLessons';
+import pronunciationLessonActivity from './pronunciationLessonActivity';
 import listen from './listen';
 import translate from './translate';
 import shifting from './shifting';
@@ -23,4 +25,6 @@ export default combineReducers({
   wxsdk,
   homework,
   pronunciationCourses,
+  pronunciationLessons,
+  pronunciationLessonActivity,
 });
