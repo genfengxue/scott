@@ -24,4 +24,6 @@ const store = createStoreWithMiddleware(createStore)(
 
 window.dispatch = store.dispatch;
 
-ReactDom.render(<Root history={history} routes={routes} store={store} />, document.getElementById('app'));
+window.addEventListener('load', () => {
+  ReactDom.render(<Root history={history} routes={routes} store={store} />, document.getElementById('app'));
+});

@@ -8,6 +8,7 @@ const schema = BaseSchema.extend({
   chineseTitle: { type: String},
   hasListen: { type: Boolean},
   hasTranslate: { type: Boolean},
+  videoPath: { type: String},
 });
 
 export default mongoose.model('Lesson', schema);
