@@ -19,35 +19,7 @@
     <link href="/css/style.css" rel="stylesheet">
     <%- stylesheets %>
     <script type="text/javascript">
-      (function() {
-        var cdnPath = 'http://7xrwtt.com1.z0.glb.clouddn.com';
-        var length = document.styleSheets.length;
-        var i = 0;
-        var sheet;
-        for (i = 0; i < length; i++) {
-          sheet = document.styleSheets[i];
-          if (sheet.href && sheet.href.indexOf('http://7xrwtt.com1.z0.glb.clouddn.com') === 0) {
-            var rules = sheet.rules ? sheet.rules : sheet.cssRules;
-            if (!rules) {
-              var link = document.createElement('LINK');
-              link.href = sheet.href.replace('http://7xrwtt.com1.z0.glb.clouddn.com', '');
-              link.type = 'text/css';
-              link.rel = 'stylesheet';
-              document.head.appendChild(link);
-            }
-          }
-          if (sheet.href && sheet.href.indexOf('https://o43236zpa.qnssl.com') === 0) {
-            var rules = sheet.rules ? sheet.rules : sheet.cssRules;
-            if (!rules) {
-              var link = document.createElement('LINK');
-              link.href = sheet.href.replace('https://o43236zpa.qnssl.com', '');
-              link.type = 'text/css';
-              link.rel = 'stylesheet';
-              document.head.appendChild(link);
-            }
-          }
-        }
-      })();
+      !function(){var d,b=document.styleSheets.length,c=0;for(c=0;b>c;c++){if(d=document.styleSheets[c],d.href&&0===d.href.indexOf("http://7xrwtt.com1.z0.glb.clouddn.com")){var e=d.rules?d.rules:d.cssRules;if(!e){var f=document.createElement("LINK");f.href=d.href.replace("http://7xrwtt.com1.z0.glb.clouddn.com",""),f.type="text/css",f.rel="stylesheet",document.head.appendChild(f)}}if(d.href&&0===d.href.indexOf("https://o43236zpa.qnssl.com")){var e=d.rules?d.rules:d.cssRules;if(!e){var f=document.createElement("LINK");f.href=d.href.replace("https://o43236zpa.qnssl.com",""),f.type="text/css",f.rel="stylesheet",document.head.appendChild(f)}}}}();
     </script>
     <% if (ENV_DEVELOPMENT) { %>
       <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>

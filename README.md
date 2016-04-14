@@ -223,3 +223,36 @@ CLOUDINARY_URL=cloudinary://333779167276662:_8jbSi9FB3sWYrfimcl8VKh34rI@keystone
 ```
 ### 运行
 npm start
+
+### cdn替换代码
+```
+(function() {
+  var cdnPath = 'http://7xrwtt.com1.z0.glb.clouddn.com';
+  var length = document.styleSheets.length;
+  var i = 0;
+  var sheet;
+  for (i = 0; i < length; i++) {
+    sheet = document.styleSheets[i];
+    if (sheet.href && sheet.href.indexOf('http://7xrwtt.com1.z0.glb.clouddn.com') === 0) {
+      var rules = sheet.rules ? sheet.rules : sheet.cssRules;
+      if (!rules) {
+        var link = document.createElement('LINK');
+        link.href = sheet.href.replace('http://7xrwtt.com1.z0.glb.clouddn.com', '');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+    }
+    if (sheet.href && sheet.href.indexOf('https://o43236zpa.qnssl.com') === 0) {
+      var rules = sheet.rules ? sheet.rules : sheet.cssRules;
+      if (!rules) {
+        var link = document.createElement('LINK');
+        link.href = sheet.href.replace('https://o43236zpa.qnssl.com', '');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+    }
+  }
+})();
+```
