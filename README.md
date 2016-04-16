@@ -249,6 +249,16 @@ router.get('/home/*', async (req, res) => {
 - 如果`wxsdk.noWechat`为true，则不在微信浏览器中，页面也要作出相应改动
 - 获取签名失败的时候，`wxsdk.errMsg`有值，页面要作出相应改动
 
+### 连接远程测试数据库
+为了安全起见，只允许使用ssh tunnel，需要给我public key  
+```
+ssh \
+-L 27018:localhost:27018 \
+-i ~/.ssh/id_rsa \
+dbuser@121.201.28.101
+```
+测试环境连接localhost:27018/wind-cms-dev
+
 ## [Roadmap](./Roadmap.md)
 
 ## [Changelog](./Changelog.md)
