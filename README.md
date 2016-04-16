@@ -201,6 +201,54 @@ router.get('/home/*', async (req, res) => {
 ```
 这里，所有home开头的路由都会指向这个react-redux app入口页面。
 
+### AudioPlayer使用方式
+参数：
+
+- audios array 音频文件路径列表，例如：['1.mp3', '1.ogg', 'backup/1.mp3', 'backup/1.ogg']
+- autoplay boolean 是否自动播放
+- children jsx array 播放状态／非播放/错误状态的样子 可不填，不填则使用默认样式
+
+示例：
+使用默认样式
+```javascript
+<AudioPlayer audios={audios} autoplay key={audios[0]}>
+</AudioPlayer>
+```
+改变不同状态下的样式，这个时候播放器的样式完全取决于内容
+```
+<AudioPlayer audios={audios} autoplay key={audios[0]}>
+  <div className="sentence-text">
+    播放
+  </div>
+  <div className="sentence-text">
+    暂停
+  </div>
+  <div className="sentence-text">
+    出错啦！
+  </div>
+</AudioPlayer>
+```
+
+### VideoPlayer使用方式
+参数：
+
+- videos array 视频文件路径列表，例如：['1.mp4', '1.webm', 'backup/1.mp4', 'backup/1.webm']
+- playing boolean 播放中
+- onEnded func 播放结束的callback
+
+示例：
+```javascript
+<VideoPlayer playing={playing} videos={videos} onEnded={() => {console.log('ended')}} />
+```
+
+### redux wxsdk
+这个是用来获取微信签名的，把它作为一个reducer来使用  
+- 需要调用微信sdk的页面引入这个reducer，  
+- 在view constructor中调用fetchSignatureAsync
+- 当wxsdk.signature有值的时候，即可调用微信sdk，使用全局变量`wx`调用微信sdk
+- 如果`wxsdk.noWechat`为true，则不在微信浏览器中，页面也要作出相应改动
+- 获取签名失败的时候，`wxsdk.errMsg`有值，页面要作出相应改动
+
 ## [Roadmap](./Roadmap.md)
 
 ## [Changelog](./Changelog.md)
