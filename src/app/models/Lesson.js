@@ -9,6 +9,7 @@ const schema = BaseSchema.extend({
   hasListen: { type: Boolean},
   hasTranslate: { type: Boolean},
   videoPath: { type: String},
+  publishedDate: { type: Date},
 });
 
 export default mongoose.model('Lesson', schema);
