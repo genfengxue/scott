@@ -13,7 +13,6 @@ import ReviewModal from '../components/ReviewModal';
 import AnswerModal from '../components/AnswerModal';
 import {RATES} from '../redux/shifting';
 import {Link} from 'react-router';
-import Clipboard from 'react-clipboard';
 
 const mapStateToProps = ({doingNewhomework, shifting}) => ({
   doingNewhomework, shifting,
