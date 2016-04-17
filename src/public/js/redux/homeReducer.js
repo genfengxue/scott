@@ -8,8 +8,21 @@ import warm from './warm';
 import doingHomework from './doingHomework';
 import wxsdk from './wxsdk';
 import homework from './homework';
+import newhomework from './newhomework';
+import doingNewhomework from './doingNewhomework';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-  courses, lessons, sentences, listen, translate, shifting, warm, doingHomework, wxsdk, homework,
+  courses,
+  lessons,
+  sentences,
+  listen,
+  translate,
+  shifting,
+  warm,
+  doingHomework,
+  wxsdk,
+  homework,
+  newhomework,
+  doingNewhomework,
 });

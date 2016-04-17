@@ -10,6 +10,7 @@ import TempPronunciationView from '../views/TempPronunciationView';
 import DoingHomeworkView from '../views/DoingHomeworkView';
 import WarmView from '../views/WarmView';
 import HomeworkView from '../views/HomeworkView';
+import DoingNewhomeworkView from '../views/DoingNewhomeworkView';
 
 // import NotFoundView from '../views/NotFoundView/NotFoundView';
 //     <Route path='/404' component={NotFoundView} />
@@ -20,6 +21,7 @@ export default (
     <Route path="/home/courses/" component={CoursesView} />
     <Route path="/home/pronunciations/" component={TempPronunciationView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/quiz/" component={DoingHomeworkView} />
+    <Route path="/home/courses/:courseNo/lessons/:lessonNo/newhomework/" component={DoingNewhomeworkView} />
     <Route path="/home/courses/:courseNo" component={LessonsView} />
     <Route path="/home/homeworks/:homeworkId" component={HomeworkView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/warm/" component={WarmView} />
