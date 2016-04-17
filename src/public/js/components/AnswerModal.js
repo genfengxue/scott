@@ -19,7 +19,7 @@ class AnswerModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool,
     onRequestClose: PropTypes.func,
-    children: PropTypes.array,
+    children: PropTypes.object,
     title: PropTypes.string,
   };
   render() {

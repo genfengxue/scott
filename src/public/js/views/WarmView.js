@@ -147,6 +147,11 @@ class WarmView extends Component {
               <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`} >
                 开始训练
               </Link>
+              <Link className="bottom-nav-btn btn btn-link col-xs-12"
+                to={`/home/courses/${courseNo}/lessons/${lessonNo}/newhomework/?type=${type || 'listen'}`}
+                style={{'marginTop': '0.5rem'}}>
+                直接做作业
+              </Link>
             </li>
           </ul>
         </nav>

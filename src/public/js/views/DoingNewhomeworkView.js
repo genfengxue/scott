@@ -38,6 +38,7 @@ class DoingNewhomeworkView extends Component {
     endTranslateQuizAsync: PropTypes.func,
     endQuiz: PropTypes.func,
     toggleAnswerModal: PropTypes.func,
+    history: PropTypes.object,
   };
 
   constructor(props) {
@@ -136,15 +137,12 @@ class DoingNewhomeworkView extends Component {
             <div className="clearfix" style={{'paddingTop': '2rem'}}>
               <div className="clearfix">
                 <div
-                  style={{minHeight: '10rem', maxHeight: '20rem', overflow: 'auto'}}
+                  style={{
+                    overflowY: 'scroll',
+                    height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px'}}
                   className="col-xs-12"
                   dangerouslySetInnerHTML={{__html: lesson.homeworkTxt}}>
                 </div>
-              </div>
-              <div className="text-muted text-xs-center" style={{'marginTop': '1rem'}}>
-                请长按上边句子，粘贴到微信群，<br />
-                然后录音提交作业<br />
-                跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
               </div>
             </div>
             :
@@ -161,9 +159,6 @@ class DoingNewhomeworkView extends Component {
                 </a>
               }
               </div>
-              <div className="text-muted text-xs-center" style={{'marginTop': '5rem'}}>
-                跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
-              </div>
             </div>
           }
           <ErrorTip error={errors.server} />
@@ -178,11 +173,23 @@ class DoingNewhomeworkView extends Component {
             <li className="col-xs-10 text-xs-center">
               {
                 type === 'translate' ?
-                <a className="bottom-nav-btn btn btn-primary-outline col-xs-12" onClick={() => this.props.toggleAnswerModal(true)}>
-                  查看答案
-                </a>
+                <div className="clearfix">
+                  <div className="text-muted text-xs-center"
+                    style={{position: 'absolute',
+                            top: '-4.8rem'}}>
+                    请长按上边句子，粘贴到微信群，<br />
+                    然后录音提交作业<br />
+                    跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
+                  </div>
+                  <a className="bottom-nav-btn btn btn-primary-outline col-xs-12"
+                    onClick={() => this.props.toggleAnswerModal(true)}>
+                    查看答案
+                  </a>
+                </div>
                 :
-                ''
+                <div className="nav-link text-muted text-xs-center">
+                  跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
+                </div>
               }
             </li>
           </ul>
