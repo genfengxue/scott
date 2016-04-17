@@ -13,6 +13,7 @@ import ReviewModal from '../components/ReviewModal';
 import AnswerModal from '../components/AnswerModal';
 import {RATES} from '../redux/shifting';
 import {Link} from 'react-router';
+import Clipboard from 'react-clipboard';
 
 const mapStateToProps = ({doingNewhomework, shifting}) => ({
   doingNewhomework, shifting,
@@ -55,6 +56,16 @@ class DoingNewhomeworkView extends Component {
   }
 
   componentWillUnmount() {
+  }
+
+  copyClick() {
+    console.log(this.refs.richtext);
+    var selection = window.getSelection();
+    var range = document.createRange();
+    range.setStartBefore(this.refs.richtext.firstChild);
+    range.setEndAfter(this.refs.richtext.lastChild);
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 
   render() {
@@ -137,6 +148,7 @@ class DoingNewhomeworkView extends Component {
             <div className="clearfix" style={{'paddingTop': '2rem'}}>
               <div className="clearfix">
                 <div
+                  ref="richtext"
                   style={{
                     overflowY: 'scroll',
                     height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px'}}
@@ -170,7 +182,7 @@ class DoingNewhomeworkView extends Component {
                 <i className="icon-left" onClick={() => this.props.history.goBack()}/>
               </a>
             </li>
-            <li className="col-xs-10 text-xs-center">
+            <li className="col-xs-9 text-xs-center">
               {
                 type === 'translate' ?
                 <div className="clearfix">
@@ -191,6 +203,12 @@ class DoingNewhomeworkView extends Component {
                   跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
                 </div>
               }
+            </li>
+            <li className="col-xs-2 no-padding-col">
+              <a className="nav-link"
+                onClick={(e) => this.copyClick(e)}>
+                复制
+              </a>
             </li>
           </ul>
         </nav>
