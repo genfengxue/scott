@@ -5,6 +5,7 @@ const customStyles = {
   overlay: {
     zIndex: '1031',
     background: 'rgba(0, 0, 0, 0.6)',
+    overflow: 'auto',
   },
   content: {
     top: '3.5rem',

@@ -57,16 +57,6 @@ class DoingNewhomeworkView extends Component {
   componentWillUnmount() {
   }
 
-  copyClick() {
-    console.log(this.refs.richtext);
-    var selection = window.getSelection();
-    var range = document.createRange();
-    range.setStartBefore(this.refs.richtext.firstChild);
-    range.setEndAfter(this.refs.richtext.lastChild);
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
-
   render() {
     const {doingNewhomework, shifting} = this.props;
     const {lesson, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, showAnswerModal} = doingNewhomework;
@@ -146,14 +136,13 @@ class DoingNewhomeworkView extends Component {
             type === 'translate' ?
             <div className="clearfix" style={{'paddingTop': '2rem'}}>
               <div className="clearfix">
-                <div
-                  ref="richtext"
+                <textarea
+                  className="col-xs-12"
+                  value={lesson.homeworkTxt}
                   style={{
                     overflowY: 'scroll',
-                    height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px'}}
-                  className="col-xs-12"
-                  dangerouslySetInnerHTML={{__html: lesson.homeworkTxt}}>
-                </div>
+                    height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px'}}>
+                </textarea>
               </div>
             </div>
             :
@@ -176,18 +165,16 @@ class DoingNewhomeworkView extends Component {
         </div>
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
-            <li className="col-xs-1 no-padding-col">
+            <li className="col-xs-1 no-padding-col" style={{'marginTop': '4.4rem'}}>
               <a className="nav-link" >
                 <i className="icon-left" onClick={() => this.props.history.goBack()}/>
               </a>
             </li>
-            <li className="col-xs-9 text-xs-center">
+            <li className="col-xs-10 text-xs-center">
               {
                 type === 'translate' ?
                 <div className="clearfix">
-                  <div className="text-muted text-xs-center"
-                    style={{position: 'absolute',
-                            top: '-4.8rem'}}>
+                  <div className="text-muted text-xs-center">
                     请长按上边句子，粘贴到微信群，<br />
                     然后录音提交作业<br />
                     跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
@@ -202,12 +189,6 @@ class DoingNewhomeworkView extends Component {
                   跟读整段视频练习隐藏在<i style={{'verticalAlign': 'bottom'}} className="icon-hamburger text-primary" />中
                 </div>
               }
-            </li>
-            <li className="col-xs-2 no-padding-col">
-              <a className="nav-link"
-                onClick={(e) => this.copyClick(e)}>
-                复制
-              </a>
             </li>
           </ul>
         </nav>
