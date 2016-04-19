@@ -122,7 +122,10 @@ router.get('/:courseNo/lessons/:lessonNo', async (req, res, next) => {
             "lessonNo": 1,
             "index": 1,
             "type": "explanation",
-            "description": "some description",
+            "description": {
+              "title": "cop [a]",
+              "body": "some description..."
+            },
             "audio": "",
             "video": ""
           },
@@ -130,8 +133,11 @@ router.get('/:courseNo/lessons/:lessonNo', async (req, res, next) => {
             "courseNo": 1,
             "lessonNo": 1,
             "index": 2,
-            "type": "redaing",
-            "description": "some description",
+            "type": "reading",
+            "description": {
+              "title": "her here hair hire",
+              "body": "[her][hir][her][hear]"
+            },
             "audio": "",
             "video": ""
           },
@@ -140,7 +146,34 @@ router.get('/:courseNo/lessons/:lessonNo', async (req, res, next) => {
             "lessonNo": 1,
             "index": 3,
             "type": "explanation",
-            "description": "some description",
+            "description": {
+              "title": "cop [a]",
+              "body": "some description..."
+            },
+            "audio": "",
+            "video": ""
+          },
+          {
+            "courseNo": 1,
+            "lessonNo": 1,
+            "index": 4,
+            "type": "reading",
+            "description": {
+              "title": "her here hair hire",
+              "body": "[her][hir][her][hear]"
+            },
+            "audio": "",
+            "video": ""
+          },
+          {
+            "courseNo": 1,
+            "lessonNo": 1,
+            "index": 5,
+            "type": "explanation",
+            "description": {
+              "title": "cop [a]",
+              "body": "some description..."
+            },
             "audio": "",
             "video": ""
           }

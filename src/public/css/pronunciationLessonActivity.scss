@@ -19,7 +19,7 @@
   }
 
   .course-content {
-    height: 416px; // TODO:
+    // height: 416px; // TODO:
     overflow: scroll;
     .pronunciation-symbol {
       margin: 1.8rem 0 1.25rem;
@@ -65,6 +65,7 @@
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid #d1d1e2;
+    background: $white;
     &:after {
       content: '';
       width: 0;
@@ -90,6 +91,19 @@
       top: -15px;
       z-index: 1;
     }
+  }
+
+  .slick-prev {
+    position: fixed;
+    left: 1.25rem;
+    bottom: 0.9rem;
+    z-index: 9;
+  }
+  .slick-next {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 0.9rem;
+    z-index: 9;
   }
 }
 

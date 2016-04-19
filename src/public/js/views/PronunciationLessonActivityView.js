@@ -47,6 +47,7 @@ class PronunciationLessonActivityView extends Component {
       touchMove: false,
       prevArrow: CustomPrevArrow,
       nextArrow: CustomNextArrow,
+      infinite: false
     };
 
     return (
@@ -61,67 +62,59 @@ class PronunciationLessonActivityView extends Component {
           </ul>
         </nav>
 
-        <Slider {...settings}>
-          {/* TODO: Listen */}
-          <div className="activity-item">
-            <div className="course-info">
-              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
-              <p className="course-label">请听讲解</p>
-            </div>
-            <div className="course-content">
-              {/* TODO: This is a placeholder, should be replaced with video */}
-              <img src="http://placehold.it/335x188" />
+            <Slider {...settings}>
+              {docs.map((lessonActivity) => {
+                return (
+                  <div key={lessonActivity.index}>
+                    {function(){
+                      if (lessonActivity.type == 'explanation') {
+                        return (
+                          <div className="activity-item">
+                            <div className="course-info">
+                              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
+                              <p className="course-label">请听讲解</p>
+                            </div>
+                            <div className="listen-explain">
+                              <h6 className="pronunciation-symbol">{lessonActivity.description.title}</h6>
+                              <ol>
+                                <li>{lessonActivity.description.body}</li>
+                              </ol>
+                            </div>
+                          </div>
+                        )
+                      }
+                    }.call(this)}
 
-              <div className="listen-explain">
-                <h6 className="pronunciation-symbol">cop [a]</h6>
-                <ol>
-                  <li>[a]这个音标键盘上打不出来,键盘上能出来是这样的 :a</li>
-                  <li>这个音类似于你去看医生, 医生让你张大嘴说 "啊"</li>
-                  <li>这个音标在发音时比较靠后</li>
-                  <li>这个音典型错误是读成了 这个音类似于你去看医生,医生让你张大嘴说 "啊", 这个音典型错误是读成了 这个音类似于你去看医生,医生让你张大嘴说 "啊" </li>
-                </ol>
-              </div>
-            </div>
-          </div>
-
-          {/* TODO: Reading */}
-          <div className="activity-item">
-            <div className="course-info">
-              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
-              <p className="course-label">请朗读整段文本</p>
-            </div>
-            <div className="course-content">
-              <div className="reading-pronunciation">
-                <h6>her here hair hire</h6>
-                <p>[her][hir][her][hear]</p>
-              </div>
-            </div>
-          </div>
-
-          {/* TODO:  Fight boss */}
-          <div className="activity-item">
-            <div className="course-info">
-              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
-              <p className="course-label">请朗读</p>
-            </div>
-            <div className="course-content">
-              <div className="fight-boss">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
-                <form>
-                  <div className="form-group">
-                    <label>昵称</label>
-                    <input type="text" className="name"/>
+                    {function(){
+                      if (lessonActivity.type == 'reading') {
+                        return (
+                          <div className="activity-item">
+                            <div className="course-info">
+                              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
+                              <p className="course-label">请朗读整段文本</p>
+                            </div>
+                            <div className="course-content">
+                              <div className="reading-pronunciation">
+                                <h6>{lessonActivity.description.title}</h6>
+                                <p>{lessonActivity.description.body}</p>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      }
+                    }.call(this)}
                   </div>
-                  <div className="form-group">
-                    <label>时间</label>
-                    <input type="text" className="time" placehold="分钟" />
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </Slider>
+                )
+              })}
+            </Slider>
+
+        <div className="course-buttons">
+          <span className="sound-button"></span>
+          <span className="boss-button hidden"></span>
+          <span className="record-button hidden"></span>
+          <span className="submit-button hidden"></span>
+          <span className="upload-button hidden"></span>
+        </div>
 
       </div>
     );
