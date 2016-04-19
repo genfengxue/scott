@@ -5,6 +5,21 @@
   .hidden {
     display: none;
   }
+  .progress-bar{
+    height: 10px;
+    border-radius: 8px;
+    margin: 15px 0;
+    background: #d9d9f1;
+    position: relative;
+    div div {
+      position: absolute!important;
+      z-index: 2;
+      height: 8px !important;
+      background-image: inherit !important;
+      background: #72AEFF;
+      border-radius: 8px!important;
+    }
+  }
   .course-info {
     .mentor-photo {
       float: left;

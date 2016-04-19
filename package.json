@@ -48,6 +48,7 @@
     "react-dom": "0.14.3",
     "react-infinite-scroll": "0.1.5",
     "react-modal": "0.6.1",
+    "react-progress": "0.0.12",
     "react-redux": "4.0.6",
     "react-router": "1.0.3",
     "react-router-redux": "3.0.0",

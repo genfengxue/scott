@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {actions} from '../redux/pronunciationLessonActivity';
 import {Link} from 'react-router';
 import Slider from 'react-slick';
+import Progress from 'react-progress';
 
 const mapStateToProps = ({pronunciationLessonActivity}) => ({
   pronunciationLessonActivity,
@@ -62,51 +63,55 @@ class PronunciationLessonActivityView extends Component {
           </ul>
         </nav>
 
-            <Slider {...settings}>
-              {docs.map((lessonActivity) => {
-                return (
-                  <div key={lessonActivity.index}>
-                    {function(){
-                      if (lessonActivity.type == 'explanation') {
-                        return (
-                          <div className="activity-item">
-                            <div className="course-info">
-                              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
-                              <p className="course-label">请听讲解</p>
-                            </div>
-                            <div className="listen-explain">
-                              <h6 className="pronunciation-symbol">{lessonActivity.description.title}</h6>
-                              <ol>
-                                <li>{lessonActivity.description.body}</li>
-                              </ol>
-                            </div>
-                          </div>
-                        )
-                      }
-                    }.call(this)}
+        <div className="progress-bar">
+          <Progress percent={30}/>
+        </div>
 
-                    {function(){
-                      if (lessonActivity.type == 'reading') {
-                        return (
-                          <div className="activity-item">
-                            <div className="course-info">
-                              <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
-                              <p className="course-label">请朗读整段文本</p>
-                            </div>
-                            <div className="course-content">
-                              <div className="reading-pronunciation">
-                                <h6>{lessonActivity.description.title}</h6>
-                                <p>{lessonActivity.description.body}</p>
-                              </div>
-                            </div>
+        <Slider {...settings}>
+          {docs.map((lessonActivity) => {
+            return (
+              <div key={lessonActivity.index}>
+                {function(){
+                  if (lessonActivity.type == 'explanation') {
+                    return (
+                      <div className="activity-item">
+                        <div className="course-info">
+                          <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
+                          <p className="course-label">请听讲解</p>
+                        </div>
+                        <div className="listen-explain">
+                          <h6 className="pronunciation-symbol">{lessonActivity.description.title}</h6>
+                          <ol>
+                            <li>{lessonActivity.description.body}</li>
+                          </ol>
+                        </div>
+                      </div>
+                    )
+                  }
+                }.call(this)}
+
+                {function(){
+                  if (lessonActivity.type == 'reading') {
+                    return (
+                      <div className="activity-item">
+                        <div className="course-info">
+                          <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
+                          <p className="course-label">请朗读整段文本</p>
+                        </div>
+                        <div className="course-content">
+                          <div className="reading-pronunciation">
+                            <h6>{lessonActivity.description.title}</h6>
+                            <p>{lessonActivity.description.body}</p>
                           </div>
-                        )
-                      }
-                    }.call(this)}
-                  </div>
-                )
-              })}
-            </Slider>
+                        </div>
+                      </div>
+                    )
+                  }
+                }.call(this)}
+              </div>
+            )
+          })}
+        </Slider>
 
         <div className="course-buttons">
           <span className="sound-button"></span>
