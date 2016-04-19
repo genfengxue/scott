@@ -6,6 +6,8 @@ import {Link} from 'react-router';
 import Slider from 'react-slick';
 import Progress from 'react-progress';
 
+import AudioPlayer from '../components/AudioPlayer';
+
 const mapStateToProps = ({pronunciationLessonActivity}) => ({
   pronunciationLessonActivity,
 });
@@ -72,7 +74,7 @@ class PronunciationLessonActivityView extends Component {
             return (
               <div key={lessonActivity.index}>
                 {function(){
-                  if (lessonActivity.type == 'explanation') {
+                  if (lessonActivity.type == '讲解') {
                     return (
                       <div className="activity-item">
                         <div className="course-info">
@@ -80,10 +82,7 @@ class PronunciationLessonActivityView extends Component {
                           <p className="course-label">请听讲解</p>
                         </div>
                         <div className="listen-explain">
-                          <h6 className="pronunciation-symbol">{lessonActivity.description.title}</h6>
-                          <ol>
-                            <li>{lessonActivity.description.body}</li>
-                          </ol>
+                          <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
                         </div>
                       </div>
                     )
@@ -91,7 +90,7 @@ class PronunciationLessonActivityView extends Component {
                 }.call(this)}
 
                 {function(){
-                  if (lessonActivity.type == 'reading') {
+                  if (lessonActivity.type == '朗读') {
                     return (
                       <div className="activity-item">
                         <div className="course-info">
@@ -100,8 +99,7 @@ class PronunciationLessonActivityView extends Component {
                         </div>
                         <div className="course-content">
                           <div className="reading-pronunciation">
-                            <h6>{lessonActivity.description.title}</h6>
-                            <p>{lessonActivity.description.body}</p>
+                            <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
                           </div>
                         </div>
                       </div>
