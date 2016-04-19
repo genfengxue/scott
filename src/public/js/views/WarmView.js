@@ -58,7 +58,7 @@ class WarmView extends Component {
       return <div>Loading...</div>;
     }
     if (lesson) {
-      setTitle(`热身`);
+      setTitle(`${courseNo}-${lessonNo}-${type}热身`);
     }
 
     // videos
