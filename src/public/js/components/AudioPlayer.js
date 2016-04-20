@@ -121,6 +121,9 @@ class AudioPlayer extends Component {
           >
           {
             audios.map((audio) => {
+              if (!audio) {
+                throw new Error('AudioPlayer: empty audio src');
+              }
               const suffix = audio.split('.').reverse()[0];
               return (
                 <source
