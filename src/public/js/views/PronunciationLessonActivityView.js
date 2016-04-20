@@ -84,6 +84,9 @@ class PronunciationLessonActivityView extends Component {
                         <div className="listen-explain">
                           <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
                         </div>
+
+                        // <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}>
+                        // </AudioPlayer>
                       </div>
                     )
                   }
