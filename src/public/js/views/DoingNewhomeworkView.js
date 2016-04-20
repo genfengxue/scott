@@ -136,13 +136,20 @@ class DoingNewhomeworkView extends Component {
             type === 'translate' ?
             <div className="clearfix" style={{'paddingTop': '2rem'}}>
               <div className="clearfix">
-                <textarea
-                  className="col-xs-12"
-                  value={lesson.homeworkTxt}
-                  style={{
-                    overflowY: 'scroll',
-                    height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px'}}>
-                </textarea>
+                {
+                  lesson.homeworkTxt ?
+                  <textarea
+                    className="col-xs-12"
+                    value={lesson.homeworkTxt}
+                    style={{
+                      overflowY: 'scroll',
+                      height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px'}}>
+                  </textarea>
+                  :
+                  <div className="text-xs-center text-muted">
+                    暂无测验
+                  </div>
+                }
               </div>
             </div>
             :
