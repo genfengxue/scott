@@ -12,6 +12,7 @@ const schema = BaseSchema.extend({
   scope: { type: String },
   action: { type: String },
   value: { type: String },
+  referer: { type: String },
 });
 
 export default mongoose.model('Behavior', schema);
