@@ -66,6 +66,7 @@ export default (app, config) => {
   app.use('/api/homeworks/', require('../app/apis/homework'));
   app.use('/api/wechat/', require('../app/apis/wechat'));
   app.use('/api/stats/', require('../app/apis/stats'));
+  app.use('/api/behaviors/', require('../app/apis/behavior'));
 
   // 页面路由定义
   app.use('/', require('../app/controllers/home'));

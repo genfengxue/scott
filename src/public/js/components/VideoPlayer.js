@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import ajax from '../common/ajax';
 
 class VideoPlayer extends Component {
   static propTypes = {
@@ -26,6 +27,25 @@ class VideoPlayer extends Component {
     if (this.props.playing) {
       this.refs.video.play();
     }
+    const children = this.refs.video.children;
+    const length = children.length;
+    let errCount = 0;
+    const handler = (err) => {
+      errCount++;
+      if (errCount === length) {
+        ajax.post('/api/behaviors/', {
+          scope: 'videoPlayer',
+          action: 'fail',
+          value: err});
+        this.state.error = err;
+        this.setState(this.state);
+      }
+    };
+    for (let i = 0; i < length; i++) {
+      const child = children[i];
+      child.addEventListener('error', handler);
+      child.addEventListener('invalid', handler);
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -40,6 +60,10 @@ class VideoPlayer extends Component {
   }
 
   _onPlay(e) {
+    ajax.post('/api/behaviors/', {
+      scope: 'videoPlayer',
+      action: 'play',
+      value: e.target.currentSrc});
   }
 
   _onPause(e) {
@@ -75,7 +99,6 @@ class VideoPlayer extends Component {
                 );
               })
             }
-            Your browser doesn't support HTML5 video tag.
           </video>
           :
           '无视频源'
