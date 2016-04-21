@@ -11,13 +11,16 @@
     margin: 15px 0;
     background: #d9d9f1;
     position: relative;
-    div div {
-      position: absolute!important;
-      z-index: 2;
-      height: 8px !important;
-      background-image: inherit !important;
-      background: #72AEFF;
-      border-radius: 8px!important;
+    div{
+      opacity: 1!important;
+      div {
+        position: absolute!important;
+        z-index: 2;
+        height: 8px !important;
+        background-image: inherit !important;
+        background: #72AEFF;
+        border-radius: 8px!important;
+      }
     }
   }
   .course-info {
