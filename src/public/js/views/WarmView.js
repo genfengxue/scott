@@ -150,7 +150,7 @@ class WarmView extends Component {
               <Link className="bottom-nav-btn btn btn-link col-xs-12"
                 to={`/home/courses/${courseNo}/lessons/${lessonNo}/newhomework/?type=${type || 'listen'}`}
                 style={{'marginTop': '0.5rem'}}>
-                直接Boss
+                直接打Boss
               </Link>
             </li>
           </ul>
