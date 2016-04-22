@@ -66,7 +66,7 @@ class TranslateView extends Component {
       return <div>Loading...</div>;
     }
     if (course && lesson && sentence) {
-      setTitle(`${courseNo}-${lessonNo}-翻译${sentence.sentenceNo}/${sentences.docs.length}`);
+      setTitle(`${sentence.sentenceNo}/${sentences.docs.length} ${lesson.englishTitle}`);
     }
 
     // audios

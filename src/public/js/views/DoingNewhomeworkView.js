@@ -67,7 +67,7 @@ class DoingNewhomeworkView extends Component {
       return <div>Loading...</div>;
     }
     if (lesson) {
-      setTitle(`打Boss`);
+      setTitle(`打Boss ${lesson.englishTitle}`);
     }
     return (
       <div className="translate">

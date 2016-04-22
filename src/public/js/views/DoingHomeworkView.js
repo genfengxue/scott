@@ -123,7 +123,7 @@ class DoingHomeworkView extends Component {
       return <div>Loading...</div>;
     }
     if (lesson) {
-      setTitle(`${courseNo}-${lessonNo}-${type}-打Boss`);
+      setTitle(`打Boss ${lesson.englishTitle}`);
     }
 
     // videos

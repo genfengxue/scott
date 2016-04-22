@@ -58,7 +58,7 @@ class WarmView extends Component {
       return <div>Loading...</div>;
     }
     if (lesson) {
-      setTitle(`${courseNo}-${lessonNo}-${type}热身`);
+      setTitle(`热身 ${lesson.englishTitle}`);
     }
 
     // videos
@@ -150,7 +150,7 @@ class WarmView extends Component {
               <Link className="bottom-nav-btn btn btn-link col-xs-12"
                 to={`/home/courses/${courseNo}/lessons/${lessonNo}/newhomework/?type=${type || 'listen'}`}
                 style={{'marginTop': '0.5rem'}}>
-                直接做作业
+                直接Boss
               </Link>
             </li>
           </ul>
