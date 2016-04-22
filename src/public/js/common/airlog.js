@@ -32,10 +32,10 @@
 (function(window) {
   let preErrorHander;
   preErrorHander = window.onerror;
-  window.onerror = function(m, u, l) {
+  window.onerror = function(m, u, l, c, e) {
     if (typeof preErrorHander === 'function') {
-      preErrorHander(m, u, l);
+      preErrorHander(m, u, l, c, e);
     }
-    console.remote(location.href, 'error', 'onJSError', m, u, l);
+    console.remote(location.href, 'error', 'onJSError', m, u, l, c, e.toString());
   };
 })(window);
