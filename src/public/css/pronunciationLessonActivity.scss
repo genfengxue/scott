@@ -5,6 +5,7 @@
   .hidden {
     display: none;
   }
+
   .progress-bar{
     height: 10px;
     border-radius: 8px;
@@ -23,6 +24,7 @@
       }
     }
   }
+
   .course-info {
     .mentor-photo {
       float: left;
@@ -119,9 +121,16 @@
   }
   .slick-next {
     position: fixed;
-    right: 1.25rem;
-    bottom: 0.9rem;
+    left: 50%;
+    bottom: 0.6rem;
     z-index: 9;
+    margin-left: -3.75rem;
+  }
+
+  .icon-voice-mute:before,
+  .icon-voice:before {
+    color: #F28318;
+    font-size: 22px;
   }
 }
 
@@ -141,9 +150,9 @@
 }
 .next-button {
   display: inline-block;
-  width: 2.875rem;
-  height: 2.875rem;
-  background: url('/img/icon-next-arrow.png') no-repeat;
+  width: 7.5rem;
+  height: 3.625em;
+  background: url('/img/icon-next.png') no-repeat;
   background-size: cover;
 }
 .prev-button {
