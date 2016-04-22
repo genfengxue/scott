@@ -22,6 +22,7 @@ class PronunciationLessonActivityView extends Component {
   constructor(props) {
     super();
     props.fetchPronunciationLessonsActivityAsync();
+    this.state = {};
   }
 
   render() {
@@ -44,13 +45,27 @@ class PronunciationLessonActivityView extends Component {
       },
     });
 
+    // Set the current progress
+    let currentProgress;
+    const lessonsNumber = pronunciationLessonActivity.docs.length;
+    const percent = 100/lessonsNumber;
+
+    // Initial value
+    const initPercent = percent.toFixed(1);
+
     const settings = {
       dots: false,
       swipe: false,
       touchMove: false,
       prevArrow: CustomPrevArrow,
       nextArrow: CustomNextArrow,
-      infinite: false
+      infinite: false,
+      afterChange: function(index) {
+        currentProgress = (percent * (index + 1)).toFixed(1);
+        this.setState({
+          progressPercent: currentProgress
+        });
+      }.bind(this)
     };
 
     return (
@@ -66,7 +81,7 @@ class PronunciationLessonActivityView extends Component {
         </nav>
 
         <div className="progress-bar">
-          <Progress percent={30}/>
+          <Progress percent={this.state.progressPercent ? this.state.progressPercent : initPercent}/>
         </div>
 
         <Slider {...settings}>
@@ -85,8 +100,12 @@ class PronunciationLessonActivityView extends Component {
                           <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
                         </div>
 
-                        // <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}>
-                        // </AudioPlayer>
+                        {
+                          lessonActivity.audio
+                            ? <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}></AudioPlayer>
+                            : ''
+                        }
+
                       </div>
                     )
                   }
