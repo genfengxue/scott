@@ -65,7 +65,7 @@ class ListenView extends Component {
       return <div>Loading...</div>;
     }
     if (course && lesson && sentence) {
-      setTitle(`${sentence.sentenceNo}/${sentences.docs.length}`);
+      setTitle(`${courseNo}-${lessonNo}-听力${sentence.sentenceNo}/${sentences.docs.length}`);
     }
 
     // audios
