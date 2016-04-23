@@ -29,7 +29,7 @@ class PronunciationLessonActivityView extends Component {
     const {docs} = this.props.pronunciationLessonActivity;
     window.pronunciationLessonActivity = this.props.pronunciationLessonActivity;
 
-    let prevArrowIsVisible;
+    let prevArrowIsVisible = true;
     const CustomPrevArrow = React.createClass({
       render() {
         if(prevArrowIsVisible){
@@ -68,6 +68,13 @@ class PronunciationLessonActivityView extends Component {
       nextArrow: CustomNextArrow,
       infinite: false,
       afterChange: function(index) {
+        // show boss button
+        if(index == lessonsNumber-1) {
+          this.setState({
+            recordBtnIsVisible: true
+          })
+          console.log("last index")
+        }
         currentProgress = (percent * (index + 1)).toFixed(1);
         this.setState({
           progressPercent: currentProgress,
@@ -135,6 +142,24 @@ class PronunciationLessonActivityView extends Component {
                       <div className="activity-item">
                         <div className="course-info">
                           <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
+                          <p className="course-label">请朗读</p>
+                        </div>
+                        <div className="course-content">
+                          <div className="reading-pronunciation">
+                            <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }
+                }.call(this)}
+
+                {function() {
+                  if(lessonActivity.type == '打Boss') {
+                    return (
+                      <div className="activity-item">
+                        <div className="course-info">
+                          <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
                           <p className="course-label">请朗读整段文本</p>
                         </div>
                         <div className="course-content">
@@ -152,7 +177,7 @@ class PronunciationLessonActivityView extends Component {
         </Slider>
 
         <div className="course-buttons">
-          <span className="boss-button hidden"></span>
+          <span className="boss-button"></span>
           <span className="record-button hidden"></span>
           <span className="submit-button hidden"></span>
           <span className="upload-button hidden"></span>

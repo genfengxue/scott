@@ -82,7 +82,7 @@
     bottom: 0;
     height: 5.4rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     border-top: 1px solid #d1d1e2;
     background: $white;
@@ -136,6 +136,7 @@
 
 .boss-button {
   display: inline-block;
+  margin-right: 1rem;
   width: 2.875rem;
   height: 2.875rem;
   background: url('/img/icon-boss.png') no-repeat;
