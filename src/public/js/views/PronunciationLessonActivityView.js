@@ -29,11 +29,18 @@ class PronunciationLessonActivityView extends Component {
     const {docs} = this.props.pronunciationLessonActivity;
     window.pronunciationLessonActivity = this.props.pronunciationLessonActivity;
 
+    let prevArrowIsVisible = true;
     const CustomPrevArrow = React.createClass({
       render() {
-        return (
-          <div className="slick-prev" {...this.props}><icon className="prev-button"></icon></div>
-        );
+        if(prevArrowIsVisible){
+          return (
+            <div className="slick-prev" {...this.props}><icon className="prev-button"></icon></div>
+          )
+        } else {
+          return (
+            <div className="slick-prev" {...this.props}></div>
+          )
+        }
       },
     });
 
@@ -61,9 +68,17 @@ class PronunciationLessonActivityView extends Component {
       nextArrow: CustomNextArrow,
       infinite: false,
       afterChange: function(index) {
+        // show boss button
+        if(index == lessonsNumber-1) {
+          this.setState({
+            recordBtnIsVisible: true
+          })
+          console.log("last index")
+        }
         currentProgress = (percent * (index + 1)).toFixed(1);
         this.setState({
-          progressPercent: currentProgress
+          progressPercent: currentProgress,
+          prevArrowIsVisible: true
         });
       }.bind(this)
     };
@@ -102,7 +117,17 @@ class PronunciationLessonActivityView extends Component {
 
                         {
                           lessonActivity.audio
-                            ? <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}></AudioPlayer>
+                            ? <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}>
+                                <div className="sentence-text">
+                                  <i className="icon-voice"></i>
+                                </div>
+                                <div className="sentence-text">
+                                  <i className="icon-voice-mute" />
+                                </div>
+                                <div className="sentence-text">
+                                  出错啦！
+                                </div>
+                              </AudioPlayer>
                             : ''
                         }
 
@@ -113,6 +138,24 @@ class PronunciationLessonActivityView extends Component {
 
                 {function(){
                   if (lessonActivity.type == '朗读') {
+                    return (
+                      <div className="activity-item">
+                        <div className="course-info">
+                          <img src="http://7xr387.com1.z0.glb.clouddn.com/windwind.jpg" className="mentor-photo" />
+                          <p className="course-label">请朗读</p>
+                        </div>
+                        <div className="course-content">
+                          <div className="reading-pronunciation">
+                            <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }
+                }.call(this)}
+
+                {function() {
+                  if(lessonActivity.type == '打Boss') {
                     return (
                       <div className="activity-item">
                         <div className="course-info">
@@ -134,8 +177,7 @@ class PronunciationLessonActivityView extends Component {
         </Slider>
 
         <div className="course-buttons">
-          <span className="sound-button"></span>
-          <span className="boss-button hidden"></span>
+          <span className="boss-button"></span>
           <span className="record-button hidden"></span>
           <span className="submit-button hidden"></span>
           <span className="upload-button hidden"></span>
