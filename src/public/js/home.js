@@ -6,13 +6,14 @@ import Root from './containers/Root';
 import routes from './routes/home';
 import homeReducer from './redux/homeReducer';
 import './common/airlog';
-
 import {
   applyMiddleware,
   compose,
   createStore,
 } from 'redux';
 import thunk from 'redux-thunk';
+
+window.scott = true;
 
 let createStoreWithMiddleware;
 const middleware = applyMiddleware(thunk);
@@ -23,4 +24,6 @@ const store = createStoreWithMiddleware(createStore)(
 
 window.dispatch = store.dispatch;
 
-ReactDom.render(<Root history={history} routes={routes} store={store} />, document.getElementById('app'));
+window.addEventListener('load', () => {
+  ReactDom.render(<Root history={history} routes={routes} store={store} />, document.getElementById('app'));
+});

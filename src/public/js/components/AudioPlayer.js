@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import ajax from '../common/ajax';
 
 class AudioPlayer extends Component {
   static propTypes = {
@@ -21,7 +22,10 @@ class AudioPlayer extends Component {
     const handler = (err) => {
       errCount++;
       if (errCount === length) {
-        console.log('AudioPlayer 24', err);
+        ajax.post('/api/behaviors/', {
+          scope: 'audioPlayer',
+          action: 'fail',
+          value: err});
         this.state.error = err;
         this.setState(this.state);
       }
@@ -48,14 +52,17 @@ class AudioPlayer extends Component {
     this.setState(this.state);
   }
 
-  _onPlay() {
+  _onPlay(e) {
+    ajax.post('/api/behaviors/', {
+      scope: 'audioPlayer',
+      action: 'play',
+      value: e.target.currentSrc});
     this.state.playing = true;
     this.setState(this.state);
   }
 
   _onError(e) {
     this.state.error = e;
-    console.log('AudioPlayer 58', e);
     this.setState(this.state);
   }
 

@@ -16,6 +16,7 @@ class PronunciationLessonsView extends Component {
   static propTypes = {
     pronunciationLessons: PropTypes.object.isRequired,
     fetchPronunciationLessonsAsync: PropTypes.func.isRequired,
+    params: PropTypes.object,
   };
 
   constructor(props) {
@@ -25,6 +26,7 @@ class PronunciationLessonsView extends Component {
 
   render() {
     const {docs} = this.props.pronunciationLessons;
+    const {courseNo} = this.props.params;
     return (
       <div className="pronunciation-lessons-view">
         <nav className="navbar">
@@ -43,7 +45,7 @@ class PronunciationLessonsView extends Component {
             {docs.map((lesson) => {
               return (
                 <li className="pronunciation-lesson-name" key={lesson.lessonNo}>
-                  <Link to={`/home/pronunciation_courses/1/lessons/activity/` }>{lesson.chineseTitle}</Link>
+                  <Link to={`/home/pronunciation_courses/${courseNo}/lessons/${lesson.lessonNo}` }>{lesson.chineseTitle}</Link>
                 </li>
               );
             })}

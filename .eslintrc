@@ -6,6 +6,7 @@
   "parser": "babel-eslint",
   "rules": {
     "react/jsx-quotes": 0,
+    "react/no-multi-comp": 0,
     "jsx-quotes": [2, "prefer-double"]
   }
 }

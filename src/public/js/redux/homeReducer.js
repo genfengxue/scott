@@ -11,6 +11,9 @@ import warm from './warm';
 import doingHomework from './doingHomework';
 import wxsdk from './wxsdk';
 import homework from './homework';
+import pronunciationHomework from './pronunciationHomework';
+import newhomework from './newhomework';
+import doingNewhomework from './doingNewhomework';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
@@ -27,4 +30,7 @@ export default combineReducers({
   pronunciationCourses,
   pronunciationLessons,
   pronunciationLessonActivity,
+  newhomework,
+  doingNewhomework,
+  pronunciationHomework,
 });

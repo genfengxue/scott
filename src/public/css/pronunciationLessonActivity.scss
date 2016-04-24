@@ -1,7 +1,9 @@
 @import "./_variables";
 
+$ring-width: 0.5rem;
+$size: 2.87rem;
+
 .pronunciation-activity-view {
-  margin: 0 1.25rem;
   .hidden {
     display: none;
   }
@@ -81,11 +83,9 @@
     right: 0;
     bottom: 0;
     height: 5.4rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     border-top: 1px solid #d1d1e2;
     background: $white;
+    padding: 1.2rem 0.5rem;
     &:after {
       content: '';
       width: 0;
@@ -136,7 +136,6 @@
 
 .boss-button {
   display: inline-block;
-  margin-right: 1rem;
   width: 2.875rem;
   height: 2.875rem;
   background: url('/img/icon-boss.png') no-repeat;
@@ -163,19 +162,79 @@
   background: url('/img/icon-prev-arrow.png') no-repeat;
   background-size: cover;
 }
-.record-button {
+a.action-button {
   display: inline-block;
-  width: 2.875rem;
-  height: 2.875rem;
-  background: url('/img/icon-record.png') no-repeat;
-  background-size: cover;
+  width: $size;
+  height: $size;
+  background: $dark-blue;
+  color: #FFF;
+  line-height: $size;
+  border-radius: 50%;
+  text-decoration: none;
+  position: relative;
 }
-.submit-button {
+a.record-button {
   display: inline-block;
-  width: 2.875rem;
-  height: 2.875rem;
-  background: url('/img/icon-submit.png') no-repeat;
-  background-size: cover;
+  width: $size;
+  height: $size;
+  background: $dark-blue;
+  color: #FFF;
+  line-height: $size;
+  border-radius: 50%;
+  font-size: $size / 2;
+  position: relative;
+  .icon-mic {
+    margin-left: 0.12rem;
+    margin-top: -0.1rem;
+  }
+  &.recording {
+    background: $green;
+    &:after {
+      position: absolute;
+      content: ' ';
+      width: $size + 2 * $ring-width;
+      height: $size + 2 * $ring-width;
+      background: #a3eb9a;
+      border-radius: 50%;
+      z-index: -1;
+      top: -$ring-width;
+      left: -$ring-width;
+      animation: breathing 2.6s infinite linear;
+    }
+    &:before {
+      position: absolute;
+      content: ' ';
+      width: $size + 4 * $ring-width;
+      height: $size + 4 * $ring-width;
+      background: #eaf6e7;
+      border-radius: 50%;
+      z-index: -2;
+      top: -2 * $ring-width;
+      left: -2 * $ring-width;
+      animation: breathing 2.6s infinite linear;
+    }
+  }
+}
+@keyframes breathing {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+a.rework-button {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  font-size: 50%;
+  line-height: 2rem;
+  top: 0.5rem;
+  left: 5.3rem;
+  background: #94cbff;
 }
 .upload-button {
   display: inline-block;

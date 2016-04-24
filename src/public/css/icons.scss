@@ -35,32 +35,38 @@
   @if $filename == loadingdots {
     $char: "\E006";
   }
-  @if $filename == mobile {
+  @if $filename == mic {
     $char: "\E007";
   }
-  @if $filename == pause {
+  @if $filename == micphone {
     $char: "\E008";
   }
-  @if $filename == play {
+  @if $filename == mobile {
     $char: "\E009";
   }
-  @if $filename == portrait {
+  @if $filename == pause {
     $char: "\E00A";
   }
-  @if $filename == right {
+  @if $filename == play {
     $char: "\E00B";
   }
-  @if $filename == tick {
+  @if $filename == portrait {
     $char: "\E00C";
   }
-  @if $filename == times {
+  @if $filename == right {
     $char: "\E00D";
   }
-  @if $filename == voice-mute {
+  @if $filename == tick {
     $char: "\E00E";
   }
-  @if $filename == voice {
+  @if $filename == times {
     $char: "\E00F";
+  }
+  @if $filename == voice-mute {
+    $char: "\E010";
+  }
+  @if $filename == voice {
+    $char: "\E011";
   }
 
   @return $char;
@@ -105,6 +111,12 @@
 }
 .icon-loadingdots {
   @include icon(loadingdots);
+}
+.icon-mic {
+  @include icon(mic);
+}
+.icon-micphone {
+  @include icon(micphone);
 }
 .icon-mobile {
   @include icon(mobile);

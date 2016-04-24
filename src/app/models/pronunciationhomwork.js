@@ -10,7 +10,6 @@ const schema = BaseSchema.extend({
   nickname: { type: String },
   serverId: { type: String },
   serverIds: [String],
-  type: {type: String},
 });
 
 export default mongoose.model('pronunciationHomework', schema);

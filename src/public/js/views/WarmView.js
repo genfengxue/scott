@@ -58,7 +58,7 @@ class WarmView extends Component {
       return <div>Loading...</div>;
     }
     if (lesson) {
-      setTitle(`热身`);
+      setTitle(`热身 ${lesson.englishTitle}`);
     }
 
     // videos
@@ -117,6 +117,10 @@ class WarmView extends Component {
           <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >存档</a>
           <a className="nav-link" onClick={() => this.props.toggleReviewModal(true)} >复习</a>
           <a className="nav-link" onClick={() => this.props.toggleFeedbackModal(true)} >纠错</a>
+          <Link className="nav-link"
+            to={`/home/courses/${courseNo}/lessons/${lessonNo}/quiz/?type=${type || 'listen'}`}>
+            打Boss
+          </Link>
         </Header>
         <CollectionModal
           isOpen={showCollectionModal}
@@ -140,15 +144,14 @@ class WarmView extends Component {
         <nav className="navbar navbar-fixed-bottom bottom-nav">
           <ul className="nav navbar-nav">
             <li className="col-xs-10 col-xs-offset-1 text-xs-center">
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`} >
-                  开始训练
-                </Link>
-                <br />
-                <Link className="bottom-nav-btn btn btn-link col-xs-12"
-                  to={`/home/courses/${courseNo}/lessons/${lessonNo}/quiz/?type=${type || 'listen'}`}
-                  style={{'marginTop': '0.5rem'}}>
-                  直接打Boss
-                </Link>
+              <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${lesson.courseNo}/lessons/${lesson.lessonNo}/${type || 'listen'}/1`} >
+                开始训练
+              </Link>
+              <Link className="bottom-nav-btn btn btn-link col-xs-12"
+                to={`/home/courses/${courseNo}/lessons/${lessonNo}/newhomework/?type=${type || 'listen'}`}
+                style={{'marginTop': '0.5rem'}}>
+                直接打Boss
+              </Link>
             </li>
           </ul>
         </nav>

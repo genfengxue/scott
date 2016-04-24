@@ -42,9 +42,16 @@ router.get('/:courseNo/lessons/:lessonNo', async (req, res, next) => {
     const limit = 1000;
 
     const query = {};
+    const {courseNo, lessonNo} = req.params;
     query.courseNo = req.params.courseNo;
     query.lessonNo = req.params.lessonNo;
     const result = await LessonActivity.paginate(query, {page, limit, sort: {index: 1}});
+    const course = await PronunciationCourse.findOne({courseNo});
+    result.course = course;
+    const lesson = await Lesson.findOne({lessonNo});
+    result.lesson = lesson;
+    req.session.startTime = new Date();
+
     res.send(result);
   } catch (err) {
     next(err);

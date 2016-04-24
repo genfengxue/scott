@@ -46,7 +46,7 @@ const getSignature = async (noncestr, timestamp, url) => {
 const reset = async () => {
   await RedisCache.set(accessTokenKey, '');
   await RedisCache.set(jsapiTicketKey, '');
-}
+};
 
 export default {
   getAccessToken,

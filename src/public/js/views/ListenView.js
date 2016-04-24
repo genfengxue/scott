@@ -65,7 +65,7 @@ class ListenView extends Component {
       return <div>Loading...</div>;
     }
     if (course && lesson && sentence) {
-      setTitle(`${sentence.sentenceNo}/${sentences.docs.length}`);
+      setTitle(`${sentence.sentenceNo}/${sentences.docs.length} ${lesson.englishTitle}`);
     }
 
     // audios
@@ -133,6 +133,10 @@ class ListenView extends Component {
           <a className="nav-link" onClick={() => this.props.toggleCollectionModal(true)} >存档</a>
           <a className="nav-link" onClick={() => this.props.toggleReviewModal(true)} >复习</a>
           <a className="nav-link" onClick={() => this.props.toggleFeedbackModal(true)} >纠错</a>
+          <Link className="nav-link"
+            to={`/home/courses/${courseNo}/lessons/${lessonNo}/quiz/?type=listen`}>
+            打Boss
+          </Link>
         </Header>
         <CollectionModal
           isOpen={showCollectionModal}
@@ -220,8 +224,8 @@ class ListenView extends Component {
                   下一句
                 </Link>
                 :
-                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/quiz/?type=listen`} >
-                  打Boss
+                <Link className="bottom-nav-btn btn btn-primary-outline col-xs-12" to={`/home/courses/${courseNo}/lessons/${lessonNo}/newhomework/?type=listen`} >
+                  做作业
                 </Link>
               )
               :
