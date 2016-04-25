@@ -14,9 +14,11 @@ export const PRONUNCIATION_HOMEWORK_ERRORS = 'PRONUNCIATION_HOMEWORK_ERRORS';
 export const UPLOADING_RECORD = 'UPLOADING_RECORD';
 export const CLEAR_RECORDS = 'CLEAR_RECORDS';
 export const BEGIN_SUBMIT = 'BEGIN_SUBMIT';
+export const PRONUNCIATION_LESSON_ACTIVITY_INIT = 'PRONUNCIATION_LESSON_ACTIVITY_INIT';
 // ------------------------------------
 // Actions
 // ------------------------------------
+export const pronunciationLessonActivityInit = createAction(PRONUNCIATION_LESSON_ACTIVITY_INIT);
 export const displayErrors = createAction(PRONUNCIATION_HOMEWORK_ERRORS, (payload) => payload);
 export const receviedPronunciationLessonsActivity = createAction(RECEIVED_PRONUNCIATION_LESSONS_ACTIVITY, (payload) => payload);
 export const pronunciationLessonsActivityIndexChange = createAction(PRONUNCIATION_LESSONS_ACTIVITY_INDEX_CHANGE, (payload) => payload);
@@ -111,12 +113,16 @@ export const actions = {
   submitRecordAsync,
   clearRecords,
   beginSubmit,
+  pronunciationLessonActivityInit,
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 export default handleActions({
+  [PRONUNCIATION_LESSON_ACTIVITY_INIT]: () => {
+    return {docs: [], activityIndex: 0};
+  },
   [PRONUNCIATION_HOMEWORK_ERRORS]: (state, {payload}) => {
     state.errors = payload;
     return Object.assign({}, state);
@@ -142,7 +148,7 @@ export default handleActions({
     state.time = payload.time;
     return Object.assign({}, state);
   },
-  [CLEAR_RECORDS]: (state, {payload}) => {
+  [CLEAR_RECORDS]: (state) => {
     state.localIds = null;
     state.time = null;
     return Object.assign({}, state);

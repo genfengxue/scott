@@ -69,11 +69,13 @@ class PronunciationLessonActivityView extends Component {
     endRecord: PropTypes.func.isRequired,
     endPronunciationHomeworkAsync: PropTypes.func.isRequired,
     submitRecordAsync: PropTypes.func.isRequired,
+    pronunciationLessonActivityInit: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.localIds = [];
+    props.pronunciationLessonActivityInit();
   }
 
   componentDidMount() {
@@ -134,7 +136,7 @@ class PronunciationLessonActivityView extends Component {
     const pronunciationLessonsActivityIndexChange = this.props.pronunciationLessonsActivityIndexChange;
     const settings = {
       dots: false,
-      swipe: false,
+      swipe: true,
       prevArrow: BondCustomPrevArrow,
       nextArrow: BondCustomNextArrow,
       infinite: false,
@@ -143,6 +145,7 @@ class PronunciationLessonActivityView extends Component {
         // why need this? the action does not fire render...
         this.forceUpdate();
       },
+      slickGoTo: activityIndex,
     };
 
     const scrollStyle = {
@@ -327,9 +330,7 @@ class PronunciationLessonActivityView extends Component {
           </div>
           <div className="col-xs-4 text-xs-center no-padding-col">
             {
-              pronunciationLessonActivity.activityIndex + 1 !== pronunciationLessonActivity.docs.length ?
-              ''
-              :
+              pronunciationLessonActivity.activityIndex + 1 === pronunciationLessonActivity.docs.length && activityLessonActivity.type === '打Boss' ?
               <div>
                 {
                   localIds ?
@@ -375,6 +376,7 @@ class PronunciationLessonActivityView extends Component {
                   </div>
                 }
               </div>
+              : ''
             }
             <span className="submit-button hidden"></span>
             <span className="upload-button hidden"></span>
@@ -382,7 +384,7 @@ class PronunciationLessonActivityView extends Component {
           <div className="col-xs-4 text-xs-center">
             {
               pronunciationLessonActivity.activityIndex + 1 !== pronunciationLessonActivity.docs.length ?
-              <span className="boss-button pull-xs-right"></span>
+              <span className="boss-button pull-xs-right" onClick={() => pronunciationLessonsActivityIndexChange(pronunciationLessonActivity.docs.length - 1)}></span>
               :
               ''
             }
