@@ -1,5 +1,6 @@
 import {createAction, handleActions} from 'redux-actions';
 import ajax from '../common/ajax';
+import history from '../common/history';
 
 // ------------------------------------
 // Constants
