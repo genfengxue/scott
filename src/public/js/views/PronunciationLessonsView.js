@@ -1,10 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-
 import {actions} from '../redux/pronunciationLessons';
 import {Link} from 'react-router';
-
 import reactInfiniteScroll from 'react-infinite-scroll';
+
 const InfiniteScroll = reactInfiniteScroll(React);
 
 const mapStateToProps = ({pronunciationLessons}) => ({
@@ -16,17 +15,19 @@ class PronunciationLessonsView extends Component {
   static propTypes = {
     pronunciationLessons: PropTypes.object.isRequired,
     fetchPronunciationLessonsAsync: PropTypes.func.isRequired,
+    fetchMorePronunciationLessonsAsync: PropTypes.func.isRequired,
     params: PropTypes.object,
   };
 
   constructor(props) {
     super();
-    props.fetchPronunciationLessonsAsync();
+    props.fetchPronunciationLessonsAsync(props.params.courseNo);
   }
 
   render() {
-    const {docs} = this.props.pronunciationLessons;
+    const {docs, total} = this.props.pronunciationLessons;
     const {courseNo} = this.props.params;
+    const hasMore = docs.length < total;
     return (
       <div className="pronunciation-lessons-view">
         <nav className="navbar">
@@ -40,8 +41,12 @@ class PronunciationLessonsView extends Component {
         </nav>
         <h2 className="text-xs-center">元音</h2>
         <p className="text-xs-center subtitle">Vowels</p>
-        <InfiniteScroll>
-          <ul className="pronunciation-lesson-list">
+        <ul className="pronunciation-lesson-list">
+          <InfiniteScroll
+            pageStart={1}
+            loadMore={(page) => this.props.fetchMorePronunciationLessonsAsync(page, courseNo)}
+            hasMore={hasMore}
+            loader={<li className="loader">Loading...</li>}>
             {docs.map((lesson) => {
               return (
                 <li className="pronunciation-lesson-name" key={lesson.lessonNo}>
@@ -49,8 +54,8 @@ class PronunciationLessonsView extends Component {
                 </li>
               );
             })}
-          </ul>
-        </InfiniteScroll>
+          </InfiniteScroll>
+        </ul>
       </div>
     );
   }

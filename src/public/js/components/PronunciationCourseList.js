@@ -14,7 +14,6 @@ class PronunciationCourseList extends Component {
   render() {
     const {docs, total} = this.props.courses;
     const hasMore = docs.length < total;
-    window.courses = this.props.courses;
     return (
       <div className="pronunciation-course-list">
         <h2 className="text-xs-center">发音语调训练</h2>

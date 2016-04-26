@@ -12,7 +12,7 @@ const config = {
       prefix: 'https://o3f47rda5.qnssl.com/',
     },
     pagination: {
-      defaultSize: 20,
+      defaultSize: 10,
       maxSize: 100,
     },
     app: {
@@ -50,7 +50,7 @@ const config = {
       prefix: 'https://o3f47rda5.qnssl.com/',
     },
     pagination: {
-      defaultSize: 20,
+      defaultSize: 10,
       maxSize: 100,
     },
     app: {
@@ -88,7 +88,7 @@ const config = {
       prefix: 'https://o3f47rda5.qnssl.com/',
     },
     pagination: {
-      defaultSize: 20,
+      defaultSize: 10,
       maxSize: 100,
     },
     app: {

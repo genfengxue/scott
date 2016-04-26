@@ -34,6 +34,7 @@ class PronunciationCoursesView extends Component {
           </ul>
         </nav>
         <PronunciationCourseList
+          loadMore={(page) => this.props.fetchMorePronunciationCoursesAsync(page)}
           courses={this.props.pronunciationCourses} />
       </div>
     );

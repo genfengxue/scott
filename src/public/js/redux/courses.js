@@ -52,7 +52,7 @@ export default handleActions({
   [RECEIVED_MORE_COURSES]: (state, {payload}) => {
     const {docs, total} = payload;
     state.total = total;
-    state.docs = unionBy(state.docs, docs, 'id');
+    state.docs = unionBy(state.docs, docs, '_id');
     return Object.assign({}, state);
   },
 }, {docs: []});
