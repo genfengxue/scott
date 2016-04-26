@@ -14,12 +14,14 @@ class LessonsView extends Component {
     lessons: PropTypes.object.isRequired,
     fetchLessonsAsync: PropTypes.func.isRequired,
     fetchMoreLessonsAsync: PropTypes.func.isRequired,
+    lessonsInit: PropTypes.func.isRequired,
     params: PropTypes.object,
     location: PropTypes.object,
   };
 
   constructor(props) {
     super();
+    props.lessonsInit();
     const {query} = props.location;
     const otherQuery = query.type === 'listen' ? {hasListen: true} : {hasTranslate: true};
     props.fetchLessonsAsync(props.params.courseNo, otherQuery);

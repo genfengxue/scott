@@ -4,11 +4,13 @@ import unionBy from 'lodash/unionBy';
 // ------------------------------------
 // Constants
 // ------------------------------------
+export const LESSONS_INIT = 'LESSONS_INIT';
 export const RECEIVED_PRONUNCIATION_LESSONS = 'RECEIVED_PRONUNCIATION_LESSONS';
 export const RECEIVED_MORE_PRONUNCIATION_LESSONS = 'RECEIVED_MORE_PRONUNCIATION_LESSONS';
 // ------------------------------------
 // Actions
 // ------------------------------------
+export const lessonsInit = createAction(LESSONS_INIT);
 export const receivedPronunciationLessons = createAction(RECEIVED_PRONUNCIATION_LESSONS, (payload) => payload);
 export const receivedMorePronunciationLessons = createAction(RECEIVED_MORE_PRONUNCIATION_LESSONS, (payload) => payload);
 export const fetchPronunciationLessonsAsync = (courseNo) => {
@@ -36,6 +38,7 @@ export const fetchMorePronunciationLessonsAsync = (page, courseNo) => {
 
 
 export const actions = {
+  lessonsInit,
   receivedPronunciationLessons,
   fetchPronunciationLessonsAsync,
   receivedMorePronunciationLessons,
@@ -46,6 +49,9 @@ export const actions = {
 // Reducer
 // ------------------------------------
 export default handleActions({
+  [LESSONS_INIT]: () => {
+    return {docs: []};
+  },
   [RECEIVED_PRONUNCIATION_LESSONS]: (state, {payload}) => {
     return payload;
   },

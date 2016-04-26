@@ -1,14 +1,10 @@
 import {Router} from 'express';
 import config from '../../config/config';
-import {verifySession} from '../middlewares/authChecker';
-import RedisCache from '../../redis/RedisCache';
-import logger from '../../utils/logger';
 import Lesson from '../models/PronunciationLesson';
 import PronunciationCourse from '../models/PronunciationCourse';
 import LessonActivity from '../models/LessonActivity';
 
-const  router = new Router();
-
+const router = new Router();
 
 router.get('/', async (req, res, next) => {
   try {
@@ -29,7 +25,10 @@ router.get('/:courseNo/lessons', async (req, res, next) => {
 
     const query = {};
     query.courseNo = req.params.courseNo;
-    const result = await Lesson.paginate(query,{page, limit, sort: {lessonNo: 1}});
+    query.publishedDate = {$lt: new Date()};
+    const result = await Lesson.paginate(query, {page, limit, sort: {lessonNo: 1}});
+    const course = await PronunciationCourse.findOne({courseNo: req.params.courseNo});
+    result.course = course;
     res.send(result);
   } catch (err) {
     next(err);

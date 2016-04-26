@@ -16,18 +16,29 @@ class PronunciationLessonsView extends Component {
     pronunciationLessons: PropTypes.object.isRequired,
     fetchPronunciationLessonsAsync: PropTypes.func.isRequired,
     fetchMorePronunciationLessonsAsync: PropTypes.func.isRequired,
+    lessonsInit: PropTypes.func.isRequired,
     params: PropTypes.object,
   };
 
   constructor(props) {
-    super();
+    super(props);
+    props.lessonsInit();
     props.fetchPronunciationLessonsAsync(props.params.courseNo);
   }
 
+  componentWillUpdate(nextProps) {
+    if (+nextProps.params.courseNo !== +this.props.params.courseNo) {
+      this.props.fetchPronunciationLessonsAsync(nextProps.params.courseNo);
+    }
+  }
+
   render() {
-    const {docs, total} = this.props.pronunciationLessons;
+    const {docs, total, course} = this.props.pronunciationLessons;
     const {courseNo} = this.props.params;
     const hasMore = docs.length < total;
+    if (!course) {
+      return <div>loading...</div>;
+    }
     return (
       <div className="pronunciation-lessons-view">
         <nav className="navbar">
@@ -39,8 +50,8 @@ class PronunciationLessonsView extends Component {
             </li>
           </ul>
         </nav>
-        <h2 className="text-xs-center">元音</h2>
-        <p className="text-xs-center subtitle">Vowels</p>
+        <h2 className="text-xs-center">{course.chineseTitle}</h2>
+        <p className="text-xs-center subtitle">{course.englishTitle}</p>
         <ul className="pronunciation-lesson-list">
           <InfiniteScroll
             pageStart={1}
