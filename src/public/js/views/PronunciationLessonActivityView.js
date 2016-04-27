@@ -9,6 +9,7 @@ import Instruction from '../components/Instruction';
 import AudioPlayer from '../components/AudioPlayer';
 import VideoPlayer from '../components/VideoPlayer';
 import ErrorTip from '../components/ErrorTip';
+import ScrollingView from '../components/ScrollingView';
 
 const mapStateToProps = ({pronunciationLessonActivity, wxsdk}) => ({
   pronunciationLessonActivity, wxsdk,
@@ -70,6 +71,7 @@ class PronunciationLessonActivityView extends Component {
     endPronunciationHomeworkAsync: PropTypes.func.isRequired,
     submitRecordAsync: PropTypes.func.isRequired,
     pronunciationLessonActivityInit: PropTypes.func.isRequired,
+    clearRecords: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -151,13 +153,14 @@ class PronunciationLessonActivityView extends Component {
     const scrollStyle = {
       overflowY: 'scroll',
       height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px',
+      'webkitOverflowScrolling': 'touch',
     };
     if (!lesson) {
       return <div>loading</div>;
     }
     const {lessonNo, courseNo} = lesson;
     return (
-      <div className="pronunciation-activity-view">
+      <div className="pronunciation-activity-view clearfix">
         <nav className="navbar">
           <ul className="nav navbar-nav">
             <li className="nav-item">
@@ -186,7 +189,7 @@ class PronunciationLessonActivityView extends Component {
                           <div className="clearfix">
                           <Instruction text="请听讲解" />
                           </div>
-                          <div className="course-content" style={scrollStyle}>
+                          <ScrollingView className="course-content" style={scrollStyle}>
                             {
                               lessonActivity.video && active
                                 ? <VideoPlayer videos={[lessonActivity.video]} autoplay key={lessonActivity.video} />
@@ -210,7 +213,7 @@ class PronunciationLessonActivityView extends Component {
                                   </AudioPlayer>
                                 : ''
                             }
-                          </div>
+                          </ScrollingView>
                         </div>
                       );
                     }
@@ -223,7 +226,7 @@ class PronunciationLessonActivityView extends Component {
                           <div className="clearfix">
                           <Instruction text="请朗读" />
                           </div>
-                          <div className="course-content" style={scrollStyle}>
+                          <ScrollingView className="course-content" style={scrollStyle}>
                             <div className="reading-pronunciation">
                               <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
                             </div>
@@ -242,7 +245,7 @@ class PronunciationLessonActivityView extends Component {
                                   </AudioPlayer>
                                 : ''
                             }
-                          </div>
+                          </ScrollingView>
                         </div>
                       );
                     }
@@ -294,7 +297,7 @@ class PronunciationLessonActivityView extends Component {
                               <ErrorTip error={errors && errors.server} />
                             </div>
                             :
-                            <div className="course-content" style={scrollStyle}>
+                            <ScrollingView className="course-content" style={scrollStyle}>
                               <div className="reading-pronunciation">
                                 <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
                               </div>
@@ -313,7 +316,7 @@ class PronunciationLessonActivityView extends Component {
                                   </AudioPlayer>
                                 : ''
                               }
-                            </div>
+                            </ScrollingView>
                           }
                         </div>
                       );
