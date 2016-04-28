@@ -36,7 +36,7 @@ class VideoPlayer extends Component {
         ajax.post('/api/behaviors/', {
           scope: 'videoPlayer',
           action: 'fail',
-          value: err});
+          value: err.toString()});
         this.state.error = err;
         this.setState(this.state);
       }

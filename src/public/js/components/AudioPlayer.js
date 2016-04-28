@@ -25,7 +25,7 @@ class AudioPlayer extends Component {
         ajax.post('/api/behaviors/', {
           scope: 'audioPlayer',
           action: 'fail',
-          value: err});
+          value: err.toString()});
         this.state.error = err;
         this.setState(this.state);
       }
