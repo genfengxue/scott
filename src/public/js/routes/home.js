@@ -26,6 +26,7 @@ export default (
     <Route path="/home/pronunciation_courses/" component={PronunciationCoursesView} />
     <Route path="/home/pronunciation_courses/:courseNo/lessons/" component={PronunciationLessonsView} />
     <Route path="/home/pronunciation_courses/:courseNo/lessons/:lessonNo" component={PronunciationLessonActivityView} />
+    <Route path="/home/pronunciation_courses/:courseNo/lessons/:lessonNo/:activityIndex" component={PronunciationLessonActivityView} />
     <Route path="/home/pronunciation_homeworks/:pronunciationHomeworkId" component={PronunciationHomeworkView} />
     <Route path="/home/pronunciations/" component={TempPronunciationView} />
     <Route path="/home/courses/:courseNo/lessons/:lessonNo/quiz/" component={DoingHomeworkView} />

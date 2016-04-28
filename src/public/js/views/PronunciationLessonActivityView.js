@@ -10,52 +10,11 @@ import AudioPlayer from '../components/AudioPlayer';
 import VideoPlayer from '../components/VideoPlayer';
 import ErrorTip from '../components/ErrorTip';
 import ScrollingView from '../components/ScrollingView';
+import history from '../common/history';
 
 const mapStateToProps = ({pronunciationLessonActivity, wxsdk}) => ({
   pronunciationLessonActivity, wxsdk,
 });
-
-class CustomPrevArrow extends Component {
-  static propTypes = {
-    pronunciationLessonActivity: PropTypes.object.isRequired,
-  };
-  render() {
-    const {pronunciationLessonActivity} = this.props;
-
-    if (pronunciationLessonActivity.activityIndex === 0) {
-      return (
-        <div className="slick-prev" {...this.props}><a className="prev-button hidden">
-        </a></div>
-      );
-    }
-    return (
-      <div className="slick-prev" {...this.props}><a className="prev-button">
-      </a></div>
-    );
-  }
-}
-
-const BondCustomPrevArrow = connect(mapStateToProps)(CustomPrevArrow);
-
-class CustomNextArrow extends Component {
-  static propTypes = {
-    pronunciationLessonActivity: PropTypes.object.isRequired,
-  };
-  render() {
-    const {pronunciationLessonActivity} = this.props;
-
-    if (pronunciationLessonActivity.activityIndex + 1 === pronunciationLessonActivity.docs.length) {
-      return (
-        <div className="slick-next" {...this.props}><a className="next-button hidden"></a></div>
-      );
-    }
-    return (
-      <div className="slick-next" {...this.props}><a className="next-button"></a></div>
-    );
-  }
-}
-
-const BondCustomNextArrow = connect(mapStateToProps)(CustomNextArrow);
 
 class PronunciationLessonActivityView extends Component {
 
@@ -64,7 +23,6 @@ class PronunciationLessonActivityView extends Component {
     pronunciationLessonActivity: PropTypes.object.isRequired,
     wxsdk: PropTypes.object.isRequired,
     fetchPronunciationLessonsActivityAsync: PropTypes.func.isRequired,
-    pronunciationLessonsActivityIndexChange: PropTypes.func.isRequired,
     fetchSignatureAsync: PropTypes.func.isRequired,
     beginRecord: PropTypes.func.isRequired,
     endRecord: PropTypes.func.isRequired,
@@ -78,6 +36,12 @@ class PronunciationLessonActivityView extends Component {
     super(props);
     this.localIds = [];
     props.pronunciationLessonActivityInit();
+    // the react-slick sucks!
+    const {courseNo, lessonNo, activityIndex} = props.params;
+    if (activityIndex) {
+      history.pushState(null, `/home/pronunciation_courses/${courseNo}/lessons/${lessonNo}/0`);
+      setTimeout(() => history.pushState(null, `/home/pronunciation_courses/${courseNo}/lessons/${lessonNo}/${activityIndex}`), 200);
+    }
   }
 
   componentDidMount() {
@@ -128,24 +92,56 @@ class PronunciationLessonActivityView extends Component {
     this.props.submitRecordAsync(payload);
   }
 
+  renderPrevArrow(courseNo, lessonNo, activityIndex) {
+    if (activityIndex === 0) {
+      return '';
+    }
+    return (
+      <div className="slick-prev">
+        <Link to={`/home/pronunciation_courses/${courseNo}/lessons/${lessonNo}/${activityIndex - 1}`} className="prev-button" />
+      </div>
+    );
+  }
+
+  renderNextArrow(courseNo, lessonNo, activityIndex) {
+    const {pronunciationLessonActivity} = this.props;
+    if (activityIndex + 1 === pronunciationLessonActivity.docs.length) {
+      return (
+        <div className="slick-next"><a className="next-button hidden"></a></div>
+      );
+    }
+    return (
+      <div className="slick-next">
+        <Link to={`/home/pronunciation_courses/${courseNo}/lessons/${lessonNo}/${activityIndex + 1}`} className="next-button" />
+      </div>
+    );
+  }
+
   render() {
     const {pronunciationLessonActivity, wxsdk} = this.props;
-    const {docs, activityIndex, recording, localIds, lesson, errors, time} = pronunciationLessonActivity;
+    const {docs, recording, localIds, lesson, errors, time} = pronunciationLessonActivity;
+    let {activityIndex} = this.props.params;
+    if (!activityIndex) {
+      activityIndex = 0;
+    } else {
+      activityIndex = +activityIndex;
+    }
+    if (!lesson) {
+      return <div>loading</div>;
+    }
+    const {lessonNo, courseNo} = lesson;
     // Set the current progress
     const activitiesCount = docs.length;
     const currentProgress = ((activityIndex || 0) + 1) / activitiesCount * 100;
     const activityLessonActivity = docs[activityIndex || 0];
-    const pronunciationLessonsActivityIndexChange = this.props.pronunciationLessonsActivityIndexChange;
     const settings = {
       dots: false,
       swipe: true,
-      prevArrow: BondCustomPrevArrow,
-      nextArrow: BondCustomNextArrow,
       infinite: false,
+      arrows: false,
       afterChange: (index) => {
-        pronunciationLessonsActivityIndexChange(index);
+        history.pushState(null, `/home/pronunciation_courses/${courseNo}/lessons/${lessonNo}/${index}`);
         // why need this? the action does not fire render...
-        this.forceUpdate();
       },
       slickGoTo: activityIndex,
     };
@@ -153,12 +149,8 @@ class PronunciationLessonActivityView extends Component {
     const scrollStyle = {
       overflowY: 'scroll',
       height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px',
-      'webkitOverflowScrolling': 'touch',
+      'WebkitOverflowScrolling': 'touch',
     };
-    if (!lesson) {
-      return <div>loading</div>;
-    }
-    const {lessonNo, courseNo} = lesson;
     return (
       <div className="pronunciation-activity-view clearfix">
         <nav className="navbar">
@@ -330,10 +322,11 @@ class PronunciationLessonActivityView extends Component {
 
         <div className="course-buttons">
           <div className="col-xs-4 text-xs-center">
+            {this.renderPrevArrow(courseNo, lessonNo, activityIndex)}
           </div>
           <div className="col-xs-4 text-xs-center no-padding-col">
             {
-              pronunciationLessonActivity.activityIndex + 1 === pronunciationLessonActivity.docs.length && activityLessonActivity.type === '打Boss' ?
+              activityIndex + 1 === pronunciationLessonActivity.docs.length && activityLessonActivity.type === '打Boss' ?
               <div>
                 {
                   localIds ?
@@ -381,13 +374,14 @@ class PronunciationLessonActivityView extends Component {
               </div>
               : ''
             }
+            {this.renderNextArrow(courseNo, lessonNo, activityIndex)}
             <span className="submit-button hidden"></span>
             <span className="upload-button hidden"></span>
           </div>
           <div className="col-xs-4 text-xs-center">
             {
-              pronunciationLessonActivity.activityIndex + 1 !== pronunciationLessonActivity.docs.length ?
-              <span className="boss-button pull-xs-right" onClick={() => pronunciationLessonsActivityIndexChange(pronunciationLessonActivity.docs.length - 1)}></span>
+              activityIndex + 1 !== pronunciationLessonActivity.docs.length ?
+              <Link className="boss-button pull-xs-right" to={`/home/pronunciation_courses/${courseNo}/lessons/${lessonNo}/${pronunciationLessonActivity.docs.length - 1}`} />
               :
               ''
             }
