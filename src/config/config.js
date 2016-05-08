@@ -12,14 +12,14 @@ const config = {
       prefix: 'https://o3f47rda5.qnssl.com/',
     },
     pagination: {
-      defaultSize: 20,
+      defaultSize: 10,
       maxSize: 100,
     },
     app: {
       name: 'wind',
     },
     port: 8000,
-    mongo: 'mongodb://localhost/wind-cms',
+    mongo: 'mongodb://localhost:27018/wind-cms-dev',
     sessionSecret: 'wind-dev',
     redis: {
       host: '127.0.0.1',
@@ -50,7 +50,7 @@ const config = {
       prefix: 'https://o3f47rda5.qnssl.com/',
     },
     pagination: {
-      defaultSize: 20,
+      defaultSize: 10,
       maxSize: 100,
     },
     app: {
@@ -88,7 +88,7 @@ const config = {
       prefix: 'https://o3f47rda5.qnssl.com/',
     },
     pagination: {
-      defaultSize: 20,
+      defaultSize: 10,
       maxSize: 100,
     },
     app: {

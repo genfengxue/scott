@@ -1,0 +1,251 @@
+@import "./_variables";
+
+$ring-width: 0.5rem;
+$size: 2.87rem;
+
+.pronunciation-activity-view {
+  .hidden {
+    display: none;
+  }
+
+  .progress-bar{
+    height: 0.625rem;
+    border-radius: 0.5rem;
+    margin: 0.9375rem 0;
+    background: #d9d9f1;
+    position: relative;
+    div{
+      opacity: 1!important;
+      div {
+        position: absolute!important;
+        z-index: 2;
+        height: 0.625rem !important;
+        background-image: inherit !important;
+        background: #72AEFF;
+        border-radius: 0.625rem !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  .course-info {
+    .mentor-photo {
+      float: left;
+      width: 3.4rem;
+      height: 3.4rem;
+      margin-right: 1.5rem;
+      border-radius: 50%;
+    }
+    .course-label {
+      line-height: 3.4rem;
+    }
+  }
+
+  .course-content {
+    word-break: break-word;
+    padding: 0.5rem;
+    .pronunciation-symbol {
+      margin: 1.8rem 0 1.25rem;
+    }
+    ol {
+      padding-left: 1.25rem;
+      li {
+        color: $light-grey;
+        margin-bottom: 1.25rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .reading-pronunciation {
+      text-align: center;
+    }
+  }
+
+  .fight-boss {
+    width: 67%;
+    margin: 0 auto;
+    .form-group {
+      label {
+        margin-right: 0.5rem;
+      }
+      input {
+        padding-left: 0.5rem;
+        border-radius: 1.75rem;
+        outline: none;
+        border: 0.0625rem solid #e0f0ff;
+        background: #e0f0ff;
+      }
+    }
+  }
+
+  .course-buttons {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5.4rem;
+    border-top: 0.0625rem solid #d1d1e2;
+    background: $white;
+    padding: 1.2rem 0;
+    margin: 0 1rem;
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 1rem solid transparent;
+      border-right: 1rem solid transparent;
+      border-bottom: 1rem solid #d1d1e2;
+      position: absolute;
+      left: 50%;
+      margin-left: -1rem;
+      top: -1rem;
+    }
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 1rem solid transparent;
+      border-right: 1rem solid transparent;
+      border-bottom: 1rem solid #fff;
+      position: absolute;
+      left: 50%;
+      margin-left: -1rem;
+      top: -0.9375rem;
+      z-index: 1;
+    }
+  }
+
+  .slick-prev {
+    position: fixed;
+    left: 1.25rem;
+    bottom: 0.9rem;
+    z-index: 9;
+  }
+  .slick-next {
+    position: fixed;
+    left: 50%;
+    bottom: 0.6rem;
+    z-index: 9;
+    margin-left: -3.75rem;
+  }
+
+  .icon-voice-mute:before,
+  .icon-voice:before {
+    color: #F28318;
+    font-size: 1.375rem;
+  }
+}
+
+.boss-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-boss.png') no-repeat;
+  background-size: cover;
+}
+.sound-button {
+  display: inline-block;
+  width: 7.5rem;
+  height: 3.625em;
+  background: url('/img/icon-sound.png') no-repeat;
+  background-size: cover;
+}
+.next-button {
+  display: inline-block;
+  width: 7.5rem;
+  height: 3.625em;
+  background: url('/img/icon-next.png') no-repeat;
+  background-size: cover;
+}
+.prev-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-prev-arrow.png') no-repeat;
+  background-size: cover;
+}
+a.action-button {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  background: $dark-blue;
+  color: #FFF;
+  line-height: $size;
+  border-radius: 50%;
+  text-decoration: none;
+  position: relative;
+}
+a.record-button {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  background: $dark-blue;
+  color: #FFF;
+  line-height: $size;
+  border-radius: 50%;
+  font-size: $size / 2;
+  position: relative;
+  .icon-mic {
+    margin-left: 0.12rem;
+    margin-top: -0.1rem;
+  }
+  &.recording {
+    background: $green;
+    &:after {
+      position: absolute;
+      content: ' ';
+      width: $size + 2 * $ring-width;
+      height: $size + 2 * $ring-width;
+      background: #a3eb9a;
+      border-radius: 50%;
+      z-index: -1;
+      top: -$ring-width;
+      left: -$ring-width;
+      animation: breathing 2.6s infinite linear;
+    }
+    &:before {
+      position: absolute;
+      content: ' ';
+      width: $size + 4 * $ring-width;
+      height: $size + 4 * $ring-width;
+      background: #eaf6e7;
+      border-radius: 50%;
+      z-index: -2;
+      top: -2 * $ring-width;
+      left: -2 * $ring-width;
+      animation: breathing 2.6s infinite linear;
+    }
+  }
+}
+@keyframes breathing {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+a.rework-button {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  font-size: 50%;
+  line-height: 2rem;
+  top: 0.5rem;
+  left: 5.3rem;
+  background: #94cbff;
+}
+.upload-button {
+  display: inline-block;
+  width: 2.875rem;
+  height: 2.875rem;
+  background: url('/img/icon-upload.png') no-repeat;
+  background-size: cover;
+}
+
+.activity-item {
+  width: 100%;
+}

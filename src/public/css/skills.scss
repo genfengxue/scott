@@ -1,15 +1,19 @@
 @import "./_variables";
 .skill-list {
+  .slogan {
+    margin: 4.5rem 0 2.5rem;
+    color: $light-nlack;
+  }
   .skill-link {
-    height: 6rem;
-    height: 18vh;
+    margin: 0 1.5rem 1.5rem;
     font-size: 1.5rem;
-    line-height: 6rem;
-    line-height: 18vh;
-    margin-top: 3rem;
-    margin-top: 10vh;
     display: block;
+    border-radius: 1.5rem;
     text-decoration: none;
-    color: $gray;
+    color: $white;
+    overflow: hidden;
+    > img {
+      width: 100%;
+    }
   }
 }

@@ -4,11 +4,13 @@ import unionBy from 'lodash/unionBy';
 // ------------------------------------
 // Constants
 // ------------------------------------
+export const LESSONS_INIT = 'LESSONS_INIT';
 export const RECEIVED_LESSONS = 'RECEIVED_LESSONS';
 export const RECEIVED_MORE_LESSONS = 'RECEIVED_MORE_LESSONS';
 // ------------------------------------
 // Actions
 // ------------------------------------
+export const lessonsInit = createAction(LESSONS_INIT);
 export const receivedLessons = createAction(RECEIVED_LESSONS, (payload) => payload);
 export const receivedMoreLessons = createAction(RECEIVED_MORE_LESSONS, (payload) => payload);
 
@@ -36,6 +38,7 @@ export const fetchMoreLessonsAsync = (page, courseNo, query) => {
 };
 
 export const actions = {
+  lessonsInit,
   receivedLessons,
   receivedMoreLessons,
   fetchLessonsAsync,
@@ -46,6 +49,9 @@ export const actions = {
 // Reducer
 // ------------------------------------
 export default handleActions({
+  [LESSONS_INIT]: () => {
+    return {docs: []};
+  },
   [RECEIVED_LESSONS]: (state, {payload}) => {
     return payload;
   },

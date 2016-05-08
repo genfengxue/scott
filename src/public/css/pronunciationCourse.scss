@@ -1,0 +1,38 @@
+@import "./_variables";
+
+.pronunciation-course-list {
+  .subtitle {
+    margin-bottom: 1.6rem;
+    color: $dark-grey;
+    font-weight: bold;
+  }
+}
+
+.pronunciation-course {
+  margin: 0 1.5rem 1.5rem;
+  a {
+    position: relative;
+    display: block;
+    color: $white;
+  }
+  .pronunciation-course-name {
+    margin-bottom: 0;
+    > img {
+      width: 100%;
+    }
+  }
+  .lesson-count {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    margin-top: -1.5rem;
+    z-index: 1;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 50%;
+    background: $white;
+    color: $black;
+  }
+}

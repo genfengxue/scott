@@ -2,7 +2,7 @@ import React from 'react';
 
 function CoreLayout({ children }) {
   return (
-    <div className="page-container">
+    <div className="page-container clearfix">
       <div className="view-container">
         {children}
       </div>
