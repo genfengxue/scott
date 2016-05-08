@@ -136,7 +136,7 @@ class PronunciationLessonActivityView extends Component {
     const activityLessonActivity = docs[activityIndex || 0];
     const settings = {
       dots: false,
-      swipe: true,
+      swipe: false,
       infinite: false,
       arrows: false,
       afterChange: (index) => {
@@ -147,7 +147,7 @@ class PronunciationLessonActivityView extends Component {
     };
 
     const scrollStyle = {
-      overflowY: 'scroll',
+      overflowY: 'auto',
       height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px',
       'WebkitOverflowScrolling': 'touch',
     };
@@ -220,23 +220,34 @@ class PronunciationLessonActivityView extends Component {
                           </div>
                           <ScrollingView className="course-content" style={scrollStyle}>
                             <div className="reading-pronunciation">
-                              <div dangerouslySetInnerHTML={{__html: lessonActivity.description}}></div>
+                              <div className="text-xs-center">
+                              {
+                                lessonActivity.readingText
+                              }
+                              </div>
+                              <div className="text-muted text-xs-center">
+                              {
+                                lessonActivity.readingNote
+                              }
+                                <div style={{display: 'inline-block'}}>
+                                {
+                                  lessonActivity.audio && active
+                                  ? <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}>
+                                      <div className="sentence-text">
+                                        <i className="icon-voice"></i>
+                                      </div>
+                                      <div className="sentence-text">
+                                        <i className="icon-voice-mute" />
+                                      </div>
+                                      <div className="sentence-text">
+                                        出错啦！
+                                      </div>
+                                    </AudioPlayer>
+                                  : ''
+                                }
+                                </div>
+                              </div>
                             </div>
-                            {
-                              lessonActivity.audio && active
-                                ? <AudioPlayer audios={[lessonActivity.audio]} autoplay key={lessonActivity.audio}>
-                                    <div className="sentence-text">
-                                      <i className="icon-voice"></i>
-                                    </div>
-                                    <div className="sentence-text">
-                                      <i className="icon-voice-mute" />
-                                    </div>
-                                    <div className="sentence-text">
-                                      出错啦！
-                                    </div>
-                                  </AudioPlayer>
-                                : ''
-                            }
                           </ScrollingView>
                         </div>
                       );

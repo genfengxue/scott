@@ -1,26 +1,19 @@
 @import "./_variables";
 .skill-list {
   .slogan {
-    margin: 72px 0 40px;
+    margin: 4.5rem 0 2.5rem;
     color: $light-nlack;
   }
   .skill-link {
-    height: 6.25rem;
-    line-height: 6.25rem;
-    margin-bottom: 23px;
+    margin-bottom: 1.5rem;
     font-size: 1.5rem;
     display: block;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     text-decoration: none;
     color: $white;
-  }
-  .pronunciation-item {
-    background: $dark-blue;
-  }
-  .listen-item {
-    background: $light-blue;
-  }
-  .translate-item {
-    background: $dark-blue;
+    overflow: hidden;
+    > img {
+      width: 100%;
+    }
   }
 }

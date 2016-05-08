@@ -17,9 +17,15 @@ class SkillsView extends Component {
     return (
       <div className="container skill-list">
         <h2 className="text-xs-center slogan">Wind教口语</h2>
-        <Link className="text-xs-center skill-link pronunciation-item" to="/home/pronunciation_courses/">发音语调训练</Link>
-        <Link className="text-xs-center skill-link listen-item" to="/home/courses/?type=listen">听力训练</Link>
-        <Link className="text-xs-center skill-link translate-item" to="/home/courses/?type=translate">口语训练</Link>
+        <Link className="text-xs-center skill-link pronunciation-item" to="/home/pronunciation_courses/">
+          <img src="/img/skill_1.png" alt="发音语调训练" />
+        </Link>
+        <Link className="text-xs-center skill-link listen-item" to="/home/courses/?type=listen">
+          <img src="/img/skill_2.png" alt="听力训练" />
+        </Link>
+        <Link className="text-xs-center skill-link translate-item" to="/home/courses/?type=translate">
+          <img src="/img/skill_3.png" alt="口语训练" />
+        </Link>
         <PronunciationModal
           isOpen={this.state.showPronunciationModal}
           onRequestClose={() => this.setState({showPronunciationModal: false})} />

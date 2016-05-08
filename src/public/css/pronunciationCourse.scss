@@ -9,23 +9,23 @@
 }
 
 .pronunciation-course {
-  margin: 0 1.5rem 1rem;
+  margin: 0 1.5rem 1.5rem;
   a {
     position: relative;
     display: block;
-    height: 5rem;
-    background: $dark-blue;
     color: $white;
-    border-radius: 1rem;
   }
   .pronunciation-course-name {
-    line-height: 5rem;
     margin-bottom: 0;
+    > img {
+      width: 100%;
+    }
   }
   .lesson-count {
     position: absolute;
     right: 1rem;
-    top: 1rem;
+    top: 50%;
+    margin-top: -1.5rem;
     z-index: 1;
     width: 3rem;
     height: 3rem;
