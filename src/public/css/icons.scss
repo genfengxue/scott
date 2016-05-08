@@ -17,56 +17,65 @@
 @function icon-char($filename) {
   $char: "";
 
-  @if $filename == cuowutishi {
+  @if $filename == boss {
     $char: "\E001";
   }
-  @if $filename == edit {
+  @if $filename == cuowutishi {
     $char: "\E002";
   }
-  @if $filename == hamburger {
+  @if $filename == edit {
     $char: "\E003";
   }
-  @if $filename == left {
+  @if $filename == hamburger {
     $char: "\E004";
   }
-  @if $filename == loading {
+  @if $filename == left {
     $char: "\E005";
   }
-  @if $filename == loadingdots {
+  @if $filename == lesson {
     $char: "\E006";
   }
-  @if $filename == mic {
+  @if $filename == loading {
     $char: "\E007";
   }
-  @if $filename == micphone {
+  @if $filename == loadingdots {
     $char: "\E008";
   }
-  @if $filename == mobile {
+  @if $filename == mic {
     $char: "\E009";
   }
-  @if $filename == pause {
+  @if $filename == micphone {
     $char: "\E00A";
   }
-  @if $filename == play {
+  @if $filename == mobile {
     $char: "\E00B";
   }
-  @if $filename == portrait {
+  @if $filename == pause {
     $char: "\E00C";
   }
-  @if $filename == right {
+  @if $filename == play {
     $char: "\E00D";
   }
-  @if $filename == tick {
+  @if $filename == portrait {
     $char: "\E00E";
   }
-  @if $filename == times {
+  @if $filename == retry {
     $char: "\E00F";
   }
-  @if $filename == voice-mute {
+  @if $filename == right {
     $char: "\E010";
   }
-  @if $filename == voice {
+  @if $filename == tick {
     $char: "\E011";
+  }
+  @if $filename == times {
+    $char: "\E012";
+  }
+  @if $filename == voice-mute {
+    $char: "\E013";
+  }
+  @if $filename == voice {
+    $char: "\E014";
   }
 
   @return $char;
@@ -94,6 +103,9 @@
   }
 }
 
+.icon-boss {
+  @include icon(boss);
+}
 .icon-cuowutishi {
   @include icon(cuowutishi);
 }
@@ -105,6 +117,9 @@
 }
 .icon-left {
   @include icon(left);
+}
+.icon-lesson {
+  @include icon(lesson);
 }
 .icon-loading {
   @include icon(loading);
@@ -129,6 +144,9 @@
 }
 .icon-portrait {
   @include icon(portrait);
+}
+.icon-retry {
+  @include icon(retry);
 }
 .icon-right {
   @include icon(right);

@@ -15,7 +15,7 @@ class SkillsView extends Component {
   render() {
     setTitle('Wind教口语');
     return (
-      <div className="container skill-list">
+      <div className="skill-list">
         <h2 className="text-xs-center slogan">Wind教口语</h2>
         <Link className="text-xs-center skill-link pronunciation-item" to="/home/pronunciation_courses/">
           <img src="/img/skill_1.png" alt="发音语调训练" />
