@@ -89,7 +89,7 @@ class HomeworkView extends Component {
     return (
       <div className="homework">
         <div style={{'margin': '0 auto', 'width': '0px', 'height': '0px', 'overflow': 'hidden'}}>
-          <img src={homework.course.imageUrl} width="700" />
+          <img src={homework.course.shareImageUrl} width="700" />
         </div>
         <Header back={`/home/courses/${courseNo}?type=${type}`} />
         <div className="container">

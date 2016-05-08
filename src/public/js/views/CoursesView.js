@@ -37,6 +37,8 @@ class CoursesView extends Component {
             </li>
           </ul>
         </nav>
+        <h2 className="text-xs-center">{type === 'listen' ? '听力训练' : '口语训练'}</h2>
+        <p className="text-xs-center subtitle">{type === 'listen' ? 'Listening' : 'Translating'}</p>
         <CourseList courses={this.props.courses} loadMore={this.props.fetchMoreCoursesAsync} type={type} />
       </div>
     );

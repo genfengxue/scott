@@ -9,15 +9,11 @@ class Course extends Component {
 
   render() {
     const {course, type} = this.props;
-    const courseStyle = {
-      'backgroundImage': `url('${course.imageUrl}')`,
-    };
     return (
       <div className="course clearfix">
         <Link to={`/home/courses/${course.courseNo}?type=${type}`}>
-          <div className="course-image" style={courseStyle}/>
           <h4 className="course-name text-xs-center">
-            {course.chineseTitle}
+            <img src={course.imageUrl} alt={course.chineseTitle} />
           </h4>
         </Link>
       </div>

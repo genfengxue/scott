@@ -1,15 +1,31 @@
 @import "./_variables";
 
 .course {
-  margin: 1.5rem 2rem;
-  .course-image {
-    width: 16rem;
-    height: 9rem;
-    background-color: $gray-lighter;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: auto;
-    margin-bottom: 0.5rem;
+  margin: 0 1.5rem 1.5rem;
+  a {
+    position: relative;
+    display: block;
+    color: $white;
+  }
+  .course-name {
+    margin-bottom: 0;
+    > img {
+      width: 100%;
+      max-width: 21rem;
+    }
+  }
+  .lesson-count {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    margin-top: -1.5rem;
+    z-index: 1;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 50%;
+    background: $white;
+    color: $black;
   }
 }

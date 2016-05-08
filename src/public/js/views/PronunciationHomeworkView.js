@@ -89,7 +89,7 @@ class PronunciationHomeworkView extends Component {
     return (
       <div className="pronunciationHomework">
         <div style={{'margin': '0 auto', 'width': '0px', 'height': '0px', 'overflow': 'hidden'}}>
-          <img src={pronunciationHomework.course.imageUrl} width="700" />
+          <img src={pronunciationHomework.course.shareImageUrl} width="700" />
         </div>
         <Header back={`/home/pronunciation_courses/${courseNo}/lessons/`} />
         <div className="container">

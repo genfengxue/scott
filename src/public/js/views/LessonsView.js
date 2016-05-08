@@ -42,6 +42,8 @@ class LessonsView extends Component {
     const otherQuery = type === 'listen' ? {hasListen: true} : {hasTranslate: true};
     if (course) {
       setTitle(course.chineseTitle + ' ' + (type === 'listen' ? '听力训练' : '口语训练'));
+    } else {
+      return (<div>loading...</div>);
     }
     const courseNo = this.props.params.courseNo;
     return (
@@ -55,6 +57,8 @@ class LessonsView extends Component {
             </li>
           </ul>
         </nav>
+        <h2 className="text-xs-center">{course.chineseTitle}</h2>
+        <p className="text-xs-center subtitle">{course.englishTitle}</p>
         <LessonList lessons={this.props.lessons} type={type} loadMore={(page) => this.props.fetchMoreLessonsAsync(page, courseNo, otherQuery)} />
       </div>
     );
