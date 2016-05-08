@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PronunciationCourseList from '../components/PronunciationCourseList';
 import {actions} from '../redux/pronunciationCourses';
 import {Link} from 'react-router';
+import setTitle from '../common/setTitle';
 
 const mapStateToProps = ({pronunciationCourses}) => ({
   pronunciationCourses,
@@ -14,6 +15,7 @@ class PronunciationCoursesView extends Component {
     pronunciationCourses: PropTypes.object.isRequired,
     fetchPronunciationCoursesAsync: PropTypes.func.isRequired,
     location: PropTypes.object,
+    fetchMorePronunciationCoursesAsync: PropTypes.func,
   };
 
   constructor(props) {
@@ -22,6 +24,7 @@ class PronunciationCoursesView extends Component {
   }
 
   render() {
+    setTitle( '发音训练-Wind教口语');
     return (
       <div>
         <nav className="navbar">

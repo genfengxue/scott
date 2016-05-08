@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {actions} from '../redux/pronunciationLessons';
 import {Link} from 'react-router';
 import reactInfiniteScroll from 'react-infinite-scroll';
+import setTitle from '../common/setTitle';
 
 const InfiniteScroll = reactInfiniteScroll(React);
 
@@ -39,6 +40,7 @@ class PronunciationLessonsView extends Component {
     if (!course) {
       return <div>loading...</div>;
     }
+    setTitle(course.chineseTitle + ' 发音训练');
     return (
       <div className="pronunciation-lessons-view">
         <nav className="navbar">

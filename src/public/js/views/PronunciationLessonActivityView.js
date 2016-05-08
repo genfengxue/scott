@@ -11,6 +11,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import ErrorTip from '../components/ErrorTip';
 import ScrollingView from '../components/ScrollingView';
 import history from '../common/history';
+import setTitle from '../common/setTitle';
 
 const mapStateToProps = ({pronunciationLessonActivity, wxsdk}) => ({
   pronunciationLessonActivity, wxsdk,
@@ -151,6 +152,7 @@ class PronunciationLessonActivityView extends Component {
       height: (window.innerHeight - 19 * parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'))) + 'px',
       'WebkitOverflowScrolling': 'touch',
     };
+    setTitle(`${(activityIndex || 0) + 1}/${activitiesCount} ${lesson.englishTitle}`);
     return (
       <div className="pronunciation-activity-view clearfix">
         <nav className="navbar">
