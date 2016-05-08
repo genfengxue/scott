@@ -17,7 +17,7 @@ class PronunciationCourseList extends Component {
     return (
       <div className="pronunciation-course-list">
         <h2 className="text-xs-center">发音语调训练</h2>
-        <p className="text-xs-center subtitle">Pronunciation</p>
+        <p className="text-xs-center subtitle">Pronunciation and Intonation</p>
         <InfiniteScroll
           pageStart={1}
           loadMore={this.props.loadMore}
