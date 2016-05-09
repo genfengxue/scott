@@ -54,9 +54,6 @@ class DoingNewhomeworkView extends Component {
     }
   }
 
-  componentWillUnmount() {
-  }
-
   render() {
     const {doingNewhomework, shifting} = this.props;
     const {lesson, errors, showCollectionModal, showMethodModal, showReviewModal, showFeedbackModal, showAnswerModal} = doingNewhomework;

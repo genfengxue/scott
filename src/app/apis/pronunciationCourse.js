@@ -26,7 +26,7 @@ router.get('/:courseNo/lessons', async (req, res, next) => {
     const query = {};
     query.courseNo = req.params.courseNo;
     query.publishedDate = {$lt: new Date()};
-    const result = await Lesson.paginate(query, {page, limit, sort: {lessonNo: 1}});
+    const result = await Lesson.paginate(query, {page, limit, sort: {index: 1}});
     const course = await PronunciationCourse.findOne({courseNo: req.params.courseNo});
     result.course = course;
     res.send(result);
