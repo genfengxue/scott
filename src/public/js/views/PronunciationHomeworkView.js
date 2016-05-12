@@ -34,7 +34,6 @@ class PronunciationHomeworkView extends Component {
   }
 
   play(serverId) {
-    console.log('views/PronunciationHomeworkView 37', serverId);
     wx.downloadVoice({
       serverId: serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
       isShowProgressTips: 1, // 默认为1，显示进度提示
