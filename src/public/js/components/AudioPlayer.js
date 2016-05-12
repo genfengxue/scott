@@ -22,6 +22,7 @@ class AudioPlayer extends Component {
       return item.indexOf('.mp3') > -1;
     });
     audio.src = mp3[0];
+    audio.autoplay = props.autoplay;
   }
 
   componentDidMount() {
@@ -32,6 +33,9 @@ class AudioPlayer extends Component {
     audio.oncanplay = this::this._onLoaded;
     audio.oncancel = this::this._onEvent;
     this.initDate = new Date();
+    if (this.props.autoplay) {
+      audio.load();
+    }
   }
 
   componentWillUnmount() {
